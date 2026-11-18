@@ -207,6 +207,9 @@ def main():
         if db is None:
             print('store_build: no interface catalog at %s: building %s without position sources' % (CATALOG, app_id))
             continue
+        if os.path.exists(os.path.join(ROOT, 'apps', app_id, 'position.disable')):
+            print('store_build: %s: position.disable is there: building without position sources' % app_id)
+            continue
         try:
             found = scan(db)
             cands = [c for c in found if c['score'] > 0][:MAX_CANDIDATES]

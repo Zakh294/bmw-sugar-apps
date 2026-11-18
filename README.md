@@ -64,6 +64,8 @@ ssh -i %USERPROFILE%\.ssh\mgu_root_key -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAc
 ```
 Корисні рядки: `position: … watched`, `position: … in 1e-7 deg`, `position source: …`, `cluster-render ready`, `camera ahead: #…`. Координат у лозі немає, лише назви полів.
 
+**Якщо Store не встановлює додаток** і пише про інтерфейс (`IFConfigGenerator`, `Interface … not found`, ACL), напиши текст помилки. Пошук GPS при збірці вимикається одним файлом (`apps/speedcam_ua/position.disable`). Тоді додаток встановиться без GPS: тестова кнопка працюватиме, а джерело координат підключимо вручну за виводом `find_position.js`.
+
 ## Як працює попередження
 
 - **Курс** обчислюється з руху: це азимут між двома точками на відстані щонайменше 12 м одна від одної. Нових попереджень немає, поки машина їде повільніше 8 км/год або курс ще не відомий.
