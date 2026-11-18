@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+<name>Камери автофіксації України (426, 2026-11-18)</name>
+<description>https://patrolpolice.gov.ua/automatic_fixation/informatsiya-pro-vstanovleni-kaf/</description>
+<Style id="cam50"><IconStyle><color>ff1f1fe1</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href></Icon></IconStyle></Style>
+<Style id="cam70"><IconStyle><color>ff0080ff</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href></Icon></IconStyle></Style>
+<Style id="cam90"><IconStyle><color>ff00b4ff</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href></Icon></IconStyle></Style>
+<Style id="cam110"><IconStyle><color>ff00d2ff</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href></Icon></IconStyle></Style>
+<Folder><name>Івано-Франківська область</name>
+<Placemark><name>50 км/год</name><description>Н-09, 322+566 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.706028,48.981222,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 244+199 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.564931,48.461486,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 240+283 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.549702,48.436117,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 227+233 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.563172,48.370277,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 224+687 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.563541,48.358372,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 260+135 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.601121,48.577230,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 271+228 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.582732,48.656498,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-10, 181+215 км (Стрий - Івано-Франківськ - Чернівці - Мамалига)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.314550,48.474211,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-10, 83+308 км (Стрий - Івано-Франківськ - Чернівці - Мамалига)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.569194,49.009389,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-10, 120+854 км (Стрий - Івано-Франківськ - Чернівці - Мамалига)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.844611,48.815472,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-10, 124+050 км (Стрий - Івано-Франківськ - Чернівці - Мамалига)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.859556,48.789417,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-10, 66+610 км (Стрий - Івано-Франківськ - Чернівці - Мамалига)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.377111,49.010972,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 233+618 км (Мукачево - Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.602904,48.409848,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-10, 89+147 км (Н-10 Стрий-Мамалига)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.636333,48.983361,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-10, 56+938 км (Стрий – Мамалига)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.247611,49.005333,0</coordinates></Point></Placemark>
+<Placemark><name>90 км/год</name><description>Н-09, 321+253 км (Мукачево-Львів)</description><styleUrl>#cam90</styleUrl><Point><coordinates>24.704528,48.969389,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-10, 176+645 км (Стрий – Мамалига)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.258786,48.476601,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-18, 4+482 км (Івано-Франківськ – Бучач – Тернопіль)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.825028,48.904972,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Волинська область</name>
+<Placemark><name>50 км/год</name><description>М-07, 444+971 км (Київ-Ковель-Ягодин)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.663809,51.202460,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 142+324 км (Доманове-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.303111,50.808389,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 129+788 км (Доманове-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.222558,50.879894,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 125+475 км (Доманове-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.206143,50.917254,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-15, 74+273 км (Ковель ‒ Володимир ‒ Червоноград ‒ Жовква)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.158703,50.742417,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-15, 76+247 км (Ковель ‒ Володимир ‒ Червоноград ‒ Жовква)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.152168,50.726370,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-22, 19+098 км (Устилуг-Луцьк-Рівне)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.381772,50.820440,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-22, 82+575 км (Устилуг-Луцьк-Рівне)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.243019,50.744347,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-22, 54+015 км (Устилуг-Луцьк-Рівне)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.858139,50.779361,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-22, 119+027 км (Устилуг-Луцьк-Рівне)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.733929,50.781621,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-22, 64+946 км (Устилуг-Луцьк-Рівне)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.008017,50.770055,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-22, 101+613 км (Устилуг-Луцьк-Рівне)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.493780,50.765066,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-22, 97+990 км (Устилуг-Луцьк-Рівне)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.450667,50.748750,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-22, 95+200 км (Устилуг-Луцьк-Рівне)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.411223,50.746036,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 82+929 км (Доманове - Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.796231,51.183526,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-15, 72+938 км (Ковель-Володимир-Червоноград-Жовква)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.174667,50.748889,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 155+608 км (Доманово-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.400239,50.761083,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 154+741 км (Доманово-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.399306,50.768917,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Вінницька область</name>
+<Placemark><name>50 км/год</name><description>М-21, 294+567 км (Виступовичі–Житомир–Могилів-Подільський)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.501843,49.320542,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-21, 294+619 км (Виступовичі–Житомир–Могилів-Подільський)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.501114,49.320199,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-21, 307+084 км (Виступовичі–Житомир–Могилів-Подільський)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.404927,49.242592,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 417+815 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.700791,49.109723,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 376+261 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.362856,49.251605,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 404+377 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.604424,49.204127,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 490+890 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>29.405347,48.809418,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 491+090 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>29.408133,48.809324,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 404+640 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.607570,49.202933,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 371+527 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.298919,49.258879,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 417+514 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.700391,49.112413,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 368+580 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.268218,49.275977,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 368+488 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.266966,49.276251,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 336+814 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>27.885225,49.391199,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 336+906 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>27.886478,49.391234,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Дніпропетровська область</name>
+<Placemark><name>50 км/год</name><description>Н-08, 423+643 км (Бориспіль - Дніпро - Запоріжжя (через м. Кременчук) - Маріуполь)</description><styleUrl>#cam50</styleUrl><Point><coordinates>35.026958,48.336318,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 985+548 км (Стрий – Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>35.101132,48.565340,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-08, 423+663 км (Бориспіль-Маріуполь)</description><styleUrl>#cam50</styleUrl><Point><coordinates>35.026755,48.336179,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Житомирська область</name>
+<Placemark><name>110 км/год</name><description>М-06, 94+461 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>29.226629,50.342753,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-06, 94+686 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>29.223533,50.341939,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-06, 97+297 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>29.188069,50.336206,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-06, 97+627 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>29.183631,50.335190,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-06, 158+305 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>28.426503,50.316700,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-06, 174+600 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>28.245123,50.400617,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-06, 127+246 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>28.823628,50.286726,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-06, 230+853 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>27.586373,50.609254,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-06, 247+134 км (Київ-Чоп)</description><styleUrl>#cam70</styleUrl><Point><coordinates>27.365667,50.607833,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-06, 247+239 км (Київ-Чоп)</description><styleUrl>#cam70</styleUrl><Point><coordinates>27.364551,50.607745,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-21, 190+150 км (Виступовичі–Житомир–Могилів-Подільський)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.655706,50.169458,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-21, 167+547 км (Виступовичі–Житомир–Могилів-Подільський)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.690257,50.344862,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-21, 230+919 км (Виступовичі–Житомир–Могилів-Подільський)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.626459,49.828292,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-06, 228 + 889 км (Київ-Чоп)</description><styleUrl>#cam70</styleUrl><Point><coordinates>27.609172,50.618894,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-21-01, 2 + 283 км (Північний під’їзд до м. Бердичева)</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.603913,49.930267,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Закарпатська область</name>
+<Placemark><name>50 км/год</name><description>М-06, 780+785 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.600405,48.471467,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 772+750 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.701988,48.456473,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 807 + 021 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.323477,48.579194,0</coordinates></Point></Placemark>
+<Placemark><name>90 км/год</name><description>М-06, 749 + 346 км (Київ-Чоп)</description><styleUrl>#cam90</styleUrl><Point><coordinates>22.950553,48.559950,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 95+424 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.552189,48.020373,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 98+824 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.592156,48.009847,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 2+395 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.747444,48.437944,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-13, 226+887 км (Львів-Самбір-Ужгород)</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.389333,48.674028,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-23, 33+714 км (Берегове-Виноградів-Велика Копаня)</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.996343,48.139736,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-23, 39+706 км (Берегове-Виноградів-Велика Копаня)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.042321,48.159416,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Т-07-19, 0+694 км (Іршава-Виноградів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.033016,48.309679,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-08, 7+734 км (Обхід м. Ужгорода – КПП "Ужгород")</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.314083,48.641194,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 805+120 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.344306,48.571333,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 805+120 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.344306,48.571333,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-13, 229+122 км (Львів-Самбір-Ужгород)</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.364528,48.662167,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 15+826 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.859482,48.361928,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Київська область</name>
+<Placemark><name>50 км/год</name><description>с. Білогородка, вул. Володимирська (біля вул. Завальна 2) (в напрямку вул. Київська), Київська область</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.232410,50.397032,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-01, 28+342 км (Київ – Чернігів – Нові Яриловичі в напрямку м. Київ)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.842250,50.507083,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-01, 28+342 км (Київ – Чернігів – Нові Яриловичі в напрямку м. Чернігів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.841861,50.507250,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-03, 101+350 км (Київ-Харків-Довжанський)</description><styleUrl>#cam110</styleUrl><Point><coordinates>31.776738,50.206527,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-03, 101+400 км (Київ-Харків-Довжанський)</description><styleUrl>#cam110</styleUrl><Point><coordinates>31.776125,50.206349,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-03, 49+150 км (Київ-Харків-Довжанський)</description><styleUrl>#cam110</styleUrl><Point><coordinates>31.085829,50.307689,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-05, 28+870 км (Київ-Одеса)</description><styleUrl>#cam110</styleUrl><Point><coordinates>30.306940,50.256226,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-05, 19+400 км (Київ-Одеса)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.387993,50.318085,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-05, 35+240 км (Київ-Одеса)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.250309,50.214179,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-05, 35 + 352 км (Київ-Одеса)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.250003,50.213358,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-05, 28 + 450 км (Київ-Одеса)</description><styleUrl>#cam70</styleUrl><Point><coordinates>30.310924,50.258287,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-05, 24+400 км (Київ-Одеса)</description><styleUrl>#cam70</styleUrl><Point><coordinates>30.345965,50.281933,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-05, 24+700 км (Київ-Одеса)</description><styleUrl>#cam70</styleUrl><Point><coordinates>30.344921,50.279348,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-05, 15+250 км (Київ-Одеса)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.422016,50.346161,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-05, 15+740 км (Київ-Одеса)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.417508,50.342831,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-06, 21+730 км (Київ-Чоп)</description><styleUrl>#cam70</styleUrl><Point><coordinates>30.225974,50.446310,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-06, 21+810 км (Київ-Чоп)</description><styleUrl>#cam70</styleUrl><Point><coordinates>30.226587,50.446328,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-06, 49 + 700 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>29.835236,50.418557,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-06, 46+050 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>29.886017,50.421495,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-06, 66+250 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>29.607617,50.412136,0</coordinates></Point></Placemark>
+<Placemark><name>90 км/год</name><description>М-07, 44+100 км (Київ-Ковель-Ягодин)</description><styleUrl>#cam90</styleUrl><Point><coordinates>30.018299,50.596001,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-07, 37+700 км (Київ-Ковель-Ягодин)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.098157,50.568832,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-01, 3+441 км (Київ-Обухів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.571788,50.308709,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-01, 3+461 км (Київ-Обухів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.572395,50.308102,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-01, 9+784 км (Київ-Обухів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.618616,50.261512,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-01, 9+994 км (Київ-Обухів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.620389,50.259383,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-01, 14+016 км (Київ-Обухів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.643353,50.226536,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-01, 14+116 км (Київ-Обухів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.644215,50.225720,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-02, 27+371 км (Київ-Іванків-Овруч)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.408656,50.652786,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-02, 28+518 км (Київ-Іванків-Овруч)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.403434,50.662362,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-01, 26+050 км (Київ-Знамянка)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.554389,50.253120,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-01, 26+088 км (Київ-Знамянка)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.554770,50.253229,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М07, 23 + 550 км (Київ - Ковель - Ягодин)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.283476,50.553371,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-02, 23+557 км (Київ - Іванків - Овруч)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.442579,50.627301,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-05, 38+825 км (Київ-Одеса)</description><styleUrl>#cam70</styleUrl><Point><coordinates>30.218654,50.185933,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-05, 39+140 км (Київ-Одеса)</description><styleUrl>#cam70</styleUrl><Point><coordinates>30.218108,50.183132,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-01, 80+444 км (Київ – Знам’янка)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.829376,49.863920,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-01, 79+010 км (Київ – Знам’янка)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.823603,49.873391,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-69, 27+784 км (Київ – Вишгород – Десна – Чернігів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.524827,50.585588,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-07, 2+817 км (Київ-Суми-Юнаківка)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.912694,50.525667,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-01-01, 0+459 км (Східний під'їзд до м. Броварів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.822333,50.564389,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-07, 21+843 км (Київ – Ковель – Ягодин)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.303145,50.547658,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Кіровоградська область</name>
+<Placemark><name>110 км/год</name><description>М-05, 248+169 км (Київ-Одеса)</description><styleUrl>#cam110</styleUrl><Point><coordinates>30.246293,48.383986,0</coordinates></Point></Placemark>
+<Placemark><name>110 км/год</name><description>М-05, 253+462 км (Київ-Одеса)</description><styleUrl>#cam110</styleUrl><Point><coordinates>30.254346,48.337709,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 784+099 км (Стрий-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.890016,48.675674,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 619+385 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.063788,48.629940,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Львівська область</name>
+<Placemark><name>50 км/год</name><description>М-06, 648+242 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.562222,49.070500,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 617+024 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.852861,49.244778,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 439+352 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.165741,50.069273,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 490 + 400 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.592883,49.969215,0</coordinates></Point></Placemark>
+<Placemark><name>90 км/год</name><description>М-06, 552+486 км (Київ-Чоп)</description><styleUrl>#cam90</styleUrl><Point><coordinates>24.020769,49.768767,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 528+459 км (Київ-Чоп (у напрямку м. Львів))</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.149771,49.901777,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 528+459 км (Київ-Чоп (у напрямку м. Луцьк))</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.149546,49.901947,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 523+260 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.201384,49.917199,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 541+451 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.147072,49.798920,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 541+296 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.147855,49.800237,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 510+120 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.365490,49.932609,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 555+730 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.014809,49.748719,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 555+662 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.014857,49.749283,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 685+309 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.250157,48.887983,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 447 + 803 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.115216,50.002741,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-09, 66+283 км (Тернопіль-Львів-Рава-Руська)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.767028,49.805139,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-09, 137+971 км (Тернопіль-Львів-Рава-Руська)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.056687,49.949948,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-10, 10+100 км (Львів-Краковець)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.888343,49.874452,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-10, 53 +580 км (Львів-Краковець)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.332832,49.934776,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-10, 21+671 км (Львів-Краковець)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.740703,49.910128,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-10, 16+281 км (Львів-Краковець)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.806806,49.889861,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-10-01, 12+514 км (Західний обхід м. Львова)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.975539,49.778094,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-10-01, 3+360 км (Західний обхід м. Львова)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.899195,49.838564,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-11, 16+153 км (Львів-Шегині)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.817576,49.804897,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-11, 58+876 км (Львів-Шегині)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.242139,49.801861,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-11, 62+177 км (Львів-Шегині)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.197194,49.801889,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-11, 13+317 км (Львів-Шегині)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.855780,49.810882,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-09, 433+537 км (Мукачево-Львів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.141361,49.751861,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-17, 4 + 898 км (Львів - Радехів - Луцьк)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.204486,49.952889,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-17, 3+064 км (Львів - Радехів - Луцьк)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.183025,49.944268,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-11, 71+630 км (Львів - Шегині)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.076628,49.804621,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-13, 10+300 км (Львів – Самбір – Ужгород)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.801057,49.758932,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 532+842 км (Київ – Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.164498,49.873379,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-15, 137+290 км (Ковель - Володимир - Червоноград - Жовква)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.138377,50.240647,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-11, 56+820 км (Львів – Шегині)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.270835,49.800333,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-11, 24+490 км (Львів – Шегині)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.704694,49.788167,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-15, 151+021 км (Ковель - Володимир - Червоноград - Жовква)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.052655,50.132694,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 584+510 км (Київ - Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.961017,49.510119,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 645+057 км (Київ – Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.586250,49.093917,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Т-14-16, 10+165 км (Львів - Пустомити - Меденичі)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.941388,49.752890,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-11, 50+620 км (Львів-Шегині)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.353220,49.803534,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-09, 110+049 км (Тернопіль-Львів-Рава-Руська)</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.203444,49.815417,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-10, 23+475 км (Львів-Краковець)</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.728940,49.922342,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Миколаївська область</name>
+<Placemark><name>50 км/год</name><description>М-05, 294 + 260 км (Київ-Одеса)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.309845,47.974214,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-14, 139 + 684 км (Одеса – Мелітополь – Новоазовськ)</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.995522,47.019091,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-24, 191 + 346 км (Благовіщанське - Миколаїв)</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.799939,47.279036,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Одеська область</name>
+<Placemark><name>110 км/год</name><description>М-05, 465+483 км (Київ-Одеса)</description><styleUrl>#cam110</styleUrl><Point><coordinates>30.632438,46.503742,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-05, 364+792 км (Київ-Одеса)</description><styleUrl>#cam70</styleUrl><Point><coordinates>30.306011,47.355231,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 96+449 км (Одеса – Рені (на м. Бухарест))</description><styleUrl>#cam50</styleUrl><Point><coordinates>29.903858,46.135148,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 120+354 км (Одеса – Рені (на м. Бухарест))</description><styleUrl>#cam50</styleUrl><Point><coordinates>29.687943,46.002353,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 125+949 км (Одеса – Рені (на м. Бухарест))</description><styleUrl>#cam50</styleUrl><Point><coordinates>29.696134,45.952815,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 190+050 км (Одеса – Рені (на м. Бухарест))</description><styleUrl>#cam50</styleUrl><Point><coordinates>29.069458,45.702245,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 229+530 км (Одеса – Рені (на м. Бухарест))</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.866082,45.406210,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 237+550 км (Одеса – Рені (на м. Бухарест))</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.784710,45.372377,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 271+315 км (Одеса – Рені (на м. Бухарест))</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.453992,45.325070,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 39+423 км (Одеса – Рені (на м. Бухарест))</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.281000,46.416841,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 16+729 км (Одеса – Рені (на м. Бухарест))</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.556013,46.474562,0</coordinates></Point></Placemark>
+<Placemark><name>90 км/год</name><description>Т-16-28, 3+015 км (Спаське-Вилково)</description><styleUrl>#cam90</styleUrl><Point><coordinates>29.440419,45.739928,0</coordinates></Point></Placemark>
+<Placemark><name>90 км/год</name><description>М-28, 17+125 км (Одеса - Южне)</description><styleUrl>#cam90</styleUrl><Point><coordinates>30.831362,46.561677,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-28, 20+980 км (Одеса - Южне)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.879270,46.570134,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 141+319 км (Одеса-Рені)</description><styleUrl>#cam50</styleUrl><Point><coordinates>29.627940,45.841872,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-15, 142+028 км (Одеса-Рені)</description><styleUrl>#cam50</styleUrl><Point><coordinates>29.622003,45.837074,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Полтавська область</name>
+<Placemark><name>110 км/год</name><description>М-03, 155+696 км (Київ-Харків-Довжанський)</description><styleUrl>#cam110</styleUrl><Point><coordinates>32.506604,50.225552,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-03, 319+374 км (Київ-Харків-Довжанський)</description><styleUrl>#cam50</styleUrl><Point><coordinates>34.272512,49.600182,0</coordinates></Point></Placemark>
+<Placemark><name>90 км/год</name><description>М-03, 324+515 км (Київ-Харків-Довжанський)</description><styleUrl>#cam90</styleUrl><Point><coordinates>34.341064,49.604084,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-22, 30 + 459 км (Полтава-Олександрія)</description><styleUrl>#cam50</styleUrl><Point><coordinates>34.302531,49.354218,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Рівненська область</name>
+<Placemark><name>110 км/год</name><description>М-06, 340+202 км (Київ-Чоп)</description><styleUrl>#cam110</styleUrl><Point><coordinates>26.140465,50.582574,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 394+318 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.614704,50.295209,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 371+971 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.766674,50.439048,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-06, 328+826 км (Київ-Чоп)</description><styleUrl>#cam70</styleUrl><Point><coordinates>26.276106,50.572236,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 325+770 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.316611,50.581444,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 339+091 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.149632,50.587668,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 322+490 км (Київ - Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.340630,50.605518,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 299+873 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.640870,50.609055,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 299+894 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.640940,50.608738,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 349+001 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.042139,50.534167,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-06, 346+900 км (Київ-Чоп)</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.066139,50.546111,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Сумська область</name>
+<Placemark><name>50 км/год</name><description>М-02, 167+441 км (Кіпті-Глухів-Бачівськ)</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.396111,51.528528,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Тернопільська область</name>
+<Placemark><name>50 км/год</name><description>М-09, 12+205 км (Тернопіль – Львів – Рава-Руська)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.408278,49.607306,0</coordinates></Point></Placemark>
+<Placemark><name>90 км/год</name><description>М-19, 303+307 км (Доманове-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam90</styleUrl><Point><coordinates>25.721639,49.682694,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 328+315 км (Доманове-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.614028,49.497111,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 374+935 км (Доманове-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.851281,49.155353,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 268+641 км (Доманове-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.775750,49.985556,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 316+542 км (Доманове-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.666361,49.574806,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 154+464 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.646306,49.544722,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-30, 158+740 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.702417,49.532722,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-41, 0+738 км (Об’їзд м.Тернополя)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.645289,49.572767,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-18, 48+821 км (Івано-Франківськ – Бучач – Тернопіль)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.174861,49.090722,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19, 250+096 км (Доманово-Ковель-Чернівці-Тереблече)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.692679,50.113487,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Хмельницька область</name>
+<Placemark><name>50 км/год</name><description>Н-25, 250+404 км (Городище - Рівне - Старокостянтинів)</description><styleUrl>#cam50</styleUrl><Point><coordinates>27.039306,50.185583,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Черкаська область</name>
+<Placemark><name>50 км/год</name><description>М-30, 548+324 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.164618,48.734140,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-16, 192+446 км (Золотоноша-Черкаси-Сміла-Умань)</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.560558,48.802962,0</coordinates></Point></Placemark>
+<Placemark><name>70 км/год</name><description>М-30, 530+055 км (Стрий-Умань-Дніпро-Ізварине)</description><styleUrl>#cam70</styleUrl><Point><coordinates>29.934833,48.790500,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Чернівецька область</name>
+<Placemark><name>50 км/год</name><description>Р-62, 100+356 км (Криворівня-Чернівці)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.779690,48.186300,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>Чернігівська область</name>
+<Placemark><name>50 км/год</name><description>М-01, 113+864 км (Київ-Чернігів-Нові Яриловичі)</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.213326,51.208032,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Р-56, 6+801 км (Чернігів - Чорнобиль)</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.225893,51.467590,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Н-27, 11+903 км (Чернігів-Мена-Сосниця-Грем’яч)</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.441880,51.542763,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-02, 125+385 км (Кіпті-Глухів-Бачівськ)</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.894986,51.329269,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Івано-Франківськ</name>
+<Placemark><name>50 км/год</name><description>вул. Галицька, 144, м. Івано-Франківськ</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.697047,48.949950,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Крихівецька, 216, м. Івано-Франківськ</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.656173,48.893246,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Тисменицька, 311, м. Івано-Франківськ</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.765658,48.911474,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Євгена Коновальця, 320, м. Івано-Франківськ</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.706558,48.876089,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Євгена Коновальця, 411, м. Івано-Франківськ</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.706662,48.875343,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Бердичів</name>
+<Placemark><name>50 км/год</name><description>вул. Одеська, 27, м. Бердичів</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.592221,49.882843,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Бориспіль</name>
+<Placemark><name>50 км/год</name><description>вул. Броварська, 1-А, м. Бориспіль</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.920632,50.366258,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Київський шлях, 2-Б, м. Бориспіль</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.920041,50.366314,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Бровари</name>
+<Placemark><name>50 км/год</name><description>перехр. вул. Київська- вул. Героїв України – вул. Чорновола В’ячеслава (в напрямку м. Чернігів, зустрічний напрямок), м. Бровари</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.783976,50.515296,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>перехр. вул. Київська- вул. Героїв України – вул. Чорновола В’ячеслава (в напрямку м. Чернігів, попутний напрямок), м. Бровари</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.783599,50.514333,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>перехр. вул. Київська- вул. Шевченка (в напрямку м. Чернігів, зустрічний напрямок), м. Бровари</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.777072,50.506307,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>перехр. вул. Київська- вул. Шевченка (в напрямку м. Чернігів, попутний напрямок), м. Бровари</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.776793,50.505590,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Біла Церква</name>
+<Placemark><name>50 км/год</name><description>просп. Незалежності (ст. назва вул. Леваневського), 48, м. Біла Церква</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.159641,49.784827,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Князя Володимира (біля вул. Надрічна, 96), м. Біла Церква</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.123514,49.785169,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>бульв. Олександрійський, 54, м. Біла Церква</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.095856,49.809675,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>бульвар Олександрійський, 113 (смуга руху в напрямку вул. Соборна), м. Біла Церква</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.095634,49.809358,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>м. Біла Церква, проспект Князя Володимира (спуск з шляхопроводу в напрямку вул. Людмили Павличенко), м. Біла Церква</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.138515,49.783180,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>м. Біла Церква, просп. Незалежності, 40 смуга руху у напрямку вул. Людмили Павличенко, м. Біла Церква</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.154972,49.785429,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Вишгород</name>
+<Placemark><name>50 км/год</name><description>перех. вул. Шолуденка - вул. Борисо-Глібська, м. Вишгород</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.470570,50.596378,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>перех. просп. Шевченка - вул. Набережна,, м. Вишгород</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.494491,50.581235,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Вінниця</name>
+<Placemark><name>50 км/год</name><description>вул. Келецька, 30, м. Вінниця</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.438422,49.225992,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Київська, 126, м. Вінниця</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.473141,49.262334,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Київська, 65, м. Вінниця</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.472799,49.253495,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Пирогова, 61, м. Вінниця</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.444261,49.223971,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Юності, 46, м. Вінниця</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.410114,49.220941,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. В'ячеслава Чорновола (біля Київського мосту), м. Вінниця</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.467521,49.239593,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>перехр. Немирівського шосе та вулиці Покровська, м. Вінниця</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.551465,49.223383,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Дніпро</name>
+<Placemark><name>50 км/год</name><description>вул. Набережна Заводська, 64, м. Дніпро</description><styleUrl>#cam50</styleUrl><Point><coordinates>34.971194,48.490806,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Набережна Перемоги, 38-А, м. Дніпро</description><styleUrl>#cam50</styleUrl><Point><coordinates>35.073028,48.444639,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Житомир</name>
+<Placemark><name>50 км/год</name><description>Чуднівський міст в напрямку вул. Качинського, м. Житомир</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.653959,50.246408,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Чуднівський міст в напрямку Радивилівська, м. Житомир</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.655246,50.247305,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Перемоги, 86, м. Житомир</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.647820,50.274131,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Покровська, 21, м. Житомир</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.661180,50.260650,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Покровська, 148а, м. Житомир</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.656590,50.292845,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Покровська, 187, м. Житомир</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.656333,50.292893,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>перехр. просп. Незалежності - вул. Отаманів Соколовських, м. Житомир</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.666637,50.272938,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Чуднівська, 103, м. Житомир</description><styleUrl>#cam50</styleUrl><Point><coordinates>28.638642,50.245238,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Золотоноша</name>
+<Placemark><name>50 км/год</name><description>вул. Шевченка 107, м. Золотоноша</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.053750,49.664417,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Калуш</name>
+<Placemark><name>50 км/год</name><description>просп. Лесі Українки, 27, м. Калуш</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.361472,49.027196,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Богдана Хмельницького, 19, м. Калуш</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.354834,49.039757,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Київ</name>
+<Placemark><name>50 км/год</name><description>вул. Олени Теліги, 37, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.453529,50.479649,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Набережне шосе, 4, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.530181,50.456731,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Дніпровська набережна / вул. Причальна, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.593149,50.417382,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Братиславська, 18, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.625613,50.467477,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Чоколівський бульвар, 24, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.455483,50.431336,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>міст Північний на лівий берег, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.540926,50.492109,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Броварський пр./ вул. Будівельників, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.610071,50.455612,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Броварський пр./ ст. м. Лівобережна, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.601344,50.452832,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>міст Північний на правий берег, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.540826,50.492322,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>міст Південний на лівий берег, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.591239,50.394649,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>міст Південний на правий берег, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.590517,50.395009,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Володимира Івасюка, 25, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.508167,50.507666,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп.Червоної Калини, 56, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.619629,50.521647,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп.Червоної Калини, 65, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.616043,50.515084,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>бульв. Миколи Міхновського, 36, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.549073,50.420328,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>бульв. Миколи Міхновського, 27, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.546285,50.419049,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Столичне шосе, 58, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.561004,50.327939,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Столичне шосе, 58, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.560800,50.328135,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Харківська площа (лівий проїзд), м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.681791,50.402692,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Харківська площа (правий проїзд), м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.682780,50.402308,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Братиславська, 9-Г, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.617634,50.478138,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Рональда Рейгана (ст. назва Теодора Драйзера), 32, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.596805,50.510667,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Наталії Ужвій, 1, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.439399,50.504209,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Правди, 58, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.438248,50.504729,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Ярослава Івашкевича, 5, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.458702,50.505157,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Автозаводська, 24/1, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.459498,50.505091,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Голосіївський, 96, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.500534,50.390343,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Рональда Рейгана (ст. назва Теодора Драйзера), 4, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.604527,50.501489,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Рональда Рейгана (ст. назва Теодора Драйзера), 9, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.603791,50.501701,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Голосііївський, 96, м. Київ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.500938,50.390329,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Кременчук</name>
+<Placemark><name>50 км/год</name><description>274-й квартал, 4, м. Кременчук</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.437303,49.109669,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Свободи, 120/25, м. Кременчук</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.431756,49.096119,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Полтавський, 265, м. Кременчук</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.487267,49.116752,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Вадима Пугачова, 6-Д, м. Кременчук</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.446888,49.096271,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Андрія Ковальова, 17, м. Кременчук</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.437328,49.110197,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Свободи, 69-А, м. Кременчук</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.431397,49.096475,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Кривий Ріг</name>
+<Placemark><name>50 км/год</name><description>вул. Нікопольське шосе, 22 у напрямку вул. 21-ї бригади Національної гвардії, м. Кривий Ріг</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.430032,47.926140,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Нікопольське шосе, 22 у напрямку Дніпровського шосе, м. Кривий Ріг</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.430500,47.926388,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Вільної Ічкерії, 11, м. Кривий Ріг</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.387492,47.926453,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Вільної Ічкерії, 13, м. Кривий Ріг</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.387548,47.924043,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. 200-річчя Кривого Рогу, 14 (навпроти) у напрямку вул. Співдружності, м. Кривий Ріг</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.435972,47.960027,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. 200-річчя Кривого Рогу, 14 у напрямку вул. Виноградна, м. Кривий Ріг</description><styleUrl>#cam50</styleUrl><Point><coordinates>33.435722,47.960972,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Кропивницький</name>
+<Placemark><name>50 км/год</name><description>вул. Габдрахманова, 50, м. Кропивницький</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.242755,48.507278,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Габдрахманова, 35-А, м. Кропивницький</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.242708,48.506886,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Яновського, 65, м. Кропивницький</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.256480,48.492737,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Холодноярська, 196, м. Кропивницький</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.241940,48.577228,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Полтавська, 40, м. Кропивницький</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.286923,48.520710,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Луцьк</name>
+<Placemark><name>50 км/год</name><description>вул. Ковельська, 147, м. Луцьк</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.289082,50.754948,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. В'ячеслава Чорновола, 17, м. Луцьк</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.359178,50.748919,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Ковельська, 144, м. Луцьк</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.289685,50.754411,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Конякіна, 18-А, м. Луцьк</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.357070,50.769658,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Львів</name>
+<Placemark><name>50 км/год</name><description>просп. Святого Івана Павла ІІ, 8, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.029371,49.800429,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Святого Івана Павла ІІ, 35, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.031119,49.800535,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Стрийська, 292, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.014850,49.788716,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Стрийська, 35, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.020148,49.816770,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Княгині Ольги, 100-К, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.003101,49.817724,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Василя Стуса, 39, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.042047,49.819003,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Володимира Великого, 18, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.002662,49.810273,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Сихівська, 16А, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.064364,49.794810,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Шевченка, 313, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.945802,49.870330,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Любінська, 89, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.976740,49.823763,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Любінська, 92, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.977820,49.824570,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Богданівська, 44, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>24.075212,49.856024,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Кульпарківська, 93, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.988639,49.821078,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Кульпарківська, 64-А, м. Львів</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.989828,49.826139,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Миколаїв</name>
+<Placemark><name>50 км/год</name><description>просп. Героїв України, 9-Т у напрямку пров. Парковий, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.998135,46.986899,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Героїв України, 9-Т у напрямку вул. Пушкінська, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.998383,46.986319,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Героїв України, 20, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.996979,47.002175,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Героїв України, 55, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.997262,47.001858,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Центральний, 160, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.016362,46.965325,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Центральний, 96, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.999512,46.966308,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Богоявленський, 140, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.045738,46.917922,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Богоявленський, 125, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.045615,46.918634,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Богоявленський, 55/2, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.044984,46.927431,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Богоявленський, 42-А, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.045427,46.927070,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Велика Морська, 13, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.972649,46.980199,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Центральний, 93, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.999068,46.966001,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>перехрестя вул. Марка Кропивницького та вул. Інженерна, м. Миколаїв</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.000191,46.967682,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Мукачево</name>
+<Placemark><name>50 км/год</name><description>вул. Великогірна, 51, м. Мукачево</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.743246,48.428169,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Обухів</name>
+<Placemark><name>50 км/год</name><description>вул. Київська 119, м. Обухів</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.658137,50.130971,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Одеса</name>
+<Placemark><name>50 км/год</name><description>просп. Добровольського, 123-А, м. Одеса</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.789028,46.584944,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Шевченка, 4-А, м. Одеса</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.749680,46.459230,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Миколаївська дорога, 287, м. Одеса</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.758694,46.552340,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Небесної Сотні, 4, м. Одеса</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.709014,46.401493,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Миколаївська дорога, 205, м. Одеса</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.736285,46.535377,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Семена Палія, 80, м. Одеса</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.792430,46.571250,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Південна дорога, 39, м. Одеса</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.779587,46.560851,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Південна дорога, 2, м. Одеса</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.779216,46.560664,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Семена Палія, 25A, м. Одеса</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.792602,46.570919,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Павлоград</name>
+<Placemark><name>50 км/год</name><description>вул. Дніпровська 409, м. Павлоград</description><styleUrl>#cam50</styleUrl><Point><coordinates>35.914500,48.501139,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Дніпровська, 16, м. Павлоград</description><styleUrl>#cam50</styleUrl><Point><coordinates>35.841518,48.529960,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Полтава</name>
+<Placemark><name>50 км/год</name><description>вул. Світанкова, 14, м. Полтава</description><styleUrl>#cam50</styleUrl><Point><coordinates>34.492449,49.578070,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Великотирнівська, 19, м. Полтава</description><styleUrl>#cam50</styleUrl><Point><coordinates>34.492615,49.577324,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Решетилівська, 35/14, м. Полтава</description><styleUrl>#cam50</styleUrl><Point><coordinates>34.514031,49.599615,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Решетилівська, 32, м. Полтава</description><styleUrl>#cam50</styleUrl><Point><coordinates>34.515140,49.599872,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Героїв АТО, 31, м. Полтава</description><styleUrl>#cam50</styleUrl><Point><coordinates>34.527632,49.573297,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Європейська, 108, м. Полтава</description><styleUrl>#cam50</styleUrl><Point><coordinates>34.530103,49.566684,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Європейська, 155, м. Полтава</description><styleUrl>#cam50</styleUrl><Point><coordinates>34.529754,49.565620,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Рівне</name>
+<Placemark><name>50 км/год</name><description>вул. Київська, 92 в напрямку вул. Федорова, м. Рівне</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.303767,50.613657,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Київська, 92 в напрямку вул. Захисників Маріуполя, м. Рівне</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.305090,50.613620,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Соборна, 416, м. Рівне</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.211943,50.635843,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Млинівська, 26, м. Рівне</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.203944,50.644500,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Київська, 6, м. Рівне</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.271278,50.616694,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Соборна, 364, м. Рівне</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.224139,50.626917,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Захисників Маріуполя, 5, м. Рівне</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.286333,50.619583,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Романа Шухевича, 2, м. Рівне</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.265167,50.634306,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Кулика і Гудачека, 10, м. Рівне</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.206250,50.616306,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>перехр. вул. Соборна- В'ячеслава Чорновола - Міцкевича, м. Рівне</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.251968,50.619134,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Сміла</name>
+<Placemark><name>50 км/год</name><description>перехр. вулиць Незалежності - Олеся Гончара, м. Сміла</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.868611,49.229639,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>перехр. вул. Героїв Холодноярців - пров. Олексія Цибка, м. Сміла</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.906583,49.228917,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Стрий</name>
+<Placemark><name>50 км/год</name><description>перехр. вул. Шевченка та Олесницького, м. Стрий</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.849306,49.257528,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Тернопіль</name>
+<Placemark><name>50 км/год</name><description>просп. Злуки, 47Б, м. Тернопіль</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.633086,49.557222,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Злуки, 45Б, м. Тернопіль</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.631186,49.557572,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Степана Будного, 28, м. Тернопіль</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.566854,49.541122,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Протасевича, 8, м. Тернопіль</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.633201,49.542796,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Степана Бандери, 90, м. Тернопіль</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.628049,49.548753,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Ужгород</name>
+<Placemark><name>50 км/год</name><description>вул. Минайська, 8, м. Ужгород</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.291667,48.611167,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Минайська, 24, м. Ужгород</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.288611,48.606333,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул.Собранецька, 152, м. Ужгород</description><styleUrl>#cam50</styleUrl><Point><coordinates>22.271784,48.638989,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Хмельницький</name>
+<Placemark><name>50 км/год</name><description>вул. Кам'янецька, 132, м. Хмельницький</description><styleUrl>#cam50</styleUrl><Point><coordinates>26.956385,49.393276,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Вінницьке шосе, 8/1, м. Хмельницький</description><styleUrl>#cam50</styleUrl><Point><coordinates>27.066267,49.421743,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Миру, 65, м. Хмельницький</description><styleUrl>#cam50</styleUrl><Point><coordinates>27.004581,49.438580,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Хуст</name>
+<Placemark><name>50 км/год</name><description>вул. Волошина, 81, м. Хуст</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.279630,48.180013,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Івана Франка, 165, м. Хуст</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.304787,48.157289,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Львівська, 157, м. Хуст</description><styleUrl>#cam50</styleUrl><Point><coordinates>23.300805,48.187238,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Черкаси</name>
+<Placemark><name>50 км/год</name><description>просп. Хіміків, 30, м. Черкаси</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.046665,49.406841,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Благовісна 36/47, м. Черкаси</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.034520,49.452627,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Надпільна, 208, м. Черкаси</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.046736,49.443349,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Благовісна, 341/40, м. Черкаси</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.072417,49.431805,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Хіміків, 50, м. Черкаси</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.047587,49.406644,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Чорновола, 119, м. Черкаси</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.073555,49.421379,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Сумгаїтська, 21 (у напрямку вул. Віталія Вергая), м. Черкаси</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.016863,49.435303,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Сумгаїтська, 21 (у напрямку вул. Академіка Корольова), м. Черкаси</description><styleUrl>#cam50</styleUrl><Point><coordinates>32.016323,49.435211,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Чернівці</name>
+<Placemark><name>50 км/год</name><description>просп. Незалежності 125, м. Чернівці</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.932944,48.268111,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Незалежності 94, м. Чернівці</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.929639,48.268694,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Героїв Майдану 160, м. Чернівці</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.928417,48.272083,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Галицький шлях, 46-В, м. Чернівці</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.907278,48.321750,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>М-19-03, 0+972 км (Південний під'їзд до м. Чернівці)</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.978444,48.228889,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Винниченка, 116, м. Чернівці</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.964965,48.277061,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Старожучківський шлях у напрямку вул. Старокостянтинівська, м. Чернівці</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.961749,48.297696,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>Старожучківський шлях у напрямку вул. Білоруська, м. Чернівці</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.961180,48.298074,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Винниченка, 97, м. Чернівці</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.965141,48.277339,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Січових Стрільців, 6, м. Чернівці</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.957433,48.289245,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул.Хотинська, 3, м. Чернівці</description><styleUrl>#cam50</styleUrl><Point><coordinates>25.923310,48.316058,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Чернігів</name>
+<Placemark><name>50 км/год</name><description>перехрестя просп. Миру - вул. Лісковицька в напрямку вул. Урочище Святе, м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.302757,51.476482,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Шевченка, 101, м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.337475,51.506358,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Шевченка, 114, м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.339237,51.507212,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Левка Лук'яненка, 12 к2, м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.328523,51.510218,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Миру, 192, м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.273892,51.520278,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Миру, 296, м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.266375,51.533845,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>просп. Миру, 241-А, м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.266831,51.533478,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Івана Мазепи, 55, м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.271558,51.481450,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Івана Мазепи, 58, м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.271846,51.481467,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Жабинського, 2-Б (навпроти), м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.269676,51.490190,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>вул. Козацька, 22 (навпроти), м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.267253,51.512394,0</coordinates></Point></Placemark>
+<Placemark><name>50 км/год</name><description>перехрестя пр-кт Миру - вул. Лісковицька (в напрямку вул. Шевченка), м. Чернігів</description><styleUrl>#cam50</styleUrl><Point><coordinates>31.302394,51.476627,0</coordinates></Point></Placemark>
+</Folder>
+<Folder><name>м. Чорноморськ</name>
+<Placemark><name>50 км/год</name><description>перехр. вул. Захисників України та Віталія Шума, м. Чорноморськ</description><styleUrl>#cam50</styleUrl><Point><coordinates>30.641767,46.303040,0</coordinates></Point></Placemark>
+</Folder>
+</Document></kml>

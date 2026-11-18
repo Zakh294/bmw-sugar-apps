@@ -1,0 +1,8105 @@
+{
+ "type": "FeatureCollection",
+ "name": "speedcams_ua",
+ "meta": {
+  "source": "https://patrolpolice.gov.ua/automatic_fixation/informatsiya-pro-vstanovleni-kaf/",
+  "fetched": "2026-11-18",
+  "count": 426
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.453529,
+     50.479649
+    ]
+   },
+   "properties": {
+    "id": 1,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "вул. Олени Теліги, 37",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.530181,
+     50.456731
+    ]
+   },
+   "properties": {
+    "id": 2,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "Набережне шосе, 4",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.593149,
+     50.417382
+    ]
+   },
+   "properties": {
+    "id": 3,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "Дніпровська набережна / вул. Причальна",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.625613,
+     50.467477
+    ]
+   },
+   "properties": {
+    "id": 4,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "вул. Братиславська, 18",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.455483,
+     50.431336
+    ]
+   },
+   "properties": {
+    "id": 5,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "Чоколівський бульвар, 24",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.540926,
+     50.492109
+    ]
+   },
+   "properties": {
+    "id": 6,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "міст Північний на лівий берег",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.610071,
+     50.455612
+    ]
+   },
+   "properties": {
+    "id": 7,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "Броварський пр./ вул. Будівельників",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.601344,
+     50.452832
+    ]
+   },
+   "properties": {
+    "id": 8,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "Броварський пр./ ст. м. Лівобережна",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.540826,
+     50.492322
+    ]
+   },
+   "properties": {
+    "id": 9,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "міст Північний на правий берег",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.591239,
+     50.394649
+    ]
+   },
+   "properties": {
+    "id": 10,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "міст Південний на лівий берег",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.590517,
+     50.395009
+    ]
+   },
+   "properties": {
+    "id": 11,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "міст Південний на правий берег",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.508167,
+     50.507666
+    ]
+   },
+   "properties": {
+    "id": 12,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "просп. Володимира Івасюка, 25",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.619629,
+     50.521647
+    ]
+   },
+   "properties": {
+    "id": 13,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "просп.Червоної Калини, 56",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.616043,
+     50.515084
+    ]
+   },
+   "properties": {
+    "id": 14,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "просп.Червоної Калини, 65",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.549073,
+     50.420328
+    ]
+   },
+   "properties": {
+    "id": 15,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "бульв. Миколи Міхновського, 36",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.546285,
+     50.419049
+    ]
+   },
+   "properties": {
+    "id": 16,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "бульв. Миколи Міхновського, 27",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.561004,
+     50.327939
+    ]
+   },
+   "properties": {
+    "id": 17,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "Столичне шосе, 58",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.5608,
+     50.328135
+    ]
+   },
+   "properties": {
+    "id": 18,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "Столичне шосе, 58",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.681791,
+     50.402692
+    ]
+   },
+   "properties": {
+    "id": 19,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "Харківська площа (лівий проїзд)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.68278,
+     50.402308
+    ]
+   },
+   "properties": {
+    "id": 20,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "Харківська площа (правий проїзд)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.617634,
+     50.478138
+    ]
+   },
+   "properties": {
+    "id": 21,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "вул. Братиславська, 9-Г",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.596805,
+     50.510667
+    ]
+   },
+   "properties": {
+    "id": 22,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "вул. Рональда Рейгана (ст. назва Теодора Драйзера), 32",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.439399,
+     50.504209
+    ]
+   },
+   "properties": {
+    "id": 23,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "вул. Наталії Ужвій, 1",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.438248,
+     50.504729
+    ]
+   },
+   "properties": {
+    "id": 24,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "просп. Правди, 58",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.458702,
+     50.505157
+    ]
+   },
+   "properties": {
+    "id": 25,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "вул. Ярослава Івашкевича, 5",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.459498,
+     50.505091
+    ]
+   },
+   "properties": {
+    "id": 26,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "вул. Автозаводська, 24/1",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.500534,
+     50.390343
+    ]
+   },
+   "properties": {
+    "id": 27,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "просп. Голосіївський, 96",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.604527,
+     50.501489
+    ]
+   },
+   "properties": {
+    "id": 28,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "вул. Рональда Рейгана (ст. назва Теодора Драйзера), 4",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.603791,
+     50.501701
+    ]
+   },
+   "properties": {
+    "id": 29,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "вул. Рональда Рейгана (ст. назва Теодора Драйзера), 9",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.500938,
+     50.390329
+    ]
+   },
+   "properties": {
+    "id": 30,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Київ",
+    "place": "просп. Голосііївський, 96",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.592221,
+     49.882843
+    ]
+   },
+   "properties": {
+    "id": 31,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Бердичів",
+    "place": "вул. Одеська, 27",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.920632,
+     50.366258
+    ]
+   },
+   "properties": {
+    "id": 32,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Бориспіль",
+    "place": "вул. Броварська, 1-А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.920041,
+     50.366314
+    ]
+   },
+   "properties": {
+    "id": 33,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Бориспіль",
+    "place": "вул. Київський шлях, 2-Б",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.159641,
+     49.784827
+    ]
+   },
+   "properties": {
+    "id": 34,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Біла Церква",
+    "place": "просп. Незалежності (ст. назва вул. Леваневського), 48",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.123514,
+     49.785169
+    ]
+   },
+   "properties": {
+    "id": 35,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Біла Церква",
+    "place": "просп. Князя Володимира (біля вул. Надрічна, 96)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.095856,
+     49.809675
+    ]
+   },
+   "properties": {
+    "id": 36,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Біла Церква",
+    "place": "бульв. Олександрійський, 54",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.23241,
+     50.397032
+    ]
+   },
+   "properties": {
+    "id": 37,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "Київська область",
+    "place": "с. Білогородка, вул. Володимирська (біля вул. Завальна 2) (в напрямку вул. Київська)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.971194,
+     48.490806
+    ]
+   },
+   "properties": {
+    "id": 38,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Дніпро",
+    "place": "вул. Набережна Заводська, 64",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.073028,
+     48.444639
+    ]
+   },
+   "properties": {
+    "id": 39,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Дніпро",
+    "place": "вул. Набережна Перемоги, 38-А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.438422,
+     49.225992
+    ]
+   },
+   "properties": {
+    "id": 40,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Вінниця",
+    "place": "вул. Келецька, 30",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.473141,
+     49.262334
+    ]
+   },
+   "properties": {
+    "id": 41,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Вінниця",
+    "place": "вул. Київська, 126",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.472799,
+     49.253495
+    ]
+   },
+   "properties": {
+    "id": 42,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Вінниця",
+    "place": "вул. Київська, 65",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.444261,
+     49.223971
+    ]
+   },
+   "properties": {
+    "id": 43,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Вінниця",
+    "place": "вул. Пирогова, 61",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.410114,
+     49.220941
+    ]
+   },
+   "properties": {
+    "id": 44,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Вінниця",
+    "place": "просп. Юності, 46",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.653959,
+     50.246408
+    ]
+   },
+   "properties": {
+    "id": 45,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Житомир",
+    "place": "Чуднівський міст в напрямку вул. Качинського",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.655246,
+     50.247305
+    ]
+   },
+   "properties": {
+    "id": 46,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Житомир",
+    "place": "Чуднівський міст в напрямку Радивилівська",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.64782,
+     50.274131
+    ]
+   },
+   "properties": {
+    "id": 47,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Житомир",
+    "place": "вул. Перемоги, 86",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.697047,
+     48.94995
+    ]
+   },
+   "properties": {
+    "id": 48,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Івано-Франківськ",
+    "place": "вул. Галицька, 144",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.656173,
+     48.893246
+    ]
+   },
+   "properties": {
+    "id": 49,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Івано-Франківськ",
+    "place": "вул. Крихівецька, 216",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.765658,
+     48.911474
+    ]
+   },
+   "properties": {
+    "id": 50,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Івано-Франківськ",
+    "place": "вул. Тисменицька, 311",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.706558,
+     48.876089
+    ]
+   },
+   "properties": {
+    "id": 51,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Івано-Франківськ",
+    "place": "вул. Євгена Коновальця, 320",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.706662,
+     48.875343
+    ]
+   },
+   "properties": {
+    "id": 52,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Івано-Франківськ",
+    "place": "вул. Євгена Коновальця, 411",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.437303,
+     49.109669
+    ]
+   },
+   "properties": {
+    "id": 53,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кременчук",
+    "place": "274-й квартал, 4",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.431756,
+     49.096119
+    ]
+   },
+   "properties": {
+    "id": 54,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кременчук",
+    "place": "просп. Свободи, 120/25",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.487267,
+     49.116752
+    ]
+   },
+   "properties": {
+    "id": 55,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кременчук",
+    "place": "просп. Полтавський, 265",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.446888,
+     49.096271
+    ]
+   },
+   "properties": {
+    "id": 56,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кременчук",
+    "place": "вул. Вадима Пугачова, 6-Д",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.437328,
+     49.110197
+    ]
+   },
+   "properties": {
+    "id": 57,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кременчук",
+    "place": "вул. Андрія Ковальова, 17",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.431397,
+     49.096475
+    ]
+   },
+   "properties": {
+    "id": 58,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кременчук",
+    "place": "просп. Свободи, 69-А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.430032,
+     47.92614
+    ]
+   },
+   "properties": {
+    "id": 59,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кривий Ріг",
+    "place": "вул. Нікопольське шосе, 22 у напрямку вул. 21-ї бригади Національної гвардії",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.4305,
+     47.926388
+    ]
+   },
+   "properties": {
+    "id": 60,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кривий Ріг",
+    "place": "вул. Нікопольське шосе, 22 у напрямку Дніпровського шосе",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.387492,
+     47.926453
+    ]
+   },
+   "properties": {
+    "id": 61,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кривий Ріг",
+    "place": "вул. Вільної Ічкерії, 11",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.387548,
+     47.924043
+    ]
+   },
+   "properties": {
+    "id": 62,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кривий Ріг",
+    "place": "вул. Вільної Ічкерії, 13",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.435972,
+     47.960027
+    ]
+   },
+   "properties": {
+    "id": 63,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кривий Ріг",
+    "place": "просп. 200-річчя Кривого Рогу, 14 (навпроти) у напрямку вул. Співдружності",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.435722,
+     47.960972
+    ]
+   },
+   "properties": {
+    "id": 64,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кривий Ріг",
+    "place": "просп. 200-річчя Кривого Рогу, 14 у напрямку вул. Виноградна",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.242755,
+     48.507278
+    ]
+   },
+   "properties": {
+    "id": 65,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кропивницький",
+    "place": "вул. Габдрахманова, 50",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.242708,
+     48.506886
+    ]
+   },
+   "properties": {
+    "id": 66,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кропивницький",
+    "place": "вул. Габдрахманова, 35-А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.25648,
+     48.492737
+    ]
+   },
+   "properties": {
+    "id": 67,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кропивницький",
+    "place": "вул. Яновського, 65",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.24194,
+     48.577228
+    ]
+   },
+   "properties": {
+    "id": 68,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кропивницький",
+    "place": "вул. Холодноярська, 196",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.286923,
+     48.52071
+    ]
+   },
+   "properties": {
+    "id": 69,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Кропивницький",
+    "place": "вул. Полтавська, 40",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.361472,
+     49.027196
+    ]
+   },
+   "properties": {
+    "id": 70,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Калуш",
+    "place": "просп. Лесі Українки, 27",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.354834,
+     49.039757
+    ]
+   },
+   "properties": {
+    "id": 71,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Калуш",
+    "place": "вул. Богдана Хмельницького, 19",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.289082,
+     50.754948
+    ]
+   },
+   "properties": {
+    "id": 72,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Луцьк",
+    "place": "вул. Ковельська, 147",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.359178,
+     50.748919
+    ]
+   },
+   "properties": {
+    "id": 73,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Луцьк",
+    "place": "вул. В'ячеслава Чорновола, 17",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.289685,
+     50.754411
+    ]
+   },
+   "properties": {
+    "id": 74,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Луцьк",
+    "place": "вул. Ковельська, 144",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.35707,
+     50.769658
+    ]
+   },
+   "properties": {
+    "id": 75,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Луцьк",
+    "place": "вул. Конякіна, 18-А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.029371,
+     49.800429
+    ]
+   },
+   "properties": {
+    "id": 76,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "просп. Святого Івана Павла ІІ, 8",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.031119,
+     49.800535
+    ]
+   },
+   "properties": {
+    "id": 77,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "просп. Святого Івана Павла ІІ, 35",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.01485,
+     49.788716
+    ]
+   },
+   "properties": {
+    "id": 78,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Стрийська, 292",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.020148,
+     49.81677
+    ]
+   },
+   "properties": {
+    "id": 79,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Стрийська, 35",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.003101,
+     49.817724
+    ]
+   },
+   "properties": {
+    "id": 80,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Княгині Ольги, 100-К",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.042047,
+     49.819003
+    ]
+   },
+   "properties": {
+    "id": 81,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Василя Стуса, 39",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.002662,
+     49.810273
+    ]
+   },
+   "properties": {
+    "id": 82,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Володимира Великого, 18",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.064364,
+     49.79481
+    ]
+   },
+   "properties": {
+    "id": 83,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Сихівська, 16А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.945802,
+     49.87033
+    ]
+   },
+   "properties": {
+    "id": 84,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Шевченка, 313",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.97674,
+     49.823763
+    ]
+   },
+   "properties": {
+    "id": 85,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Любінська, 89",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.97782,
+     49.82457
+    ]
+   },
+   "properties": {
+    "id": 86,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Любінська, 92",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.075212,
+     49.856024
+    ]
+   },
+   "properties": {
+    "id": 87,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Богданівська, 44",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.988639,
+     49.821078
+    ]
+   },
+   "properties": {
+    "id": 88,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Кульпарківська, 93",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.989828,
+     49.826139
+    ]
+   },
+   "properties": {
+    "id": 89,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Львів",
+    "place": "вул. Кульпарківська, 64-А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.743246,
+     48.428169
+    ]
+   },
+   "properties": {
+    "id": 90,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Мукачево",
+    "place": "вул. Великогірна, 51",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.998135,
+     46.986899
+    ]
+   },
+   "properties": {
+    "id": 91,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Героїв України, 9-Т у напрямку пров. Парковий",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.998383,
+     46.986319
+    ]
+   },
+   "properties": {
+    "id": 92,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Героїв України, 9-Т у напрямку вул. Пушкінська",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.996979,
+     47.002175
+    ]
+   },
+   "properties": {
+    "id": 93,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Героїв України, 20",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.997262,
+     47.001858
+    ]
+   },
+   "properties": {
+    "id": 94,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Героїв України, 55",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.016362,
+     46.965325
+    ]
+   },
+   "properties": {
+    "id": 95,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Центральний, 160",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.999512,
+     46.966308
+    ]
+   },
+   "properties": {
+    "id": 96,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Центральний, 96",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.045738,
+     46.917922
+    ]
+   },
+   "properties": {
+    "id": 97,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Богоявленський, 140",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.045615,
+     46.918634
+    ]
+   },
+   "properties": {
+    "id": 98,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Богоявленський, 125",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.044984,
+     46.927431
+    ]
+   },
+   "properties": {
+    "id": 99,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Богоявленський, 55/2",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.045427,
+     46.92707
+    ]
+   },
+   "properties": {
+    "id": 100,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Богоявленський, 42-А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.972649,
+     46.980199
+    ]
+   },
+   "properties": {
+    "id": 101,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "вул. Велика Морська, 13",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.999068,
+     46.966001
+    ]
+   },
+   "properties": {
+    "id": 102,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "просп. Центральний, 93",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.789028,
+     46.584944
+    ]
+   },
+   "properties": {
+    "id": 103,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Одеса",
+    "place": "просп. Добровольського, 123-А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.74968,
+     46.45923
+    ]
+   },
+   "properties": {
+    "id": 104,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Одеса",
+    "place": "просп. Шевченка, 4-А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.758694,
+     46.55234
+    ]
+   },
+   "properties": {
+    "id": 105,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Одеса",
+    "place": "Миколаївська дорога, 287",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.709014,
+     46.401493
+    ]
+   },
+   "properties": {
+    "id": 106,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Одеса",
+    "place": "просп. Небесної Сотні, 4",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.736285,
+     46.535377
+    ]
+   },
+   "properties": {
+    "id": 107,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Одеса",
+    "place": "Миколаївська дорога, 205",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.79243,
+     46.57125
+    ]
+   },
+   "properties": {
+    "id": 108,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Одеса",
+    "place": "вул. Семена Палія, 80",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.779587,
+     46.560851
+    ]
+   },
+   "properties": {
+    "id": 109,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Одеса",
+    "place": "Південна дорога, 39",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.779216,
+     46.560664
+    ]
+   },
+   "properties": {
+    "id": 110,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Одеса",
+    "place": "Південна дорога, 2",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.792602,
+     46.570919
+    ]
+   },
+   "properties": {
+    "id": 111,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Одеса",
+    "place": "вул. Семена Палія, 25A",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.492449,
+     49.57807
+    ]
+   },
+   "properties": {
+    "id": 112,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Полтава",
+    "place": "вул. Світанкова, 14",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.492615,
+     49.577324
+    ]
+   },
+   "properties": {
+    "id": 113,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Полтава",
+    "place": "вул. Великотирнівська, 19",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.514031,
+     49.599615
+    ]
+   },
+   "properties": {
+    "id": 114,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Полтава",
+    "place": "вул. Решетилівська, 35/14",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.51514,
+     49.599872
+    ]
+   },
+   "properties": {
+    "id": 115,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Полтава",
+    "place": "вул. Решетилівська, 32",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.527632,
+     49.573297
+    ]
+   },
+   "properties": {
+    "id": 116,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Полтава",
+    "place": "вул. Героїв АТО, 31",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.530103,
+     49.566684
+    ]
+   },
+   "properties": {
+    "id": 117,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Полтава",
+    "place": "вул. Європейська, 108",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.529754,
+     49.56562
+    ]
+   },
+   "properties": {
+    "id": 118,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Полтава",
+    "place": "вул. Європейська, 155",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.9145,
+     48.501139
+    ]
+   },
+   "properties": {
+    "id": 119,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Павлоград",
+    "place": "вул. Дніпровська 409",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.841518,
+     48.52996
+    ]
+   },
+   "properties": {
+    "id": 120,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Павлоград",
+    "place": "вул. Дніпровська, 16",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.303767,
+     50.613657
+    ]
+   },
+   "properties": {
+    "id": 121,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Рівне",
+    "place": "вул. Київська, 92 в напрямку вул. Федорова",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.30509,
+     50.61362
+    ]
+   },
+   "properties": {
+    "id": 122,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Рівне",
+    "place": "вул. Київська, 92 в напрямку вул. Захисників Маріуполя",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.211943,
+     50.635843
+    ]
+   },
+   "properties": {
+    "id": 123,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Рівне",
+    "place": "вул. Соборна, 416",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.633086,
+     49.557222
+    ]
+   },
+   "properties": {
+    "id": 124,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Тернопіль",
+    "place": "просп. Злуки, 47Б",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.631186,
+     49.557572
+    ]
+   },
+   "properties": {
+    "id": 125,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Тернопіль",
+    "place": "просп. Злуки, 45Б",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.566854,
+     49.541122
+    ]
+   },
+   "properties": {
+    "id": 126,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Тернопіль",
+    "place": "вул. Степана Будного, 28",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.633201,
+     49.542796
+    ]
+   },
+   "properties": {
+    "id": 127,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Тернопіль",
+    "place": "вул. Протасевича, 8",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.628049,
+     49.548753
+    ]
+   },
+   "properties": {
+    "id": 128,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Тернопіль",
+    "place": "просп. Степана Бандери, 90",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.291667,
+     48.611167
+    ]
+   },
+   "properties": {
+    "id": 129,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Ужгород",
+    "place": "вул. Минайська, 8",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.288611,
+     48.606333
+    ]
+   },
+   "properties": {
+    "id": 130,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Ужгород",
+    "place": "вул. Минайська, 24",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.271784,
+     48.638989
+    ]
+   },
+   "properties": {
+    "id": 131,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Ужгород",
+    "place": "вул.Собранецька, 152",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.956385,
+     49.393276
+    ]
+   },
+   "properties": {
+    "id": 132,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Хмельницький",
+    "place": "вул. Кам'янецька, 132",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.066267,
+     49.421743
+    ]
+   },
+   "properties": {
+    "id": 133,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Хмельницький",
+    "place": "вул. Вінницьке шосе, 8/1",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.004581,
+     49.43858
+    ]
+   },
+   "properties": {
+    "id": 134,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Хмельницький",
+    "place": "просп. Миру, 65",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.27963,
+     48.180013
+    ]
+   },
+   "properties": {
+    "id": 135,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Хуст",
+    "place": "вул. Волошина, 81",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.304787,
+     48.157289
+    ]
+   },
+   "properties": {
+    "id": 136,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Хуст",
+    "place": "вул. Івана Франка, 165",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.300805,
+     48.187238
+    ]
+   },
+   "properties": {
+    "id": 137,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Хуст",
+    "place": "вул. Львівська, 157",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.046665,
+     49.406841
+    ]
+   },
+   "properties": {
+    "id": 138,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Черкаси",
+    "place": "просп. Хіміків, 30",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.03452,
+     49.452627
+    ]
+   },
+   "properties": {
+    "id": 139,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Черкаси",
+    "place": "вул. Благовісна 36/47",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.046736,
+     49.443349
+    ]
+   },
+   "properties": {
+    "id": 140,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Черкаси",
+    "place": "вул. Надпільна, 208",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.072417,
+     49.431805
+    ]
+   },
+   "properties": {
+    "id": 141,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Черкаси",
+    "place": "вул. Благовісна, 341/40",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.047587,
+     49.406644
+    ]
+   },
+   "properties": {
+    "id": 142,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Черкаси",
+    "place": "просп. Хіміків, 50",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.073555,
+     49.421379
+    ]
+   },
+   "properties": {
+    "id": 143,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Черкаси",
+    "place": "вул. Чорновола, 119",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.016863,
+     49.435303
+    ]
+   },
+   "properties": {
+    "id": 144,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Черкаси",
+    "place": "вул. Сумгаїтська, 21 (у напрямку вул. Віталія Вергая)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.016323,
+     49.435211
+    ]
+   },
+   "properties": {
+    "id": 145,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Черкаси",
+    "place": "вул. Сумгаїтська, 21 (у напрямку вул. Академіка Корольова)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.932944,
+     48.268111
+    ]
+   },
+   "properties": {
+    "id": 146,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернівці",
+    "place": "просп. Незалежності 125",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.929639,
+     48.268694
+    ]
+   },
+   "properties": {
+    "id": 147,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернівці",
+    "place": "просп. Незалежності 94",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.928417,
+     48.272083
+    ]
+   },
+   "properties": {
+    "id": 148,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернівці",
+    "place": "вул. Героїв Майдану 160",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.907278,
+     48.32175
+    ]
+   },
+   "properties": {
+    "id": 149,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернівці",
+    "place": "вул. Галицький шлях, 46-В",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.978444,
+     48.228889
+    ]
+   },
+   "properties": {
+    "id": 150,
+    "limit": 50,
+    "road": "М-19-03",
+    "km": "0+972",
+    "region": "м. Чернівці",
+    "place": "Південний під'їзд до м. Чернівці",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.964965,
+     48.277061
+    ]
+   },
+   "properties": {
+    "id": 151,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернівці",
+    "place": "вул. Винниченка, 116",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.961749,
+     48.297696
+    ]
+   },
+   "properties": {
+    "id": 152,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернівці",
+    "place": "Старожучківський шлях у напрямку вул. Старокостянтинівська",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.96118,
+     48.298074
+    ]
+   },
+   "properties": {
+    "id": 153,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернівці",
+    "place": "Старожучківський шлях у напрямку вул. Білоруська",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.965141,
+     48.277339
+    ]
+   },
+   "properties": {
+    "id": 154,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернівці",
+    "place": "вул. Винниченка, 97",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.302757,
+     51.476482
+    ]
+   },
+   "properties": {
+    "id": 155,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "перехрестя просп. Миру - вул. Лісковицька в напрямку вул. Урочище Святе",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.337475,
+     51.506358
+    ]
+   },
+   "properties": {
+    "id": 156,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "вул. Шевченка, 101",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.339237,
+     51.507212
+    ]
+   },
+   "properties": {
+    "id": 157,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "вул. Шевченка, 114",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.328523,
+     51.510218
+    ]
+   },
+   "properties": {
+    "id": 158,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "просп. Левка Лук'яненка, 12 к2",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.273892,
+     51.520278
+    ]
+   },
+   "properties": {
+    "id": 159,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "просп. Миру, 192",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.266375,
+     51.533845
+    ]
+   },
+   "properties": {
+    "id": 160,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "просп. Миру, 296",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.266831,
+     51.533478
+    ]
+   },
+   "properties": {
+    "id": 161,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "просп. Миру, 241-А",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.271558,
+     51.48145
+    ]
+   },
+   "properties": {
+    "id": 162,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "вул. Івана Мазепи, 55",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.271846,
+     51.481467
+    ]
+   },
+   "properties": {
+    "id": 163,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "вул. Івана Мазепи, 58",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.269676,
+     51.49019
+    ]
+   },
+   "properties": {
+    "id": 164,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "вул. Жабинського, 2-Б (навпроти)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.267253,
+     51.512394
+    ]
+   },
+   "properties": {
+    "id": 165,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "вул. Козацька, 22 (навпроти)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.84225,
+     50.507083
+    ]
+   },
+   "properties": {
+    "id": 166,
+    "limit": 50,
+    "road": "М-01",
+    "km": "28+342",
+    "region": "Київська область",
+    "place": "Київ – Чернігів – Нові Яриловичі в напрямку м. Київ",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.841861,
+     50.50725
+    ]
+   },
+   "properties": {
+    "id": 167,
+    "limit": 50,
+    "road": "М-01",
+    "km": "28+342",
+    "region": "Київська область",
+    "place": "Київ – Чернігів – Нові Яриловичі в напрямку м. Чернігів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.776738,
+     50.206527
+    ]
+   },
+   "properties": {
+    "id": 168,
+    "limit": 110,
+    "road": "М-03",
+    "km": "101+350",
+    "region": "Київська область",
+    "place": "Київ-Харків-Довжанський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.776125,
+     50.206349
+    ]
+   },
+   "properties": {
+    "id": 169,
+    "limit": 110,
+    "road": "М-03",
+    "km": "101+400",
+    "region": "Київська область",
+    "place": "Київ-Харків-Довжанський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.085829,
+     50.307689
+    ]
+   },
+   "properties": {
+    "id": 170,
+    "limit": 110,
+    "road": "М-03",
+    "km": "49+150",
+    "region": "Київська область",
+    "place": "Київ-Харків-Довжанський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.30694,
+     50.256226
+    ]
+   },
+   "properties": {
+    "id": 171,
+    "limit": 110,
+    "road": "М-05",
+    "km": "28+870",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.387993,
+     50.318085
+    ]
+   },
+   "properties": {
+    "id": 172,
+    "limit": 50,
+    "road": "М-05",
+    "km": "19+400",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.250309,
+     50.214179
+    ]
+   },
+   "properties": {
+    "id": 173,
+    "limit": 50,
+    "road": "М-05",
+    "km": "35+240",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.250003,
+     50.213358
+    ]
+   },
+   "properties": {
+    "id": 174,
+    "limit": 50,
+    "road": "М-05",
+    "km": "35 + 352",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.310924,
+     50.258287
+    ]
+   },
+   "properties": {
+    "id": 175,
+    "limit": 70,
+    "road": "М-05",
+    "km": "28 + 450",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.345965,
+     50.281933
+    ]
+   },
+   "properties": {
+    "id": 176,
+    "limit": 70,
+    "road": "М-05",
+    "km": "24+400",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.344921,
+     50.279348
+    ]
+   },
+   "properties": {
+    "id": 177,
+    "limit": 70,
+    "road": "М-05",
+    "km": "24+700",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.422016,
+     50.346161
+    ]
+   },
+   "properties": {
+    "id": 178,
+    "limit": 50,
+    "road": "М-05",
+    "km": "15+250",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.417508,
+     50.342831
+    ]
+   },
+   "properties": {
+    "id": 179,
+    "limit": 50,
+    "road": "М-05",
+    "km": "15+740",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.225974,
+     50.44631
+    ]
+   },
+   "properties": {
+    "id": 180,
+    "limit": 70,
+    "road": "М-06",
+    "km": "21+730",
+    "region": "Київська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.226587,
+     50.446328
+    ]
+   },
+   "properties": {
+    "id": 181,
+    "limit": 70,
+    "road": "М-06",
+    "km": "21+810",
+    "region": "Київська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.835236,
+     50.418557
+    ]
+   },
+   "properties": {
+    "id": 182,
+    "limit": 110,
+    "road": "М-06",
+    "km": "49 + 700",
+    "region": "Київська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.886017,
+     50.421495
+    ]
+   },
+   "properties": {
+    "id": 183,
+    "limit": 110,
+    "road": "М-06",
+    "km": "46+050",
+    "region": "Київська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.607617,
+     50.412136
+    ]
+   },
+   "properties": {
+    "id": 184,
+    "limit": 110,
+    "road": "М-06",
+    "km": "66+250",
+    "region": "Київська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.018299,
+     50.596001
+    ]
+   },
+   "properties": {
+    "id": 185,
+    "limit": 90,
+    "road": "М-07",
+    "km": "44+100",
+    "region": "Київська область",
+    "place": "Київ-Ковель-Ягодин",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.098157,
+     50.568832
+    ]
+   },
+   "properties": {
+    "id": 186,
+    "limit": 50,
+    "road": "М-07",
+    "km": "37+700",
+    "region": "Київська область",
+    "place": "Київ-Ковель-Ягодин",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.571788,
+     50.308709
+    ]
+   },
+   "properties": {
+    "id": 187,
+    "limit": 50,
+    "road": "Р-01",
+    "km": "3+441",
+    "region": "Київська область",
+    "place": "Київ-Обухів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.572395,
+     50.308102
+    ]
+   },
+   "properties": {
+    "id": 188,
+    "limit": 50,
+    "road": "Р-01",
+    "km": "3+461",
+    "region": "Київська область",
+    "place": "Київ-Обухів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.618616,
+     50.261512
+    ]
+   },
+   "properties": {
+    "id": 189,
+    "limit": 50,
+    "road": "Р-01",
+    "km": "9+784",
+    "region": "Київська область",
+    "place": "Київ-Обухів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.620389,
+     50.259383
+    ]
+   },
+   "properties": {
+    "id": 190,
+    "limit": 50,
+    "road": "Р-01",
+    "km": "9+994",
+    "region": "Київська область",
+    "place": "Київ-Обухів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.643353,
+     50.226536
+    ]
+   },
+   "properties": {
+    "id": 191,
+    "limit": 50,
+    "road": "Р-01",
+    "km": "14+016",
+    "region": "Київська область",
+    "place": "Київ-Обухів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.644215,
+     50.22572
+    ]
+   },
+   "properties": {
+    "id": 192,
+    "limit": 50,
+    "road": "Р-01",
+    "km": "14+116",
+    "region": "Київська область",
+    "place": "Київ-Обухів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.408656,
+     50.652786
+    ]
+   },
+   "properties": {
+    "id": 193,
+    "limit": 50,
+    "road": "Р-02",
+    "km": "27+371",
+    "region": "Київська область",
+    "place": "Київ-Іванків-Овруч",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.403434,
+     50.662362
+    ]
+   },
+   "properties": {
+    "id": 194,
+    "limit": 50,
+    "road": "Р-02",
+    "km": "28+518",
+    "region": "Київська область",
+    "place": "Київ-Іванків-Овруч",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.554389,
+     50.25312
+    ]
+   },
+   "properties": {
+    "id": 195,
+    "limit": 50,
+    "road": "Н-01",
+    "km": "26+050",
+    "region": "Київська область",
+    "place": "Київ-Знамянка",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.55477,
+     50.253229
+    ]
+   },
+   "properties": {
+    "id": 196,
+    "limit": 50,
+    "road": "Н-01",
+    "km": "26+088",
+    "region": "Київська область",
+    "place": "Київ-Знамянка",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.246293,
+     48.383986
+    ]
+   },
+   "properties": {
+    "id": 197,
+    "limit": 110,
+    "road": "М-05",
+    "km": "248+169",
+    "region": "Кіровоградська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.254346,
+     48.337709
+    ]
+   },
+   "properties": {
+    "id": 198,
+    "limit": 110,
+    "road": "М-05",
+    "km": "253+462",
+    "region": "Кіровоградська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.501843,
+     49.320542
+    ]
+   },
+   "properties": {
+    "id": 199,
+    "limit": 50,
+    "road": "М-21",
+    "km": "294+567",
+    "region": "Вінницька область",
+    "place": "Виступовичі–Житомир–Могилів-Подільський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.501114,
+     49.320199
+    ]
+   },
+   "properties": {
+    "id": 200,
+    "limit": 50,
+    "road": "М-21",
+    "km": "294+619",
+    "region": "Вінницька область",
+    "place": "Виступовичі–Житомир–Могилів-Подільський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.404927,
+     49.242592
+    ]
+   },
+   "properties": {
+    "id": 201,
+    "limit": 50,
+    "road": "М-21",
+    "km": "307+084",
+    "region": "Вінницька область",
+    "place": "Виступовичі–Житомир–Могилів-Подільський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.700791,
+     49.109723
+    ]
+   },
+   "properties": {
+    "id": 202,
+    "limit": 50,
+    "road": "М-30",
+    "km": "417+815",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.362856,
+     49.251605
+    ]
+   },
+   "properties": {
+    "id": 203,
+    "limit": 50,
+    "road": "М-30",
+    "km": "376+261",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.604424,
+     49.204127
+    ]
+   },
+   "properties": {
+    "id": 204,
+    "limit": 50,
+    "road": "М-30",
+    "km": "404+377",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.405347,
+     48.809418
+    ]
+   },
+   "properties": {
+    "id": 205,
+    "limit": 50,
+    "road": "М-30",
+    "km": "490+890",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.408133,
+     48.809324
+    ]
+   },
+   "properties": {
+    "id": 206,
+    "limit": 50,
+    "road": "М-30",
+    "km": "491+090",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.60757,
+     49.202933
+    ]
+   },
+   "properties": {
+    "id": 207,
+    "limit": 50,
+    "road": "М-30",
+    "km": "404+640",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.298919,
+     49.258879
+    ]
+   },
+   "properties": {
+    "id": 208,
+    "limit": 50,
+    "road": "М-30",
+    "km": "371+527",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.700391,
+     49.112413
+    ]
+   },
+   "properties": {
+    "id": 209,
+    "limit": 50,
+    "road": "М-30",
+    "km": "417+514",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.268218,
+     49.275977
+    ]
+   },
+   "properties": {
+    "id": 210,
+    "limit": 50,
+    "road": "М-30",
+    "km": "368+580",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.266966,
+     49.276251
+    ]
+   },
+   "properties": {
+    "id": 211,
+    "limit": 50,
+    "road": "М-30",
+    "km": "368+488",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.663809,
+     51.20246
+    ]
+   },
+   "properties": {
+    "id": 212,
+    "limit": 50,
+    "road": "М-07",
+    "km": "444+971",
+    "region": "Волинська область",
+    "place": "Київ-Ковель-Ягодин",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.303111,
+     50.808389
+    ]
+   },
+   "properties": {
+    "id": 213,
+    "limit": 50,
+    "road": "М-19",
+    "km": "142+324",
+    "region": "Волинська область",
+    "place": "Доманове-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.222558,
+     50.879894
+    ]
+   },
+   "properties": {
+    "id": 214,
+    "limit": 50,
+    "road": "М-19",
+    "km": "129+788",
+    "region": "Волинська область",
+    "place": "Доманове-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.206143,
+     50.917254
+    ]
+   },
+   "properties": {
+    "id": 215,
+    "limit": 50,
+    "road": "М-19",
+    "km": "125+475",
+    "region": "Волинська область",
+    "place": "Доманове-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.158703,
+     50.742417
+    ]
+   },
+   "properties": {
+    "id": 216,
+    "limit": 50,
+    "road": "Р-15",
+    "km": "74+273",
+    "region": "Волинська область",
+    "place": "Ковель ‒ Володимир ‒ Червоноград ‒ Жовква",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.152168,
+     50.72637
+    ]
+   },
+   "properties": {
+    "id": 217,
+    "limit": 50,
+    "road": "Р-15",
+    "km": "76+247",
+    "region": "Волинська область",
+    "place": "Ковель ‒ Володимир ‒ Червоноград ‒ Жовква",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.381772,
+     50.82044
+    ]
+   },
+   "properties": {
+    "id": 218,
+    "limit": 50,
+    "road": "Н-22",
+    "km": "19+098",
+    "region": "Волинська область",
+    "place": "Устилуг-Луцьк-Рівне",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.243019,
+     50.744347
+    ]
+   },
+   "properties": {
+    "id": 219,
+    "limit": 50,
+    "road": "Н-22",
+    "km": "82+575",
+    "region": "Волинська область",
+    "place": "Устилуг-Луцьк-Рівне",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.858139,
+     50.779361
+    ]
+   },
+   "properties": {
+    "id": 220,
+    "limit": 50,
+    "road": "Н-22",
+    "km": "54+015",
+    "region": "Волинська область",
+    "place": "Устилуг-Луцьк-Рівне",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.733929,
+     50.781621
+    ]
+   },
+   "properties": {
+    "id": 221,
+    "limit": 50,
+    "road": "Н-22",
+    "km": "119+027",
+    "region": "Волинська область",
+    "place": "Устилуг-Луцьк-Рівне",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.008017,
+     50.770055
+    ]
+   },
+   "properties": {
+    "id": 222,
+    "limit": 50,
+    "road": "Н-22",
+    "km": "64+946",
+    "region": "Волинська область",
+    "place": "Устилуг-Луцьк-Рівне",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.49378,
+     50.765066
+    ]
+   },
+   "properties": {
+    "id": 223,
+    "limit": 50,
+    "road": "Н-22",
+    "km": "101+613",
+    "region": "Волинська область",
+    "place": "Устилуг-Луцьк-Рівне",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.450667,
+     50.74875
+    ]
+   },
+   "properties": {
+    "id": 224,
+    "limit": 50,
+    "road": "Н-22",
+    "km": "97+990",
+    "region": "Волинська область",
+    "place": "Устилуг-Луцьк-Рівне",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.411223,
+     50.746036
+    ]
+   },
+   "properties": {
+    "id": 225,
+    "limit": 50,
+    "road": "Н-22",
+    "km": "95+200",
+    "region": "Волинська область",
+    "place": "Устилуг-Луцьк-Рівне",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.026958,
+     48.336318
+    ]
+   },
+   "properties": {
+    "id": 226,
+    "limit": 50,
+    "road": "Н-08",
+    "km": "423+643",
+    "region": "Дніпропетровська область",
+    "place": "Бориспіль - Дніпро - Запоріжжя (через м. Кременчук) - Маріуполь",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.226629,
+     50.342753
+    ]
+   },
+   "properties": {
+    "id": 227,
+    "limit": 110,
+    "road": "М-06",
+    "km": "94+461",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.223533,
+     50.341939
+    ]
+   },
+   "properties": {
+    "id": 228,
+    "limit": 110,
+    "road": "М-06",
+    "km": "94+686",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.188069,
+     50.336206
+    ]
+   },
+   "properties": {
+    "id": 229,
+    "limit": 110,
+    "road": "М-06",
+    "km": "97+297",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.183631,
+     50.33519
+    ]
+   },
+   "properties": {
+    "id": 230,
+    "limit": 110,
+    "road": "М-06",
+    "km": "97+627",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.426503,
+     50.3167
+    ]
+   },
+   "properties": {
+    "id": 231,
+    "limit": 110,
+    "road": "М-06",
+    "km": "158+305",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.245123,
+     50.400617
+    ]
+   },
+   "properties": {
+    "id": 232,
+    "limit": 110,
+    "road": "М-06",
+    "km": "174+600",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.823628,
+     50.286726
+    ]
+   },
+   "properties": {
+    "id": 233,
+    "limit": 110,
+    "road": "М-06",
+    "km": "127+246",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.586373,
+     50.609254
+    ]
+   },
+   "properties": {
+    "id": 234,
+    "limit": 110,
+    "road": "М-06",
+    "km": "230+853",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.365667,
+     50.607833
+    ]
+   },
+   "properties": {
+    "id": 235,
+    "limit": 70,
+    "road": "М-06",
+    "km": "247+134",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.364551,
+     50.607745
+    ]
+   },
+   "properties": {
+    "id": 236,
+    "limit": 70,
+    "road": "М-06",
+    "km": "247+239",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.655706,
+     50.169458
+    ]
+   },
+   "properties": {
+    "id": 237,
+    "limit": 50,
+    "road": "М-21",
+    "km": "190+150",
+    "region": "Житомирська область",
+    "place": "Виступовичі–Житомир–Могилів-Подільський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.690257,
+     50.344862
+    ]
+   },
+   "properties": {
+    "id": 238,
+    "limit": 50,
+    "road": "М-21",
+    "km": "167+547",
+    "region": "Житомирська область",
+    "place": "Виступовичі–Житомир–Могилів-Подільський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.626459,
+     49.828292
+    ]
+   },
+   "properties": {
+    "id": 239,
+    "limit": 50,
+    "road": "М-21",
+    "km": "230+919",
+    "region": "Житомирська область",
+    "place": "Виступовичі–Житомир–Могилів-Подільський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.600405,
+     48.471467
+    ]
+   },
+   "properties": {
+    "id": 240,
+    "limit": 50,
+    "road": "М-06",
+    "km": "780+785",
+    "region": "Закарпатська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.701988,
+     48.456473
+    ]
+   },
+   "properties": {
+    "id": 241,
+    "limit": 50,
+    "road": "М-06",
+    "km": "772+750",
+    "region": "Закарпатська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.323477,
+     48.579194
+    ]
+   },
+   "properties": {
+    "id": 242,
+    "limit": 50,
+    "road": "М-06",
+    "km": "807 + 021",
+    "region": "Закарпатська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.950553,
+     48.55995
+    ]
+   },
+   "properties": {
+    "id": 243,
+    "limit": 90,
+    "road": "М-06",
+    "km": "749 + 346",
+    "region": "Закарпатська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.552189,
+     48.020373
+    ]
+   },
+   "properties": {
+    "id": 244,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "95+424",
+    "region": "Закарпатська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.592156,
+     48.009847
+    ]
+   },
+   "properties": {
+    "id": 245,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "98+824",
+    "region": "Закарпатська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.747444,
+     48.437944
+    ]
+   },
+   "properties": {
+    "id": 246,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "2+395",
+    "region": "Закарпатська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.389333,
+     48.674028
+    ]
+   },
+   "properties": {
+    "id": 247,
+    "limit": 50,
+    "road": "Н-13",
+    "km": "226+887",
+    "region": "Закарпатська область",
+    "place": "Львів-Самбір-Ужгород",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.996343,
+     48.139736
+    ]
+   },
+   "properties": {
+    "id": 248,
+    "limit": 50,
+    "road": "М-23",
+    "km": "33+714",
+    "region": "Закарпатська область",
+    "place": "Берегове-Виноградів-Велика Копаня",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.042321,
+     48.159416
+    ]
+   },
+   "properties": {
+    "id": 249,
+    "limit": 50,
+    "road": "М-23",
+    "km": "39+706",
+    "region": "Закарпатська область",
+    "place": "Берегове-Виноградів-Велика Копаня",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.033016,
+     48.309679
+    ]
+   },
+   "properties": {
+    "id": 250,
+    "limit": 50,
+    "road": "Т-07-19",
+    "km": "0+694",
+    "region": "Закарпатська область",
+    "place": "Іршава-Виноградів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.314083,
+     48.641194
+    ]
+   },
+   "properties": {
+    "id": 251,
+    "limit": 50,
+    "road": "М-08",
+    "km": "7+734",
+    "region": "Закарпатська область",
+    "place": "Обхід м. Ужгорода – КПП \"Ужгород\"",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.706028,
+     48.981222
+    ]
+   },
+   "properties": {
+    "id": 252,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "322+566",
+    "region": "Івано-Франківська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.564931,
+     48.461486
+    ]
+   },
+   "properties": {
+    "id": 253,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "244+199",
+    "region": "Івано-Франківська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.549702,
+     48.436117
+    ]
+   },
+   "properties": {
+    "id": 254,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "240+283",
+    "region": "Івано-Франківська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.563172,
+     48.370277
+    ]
+   },
+   "properties": {
+    "id": 255,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "227+233",
+    "region": "Івано-Франківська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.563541,
+     48.358372
+    ]
+   },
+   "properties": {
+    "id": 256,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "224+687",
+    "region": "Івано-Франківська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.601121,
+     48.57723
+    ]
+   },
+   "properties": {
+    "id": 257,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "260+135",
+    "region": "Івано-Франківська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.582732,
+     48.656498
+    ]
+   },
+   "properties": {
+    "id": 258,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "271+228",
+    "region": "Івано-Франківська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.31455,
+     48.474211
+    ]
+   },
+   "properties": {
+    "id": 259,
+    "limit": 50,
+    "road": "Н-10",
+    "km": "181+215",
+    "region": "Івано-Франківська область",
+    "place": "Стрий - Івано-Франківськ - Чернівці - Мамалига",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.569194,
+     49.009389
+    ]
+   },
+   "properties": {
+    "id": 260,
+    "limit": 50,
+    "road": "Н-10",
+    "km": "83+308",
+    "region": "Івано-Франківська область",
+    "place": "Стрий - Івано-Франківськ - Чернівці - Мамалига",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.844611,
+     48.815472
+    ]
+   },
+   "properties": {
+    "id": 261,
+    "limit": 50,
+    "road": "Н-10",
+    "km": "120+854",
+    "region": "Івано-Франківська область",
+    "place": "Стрий - Івано-Франківськ - Чернівці - Мамалига",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.859556,
+     48.789417
+    ]
+   },
+   "properties": {
+    "id": 262,
+    "limit": 50,
+    "road": "Н-10",
+    "km": "124+050",
+    "region": "Івано-Франківська область",
+    "place": "Стрий - Івано-Франківськ - Чернівці - Мамалига",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.377111,
+     49.010972
+    ]
+   },
+   "properties": {
+    "id": 263,
+    "limit": 50,
+    "road": "Н-10",
+    "km": "66+610",
+    "region": "Івано-Франківська область",
+    "place": "Стрий - Івано-Франківськ - Чернівці - Мамалига",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.602904,
+     48.409848
+    ]
+   },
+   "properties": {
+    "id": 264,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "233+618",
+    "region": "Івано-Франківська область",
+    "place": "Мукачево - Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.562222,
+     49.0705
+    ]
+   },
+   "properties": {
+    "id": 265,
+    "limit": 50,
+    "road": "М-06",
+    "km": "648+242",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.852861,
+     49.244778
+    ]
+   },
+   "properties": {
+    "id": 266,
+    "limit": 50,
+    "road": "М-06",
+    "km": "617+024",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.165741,
+     50.069273
+    ]
+   },
+   "properties": {
+    "id": 267,
+    "limit": 50,
+    "road": "М-06",
+    "km": "439+352",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.592883,
+     49.969215
+    ]
+   },
+   "properties": {
+    "id": 268,
+    "limit": 50,
+    "road": "М-06",
+    "km": "490 + 400",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.020769,
+     49.768767
+    ]
+   },
+   "properties": {
+    "id": 269,
+    "limit": 90,
+    "road": "М-06",
+    "km": "552+486",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.149771,
+     49.901777
+    ]
+   },
+   "properties": {
+    "id": 270,
+    "limit": 50,
+    "road": "М-06",
+    "km": "528+459",
+    "region": "Львівська область",
+    "place": "Київ-Чоп (у напрямку м. Львів)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.149546,
+     49.901947
+    ]
+   },
+   "properties": {
+    "id": 271,
+    "limit": 50,
+    "road": "М-06",
+    "km": "528+459",
+    "region": "Львівська область",
+    "place": "Київ-Чоп (у напрямку м. Луцьк)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.201384,
+     49.917199
+    ]
+   },
+   "properties": {
+    "id": 272,
+    "limit": 50,
+    "road": "М-06",
+    "km": "523+260",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.147072,
+     49.79892
+    ]
+   },
+   "properties": {
+    "id": 273,
+    "limit": 50,
+    "road": "М-06",
+    "km": "541+451",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.147855,
+     49.800237
+    ]
+   },
+   "properties": {
+    "id": 274,
+    "limit": 50,
+    "road": "М-06",
+    "km": "541+296",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.36549,
+     49.932609
+    ]
+   },
+   "properties": {
+    "id": 275,
+    "limit": 50,
+    "road": "М-06",
+    "km": "510+120",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.014809,
+     49.748719
+    ]
+   },
+   "properties": {
+    "id": 276,
+    "limit": 50,
+    "road": "М-06",
+    "km": "555+730",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.014857,
+     49.749283
+    ]
+   },
+   "properties": {
+    "id": 277,
+    "limit": 50,
+    "road": "М-06",
+    "km": "555+662",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.250157,
+     48.887983
+    ]
+   },
+   "properties": {
+    "id": 278,
+    "limit": 50,
+    "road": "М-06",
+    "km": "685+309",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.115216,
+     50.002741
+    ]
+   },
+   "properties": {
+    "id": 279,
+    "limit": 50,
+    "road": "М-06",
+    "km": "447 + 803",
+    "region": "Львівська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.767028,
+     49.805139
+    ]
+   },
+   "properties": {
+    "id": 280,
+    "limit": 50,
+    "road": "М-09",
+    "km": "66+283",
+    "region": "Львівська область",
+    "place": "Тернопіль-Львів-Рава-Руська",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.056687,
+     49.949948
+    ]
+   },
+   "properties": {
+    "id": 281,
+    "limit": 50,
+    "road": "М-09",
+    "km": "137+971",
+    "region": "Львівська область",
+    "place": "Тернопіль-Львів-Рава-Руська",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.888343,
+     49.874452
+    ]
+   },
+   "properties": {
+    "id": 282,
+    "limit": 50,
+    "road": "М-10",
+    "km": "10+100",
+    "region": "Львівська область",
+    "place": "Львів-Краковець",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.332832,
+     49.934776
+    ]
+   },
+   "properties": {
+    "id": 283,
+    "limit": 50,
+    "road": "М-10",
+    "km": "53 +580",
+    "region": "Львівська область",
+    "place": "Львів-Краковець",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.740703,
+     49.910128
+    ]
+   },
+   "properties": {
+    "id": 284,
+    "limit": 50,
+    "road": "М-10",
+    "km": "21+671",
+    "region": "Львівська область",
+    "place": "Львів-Краковець",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.806806,
+     49.889861
+    ]
+   },
+   "properties": {
+    "id": 285,
+    "limit": 50,
+    "road": "М-10",
+    "km": "16+281",
+    "region": "Львівська область",
+    "place": "Львів-Краковець",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.975539,
+     49.778094
+    ]
+   },
+   "properties": {
+    "id": 286,
+    "limit": 50,
+    "road": "М-10-01",
+    "km": "12+514",
+    "region": "Львівська область",
+    "place": "Західний обхід м. Львова",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.899195,
+     49.838564
+    ]
+   },
+   "properties": {
+    "id": 287,
+    "limit": 50,
+    "road": "М-10-01",
+    "km": "3+360",
+    "region": "Львівська область",
+    "place": "Західний обхід м. Львова",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.817576,
+     49.804897
+    ]
+   },
+   "properties": {
+    "id": 288,
+    "limit": 50,
+    "road": "М-11",
+    "km": "16+153",
+    "region": "Львівська область",
+    "place": "Львів-Шегині",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.242139,
+     49.801861
+    ]
+   },
+   "properties": {
+    "id": 289,
+    "limit": 50,
+    "road": "М-11",
+    "km": "58+876",
+    "region": "Львівська область",
+    "place": "Львів-Шегині",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.197194,
+     49.801889
+    ]
+   },
+   "properties": {
+    "id": 290,
+    "limit": 50,
+    "road": "М-11",
+    "km": "62+177",
+    "region": "Львівська область",
+    "place": "Львів-Шегині",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.85578,
+     49.810882
+    ]
+   },
+   "properties": {
+    "id": 291,
+    "limit": 50,
+    "road": "М-11",
+    "km": "13+317",
+    "region": "Львівська область",
+    "place": "Львів-Шегині",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.141361,
+     49.751861
+    ]
+   },
+   "properties": {
+    "id": 292,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "433+537",
+    "region": "Львівська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.204486,
+     49.952889
+    ]
+   },
+   "properties": {
+    "id": 293,
+    "limit": 50,
+    "road": "Н-17",
+    "km": "4 + 898",
+    "region": "Львівська область",
+    "place": "Львів - Радехів - Луцьк",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.183025,
+     49.944268
+    ]
+   },
+   "properties": {
+    "id": 294,
+    "limit": 50,
+    "road": "Н-17",
+    "km": "3+064",
+    "region": "Львівська область",
+    "place": "Львів - Радехів - Луцьк",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.076628,
+     49.804621
+    ]
+   },
+   "properties": {
+    "id": 295,
+    "limit": 50,
+    "road": "М-11",
+    "km": "71+630",
+    "region": "Львівська область",
+    "place": "Львів - Шегині",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.309845,
+     47.974214
+    ]
+   },
+   "properties": {
+    "id": 296,
+    "limit": 50,
+    "road": "М-05",
+    "km": "294 + 260",
+    "region": "Миколаївська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.995522,
+     47.019091
+    ]
+   },
+   "properties": {
+    "id": 297,
+    "limit": 50,
+    "road": "М-14",
+    "km": "139 + 684",
+    "region": "Миколаївська область",
+    "place": "Одеса – Мелітополь – Новоазовськ",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.799939,
+     47.279036
+    ]
+   },
+   "properties": {
+    "id": 298,
+    "limit": 50,
+    "road": "Н-24",
+    "km": "191 + 346",
+    "region": "Миколаївська область",
+    "place": "Благовіщанське - Миколаїв",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.632438,
+     46.503742
+    ]
+   },
+   "properties": {
+    "id": 299,
+    "limit": 110,
+    "road": "М-05",
+    "km": "465+483",
+    "region": "Одеська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.306011,
+     47.355231
+    ]
+   },
+   "properties": {
+    "id": 300,
+    "limit": 70,
+    "road": "М-05",
+    "km": "364+792",
+    "region": "Одеська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.903858,
+     46.135148
+    ]
+   },
+   "properties": {
+    "id": 301,
+    "limit": 50,
+    "road": "М-15",
+    "km": "96+449",
+    "region": "Одеська область",
+    "place": "Одеса – Рені (на м. Бухарест)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.687943,
+     46.002353
+    ]
+   },
+   "properties": {
+    "id": 302,
+    "limit": 50,
+    "road": "М-15",
+    "km": "120+354",
+    "region": "Одеська область",
+    "place": "Одеса – Рені (на м. Бухарест)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.696134,
+     45.952815
+    ]
+   },
+   "properties": {
+    "id": 303,
+    "limit": 50,
+    "road": "М-15",
+    "km": "125+949",
+    "region": "Одеська область",
+    "place": "Одеса – Рені (на м. Бухарест)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.069458,
+     45.702245
+    ]
+   },
+   "properties": {
+    "id": 304,
+    "limit": 50,
+    "road": "М-15",
+    "km": "190+050",
+    "region": "Одеська область",
+    "place": "Одеса – Рені (на м. Бухарест)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.866082,
+     45.40621
+    ]
+   },
+   "properties": {
+    "id": 305,
+    "limit": 50,
+    "road": "М-15",
+    "km": "229+530",
+    "region": "Одеська область",
+    "place": "Одеса – Рені (на м. Бухарест)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.78471,
+     45.372377
+    ]
+   },
+   "properties": {
+    "id": 306,
+    "limit": 50,
+    "road": "М-15",
+    "km": "237+550",
+    "region": "Одеська область",
+    "place": "Одеса – Рені (на м. Бухарест)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.453992,
+     45.32507
+    ]
+   },
+   "properties": {
+    "id": 307,
+    "limit": 50,
+    "road": "М-15",
+    "km": "271+315",
+    "region": "Одеська область",
+    "place": "Одеса – Рені (на м. Бухарест)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.281,
+     46.416841
+    ]
+   },
+   "properties": {
+    "id": 308,
+    "limit": 50,
+    "road": "М-15",
+    "km": "39+423",
+    "region": "Одеська область",
+    "place": "Одеса – Рені (на м. Бухарест)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.556013,
+     46.474562
+    ]
+   },
+   "properties": {
+    "id": 309,
+    "limit": 50,
+    "road": "М-15",
+    "km": "16+729",
+    "region": "Одеська область",
+    "place": "Одеса – Рені (на м. Бухарест)",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.440419,
+     45.739928
+    ]
+   },
+   "properties": {
+    "id": 310,
+    "limit": 90,
+    "road": "Т-16-28",
+    "km": "3+015",
+    "region": "Одеська область",
+    "place": "Спаське-Вилково",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.831362,
+     46.561677
+    ]
+   },
+   "properties": {
+    "id": 311,
+    "limit": 90,
+    "road": "М-28",
+    "km": "17+125",
+    "region": "Одеська область",
+    "place": "Одеса - Южне",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.87927,
+     46.570134
+    ]
+   },
+   "properties": {
+    "id": 312,
+    "limit": 50,
+    "road": "М-28",
+    "km": "20+980",
+    "region": "Одеська область",
+    "place": "Одеса - Южне",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.506604,
+     50.225552
+    ]
+   },
+   "properties": {
+    "id": 313,
+    "limit": 110,
+    "road": "М-03",
+    "km": "155+696",
+    "region": "Полтавська область",
+    "place": "Київ-Харків-Довжанський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.272512,
+     49.600182
+    ]
+   },
+   "properties": {
+    "id": 314,
+    "limit": 50,
+    "road": "М-03",
+    "km": "319+374",
+    "region": "Полтавська область",
+    "place": "Київ-Харків-Довжанський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.341064,
+     49.604084
+    ]
+   },
+   "properties": {
+    "id": 315,
+    "limit": 90,
+    "road": "М-03",
+    "km": "324+515",
+    "region": "Полтавська область",
+    "place": "Київ-Харків-Довжанський",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.302531,
+     49.354218
+    ]
+   },
+   "properties": {
+    "id": 316,
+    "limit": 50,
+    "road": "М-22",
+    "km": "30 + 459",
+    "region": "Полтавська область",
+    "place": "Полтава-Олександрія",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.396111,
+     51.528528
+    ]
+   },
+   "properties": {
+    "id": 317,
+    "limit": 50,
+    "road": "М-02",
+    "km": "167+441",
+    "region": "Сумська область",
+    "place": "Кіпті-Глухів-Бачівськ",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.408278,
+     49.607306
+    ]
+   },
+   "properties": {
+    "id": 318,
+    "limit": 50,
+    "road": "М-09",
+    "km": "12+205",
+    "region": "Тернопільська область",
+    "place": "Тернопіль – Львів – Рава-Руська",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.721639,
+     49.682694
+    ]
+   },
+   "properties": {
+    "id": 319,
+    "limit": 90,
+    "road": "М-19",
+    "km": "303+307",
+    "region": "Тернопільська область",
+    "place": "Доманове-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.614028,
+     49.497111
+    ]
+   },
+   "properties": {
+    "id": 320,
+    "limit": 50,
+    "road": "М-19",
+    "km": "328+315",
+    "region": "Тернопільська область",
+    "place": "Доманове-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.851281,
+     49.155353
+    ]
+   },
+   "properties": {
+    "id": 321,
+    "limit": 50,
+    "road": "М-19",
+    "km": "374+935",
+    "region": "Тернопільська область",
+    "place": "Доманове-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.77575,
+     49.985556
+    ]
+   },
+   "properties": {
+    "id": 322,
+    "limit": 50,
+    "road": "М-19",
+    "km": "268+641",
+    "region": "Тернопільська область",
+    "place": "Доманове-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.666361,
+     49.574806
+    ]
+   },
+   "properties": {
+    "id": 323,
+    "limit": 50,
+    "road": "М-19",
+    "km": "316+542",
+    "region": "Тернопільська область",
+    "place": "Доманове-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.646306,
+     49.544722
+    ]
+   },
+   "properties": {
+    "id": 324,
+    "limit": 50,
+    "road": "М-30",
+    "km": "154+464",
+    "region": "Тернопільська область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.702417,
+     49.532722
+    ]
+   },
+   "properties": {
+    "id": 325,
+    "limit": 50,
+    "road": "М-30",
+    "km": "158+740",
+    "region": "Тернопільська область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.645289,
+     49.572767
+    ]
+   },
+   "properties": {
+    "id": 326,
+    "limit": 50,
+    "road": "Р-41",
+    "km": "0+738",
+    "region": "Тернопільська область",
+    "place": "Об’їзд м.Тернополя",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.174861,
+     49.090722
+    ]
+   },
+   "properties": {
+    "id": 327,
+    "limit": 50,
+    "road": "Н-18",
+    "km": "48+821",
+    "region": "Тернопільська область",
+    "place": "Івано-Франківськ – Бучач – Тернопіль",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.140465,
+     50.582574
+    ]
+   },
+   "properties": {
+    "id": 328,
+    "limit": 110,
+    "road": "М-06",
+    "km": "340+202",
+    "region": "Рівненська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.614704,
+     50.295209
+    ]
+   },
+   "properties": {
+    "id": 329,
+    "limit": 50,
+    "road": "М-06",
+    "km": "394+318",
+    "region": "Рівненська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.766674,
+     50.439048
+    ]
+   },
+   "properties": {
+    "id": 330,
+    "limit": 50,
+    "road": "М-06",
+    "km": "371+971",
+    "region": "Рівненська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.276106,
+     50.572236
+    ]
+   },
+   "properties": {
+    "id": 331,
+    "limit": 70,
+    "road": "М-06",
+    "km": "328+826",
+    "region": "Рівненська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.316611,
+     50.581444
+    ]
+   },
+   "properties": {
+    "id": 332,
+    "limit": 50,
+    "road": "М-06",
+    "km": "325+770",
+    "region": "Рівненська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.149632,
+     50.587668
+    ]
+   },
+   "properties": {
+    "id": 333,
+    "limit": 50,
+    "road": "М-06",
+    "km": "339+091",
+    "region": "Рівненська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.039306,
+     50.185583
+    ]
+   },
+   "properties": {
+    "id": 334,
+    "limit": 50,
+    "road": "Н-25",
+    "km": "250+404",
+    "region": "Хмельницька область",
+    "place": "Городище - Рівне - Старокостянтинів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.164618,
+     48.73414
+    ]
+   },
+   "properties": {
+    "id": 335,
+    "limit": 50,
+    "road": "М-30",
+    "km": "548+324",
+    "region": "Черкаська область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.77969,
+     48.1863
+    ]
+   },
+   "properties": {
+    "id": 336,
+    "limit": 50,
+    "road": "Р-62",
+    "km": "100+356",
+    "region": "Чернівецька область",
+    "place": "Криворівня-Чернівці",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.213326,
+     51.208032
+    ]
+   },
+   "properties": {
+    "id": 337,
+    "limit": 50,
+    "road": "М-01",
+    "km": "113+864",
+    "region": "Чернігівська область",
+    "place": "Київ-Чернігів-Нові Яриловичі",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.225893,
+     51.46759
+    ]
+   },
+   "properties": {
+    "id": 338,
+    "limit": 50,
+    "road": "Р-56",
+    "km": "6+801",
+    "region": "Чернігівська область",
+    "place": "Чернігів - Чорнобиль",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.44188,
+     51.542763
+    ]
+   },
+   "properties": {
+    "id": 339,
+    "limit": 50,
+    "road": "Н-27",
+    "km": "11+903",
+    "region": "Чернігівська область",
+    "place": "Чернігів-Мена-Сосниця-Грем’яч",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.302394,
+     51.476627
+    ]
+   },
+   "properties": {
+    "id": 340,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернігів",
+    "place": "перехрестя пр-кт Миру - вул. Лісковицька (в напрямку вул. Шевченка)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.609172,
+     50.618894
+    ]
+   },
+   "properties": {
+    "id": 341,
+    "limit": 70,
+    "road": "М-06",
+    "km": "228 + 889",
+    "region": "Житомирська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.283476,
+     50.553371
+    ]
+   },
+   "properties": {
+    "id": 342,
+    "limit": 50,
+    "road": "М07",
+    "km": "23 + 550",
+    "region": "Київська область",
+    "place": "Київ - Ковель - Ягодин",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.641767,
+     46.30304
+    ]
+   },
+   "properties": {
+    "id": 343,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чорноморськ",
+    "place": "перехр. вул. Захисників України та Віталія Шума",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.796231,
+     51.183526
+    ]
+   },
+   "properties": {
+    "id": 344,
+    "limit": 50,
+    "road": "М-19",
+    "km": "82+929",
+    "region": "Волинська область",
+    "place": "Доманове - Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.783976,
+     50.515296
+    ]
+   },
+   "properties": {
+    "id": 345,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Бровари",
+    "place": "перехр. вул. Київська- вул. Героїв України – вул. Чорновола В’ячеслава (в напрямку м. Чернігів, зустрічний напрямок)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.783599,
+     50.514333
+    ]
+   },
+   "properties": {
+    "id": 346,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Бровари",
+    "place": "перехр. вул. Київська- вул. Героїв України – вул. Чорновола В’ячеслава (в напрямку м. Чернігів, попутний напрямок)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.777072,
+     50.506307
+    ]
+   },
+   "properties": {
+    "id": 347,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Бровари",
+    "place": "перехр. вул. Київська- вул. Шевченка (в напрямку м. Чернігів, зустрічний напрямок)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.776793,
+     50.50559
+    ]
+   },
+   "properties": {
+    "id": 348,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Бровари",
+    "place": "перехр. вул. Київська- вул. Шевченка (в напрямку м. Чернігів, попутний напрямок)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.801057,
+     49.758932
+    ]
+   },
+   "properties": {
+    "id": 349,
+    "limit": 50,
+    "road": "Н-13",
+    "km": "10+300",
+    "region": "Львівська область",
+    "place": "Львів – Самбір – Ужгород",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.164498,
+     49.873379
+    ]
+   },
+   "properties": {
+    "id": 350,
+    "limit": 50,
+    "road": "М-06",
+    "km": "532+842",
+    "region": "Львівська область",
+    "place": "Київ – Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.658137,
+     50.130971
+    ]
+   },
+   "properties": {
+    "id": 351,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Обухів",
+    "place": "вул. Київська 119",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.467521,
+     49.239593
+    ]
+   },
+   "properties": {
+    "id": 352,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Вінниця",
+    "place": "вул. В'ячеслава Чорновола (біля Київського мосту)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.551465,
+     49.223383
+    ]
+   },
+   "properties": {
+    "id": 353,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Вінниця",
+    "place": "перехр. Немирівського шосе та вулиці Покровська",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.138377,
+     50.240647
+    ]
+   },
+   "properties": {
+    "id": 354,
+    "limit": 50,
+    "road": "Р-15",
+    "km": "137+290",
+    "region": "Львівська область",
+    "place": "Ковель - Володимир - Червоноград - Жовква",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.270835,
+     49.800333
+    ]
+   },
+   "properties": {
+    "id": 355,
+    "limit": 50,
+    "road": "М-11",
+    "km": "56+820",
+    "region": "Львівська область",
+    "place": "Львів – Шегині",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.05375,
+     49.664417
+    ]
+   },
+   "properties": {
+    "id": 356,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Золотоноша",
+    "place": "вул. Шевченка 107",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.442579,
+     50.627301
+    ]
+   },
+   "properties": {
+    "id": 357,
+    "limit": 50,
+    "road": "Р-02",
+    "km": "23+557",
+    "region": "Київська область",
+    "place": "Київ - Іванків - Овруч",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.704694,
+     49.788167
+    ]
+   },
+   "properties": {
+    "id": 358,
+    "limit": 50,
+    "road": "М-11",
+    "km": "24+490",
+    "region": "Львівська область",
+    "place": "Львів – Шегині",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.052655,
+     50.132694
+    ]
+   },
+   "properties": {
+    "id": 359,
+    "limit": 50,
+    "road": "Р-15",
+    "km": "151+021",
+    "region": "Львівська область",
+    "place": "Ковель - Володимир - Червоноград - Жовква",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.961017,
+     49.510119
+    ]
+   },
+   "properties": {
+    "id": 360,
+    "limit": 50,
+    "road": "М-06",
+    "km": "584+510",
+    "region": "Львівська область",
+    "place": "Київ - Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.636333,
+     48.983361
+    ]
+   },
+   "properties": {
+    "id": 361,
+    "limit": 50,
+    "road": "Н-10",
+    "km": "89+147",
+    "region": "Івано-Франківська область",
+    "place": "Н-10 Стрий-Мамалига",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.47057,
+     50.596378
+    ]
+   },
+   "properties": {
+    "id": 362,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Вишгород",
+    "place": "перех. вул. Шолуденка - вул. Борисо-Глібська",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.494491,
+     50.581235
+    ]
+   },
+   "properties": {
+    "id": 363,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Вишгород",
+    "place": "перех. просп. Шевченка - вул. Набережна,",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.095634,
+     49.809358
+    ]
+   },
+   "properties": {
+    "id": 364,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Біла Церква",
+    "place": "бульвар Олександрійський, 113 (смуга руху в напрямку вул. Соборна)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.138515,
+     49.78318
+    ]
+   },
+   "properties": {
+    "id": 365,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Біла Церква",
+    "place": "м. Біла Церква, проспект Князя Володимира (спуск з шляхопроводу в напрямку вул. Людмили Павличенко)",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.154972,
+     49.785429
+    ]
+   },
+   "properties": {
+    "id": 366,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Біла Церква",
+    "place": "м. Біла Церква, просп. Незалежності, 40 смуга руху у напрямку вул. Людмили Павличенко",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.247611,
+     49.005333
+    ]
+   },
+   "properties": {
+    "id": 367,
+    "limit": 50,
+    "road": "Н-10",
+    "km": "56+938",
+    "region": "Івано-Франківська область",
+    "place": "Стрий – Мамалига",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.62794,
+     45.841872
+    ]
+   },
+   "properties": {
+    "id": 368,
+    "limit": 50,
+    "road": "М-15",
+    "km": "141+319",
+    "region": "Одеська область",
+    "place": "Одеса-Рені",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.622003,
+     45.837074
+    ]
+   },
+   "properties": {
+    "id": 369,
+    "limit": 50,
+    "road": "М-15",
+    "km": "142+028",
+    "region": "Одеська область",
+    "place": "Одеса-Рені",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.704528,
+     48.969389
+    ]
+   },
+   "properties": {
+    "id": 370,
+    "limit": 90,
+    "road": "Н-09",
+    "km": "321+253",
+    "region": "Івано-Франківська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.58625,
+     49.093917
+    ]
+   },
+   "properties": {
+    "id": 371,
+    "limit": 50,
+    "road": "М-06",
+    "km": "645+057",
+    "region": "Львівська область",
+    "place": "Київ – Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.258786,
+     48.476601
+    ]
+   },
+   "properties": {
+    "id": 372,
+    "limit": 50,
+    "road": "Н-10",
+    "km": "176+645",
+    "region": "Івано-Франківська область",
+    "place": "Стрий – Мамалига",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.218654,
+     50.185933
+    ]
+   },
+   "properties": {
+    "id": 373,
+    "limit": 70,
+    "road": "М-05",
+    "km": "38+825",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.218108,
+     50.183132
+    ]
+   },
+   "properties": {
+    "id": 374,
+    "limit": 70,
+    "road": "М-05",
+    "km": "39+140",
+    "region": "Київська область",
+    "place": "Київ-Одеса",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.941388,
+     49.75289
+    ]
+   },
+   "properties": {
+    "id": 375,
+    "limit": 50,
+    "road": "Т-14-16",
+    "km": "10+165",
+    "region": "Львівська область",
+    "place": "Львів - Пустомити - Меденичі",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.894986,
+     51.329269
+    ]
+   },
+   "properties": {
+    "id": 376,
+    "limit": 50,
+    "road": "М-02",
+    "km": "125+385",
+    "region": "Чернігівська область",
+    "place": "Кіпті-Глухів-Бачівськ",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.101132,
+     48.56534
+    ]
+   },
+   "properties": {
+    "id": 377,
+    "limit": 50,
+    "road": "М-30",
+    "km": "985+548",
+    "region": "Дніпропетровська область",
+    "place": "Стрий – Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.203944,
+     50.6445
+    ]
+   },
+   "properties": {
+    "id": 378,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Рівне",
+    "place": "вул. Млинівська, 26",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.271278,
+     50.616694
+    ]
+   },
+   "properties": {
+    "id": 379,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Рівне",
+    "place": "вул. Київська, 6",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.224139,
+     50.626917
+    ]
+   },
+   "properties": {
+    "id": 380,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Рівне",
+    "place": "вул. Соборна, 364",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.286333,
+     50.619583
+    ]
+   },
+   "properties": {
+    "id": 381,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Рівне",
+    "place": "вул. Захисників Маріуполя, 5",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.265167,
+     50.634306
+    ]
+   },
+   "properties": {
+    "id": 382,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Рівне",
+    "place": "вул. Романа Шухевича, 2",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.34063,
+     50.605518
+    ]
+   },
+   "properties": {
+    "id": 383,
+    "limit": 50,
+    "road": "М-06",
+    "km": "322+490",
+    "region": "Рівненська область",
+    "place": "Київ - Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.890016,
+     48.675674
+    ]
+   },
+   "properties": {
+    "id": 384,
+    "limit": 50,
+    "road": "М-30",
+    "km": "784+099",
+    "region": "Кіровоградська область",
+    "place": "Стрий-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.868611,
+     49.229639
+    ]
+   },
+   "properties": {
+    "id": 385,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Сміла",
+    "place": "перехр. вулиць Незалежності - Олеся Гончара",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.20625,
+     50.616306
+    ]
+   },
+   "properties": {
+    "id": 386,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Рівне",
+    "place": "вул. Кулика і Гудачека, 10",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.251968,
+     50.619134
+    ]
+   },
+   "properties": {
+    "id": 387,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Рівне",
+    "place": "перехр. вул. Соборна- В'ячеслава Чорновола - Міцкевича",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.957433,
+     48.289245
+    ]
+   },
+   "properties": {
+    "id": 388,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернівці",
+    "place": "вул. Січових Стрільців, 6",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.35322,
+     49.803534
+    ]
+   },
+   "properties": {
+    "id": 389,
+    "limit": 50,
+    "road": "М-11",
+    "km": "50+620",
+    "region": "Львівська область",
+    "place": "Львів-Шегині",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.026755,
+     48.336179
+    ]
+   },
+   "properties": {
+    "id": 390,
+    "limit": 50,
+    "road": "Н-08",
+    "km": "423+663",
+    "region": "Дніпропетровська область",
+    "place": "Бориспіль-Маріуполь",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.174667,
+     50.748889
+    ]
+   },
+   "properties": {
+    "id": 391,
+    "limit": 50,
+    "road": "Р-15",
+    "km": "72+938",
+    "region": "Волинська область",
+    "place": "Ковель-Володимир-Червоноград-Жовква",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.344306,
+     48.571333
+    ]
+   },
+   "properties": {
+    "id": 392,
+    "limit": 50,
+    "road": "М-06",
+    "km": "805+120",
+    "region": "Закарпатська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.66118,
+     50.26065
+    ]
+   },
+   "properties": {
+    "id": 393,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Житомир",
+    "place": "вул. Покровська, 21",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.65659,
+     50.292845
+    ]
+   },
+   "properties": {
+    "id": 394,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Житомир",
+    "place": "вул. Покровська, 148а",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.656333,
+     50.292893
+    ]
+   },
+   "properties": {
+    "id": 395,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Житомир",
+    "place": "вул. Покровська, 187",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.560558,
+     48.802962
+    ]
+   },
+   "properties": {
+    "id": 396,
+    "limit": 50,
+    "road": "Н-16",
+    "km": "192+446",
+    "region": "Черкаська область",
+    "place": "Золотоноша-Черкаси-Сміла-Умань",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.92331,
+     48.316058
+    ]
+   },
+   "properties": {
+    "id": 397,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Чернівці",
+    "place": "вул.Хотинська, 3",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.906583,
+     49.228917
+    ]
+   },
+   "properties": {
+    "id": 398,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Сміла",
+    "place": "перехр. вул. Героїв Холодноярців - пров. Олексія Цибка",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.344306,
+     48.571333
+    ]
+   },
+   "properties": {
+    "id": 399,
+    "limit": 50,
+    "road": "М-06",
+    "km": "805+120",
+    "region": "Закарпатська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.934833,
+     48.7905
+    ]
+   },
+   "properties": {
+    "id": 400,
+    "limit": 70,
+    "road": "М-30",
+    "km": "530+055",
+    "region": "Черкаська область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.000191,
+     46.967682
+    ]
+   },
+   "properties": {
+    "id": 401,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Миколаїв",
+    "place": "перехрестя вул. Марка Кропивницького та вул. Інженерна",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.849306,
+     49.257528
+    ]
+   },
+   "properties": {
+    "id": 402,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Стрий",
+    "place": "перехр. вул. Шевченка та Олесницького",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.400239,
+     50.761083
+    ]
+   },
+   "properties": {
+    "id": 403,
+    "limit": 50,
+    "road": "М-19",
+    "km": "155+608",
+    "region": "Волинська область",
+    "place": "Доманово-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.399306,
+     50.768917
+    ]
+   },
+   "properties": {
+    "id": 404,
+    "limit": 50,
+    "road": "М-19",
+    "km": "154+741",
+    "region": "Волинська область",
+    "place": "Доманово-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.364528,
+     48.662167
+    ]
+   },
+   "properties": {
+    "id": 405,
+    "limit": 50,
+    "road": "Н-13",
+    "km": "229+122",
+    "region": "Закарпатська область",
+    "place": "Львів-Самбір-Ужгород",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     22.859482,
+     48.361928
+    ]
+   },
+   "properties": {
+    "id": 406,
+    "limit": 50,
+    "road": "Н-09",
+    "km": "15+826",
+    "region": "Закарпатська область",
+    "place": "Мукачево-Львів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.64087,
+     50.609055
+    ]
+   },
+   "properties": {
+    "id": 407,
+    "limit": 50,
+    "road": "М-06",
+    "km": "299+873",
+    "region": "Рівненська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.64094,
+     50.608738
+    ]
+   },
+   "properties": {
+    "id": 408,
+    "limit": 50,
+    "road": "М-06",
+    "km": "299+894",
+    "region": "Рівненська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.042139,
+     50.534167
+    ]
+   },
+   "properties": {
+    "id": 409,
+    "limit": 50,
+    "road": "М-06",
+    "km": "349+001",
+    "region": "Рівненська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     26.066139,
+     50.546111
+    ]
+   },
+   "properties": {
+    "id": 410,
+    "limit": 50,
+    "road": "М-06",
+    "km": "346+900",
+    "region": "Рівненська область",
+    "place": "Київ-Чоп",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.885225,
+     49.391199
+    ]
+   },
+   "properties": {
+    "id": 411,
+    "limit": 50,
+    "road": "М-30",
+    "km": "336+814",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.886478,
+     49.391234
+    ]
+   },
+   "properties": {
+    "id": 412,
+    "limit": 50,
+    "road": "М-30",
+    "km": "336+906",
+    "region": "Вінницька область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.829376,
+     49.86392
+    ]
+   },
+   "properties": {
+    "id": 413,
+    "limit": 50,
+    "road": "Н-01",
+    "km": "80+444",
+    "region": "Київська область",
+    "place": "Київ – Знам’янка",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.823603,
+     49.873391
+    ]
+   },
+   "properties": {
+    "id": 414,
+    "limit": 50,
+    "road": "Н-01",
+    "km": "79+010",
+    "region": "Київська область",
+    "place": "Київ – Знам’янка",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.603913,
+     49.930267
+    ]
+   },
+   "properties": {
+    "id": 415,
+    "limit": 50,
+    "road": "М-21-01",
+    "km": "2 + 283",
+    "region": "Житомирська область",
+    "place": "Північний під’їзд до м. Бердичева",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.666637,
+     50.272938
+    ]
+   },
+   "properties": {
+    "id": 416,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Житомир",
+    "place": "перехр. просп. Незалежності - вул. Отаманів Соколовських",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.638642,
+     50.245238
+    ]
+   },
+   "properties": {
+    "id": 417,
+    "limit": 50,
+    "road": null,
+    "km": null,
+    "region": "м. Житомир",
+    "place": "вул. Чуднівська, 103",
+    "type": "city"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.203444,
+     49.815417
+    ]
+   },
+   "properties": {
+    "id": 418,
+    "limit": 50,
+    "road": "М-09",
+    "km": "110+049",
+    "region": "Львівська область",
+    "place": "Тернопіль-Львів-Рава-Руська",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     23.72894,
+     49.922342
+    ]
+   },
+   "properties": {
+    "id": 419,
+    "limit": 50,
+    "road": "М-10",
+    "km": "23+475",
+    "region": "Львівська область",
+    "place": "Львів-Краковець",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     25.692679,
+     50.113487
+    ]
+   },
+   "properties": {
+    "id": 420,
+    "limit": 50,
+    "road": "М-19",
+    "km": "250+096",
+    "region": "Тернопільська область",
+    "place": "Доманово-Ковель-Чернівці-Тереблече",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.063788,
+     48.62994
+    ]
+   },
+   "properties": {
+    "id": 421,
+    "limit": 50,
+    "road": "М-30",
+    "km": "619+385",
+    "region": "Кіровоградська область",
+    "place": "Стрий-Умань-Дніпро-Ізварине",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.524827,
+     50.585588
+    ]
+   },
+   "properties": {
+    "id": 422,
+    "limit": 50,
+    "road": "Р-69",
+    "km": "27+784",
+    "region": "Київська область",
+    "place": "Київ – Вишгород – Десна – Чернігів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.912694,
+     50.525667
+    ]
+   },
+   "properties": {
+    "id": 423,
+    "limit": 50,
+    "road": "Н-07",
+    "km": "2+817",
+    "region": "Київська область",
+    "place": "Київ-Суми-Юнаківка",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.822333,
+     50.564389
+    ]
+   },
+   "properties": {
+    "id": 424,
+    "limit": 50,
+    "road": "М-01-01",
+    "km": "0+459",
+    "region": "Київська область",
+    "place": "Східний під'їзд до м. Броварів",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.303145,
+     50.547658
+    ]
+   },
+   "properties": {
+    "id": 425,
+    "limit": 50,
+    "road": "М-07",
+    "km": "21+843",
+    "region": "Київська область",
+    "place": "Київ – Ковель – Ягодин",
+    "type": "highway"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     24.825028,
+     48.904972
+    ]
+   },
+   "properties": {
+    "id": 426,
+    "limit": 50,
+    "road": "Н-18",
+    "km": "4+482",
+    "region": "Івано-Франківська область",
+    "place": "Івано-Франківськ – Бучач – Тернопіль",
+    "type": "highway"
+   }
+  }
+ ]
+}

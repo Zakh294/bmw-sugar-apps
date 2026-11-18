@@ -1,0 +1,44 @@
+{
+  "id": "speedcam_ua",
+  "title": "SpeedCam UA",
+  "description": "Offline warnings for Ukraine's 426 automatic speed cameras on the HUD and the instrument cluster, from the car's own GPS, no phone needed",
+  "version": "0.1.0",
+  "vendor": "custom",
+  "loggingId": "OASC",
+  "iconGlyph": "CAM",
+  "autostart": true,
+  "mguHmi": ["ID7"],
+  "requires": { "cluster-render": "0.5.1" },
+  "signals": {
+    "de.bmw.infotainment.vehicle.Vehicle2": {
+      "statusCarSpeed2": "rs"
+    }
+  },
+  "screens": [
+    {
+      "name": "MAIN",
+      "kind": "canvas",
+      "title": "SpeedCam UA",
+      "buttons": [
+        ["BTN_TEST", "Test warning"],
+        ["BTN_SETTINGS", "Settings"]
+      ]
+    }
+  ],
+  "settings": [
+    { "key": "enabled", "label": "Camera warnings", "type": "bool", "default": true },
+    { "key": "showHud", "label": "Show on the HUD", "type": "bool", "default": true },
+    { "key": "showCluster", "label": "Show on the instrument cluster", "type": "bool", "default": true },
+    { "key": "clusterPlace", "label": "Place on the cluster", "type": "choice", "default": "center",
+      "options": [["center", "Middle, bottom"], ["left", "Left, bottom"], ["right", "Right, bottom"]] },
+    { "key": "lead", "label": "Warn this long before the camera", "type": "number", "unit": "s", "default": 20, "markDefault": true,
+      "steps": [10, 15, 20, 25, 30, 40] },
+    { "key": "minWarn", "label": "Warn at least this far ahead", "type": "number", "unit": "m", "default": 300, "markDefault": true,
+      "steps": [150, 200, 300, 400, 500, 700] },
+    { "key": "tolerance", "label": "Speed shown amber above the limit by", "type": "number", "unit": "km/h", "default": 0, "markDefault": true,
+      "steps": [0, 5, 10, 15] }
+  ],
+  "config": {
+    "socketPath": "/dev/shm/cluster-render/render.sock"
+  }
+}

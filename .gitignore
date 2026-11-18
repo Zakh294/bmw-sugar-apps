@@ -1,0 +1,7 @@
+dist/
+preview/emu/
+oap-sdk/
+apps/*/kit
+__pycache__/
+*.pyc
+node_modules/

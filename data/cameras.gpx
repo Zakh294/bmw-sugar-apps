@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="speedcam-ua" xmlns="http://www.topografix.com/GPX/1/1">
+<metadata><name>Камери автофіксації України</name><desc>https://patrolpolice.gov.ua/automatic_fixation/informatsiya-pro-vstanovleni-kaf/</desc></metadata>
+<wpt lat="50.479649" lon="30.453529"><name>Камера 50</name><desc>вул. Олени Теліги, 37, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.456731" lon="30.530181"><name>Камера 50</name><desc>Набережне шосе, 4, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.417382" lon="30.593149"><name>Камера 50</name><desc>Дніпровська набережна / вул. Причальна, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.467477" lon="30.625613"><name>Камера 50</name><desc>вул. Братиславська, 18, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.431336" lon="30.455483"><name>Камера 50</name><desc>Чоколівський бульвар, 24, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.492109" lon="30.540926"><name>Камера 50</name><desc>міст Північний на лівий берег, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.455612" lon="30.610071"><name>Камера 50</name><desc>Броварський пр./ вул. Будівельників, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.452832" lon="30.601344"><name>Камера 50</name><desc>Броварський пр./ ст. м. Лівобережна, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.492322" lon="30.540826"><name>Камера 50</name><desc>міст Північний на правий берег, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.394649" lon="30.591239"><name>Камера 50</name><desc>міст Південний на лівий берег, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.395009" lon="30.590517"><name>Камера 50</name><desc>міст Південний на правий берег, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.507666" lon="30.508167"><name>Камера 50</name><desc>просп. Володимира Івасюка, 25, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.521647" lon="30.619629"><name>Камера 50</name><desc>просп.Червоної Калини, 56, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.515084" lon="30.616043"><name>Камера 50</name><desc>просп.Червоної Калини, 65, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.420328" lon="30.549073"><name>Камера 50</name><desc>бульв. Миколи Міхновського, 36, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.419049" lon="30.546285"><name>Камера 50</name><desc>бульв. Миколи Міхновського, 27, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.327939" lon="30.561004"><name>Камера 50</name><desc>Столичне шосе, 58, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.328135" lon="30.560800"><name>Камера 50</name><desc>Столичне шосе, 58, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.402692" lon="30.681791"><name>Камера 50</name><desc>Харківська площа (лівий проїзд), м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.402308" lon="30.682780"><name>Камера 50</name><desc>Харківська площа (правий проїзд), м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.478138" lon="30.617634"><name>Камера 50</name><desc>вул. Братиславська, 9-Г, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.510667" lon="30.596805"><name>Камера 50</name><desc>вул. Рональда Рейгана (ст. назва Теодора Драйзера), 32, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.504209" lon="30.439399"><name>Камера 50</name><desc>вул. Наталії Ужвій, 1, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.504729" lon="30.438248"><name>Камера 50</name><desc>просп. Правди, 58, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.505157" lon="30.458702"><name>Камера 50</name><desc>вул. Ярослава Івашкевича, 5, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.505091" lon="30.459498"><name>Камера 50</name><desc>вул. Автозаводська, 24/1, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.390343" lon="30.500534"><name>Камера 50</name><desc>просп. Голосіївський, 96, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.501489" lon="30.604527"><name>Камера 50</name><desc>вул. Рональда Рейгана (ст. назва Теодора Драйзера), 4, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.501701" lon="30.603791"><name>Камера 50</name><desc>вул. Рональда Рейгана (ст. назва Теодора Драйзера), 9, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.390329" lon="30.500938"><name>Камера 50</name><desc>просп. Голосііївський, 96, м. Київ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.882843" lon="28.592221"><name>Камера 50</name><desc>вул. Одеська, 27, м. Бердичів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.366258" lon="30.920632"><name>Камера 50</name><desc>вул. Броварська, 1-А, м. Бориспіль</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.366314" lon="30.920041"><name>Камера 50</name><desc>вул. Київський шлях, 2-Б, м. Бориспіль</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.784827" lon="30.159641"><name>Камера 50</name><desc>просп. Незалежності (ст. назва вул. Леваневського), 48, м. Біла Церква</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.785169" lon="30.123514"><name>Камера 50</name><desc>просп. Князя Володимира (біля вул. Надрічна, 96), м. Біла Церква</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.809675" lon="30.095856"><name>Камера 50</name><desc>бульв. Олександрійський, 54, м. Біла Церква</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.397032" lon="30.232410"><name>Камера 50</name><desc>с. Білогородка, вул. Володимирська (біля вул. Завальна 2) (в напрямку вул. Київська), Київська область</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.490806" lon="34.971194"><name>Камера 50</name><desc>вул. Набережна Заводська, 64, м. Дніпро</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.444639" lon="35.073028"><name>Камера 50</name><desc>вул. Набережна Перемоги, 38-А, м. Дніпро</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.225992" lon="28.438422"><name>Камера 50</name><desc>вул. Келецька, 30, м. Вінниця</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.262334" lon="28.473141"><name>Камера 50</name><desc>вул. Київська, 126, м. Вінниця</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.253495" lon="28.472799"><name>Камера 50</name><desc>вул. Київська, 65, м. Вінниця</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.223971" lon="28.444261"><name>Камера 50</name><desc>вул. Пирогова, 61, м. Вінниця</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.220941" lon="28.410114"><name>Камера 50</name><desc>просп. Юності, 46, м. Вінниця</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.246408" lon="28.653959"><name>Камера 50</name><desc>Чуднівський міст в напрямку вул. Качинського, м. Житомир</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.247305" lon="28.655246"><name>Камера 50</name><desc>Чуднівський міст в напрямку Радивилівська, м. Житомир</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.274131" lon="28.647820"><name>Камера 50</name><desc>вул. Перемоги, 86, м. Житомир</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.949950" lon="24.697047"><name>Камера 50</name><desc>вул. Галицька, 144, м. Івано-Франківськ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.893246" lon="24.656173"><name>Камера 50</name><desc>вул. Крихівецька, 216, м. Івано-Франківськ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.911474" lon="24.765658"><name>Камера 50</name><desc>вул. Тисменицька, 311, м. Івано-Франківськ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.876089" lon="24.706558"><name>Камера 50</name><desc>вул. Євгена Коновальця, 320, м. Івано-Франківськ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.875343" lon="24.706662"><name>Камера 50</name><desc>вул. Євгена Коновальця, 411, м. Івано-Франківськ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.109669" lon="33.437303"><name>Камера 50</name><desc>274-й квартал, 4, м. Кременчук</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.096119" lon="33.431756"><name>Камера 50</name><desc>просп. Свободи, 120/25, м. Кременчук</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.116752" lon="33.487267"><name>Камера 50</name><desc>просп. Полтавський, 265, м. Кременчук</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.096271" lon="33.446888"><name>Камера 50</name><desc>вул. Вадима Пугачова, 6-Д, м. Кременчук</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.110197" lon="33.437328"><name>Камера 50</name><desc>вул. Андрія Ковальова, 17, м. Кременчук</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.096475" lon="33.431397"><name>Камера 50</name><desc>просп. Свободи, 69-А, м. Кременчук</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.926140" lon="33.430032"><name>Камера 50</name><desc>вул. Нікопольське шосе, 22 у напрямку вул. 21-ї бригади Національної гвардії, м. Кривий Ріг</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.926388" lon="33.430500"><name>Камера 50</name><desc>вул. Нікопольське шосе, 22 у напрямку Дніпровського шосе, м. Кривий Ріг</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.926453" lon="33.387492"><name>Камера 50</name><desc>вул. Вільної Ічкерії, 11, м. Кривий Ріг</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.924043" lon="33.387548"><name>Камера 50</name><desc>вул. Вільної Ічкерії, 13, м. Кривий Ріг</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.960027" lon="33.435972"><name>Камера 50</name><desc>просп. 200-річчя Кривого Рогу, 14 (навпроти) у напрямку вул. Співдружності, м. Кривий Ріг</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.960972" lon="33.435722"><name>Камера 50</name><desc>просп. 200-річчя Кривого Рогу, 14 у напрямку вул. Виноградна, м. Кривий Ріг</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.507278" lon="32.242755"><name>Камера 50</name><desc>вул. Габдрахманова, 50, м. Кропивницький</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.506886" lon="32.242708"><name>Камера 50</name><desc>вул. Габдрахманова, 35-А, м. Кропивницький</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.492737" lon="32.256480"><name>Камера 50</name><desc>вул. Яновського, 65, м. Кропивницький</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.577228" lon="32.241940"><name>Камера 50</name><desc>вул. Холодноярська, 196, м. Кропивницький</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.520710" lon="32.286923"><name>Камера 50</name><desc>вул. Полтавська, 40, м. Кропивницький</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.027196" lon="24.361472"><name>Камера 50</name><desc>просп. Лесі Українки, 27, м. Калуш</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.039757" lon="24.354834"><name>Камера 50</name><desc>вул. Богдана Хмельницького, 19, м. Калуш</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.754948" lon="25.289082"><name>Камера 50</name><desc>вул. Ковельська, 147, м. Луцьк</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.748919" lon="25.359178"><name>Камера 50</name><desc>вул. В'ячеслава Чорновола, 17, м. Луцьк</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.754411" lon="25.289685"><name>Камера 50</name><desc>вул. Ковельська, 144, м. Луцьк</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.769658" lon="25.357070"><name>Камера 50</name><desc>вул. Конякіна, 18-А, м. Луцьк</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.800429" lon="24.029371"><name>Камера 50</name><desc>просп. Святого Івана Павла ІІ, 8, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.800535" lon="24.031119"><name>Камера 50</name><desc>просп. Святого Івана Павла ІІ, 35, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.788716" lon="24.014850"><name>Камера 50</name><desc>вул. Стрийська, 292, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.816770" lon="24.020148"><name>Камера 50</name><desc>вул. Стрийська, 35, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.817724" lon="24.003101"><name>Камера 50</name><desc>вул. Княгині Ольги, 100-К, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.819003" lon="24.042047"><name>Камера 50</name><desc>вул. Василя Стуса, 39, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.810273" lon="24.002662"><name>Камера 50</name><desc>вул. Володимира Великого, 18, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.794810" lon="24.064364"><name>Камера 50</name><desc>вул. Сихівська, 16А, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.870330" lon="23.945802"><name>Камера 50</name><desc>вул. Шевченка, 313, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.823763" lon="23.976740"><name>Камера 50</name><desc>вул. Любінська, 89, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.824570" lon="23.977820"><name>Камера 50</name><desc>вул. Любінська, 92, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.856024" lon="24.075212"><name>Камера 50</name><desc>вул. Богданівська, 44, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.821078" lon="23.988639"><name>Камера 50</name><desc>вул. Кульпарківська, 93, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.826139" lon="23.989828"><name>Камера 50</name><desc>вул. Кульпарківська, 64-А, м. Львів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.428169" lon="22.743246"><name>Камера 50</name><desc>вул. Великогірна, 51, м. Мукачево</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.986899" lon="31.998135"><name>Камера 50</name><desc>просп. Героїв України, 9-Т у напрямку пров. Парковий, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.986319" lon="31.998383"><name>Камера 50</name><desc>просп. Героїв України, 9-Т у напрямку вул. Пушкінська, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.002175" lon="31.996979"><name>Камера 50</name><desc>просп. Героїв України, 20, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.001858" lon="31.997262"><name>Камера 50</name><desc>просп. Героїв України, 55, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.965325" lon="32.016362"><name>Камера 50</name><desc>просп. Центральний, 160, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.966308" lon="31.999512"><name>Камера 50</name><desc>просп. Центральний, 96, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.917922" lon="32.045738"><name>Камера 50</name><desc>просп. Богоявленський, 140, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.918634" lon="32.045615"><name>Камера 50</name><desc>просп. Богоявленський, 125, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.927431" lon="32.044984"><name>Камера 50</name><desc>просп. Богоявленський, 55/2, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.927070" lon="32.045427"><name>Камера 50</name><desc>просп. Богоявленський, 42-А, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.980199" lon="31.972649"><name>Камера 50</name><desc>вул. Велика Морська, 13, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.966001" lon="31.999068"><name>Камера 50</name><desc>просп. Центральний, 93, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.584944" lon="30.789028"><name>Камера 50</name><desc>просп. Добровольського, 123-А, м. Одеса</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.459230" lon="30.749680"><name>Камера 50</name><desc>просп. Шевченка, 4-А, м. Одеса</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.552340" lon="30.758694"><name>Камера 50</name><desc>Миколаївська дорога, 287, м. Одеса</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.401493" lon="30.709014"><name>Камера 50</name><desc>просп. Небесної Сотні, 4, м. Одеса</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.535377" lon="30.736285"><name>Камера 50</name><desc>Миколаївська дорога, 205, м. Одеса</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.571250" lon="30.792430"><name>Камера 50</name><desc>вул. Семена Палія, 80, м. Одеса</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.560851" lon="30.779587"><name>Камера 50</name><desc>Південна дорога, 39, м. Одеса</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.560664" lon="30.779216"><name>Камера 50</name><desc>Південна дорога, 2, м. Одеса</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.570919" lon="30.792602"><name>Камера 50</name><desc>вул. Семена Палія, 25A, м. Одеса</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.578070" lon="34.492449"><name>Камера 50</name><desc>вул. Світанкова, 14, м. Полтава</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.577324" lon="34.492615"><name>Камера 50</name><desc>вул. Великотирнівська, 19, м. Полтава</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.599615" lon="34.514031"><name>Камера 50</name><desc>вул. Решетилівська, 35/14, м. Полтава</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.599872" lon="34.515140"><name>Камера 50</name><desc>вул. Решетилівська, 32, м. Полтава</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.573297" lon="34.527632"><name>Камера 50</name><desc>вул. Героїв АТО, 31, м. Полтава</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.566684" lon="34.530103"><name>Камера 50</name><desc>вул. Європейська, 108, м. Полтава</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.565620" lon="34.529754"><name>Камера 50</name><desc>вул. Європейська, 155, м. Полтава</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.501139" lon="35.914500"><name>Камера 50</name><desc>вул. Дніпровська 409, м. Павлоград</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.529960" lon="35.841518"><name>Камера 50</name><desc>вул. Дніпровська, 16, м. Павлоград</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.613657" lon="26.303767"><name>Камера 50</name><desc>вул. Київська, 92 в напрямку вул. Федорова, м. Рівне</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.613620" lon="26.305090"><name>Камера 50</name><desc>вул. Київська, 92 в напрямку вул. Захисників Маріуполя, м. Рівне</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.635843" lon="26.211943"><name>Камера 50</name><desc>вул. Соборна, 416, м. Рівне</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.557222" lon="25.633086"><name>Камера 50</name><desc>просп. Злуки, 47Б, м. Тернопіль</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.557572" lon="25.631186"><name>Камера 50</name><desc>просп. Злуки, 45Б, м. Тернопіль</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.541122" lon="25.566854"><name>Камера 50</name><desc>вул. Степана Будного, 28, м. Тернопіль</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.542796" lon="25.633201"><name>Камера 50</name><desc>вул. Протасевича, 8, м. Тернопіль</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.548753" lon="25.628049"><name>Камера 50</name><desc>просп. Степана Бандери, 90, м. Тернопіль</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.611167" lon="22.291667"><name>Камера 50</name><desc>вул. Минайська, 8, м. Ужгород</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.606333" lon="22.288611"><name>Камера 50</name><desc>вул. Минайська, 24, м. Ужгород</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.638989" lon="22.271784"><name>Камера 50</name><desc>вул.Собранецька, 152, м. Ужгород</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.393276" lon="26.956385"><name>Камера 50</name><desc>вул. Кам'янецька, 132, м. Хмельницький</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.421743" lon="27.066267"><name>Камера 50</name><desc>вул. Вінницьке шосе, 8/1, м. Хмельницький</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.438580" lon="27.004581"><name>Камера 50</name><desc>просп. Миру, 65, м. Хмельницький</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.180013" lon="23.279630"><name>Камера 50</name><desc>вул. Волошина, 81, м. Хуст</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.157289" lon="23.304787"><name>Камера 50</name><desc>вул. Івана Франка, 165, м. Хуст</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.187238" lon="23.300805"><name>Камера 50</name><desc>вул. Львівська, 157, м. Хуст</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.406841" lon="32.046665"><name>Камера 50</name><desc>просп. Хіміків, 30, м. Черкаси</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.452627" lon="32.034520"><name>Камера 50</name><desc>вул. Благовісна 36/47, м. Черкаси</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.443349" lon="32.046736"><name>Камера 50</name><desc>вул. Надпільна, 208, м. Черкаси</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.431805" lon="32.072417"><name>Камера 50</name><desc>вул. Благовісна, 341/40, м. Черкаси</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.406644" lon="32.047587"><name>Камера 50</name><desc>просп. Хіміків, 50, м. Черкаси</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.421379" lon="32.073555"><name>Камера 50</name><desc>вул. Чорновола, 119, м. Черкаси</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.435303" lon="32.016863"><name>Камера 50</name><desc>вул. Сумгаїтська, 21 (у напрямку вул. Віталія Вергая), м. Черкаси</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.435211" lon="32.016323"><name>Камера 50</name><desc>вул. Сумгаїтська, 21 (у напрямку вул. Академіка Корольова), м. Черкаси</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.268111" lon="25.932944"><name>Камера 50</name><desc>просп. Незалежності 125, м. Чернівці</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.268694" lon="25.929639"><name>Камера 50</name><desc>просп. Незалежності 94, м. Чернівці</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.272083" lon="25.928417"><name>Камера 50</name><desc>вул. Героїв Майдану 160, м. Чернівці</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.321750" lon="25.907278"><name>Камера 50</name><desc>вул. Галицький шлях, 46-В, м. Чернівці</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.228889" lon="25.978444"><name>Камера 50</name><desc>М-19-03, 0+972 км (Південний під'їзд до м. Чернівці)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.277061" lon="25.964965"><name>Камера 50</name><desc>вул. Винниченка, 116, м. Чернівці</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.297696" lon="25.961749"><name>Камера 50</name><desc>Старожучківський шлях у напрямку вул. Старокостянтинівська, м. Чернівці</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.298074" lon="25.961180"><name>Камера 50</name><desc>Старожучківський шлях у напрямку вул. Білоруська, м. Чернівці</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.277339" lon="25.965141"><name>Камера 50</name><desc>вул. Винниченка, 97, м. Чернівці</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.476482" lon="31.302757"><name>Камера 50</name><desc>перехрестя просп. Миру - вул. Лісковицька в напрямку вул. Урочище Святе, м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.506358" lon="31.337475"><name>Камера 50</name><desc>вул. Шевченка, 101, м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.507212" lon="31.339237"><name>Камера 50</name><desc>вул. Шевченка, 114, м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.510218" lon="31.328523"><name>Камера 50</name><desc>просп. Левка Лук'яненка, 12 к2, м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.520278" lon="31.273892"><name>Камера 50</name><desc>просп. Миру, 192, м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.533845" lon="31.266375"><name>Камера 50</name><desc>просп. Миру, 296, м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.533478" lon="31.266831"><name>Камера 50</name><desc>просп. Миру, 241-А, м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.481450" lon="31.271558"><name>Камера 50</name><desc>вул. Івана Мазепи, 55, м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.481467" lon="31.271846"><name>Камера 50</name><desc>вул. Івана Мазепи, 58, м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.490190" lon="31.269676"><name>Камера 50</name><desc>вул. Жабинського, 2-Б (навпроти), м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.512394" lon="31.267253"><name>Камера 50</name><desc>вул. Козацька, 22 (навпроти), м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.507083" lon="30.842250"><name>Камера 50</name><desc>М-01, 28+342 км (Київ – Чернігів – Нові Яриловичі в напрямку м. Київ)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.507250" lon="30.841861"><name>Камера 50</name><desc>М-01, 28+342 км (Київ – Чернігів – Нові Яриловичі в напрямку м. Чернігів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.206527" lon="31.776738"><name>Камера 110</name><desc>М-03, 101+350 км (Київ-Харків-Довжанський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.206349" lon="31.776125"><name>Камера 110</name><desc>М-03, 101+400 км (Київ-Харків-Довжанський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.307689" lon="31.085829"><name>Камера 110</name><desc>М-03, 49+150 км (Київ-Харків-Довжанський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.256226" lon="30.306940"><name>Камера 110</name><desc>М-05, 28+870 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.318085" lon="30.387993"><name>Камера 50</name><desc>М-05, 19+400 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.214179" lon="30.250309"><name>Камера 50</name><desc>М-05, 35+240 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.213358" lon="30.250003"><name>Камера 50</name><desc>М-05, 35 + 352 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.258287" lon="30.310924"><name>Камера 70</name><desc>М-05, 28 + 450 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.281933" lon="30.345965"><name>Камера 70</name><desc>М-05, 24+400 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.279348" lon="30.344921"><name>Камера 70</name><desc>М-05, 24+700 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.346161" lon="30.422016"><name>Камера 50</name><desc>М-05, 15+250 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.342831" lon="30.417508"><name>Камера 50</name><desc>М-05, 15+740 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.446310" lon="30.225974"><name>Камера 70</name><desc>М-06, 21+730 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.446328" lon="30.226587"><name>Камера 70</name><desc>М-06, 21+810 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.418557" lon="29.835236"><name>Камера 110</name><desc>М-06, 49 + 700 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.421495" lon="29.886017"><name>Камера 110</name><desc>М-06, 46+050 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.412136" lon="29.607617"><name>Камера 110</name><desc>М-06, 66+250 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.596001" lon="30.018299"><name>Камера 90</name><desc>М-07, 44+100 км (Київ-Ковель-Ягодин)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.568832" lon="30.098157"><name>Камера 50</name><desc>М-07, 37+700 км (Київ-Ковель-Ягодин)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.308709" lon="30.571788"><name>Камера 50</name><desc>Р-01, 3+441 км (Київ-Обухів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.308102" lon="30.572395"><name>Камера 50</name><desc>Р-01, 3+461 км (Київ-Обухів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.261512" lon="30.618616"><name>Камера 50</name><desc>Р-01, 9+784 км (Київ-Обухів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.259383" lon="30.620389"><name>Камера 50</name><desc>Р-01, 9+994 км (Київ-Обухів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.226536" lon="30.643353"><name>Камера 50</name><desc>Р-01, 14+016 км (Київ-Обухів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.225720" lon="30.644215"><name>Камера 50</name><desc>Р-01, 14+116 км (Київ-Обухів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.652786" lon="30.408656"><name>Камера 50</name><desc>Р-02, 27+371 км (Київ-Іванків-Овруч)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.662362" lon="30.403434"><name>Камера 50</name><desc>Р-02, 28+518 км (Київ-Іванків-Овруч)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.253120" lon="30.554389"><name>Камера 50</name><desc>Н-01, 26+050 км (Київ-Знамянка)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.253229" lon="30.554770"><name>Камера 50</name><desc>Н-01, 26+088 км (Київ-Знамянка)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.383986" lon="30.246293"><name>Камера 110</name><desc>М-05, 248+169 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.337709" lon="30.254346"><name>Камера 110</name><desc>М-05, 253+462 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.320542" lon="28.501843"><name>Камера 50</name><desc>М-21, 294+567 км (Виступовичі–Житомир–Могилів-Подільський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.320199" lon="28.501114"><name>Камера 50</name><desc>М-21, 294+619 км (Виступовичі–Житомир–Могилів-Подільський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.242592" lon="28.404927"><name>Камера 50</name><desc>М-21, 307+084 км (Виступовичі–Житомир–Могилів-Подільський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.109723" lon="28.700791"><name>Камера 50</name><desc>М-30, 417+815 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.251605" lon="28.362856"><name>Камера 50</name><desc>М-30, 376+261 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.204127" lon="28.604424"><name>Камера 50</name><desc>М-30, 404+377 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.809418" lon="29.405347"><name>Камера 50</name><desc>М-30, 490+890 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.809324" lon="29.408133"><name>Камера 50</name><desc>М-30, 491+090 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.202933" lon="28.607570"><name>Камера 50</name><desc>М-30, 404+640 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.258879" lon="28.298919"><name>Камера 50</name><desc>М-30, 371+527 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.112413" lon="28.700391"><name>Камера 50</name><desc>М-30, 417+514 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.275977" lon="28.268218"><name>Камера 50</name><desc>М-30, 368+580 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.276251" lon="28.266966"><name>Камера 50</name><desc>М-30, 368+488 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.202460" lon="24.663809"><name>Камера 50</name><desc>М-07, 444+971 км (Київ-Ковель-Ягодин)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.808389" lon="25.303111"><name>Камера 50</name><desc>М-19, 142+324 км (Доманове-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.879894" lon="25.222558"><name>Камера 50</name><desc>М-19, 129+788 км (Доманове-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.917254" lon="25.206143"><name>Камера 50</name><desc>М-19, 125+475 км (Доманове-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.742417" lon="24.158703"><name>Камера 50</name><desc>Р-15, 74+273 км (Ковель ‒ Володимир ‒ Червоноград ‒ Жовква)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.726370" lon="24.152168"><name>Камера 50</name><desc>Р-15, 76+247 км (Ковель ‒ Володимир ‒ Червоноград ‒ Жовква)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.820440" lon="24.381772"><name>Камера 50</name><desc>Н-22, 19+098 км (Устилуг-Луцьк-Рівне)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.744347" lon="25.243019"><name>Камера 50</name><desc>Н-22, 82+575 км (Устилуг-Луцьк-Рівне)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.779361" lon="24.858139"><name>Камера 50</name><desc>Н-22, 54+015 км (Устилуг-Луцьк-Рівне)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.781621" lon="25.733929"><name>Камера 50</name><desc>Н-22, 119+027 км (Устилуг-Луцьк-Рівне)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.770055" lon="25.008017"><name>Камера 50</name><desc>Н-22, 64+946 км (Устилуг-Луцьк-Рівне)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.765066" lon="25.493780"><name>Камера 50</name><desc>Н-22, 101+613 км (Устилуг-Луцьк-Рівне)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.748750" lon="25.450667"><name>Камера 50</name><desc>Н-22, 97+990 км (Устилуг-Луцьк-Рівне)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.746036" lon="25.411223"><name>Камера 50</name><desc>Н-22, 95+200 км (Устилуг-Луцьк-Рівне)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.336318" lon="35.026958"><name>Камера 50</name><desc>Н-08, 423+643 км (Бориспіль - Дніпро - Запоріжжя (через м. Кременчук) - Маріуполь)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.342753" lon="29.226629"><name>Камера 110</name><desc>М-06, 94+461 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.341939" lon="29.223533"><name>Камера 110</name><desc>М-06, 94+686 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.336206" lon="29.188069"><name>Камера 110</name><desc>М-06, 97+297 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.335190" lon="29.183631"><name>Камера 110</name><desc>М-06, 97+627 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.316700" lon="28.426503"><name>Камера 110</name><desc>М-06, 158+305 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.400617" lon="28.245123"><name>Камера 110</name><desc>М-06, 174+600 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.286726" lon="28.823628"><name>Камера 110</name><desc>М-06, 127+246 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.609254" lon="27.586373"><name>Камера 110</name><desc>М-06, 230+853 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.607833" lon="27.365667"><name>Камера 70</name><desc>М-06, 247+134 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.607745" lon="27.364551"><name>Камера 70</name><desc>М-06, 247+239 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.169458" lon="28.655706"><name>Камера 50</name><desc>М-21, 190+150 км (Виступовичі–Житомир–Могилів-Подільський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.344862" lon="28.690257"><name>Камера 50</name><desc>М-21, 167+547 км (Виступовичі–Житомир–Могилів-Подільський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.828292" lon="28.626459"><name>Камера 50</name><desc>М-21, 230+919 км (Виступовичі–Житомир–Могилів-Подільський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.471467" lon="22.600405"><name>Камера 50</name><desc>М-06, 780+785 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.456473" lon="22.701988"><name>Камера 50</name><desc>М-06, 772+750 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.579194" lon="22.323477"><name>Камера 50</name><desc>М-06, 807 + 021 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.559950" lon="22.950553"><name>Камера 90</name><desc>М-06, 749 + 346 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.020373" lon="23.552189"><name>Камера 50</name><desc>Н-09, 95+424 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.009847" lon="23.592156"><name>Камера 50</name><desc>Н-09, 98+824 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.437944" lon="22.747444"><name>Камера 50</name><desc>Н-09, 2+395 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.674028" lon="22.389333"><name>Камера 50</name><desc>Н-13, 226+887 км (Львів-Самбір-Ужгород)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.139736" lon="22.996343"><name>Камера 50</name><desc>М-23, 33+714 км (Берегове-Виноградів-Велика Копаня)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.159416" lon="23.042321"><name>Камера 50</name><desc>М-23, 39+706 км (Берегове-Виноградів-Велика Копаня)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.309679" lon="23.033016"><name>Камера 50</name><desc>Т-07-19, 0+694 км (Іршава-Виноградів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.641194" lon="22.314083"><name>Камера 50</name><desc>М-08, 7+734 км (Обхід м. Ужгорода – КПП "Ужгород")</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.981222" lon="24.706028"><name>Камера 50</name><desc>Н-09, 322+566 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.461486" lon="24.564931"><name>Камера 50</name><desc>Н-09, 244+199 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.436117" lon="24.549702"><name>Камера 50</name><desc>Н-09, 240+283 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.370277" lon="24.563172"><name>Камера 50</name><desc>Н-09, 227+233 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.358372" lon="24.563541"><name>Камера 50</name><desc>Н-09, 224+687 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.577230" lon="24.601121"><name>Камера 50</name><desc>Н-09, 260+135 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.656498" lon="24.582732"><name>Камера 50</name><desc>Н-09, 271+228 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.474211" lon="25.314550"><name>Камера 50</name><desc>Н-10, 181+215 км (Стрий - Івано-Франківськ - Чернівці - Мамалига)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.009389" lon="24.569194"><name>Камера 50</name><desc>Н-10, 83+308 км (Стрий - Івано-Франківськ - Чернівці - Мамалига)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.815472" lon="24.844611"><name>Камера 50</name><desc>Н-10, 120+854 км (Стрий - Івано-Франківськ - Чернівці - Мамалига)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.789417" lon="24.859556"><name>Камера 50</name><desc>Н-10, 124+050 км (Стрий - Івано-Франківськ - Чернівці - Мамалига)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.010972" lon="24.377111"><name>Камера 50</name><desc>Н-10, 66+610 км (Стрий - Івано-Франківськ - Чернівці - Мамалига)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.409848" lon="24.602904"><name>Камера 50</name><desc>Н-09, 233+618 км (Мукачево - Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.070500" lon="23.562222"><name>Камера 50</name><desc>М-06, 648+242 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.244778" lon="23.852861"><name>Камера 50</name><desc>М-06, 617+024 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.069273" lon="25.165741"><name>Камера 50</name><desc>М-06, 439+352 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.969215" lon="24.592883"><name>Камера 50</name><desc>М-06, 490 + 400 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.768767" lon="24.020769"><name>Камера 90</name><desc>М-06, 552+486 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.901777" lon="24.149771"><name>Камера 50</name><desc>М-06, 528+459 км (Київ-Чоп (у напрямку м. Львів))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.901947" lon="24.149546"><name>Камера 50</name><desc>М-06, 528+459 км (Київ-Чоп (у напрямку м. Луцьк))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.917199" lon="24.201384"><name>Камера 50</name><desc>М-06, 523+260 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.798920" lon="24.147072"><name>Камера 50</name><desc>М-06, 541+451 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.800237" lon="24.147855"><name>Камера 50</name><desc>М-06, 541+296 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.932609" lon="24.365490"><name>Камера 50</name><desc>М-06, 510+120 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.748719" lon="24.014809"><name>Камера 50</name><desc>М-06, 555+730 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.749283" lon="24.014857"><name>Камера 50</name><desc>М-06, 555+662 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.887983" lon="23.250157"><name>Камера 50</name><desc>М-06, 685+309 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.002741" lon="25.115216"><name>Камера 50</name><desc>М-06, 447 + 803 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.805139" lon="24.767028"><name>Камера 50</name><desc>М-09, 66+283 км (Тернопіль-Львів-Рава-Руська)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.949948" lon="24.056687"><name>Камера 50</name><desc>М-09, 137+971 км (Тернопіль-Львів-Рава-Руська)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.874452" lon="23.888343"><name>Камера 50</name><desc>М-10, 10+100 км (Львів-Краковець)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.934776" lon="23.332832"><name>Камера 50</name><desc>М-10, 53 +580 км (Львів-Краковець)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.910128" lon="23.740703"><name>Камера 50</name><desc>М-10, 21+671 км (Львів-Краковець)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.889861" lon="23.806806"><name>Камера 50</name><desc>М-10, 16+281 км (Львів-Краковець)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.778094" lon="23.975539"><name>Камера 50</name><desc>М-10-01, 12+514 км (Західний обхід м. Львова)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.838564" lon="23.899195"><name>Камера 50</name><desc>М-10-01, 3+360 км (Західний обхід м. Львова)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.804897" lon="23.817576"><name>Камера 50</name><desc>М-11, 16+153 км (Львів-Шегині)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.801861" lon="23.242139"><name>Камера 50</name><desc>М-11, 58+876 км (Львів-Шегині)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.801889" lon="23.197194"><name>Камера 50</name><desc>М-11, 62+177 км (Львів-Шегині)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.810882" lon="23.855780"><name>Камера 50</name><desc>М-11, 13+317 км (Львів-Шегині)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.751861" lon="24.141361"><name>Камера 50</name><desc>Н-09, 433+537 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.952889" lon="24.204486"><name>Камера 50</name><desc>Н-17, 4 + 898 км (Львів - Радехів - Луцьк)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.944268" lon="24.183025"><name>Камера 50</name><desc>Н-17, 3+064 км (Львів - Радехів - Луцьк)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.804621" lon="23.076628"><name>Камера 50</name><desc>М-11, 71+630 км (Львів - Шегині)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.974214" lon="30.309845"><name>Камера 50</name><desc>М-05, 294 + 260 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.019091" lon="31.995522"><name>Камера 50</name><desc>М-14, 139 + 684 км (Одеса – Мелітополь – Новоазовськ)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.279036" lon="31.799939"><name>Камера 50</name><desc>Н-24, 191 + 346 км (Благовіщанське - Миколаїв)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.503742" lon="30.632438"><name>Камера 110</name><desc>М-05, 465+483 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="47.355231" lon="30.306011"><name>Камера 70</name><desc>М-05, 364+792 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.135148" lon="29.903858"><name>Камера 50</name><desc>М-15, 96+449 км (Одеса – Рені (на м. Бухарест))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.002353" lon="29.687943"><name>Камера 50</name><desc>М-15, 120+354 км (Одеса – Рені (на м. Бухарест))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="45.952815" lon="29.696134"><name>Камера 50</name><desc>М-15, 125+949 км (Одеса – Рені (на м. Бухарест))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="45.702245" lon="29.069458"><name>Камера 50</name><desc>М-15, 190+050 км (Одеса – Рені (на м. Бухарест))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="45.406210" lon="28.866082"><name>Камера 50</name><desc>М-15, 229+530 км (Одеса – Рені (на м. Бухарест))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="45.372377" lon="28.784710"><name>Камера 50</name><desc>М-15, 237+550 км (Одеса – Рені (на м. Бухарест))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="45.325070" lon="28.453992"><name>Камера 50</name><desc>М-15, 271+315 км (Одеса – Рені (на м. Бухарест))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.416841" lon="30.281000"><name>Камера 50</name><desc>М-15, 39+423 км (Одеса – Рені (на м. Бухарест))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.474562" lon="30.556013"><name>Камера 50</name><desc>М-15, 16+729 км (Одеса – Рені (на м. Бухарест))</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="45.739928" lon="29.440419"><name>Камера 90</name><desc>Т-16-28, 3+015 км (Спаське-Вилково)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.561677" lon="30.831362"><name>Камера 90</name><desc>М-28, 17+125 км (Одеса - Южне)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.570134" lon="30.879270"><name>Камера 50</name><desc>М-28, 20+980 км (Одеса - Южне)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.225552" lon="32.506604"><name>Камера 110</name><desc>М-03, 155+696 км (Київ-Харків-Довжанський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.600182" lon="34.272512"><name>Камера 50</name><desc>М-03, 319+374 км (Київ-Харків-Довжанський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.604084" lon="34.341064"><name>Камера 90</name><desc>М-03, 324+515 км (Київ-Харків-Довжанський)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.354218" lon="34.302531"><name>Камера 50</name><desc>М-22, 30 + 459 км (Полтава-Олександрія)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.528528" lon="33.396111"><name>Камера 50</name><desc>М-02, 167+441 км (Кіпті-Глухів-Бачівськ)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.607306" lon="25.408278"><name>Камера 50</name><desc>М-09, 12+205 км (Тернопіль – Львів – Рава-Руська)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.682694" lon="25.721639"><name>Камера 90</name><desc>М-19, 303+307 км (Доманове-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.497111" lon="25.614028"><name>Камера 50</name><desc>М-19, 328+315 км (Доманове-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.155353" lon="25.851281"><name>Камера 50</name><desc>М-19, 374+935 км (Доманове-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.985556" lon="25.775750"><name>Камера 50</name><desc>М-19, 268+641 км (Доманове-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.574806" lon="25.666361"><name>Камера 50</name><desc>М-19, 316+542 км (Доманове-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.544722" lon="25.646306"><name>Камера 50</name><desc>М-30, 154+464 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.532722" lon="25.702417"><name>Камера 50</name><desc>М-30, 158+740 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.572767" lon="25.645289"><name>Камера 50</name><desc>Р-41, 0+738 км (Об’їзд м.Тернополя)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.090722" lon="25.174861"><name>Камера 50</name><desc>Н-18, 48+821 км (Івано-Франківськ – Бучач – Тернопіль)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.582574" lon="26.140465"><name>Камера 110</name><desc>М-06, 340+202 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.295209" lon="25.614704"><name>Камера 50</name><desc>М-06, 394+318 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.439048" lon="25.766674"><name>Камера 50</name><desc>М-06, 371+971 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.572236" lon="26.276106"><name>Камера 70</name><desc>М-06, 328+826 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.581444" lon="26.316611"><name>Камера 50</name><desc>М-06, 325+770 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.587668" lon="26.149632"><name>Камера 50</name><desc>М-06, 339+091 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.185583" lon="27.039306"><name>Камера 50</name><desc>Н-25, 250+404 км (Городище - Рівне - Старокостянтинів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.734140" lon="30.164618"><name>Камера 50</name><desc>М-30, 548+324 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.186300" lon="25.779690"><name>Камера 50</name><desc>Р-62, 100+356 км (Криворівня-Чернівці)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.208032" lon="31.213326"><name>Камера 50</name><desc>М-01, 113+864 км (Київ-Чернігів-Нові Яриловичі)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.467590" lon="31.225893"><name>Камера 50</name><desc>Р-56, 6+801 км (Чернігів - Чорнобиль)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.542763" lon="31.441880"><name>Камера 50</name><desc>Н-27, 11+903 км (Чернігів-Мена-Сосниця-Грем’яч)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.476627" lon="31.302394"><name>Камера 50</name><desc>перехрестя пр-кт Миру - вул. Лісковицька (в напрямку вул. Шевченка), м. Чернігів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.618894" lon="27.609172"><name>Камера 70</name><desc>М-06, 228 + 889 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.553371" lon="30.283476"><name>Камера 50</name><desc>М07, 23 + 550 км (Київ - Ковель - Ягодин)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.303040" lon="30.641767"><name>Камера 50</name><desc>перехр. вул. Захисників України та Віталія Шума, м. Чорноморськ</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.183526" lon="24.796231"><name>Камера 50</name><desc>М-19, 82+929 км (Доманове - Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.515296" lon="30.783976"><name>Камера 50</name><desc>перехр. вул. Київська- вул. Героїв України – вул. Чорновола В’ячеслава (в напрямку м. Чернігів, зустрічний напрямок), м. Бровари</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.514333" lon="30.783599"><name>Камера 50</name><desc>перехр. вул. Київська- вул. Героїв України – вул. Чорновола В’ячеслава (в напрямку м. Чернігів, попутний напрямок), м. Бровари</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.506307" lon="30.777072"><name>Камера 50</name><desc>перехр. вул. Київська- вул. Шевченка (в напрямку м. Чернігів, зустрічний напрямок), м. Бровари</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.505590" lon="30.776793"><name>Камера 50</name><desc>перехр. вул. Київська- вул. Шевченка (в напрямку м. Чернігів, попутний напрямок), м. Бровари</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.758932" lon="23.801057"><name>Камера 50</name><desc>Н-13, 10+300 км (Львів – Самбір – Ужгород)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.873379" lon="24.164498"><name>Камера 50</name><desc>М-06, 532+842 км (Київ – Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.130971" lon="30.658137"><name>Камера 50</name><desc>вул. Київська 119, м. Обухів</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.239593" lon="28.467521"><name>Камера 50</name><desc>вул. В'ячеслава Чорновола (біля Київського мосту), м. Вінниця</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.223383" lon="28.551465"><name>Камера 50</name><desc>перехр. Немирівського шосе та вулиці Покровська, м. Вінниця</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.240647" lon="24.138377"><name>Камера 50</name><desc>Р-15, 137+290 км (Ковель - Володимир - Червоноград - Жовква)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.800333" lon="23.270835"><name>Камера 50</name><desc>М-11, 56+820 км (Львів – Шегині)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.664417" lon="32.053750"><name>Камера 50</name><desc>вул. Шевченка 107, м. Золотоноша</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.627301" lon="30.442579"><name>Камера 50</name><desc>Р-02, 23+557 км (Київ - Іванків - Овруч)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.788167" lon="23.704694"><name>Камера 50</name><desc>М-11, 24+490 км (Львів – Шегині)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.132694" lon="24.052655"><name>Камера 50</name><desc>Р-15, 151+021 км (Ковель - Володимир - Червоноград - Жовква)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.510119" lon="23.961017"><name>Камера 50</name><desc>М-06, 584+510 км (Київ - Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.983361" lon="24.636333"><name>Камера 50</name><desc>Н-10, 89+147 км (Н-10 Стрий-Мамалига)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.596378" lon="30.470570"><name>Камера 50</name><desc>перех. вул. Шолуденка - вул. Борисо-Глібська, м. Вишгород</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.581235" lon="30.494491"><name>Камера 50</name><desc>перех. просп. Шевченка - вул. Набережна,, м. Вишгород</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.809358" lon="30.095634"><name>Камера 50</name><desc>бульвар Олександрійський, 113 (смуга руху в напрямку вул. Соборна), м. Біла Церква</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.783180" lon="30.138515"><name>Камера 50</name><desc>м. Біла Церква, проспект Князя Володимира (спуск з шляхопроводу в напрямку вул. Людмили Павличенко), м. Біла Церква</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.785429" lon="30.154972"><name>Камера 50</name><desc>м. Біла Церква, просп. Незалежності, 40 смуга руху у напрямку вул. Людмили Павличенко, м. Біла Церква</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.005333" lon="24.247611"><name>Камера 50</name><desc>Н-10, 56+938 км (Стрий – Мамалига)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="45.841872" lon="29.627940"><name>Камера 50</name><desc>М-15, 141+319 км (Одеса-Рені)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="45.837074" lon="29.622003"><name>Камера 50</name><desc>М-15, 142+028 км (Одеса-Рені)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.969389" lon="24.704528"><name>Камера 90</name><desc>Н-09, 321+253 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.093917" lon="23.586250"><name>Камера 50</name><desc>М-06, 645+057 км (Київ – Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.476601" lon="25.258786"><name>Камера 50</name><desc>Н-10, 176+645 км (Стрий – Мамалига)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.185933" lon="30.218654"><name>Камера 70</name><desc>М-05, 38+825 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.183132" lon="30.218108"><name>Камера 70</name><desc>М-05, 39+140 км (Київ-Одеса)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.752890" lon="23.941388"><name>Камера 50</name><desc>Т-14-16, 10+165 км (Львів - Пустомити - Меденичі)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="51.329269" lon="32.894986"><name>Камера 50</name><desc>М-02, 125+385 км (Кіпті-Глухів-Бачівськ)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.565340" lon="35.101132"><name>Камера 50</name><desc>М-30, 985+548 км (Стрий – Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.644500" lon="26.203944"><name>Камера 50</name><desc>вул. Млинівська, 26, м. Рівне</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.616694" lon="26.271278"><name>Камера 50</name><desc>вул. Київська, 6, м. Рівне</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.626917" lon="26.224139"><name>Камера 50</name><desc>вул. Соборна, 364, м. Рівне</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.619583" lon="26.286333"><name>Камера 50</name><desc>вул. Захисників Маріуполя, 5, м. Рівне</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.634306" lon="26.265167"><name>Камера 50</name><desc>вул. Романа Шухевича, 2, м. Рівне</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.605518" lon="26.340630"><name>Камера 50</name><desc>М-06, 322+490 км (Київ - Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.675674" lon="32.890016"><name>Камера 50</name><desc>М-30, 784+099 км (Стрий-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.229639" lon="31.868611"><name>Камера 50</name><desc>перехр. вулиць Незалежності - Олеся Гончара, м. Сміла</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.616306" lon="26.206250"><name>Камера 50</name><desc>вул. Кулика і Гудачека, 10, м. Рівне</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.619134" lon="26.251968"><name>Камера 50</name><desc>перехр. вул. Соборна- В'ячеслава Чорновола - Міцкевича, м. Рівне</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.289245" lon="25.957433"><name>Камера 50</name><desc>вул. Січових Стрільців, 6, м. Чернівці</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.803534" lon="23.353220"><name>Камера 50</name><desc>М-11, 50+620 км (Львів-Шегині)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.336179" lon="35.026755"><name>Камера 50</name><desc>Н-08, 423+663 км (Бориспіль-Маріуполь)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.748889" lon="24.174667"><name>Камера 50</name><desc>Р-15, 72+938 км (Ковель-Володимир-Червоноград-Жовква)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.571333" lon="22.344306"><name>Камера 50</name><desc>М-06, 805+120 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.260650" lon="28.661180"><name>Камера 50</name><desc>вул. Покровська, 21, м. Житомир</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.292845" lon="28.656590"><name>Камера 50</name><desc>вул. Покровська, 148а, м. Житомир</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.292893" lon="28.656333"><name>Камера 50</name><desc>вул. Покровська, 187, м. Житомир</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.802962" lon="30.560558"><name>Камера 50</name><desc>Н-16, 192+446 км (Золотоноша-Черкаси-Сміла-Умань)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.316058" lon="25.923310"><name>Камера 50</name><desc>вул.Хотинська, 3, м. Чернівці</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.228917" lon="31.906583"><name>Камера 50</name><desc>перехр. вул. Героїв Холодноярців - пров. Олексія Цибка, м. Сміла</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.571333" lon="22.344306"><name>Камера 50</name><desc>М-06, 805+120 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.790500" lon="29.934833"><name>Камера 70</name><desc>М-30, 530+055 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="46.967682" lon="32.000191"><name>Камера 50</name><desc>перехрестя вул. Марка Кропивницького та вул. Інженерна, м. Миколаїв</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.257528" lon="23.849306"><name>Камера 50</name><desc>перехр. вул. Шевченка та Олесницького, м. Стрий</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.761083" lon="25.400239"><name>Камера 50</name><desc>М-19, 155+608 км (Доманово-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.768917" lon="25.399306"><name>Камера 50</name><desc>М-19, 154+741 км (Доманово-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.662167" lon="22.364528"><name>Камера 50</name><desc>Н-13, 229+122 км (Львів-Самбір-Ужгород)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.361928" lon="22.859482"><name>Камера 50</name><desc>Н-09, 15+826 км (Мукачево-Львів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.609055" lon="26.640870"><name>Камера 50</name><desc>М-06, 299+873 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.608738" lon="26.640940"><name>Камера 50</name><desc>М-06, 299+894 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.534167" lon="26.042139"><name>Камера 50</name><desc>М-06, 349+001 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.546111" lon="26.066139"><name>Камера 50</name><desc>М-06, 346+900 км (Київ-Чоп)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.391199" lon="27.885225"><name>Камера 50</name><desc>М-30, 336+814 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.391234" lon="27.886478"><name>Камера 50</name><desc>М-30, 336+906 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.863920" lon="30.829376"><name>Камера 50</name><desc>Н-01, 80+444 км (Київ – Знам’янка)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.873391" lon="30.823603"><name>Камера 50</name><desc>Н-01, 79+010 км (Київ – Знам’янка)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.930267" lon="28.603913"><name>Камера 50</name><desc>М-21-01, 2 + 283 км (Північний під’їзд до м. Бердичева)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.272938" lon="28.666637"><name>Камера 50</name><desc>перехр. просп. Незалежності - вул. Отаманів Соколовських, м. Житомир</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.245238" lon="28.638642"><name>Камера 50</name><desc>вул. Чуднівська, 103, м. Житомир</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.815417" lon="24.203444"><name>Камера 50</name><desc>М-09, 110+049 км (Тернопіль-Львів-Рава-Руська)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="49.922342" lon="23.728940"><name>Камера 50</name><desc>М-10, 23+475 км (Львів-Краковець)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.113487" lon="25.692679"><name>Камера 50</name><desc>М-19, 250+096 км (Доманово-Ковель-Чернівці-Тереблече)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.629940" lon="31.063788"><name>Камера 50</name><desc>М-30, 619+385 км (Стрий-Умань-Дніпро-Ізварине)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.585588" lon="30.524827"><name>Камера 50</name><desc>Р-69, 27+784 км (Київ – Вишгород – Десна – Чернігів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.525667" lon="30.912694"><name>Камера 50</name><desc>Н-07, 2+817 км (Київ-Суми-Юнаківка)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.564389" lon="30.822333"><name>Камера 50</name><desc>М-01-01, 0+459 км (Східний під'їзд до м. Броварів)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="50.547658" lon="30.303145"><name>Камера 50</name><desc>М-07, 21+843 км (Київ – Ковель – Ягодин)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+<wpt lat="48.904972" lon="24.825028"><name>Камера 50</name><desc>Н-18, 4+482 км (Івано-Франківськ – Бучач – Тернопіль)</desc><sym>Speed Camera</sym><type>speed_camera</type></wpt>
+</gpx>

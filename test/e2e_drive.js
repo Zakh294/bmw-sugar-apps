@@ -1,0 +1,165 @@
+'use strict';
+/**
+ * End-to-end test on the PC: the Store's build step with a made-up interface catalog, the built app in the kit's
+ * stubbed head unit, a fake cluster-render, and a drive past a real camera from the list.
+ *
+ *   node test/e2e_drive.js [outDir]      (exit code 1 on a failed check; pictures in outDir, default preview/)
+ *
+ * Checks: the build finds the position field (and not the destination / POI decoys), the app reads 1e-7 degree
+ * integers, the warning comes up ahead of the camera on the HUD and the cluster, counts down, goes after the camera,
+ * stays off when driving away from a camera, and the test button shows a warning.
+ */
+const fs = require('fs');
+const path = require('path');
+const cp = require('child_process');
+
+const ROOT = path.resolve(__dirname, '..');
+const OUT = path.resolve(process.argv[2] || path.join(ROOT, 'preview'));
+const TMP = fs.mkdtempSync('/tmp/speedcam-e2e-');
+const POS_IFACE = 'de.bmw.infotainment.navigation.positioning.Positioning';
+const fails = [];
+const check = (ok, what) => { console.log((ok ? 'ok   ' : 'FAIL ') + what); if (!ok) fails.push(what); };
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+const catalog = {
+    interfaces: {
+        [POS_IFACE]: { serviceId: 1, version: 1, fields: {
+            currentPositionWGS84: { dataRef: 'PosInfo', getter: { id: 1 }, notifier: { id: 2 } },
+            destinationPosition: { dataRef: 'GeoPos', getter: { id: 3 }, notifier: { id: 4 } },
+        } },
+        'de.bmw.infotainment.navigation.poi.PoiSearch': { serviceId: 2, version: 1, fields: { results: { dataRef: 'PoiList', getter: { id: 6 } } } },
+        'de.bmw.infotainment.vehicle.CDS2': { serviceId: 3, version: 1, fields: { statusLateralAccelerationMassCenter: { dataRef: 'Acc', notifier: { id: 5 } } } },
+        'de.bmw.infotainment.vehicle.Vehicle2': { serviceId: 4, version: 1, fields: { statusCarSpeed2: { dataRef: 'Spd', getter: { id: 7 }, notifier: { id: 8 } } } },
+    },
+    instanceIDs: {
+        [POS_IFACE]: { Main_Instance: 1 }, 'de.bmw.infotainment.navigation.poi.PoiSearch': { Main_Instance: 1 },
+        'de.bmw.infotainment.vehicle.CDS2': { 1: 1 }, 'de.bmw.infotainment.vehicle.Vehicle2': { 1: 1 },
+    },
+    datatypes: {
+        PosInfo: { type: 'struct', members: [{ name: 'position', dataRef: 'GeoPos' }, { name: 'heading', dataRef: 'UInt16' }] },
+        GeoPos: { type: 'struct', members: [{ name: 'latitude', dataRef: 'Int32' }, { name: 'longitude', dataRef: 'Int32' }] },
+        Acc: { type: 'struct', members: [{ name: 'lateralAccelerationCentreOfGravity', dataRef: 'UInt16' }] },
+        PoiList: { type: 'array', elementDataRef: 'Poi' },
+        Poi: { type: 'struct', members: [{ name: 'name', dataRef: 'String' }, { name: 'geo', dataRef: 'GeoPos' }] },
+        Spd: { type: 'struct', members: [{ name: 'speedVehicleCentreOfGravity', dataRef: 'UInt16' }] },
+    },
+};
+
+async function main() {
+    fs.mkdirSync(OUT, { recursive: true });
+    cp.execSync('tar -C "' + ROOT + '" --exclude=.git --exclude=dist --exclude=preview --exclude="apps/*/kit" -cf - . | tar -C "' + TMP + '" -xf -');
+    fs.writeFileSync(path.join(TMP, 'catalog.json'), JSON.stringify(catalog));
+    const build = cp.execSync('python3 tools/store_build.py --preview-only speedcam_ua', {
+        cwd: TMP, env: Object.assign({}, process.env, { MGU_SOMEIP_CATALOG: path.join(TMP, 'catalog.json') }) }).toString();
+    console.log(build.trim().split('\n').map((l) => '  | ' + l).join('\n'));
+    const cands = require(path.join(TMP, 'apps', 'speedcam_ua', 'position_candidates.js')).list;
+    check(cands.length >= 1 && cands[0].name === 'currentPositionWGS84', 'store_build ranks currentPositionWGS84 first');
+    check(!cands.some((c) => /destination|results/.test(c.name)), 'store_build leaves out the destination and POI decoys');
+    const spec = JSON.parse(fs.readFileSync(path.join(TMP, 'apps', 'speedcam_ua', 'app.json'), 'utf8'));
+    check(spec.signals[POS_IFACE] && spec.signals[POS_IFACE].currentPositionWGS84 === 'rs' && spec.signals[POS_IFACE]._optional, 'app.json gets the field, read + subscribe, optional');
+
+    const stage = path.join(TMP, 'dist', 'speedcam_ua');
+    const specPath = path.join(stage, 'source', 'javascript', 'kit', 'app-spec.json');
+    const rt = JSON.parse(fs.readFileSync(specPath, 'utf8'));
+    const sockPath = path.join(TMP, 'render.sock');
+    rt.config.socketPath = sockPath;
+    fs.writeFileSync(specPath, JSON.stringify(rt));
+
+    const srv = await require('./fake_cluster_render').start(sockPath);
+    const js = path.join(stage, 'source', 'javascript');
+    const { Canvas } = require(path.join(js, 'kit', 'canvas'));
+    const geo = require(path.join(js, 'geo'));
+    const DB = require(path.join(js, 'cameras'));
+    const { headUnit } = require(path.join(TMP, 'kit', 'tools', 'hu-stub'));
+    let page = null;
+    const quiet = { info: () => {}, warn: (m) => console.log('  warn: ' + m), error: (m, e) => console.log('  error: ' + m + ' ' + (e && e.stack || e || '')), debug: () => {} };
+    const logLines = [];
+    const log = { info: (m) => logLines.push(m), warn: quiet.warn, error: quiet.error, debug: () => {} };
+    const hu = headUnit(stage, { dataDir: path.join(TMP, 'data'), fresh: true, image: (name, cv) => { page = cv; }, log });
+    fs.mkdirSync(path.join(TMP, 'data'), { recursive: true });
+    const subs = {};
+    hu.ctx.signals = {
+        watch: async (iface, inst, handlers) => { (subs[iface] = subs[iface] || []).push(handlers); return { iface, available: true, error: null, shutdown: () => Promise.resolve() }; },
+    };
+    hu.ctx.log = log;
+    const feed = (iface, field, v) => (subs[iface] || []).forEach((h) => { if (h[field]) h[field](v); });
+    hu.start();
+    await sleep(600);
+
+    const layerOf = (target) => Array.from(srv.layers.values()).find((l) => l.target === target);
+    const snap = (name) => {
+        [['hud', '#000000'], ['panel', '#2b2f36']].forEach((t) => {
+            const l = layerOf(t[0]);
+            if (!l) return;
+            const cv = new Canvas(l.iw + 40, l.ih + 40).clear(t[1]);
+            // the layer over the background, by its alpha
+            for (let y = 0; y < l.ih; y++) for (let x = 0; x < l.iw; x++) {
+                const i = (y * l.iw + x) * 4, a = l.px[i + 3] / 255, o = ((y + 20) * cv.w + x + 20) * 4;
+                for (let c = 0; c < 3; c++) cv.d[o + c] = Math.round(l.px[i + c] * a + cv.d[o + c] * (1 - a));
+            }
+            fs.writeFileSync(path.join(OUT, name + '_' + (t[0] === 'panel' ? 'cluster' : 'hud') + '.png'), cv.png());
+        });
+    };
+    check(!!layerOf('hud') && !!layerOf('panel'), 'the app made a HUD layer and a cluster layer on cluster-render');
+    check(layerOf('hud').klass === undefined ? layerOf('hud').class === 'alert' : true, 'layers are in the alert class');
+    check(!layerOf('hud').visible && !layerOf('panel').visible, 'nothing on the glass while no camera is near');
+
+    // a highway camera: drive 2.5 km towards it at 90 km/h, then 600 m past it (one fix = 25 m, every 250 ms)
+    const row = DB.rows.find((r) => r[4] === 'М-06');
+    const cam = { id: row[0], lat: row[1], lon: row[2], limit: row[3] };
+    const brg = 75;
+    const start = geo.offset(cam.lat, cam.lon, (brg + 180) % 360, 2500);
+    const put = (p, kmh) => {
+        feed(POS_IFACE, 'currentPositionWGS84', { position: { latitude: Math.round(p.lat * 1e7), longitude: Math.round(p.lon * 1e7) }, heading: 0 });
+        feed('de.bmw.infotainment.vehicle.Vehicle2', 'statusCarSpeed2', { speedVehicleCentreOfGravity: Math.round(kmh / 0.015625) });
+    };
+    let firstOn = null, onCount = 0, offAfter = null, snaps = 0, distances = [];
+    for (let s = 0; s <= 3100; s += 25) {
+        const p = geo.offset(start.lat, start.lon, brg, s);
+        const toCam = 2500 - s;
+        put(p, toCam < 400 && toCam > -100 ? 78 : 90);
+        await sleep(260);
+        const vis = layerOf('hud').visible && layerOf('panel').visible;
+        if (vis) {
+            onCount++;
+            if (firstOn === null) firstOn = toCam;
+            distances.push(toCam);
+            if ((snaps === 0 && toCam <= 450) || (snaps === 1 && toCam <= 160)) { snap('drive_' + (snaps ? 'close' : 'approach')); snaps++; }
+        } else if (firstOn !== null && offAfter === null) offAfter = toCam;
+        if (s === 400) { page = null; await hu.loopFn(); if (page) fs.writeFileSync(path.join(OUT, 'page_driving.png'), page.png()); }
+    }
+    console.log('  warning on from ' + firstOn + ' m before the camera, off ' + (offAfter === null ? 'never' : -offAfter + ' m after it') + ', on for ' + onCount + ' fixes');
+    check(firstOn !== null && firstOn <= 520 && firstOn >= 400, 'the warning starts about 20 s ahead at 90 km/h (500 m)');
+    check(offAfter !== null && offAfter <= 0 && offAfter > -150, 'the warning goes once the camera is passed');
+    check(snaps === 2, 'pictures taken on the way in');
+    const lines = logLines.filter((l) => /camera ahead/.test(l));
+    check(lines.length === 1 && lines[0].indexOf('#' + cam.id) >= 0, 'one "camera ahead" for camera #' + cam.id + ' in the log');
+
+    // driving away from a camera with no other camera within 3 km: no warning
+    await sleep(500);
+    const lonely = DB.rows.map((r) => ({ lat: r[1], lon: r[2], id: r[0] })).find((a) => !DB.rows.some((b) => b[0] !== a.id && geo.distance(a.lat, a.lon, b[1], b[2]) < 3000));
+    const away0 = geo.offset(lonely.lat, lonely.lon, brg, 40);
+    let awayOn = false;
+    for (let s = 0; s <= 1000; s += 25) {
+        put(geo.offset(away0.lat, away0.lon, brg, s), 90);
+        await sleep(120);
+        if (layerOf('hud').visible) awayOn = true;
+    }
+    check(!awayOn, 'no warning while driving away from the camera');
+
+    // standing still near a camera, then the test button
+    put(away0, 0);
+    await sleep(400);
+    hu.handlers.BTN_TEST();
+    await sleep(1200);
+    check(layerOf('hud').visible && layerOf('panel').visible, 'the test button shows a warning on both screens');
+    snap('test_button');
+    page = null; await hu.loopFn(); if (page) fs.writeFileSync(path.join(OUT, 'page_test.png'), page.png());
+    check(!!page, 'the page draws');
+
+    srv.close();
+    console.log(fails.length ? '\n' + fails.length + ' check(s) failed' : '\nall checks passed; pictures in ' + OUT);
+    process.exit(fails.length ? 1 : 0);
+}
+
+main().catch((e) => { console.error(e && e.stack || e); process.exit(2); });
