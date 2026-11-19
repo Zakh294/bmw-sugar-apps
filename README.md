@@ -31,7 +31,7 @@
    & ([scriptblock]::Create((irm https://raw.githubusercontent.com/robertnisipeanu/mgu-store/main/deploy/install.ps1))) token --identity $HOME\.ssh\mgu_root_key
    ```
    Встав токен, коли скрипт його попросить.
-2. **Додай джерело.** Store → Settings → **Add source** → `Consedge-Tech/bmw-speedcam-ua` → **Branch** `main`. Це дерево вихідного коду, як `bimmer-lab/apps`: блок збирає додаток сам. Потім **Check now**.
+2. **Додай джерело.** Store → Settings → **Add source** → `Zakh294/bmw-speedcam-ua` → **Branch** `main`. Це дерево вихідного коду, як `bimmer-lab/apps`: блок збирає додаток сам. Потім **Check now**.
 3. Store → **SpeedCam UA** → **Install**. Під час збірки (1–2 хв) блок сам знаходить у своєму каталозі інтерфейсів, звідки брати координати машини, і вбудовує це в додаток.
 4. Якщо з'явиться *Restart pending*: Settings → **Restart head unit**.
 
