@@ -3,3 +3,4 @@ kit/ - MGU App Kit, Copyright (c) 2026 cauliflowermossgrape, MIT.
 cluster_render_client.js - Copyright (C) 2026 Robert Nisipeanu, MPL-2.0 (robertnisipeanu/idrive-apps, unchanged).
 cameras.js - the official list of automatic traffic enforcement devices of Ukraine's Patrol Police,
 https://patrolpolice.gov.ua/automatic_fixation/informatsiya-pro-vstanovleni-kaf/
+kit/fonts/cyrillic.json - glyphs of Ubuntu Bold, Ubuntu Font Licence 1.0 (kit/fonts/UFL-Ubuntu.txt).

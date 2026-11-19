@@ -11,6 +11,7 @@ function start(socketPath) {
     try { fs.unlinkSync(socketPath); } catch (e) { /* none */ }
     const layers = new Map();
     const log = [];
+    const socks = [];
     const send = (sock, obj) => {
         const b = Buffer.from(JSON.stringify(obj), 'utf8');
         const m = Buffer.alloc(5 + b.length);
@@ -18,6 +19,7 @@ function start(socketPath) {
         sock.write(m);
     };
     const server = net.createServer((sock) => {
+        socks.push(sock);
         let buf = Buffer.alloc(0);
         sock.on('data', (d) => {
             buf = Buffer.concat([buf, d]);
@@ -58,7 +60,7 @@ function start(socketPath) {
         });
         sock.on('error', () => {});
     });
-    return new Promise((resolve) => server.listen(socketPath, () => resolve({ server, layers, log, close: () => server.close() })));
+    return new Promise((resolve) => server.listen(socketPath, () => resolve({ server, layers, log, emit: (ev) => socks.forEach((k) => send(k, ev)), close: () => { socks.forEach((k) => k.destroy()); server.close(); } })));
 }
 
 module.exports = { start };

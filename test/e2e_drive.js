@@ -86,10 +86,11 @@ async function main() {
     hu.start();
     await sleep(600);
 
-    const layerOf = (target) => Array.from(srv.layers.values()).find((l) => l.target === target);
-    const snap = (name) => {
-        [['hud', '#000000'], ['panel', '#2b2f36']].forEach((t) => {
-            const l = layerOf(t[0]);
+    // the compact cluster card is 440 wide, the banner in the phone map 640
+    const layerOf = (target, w) => Array.from(srv.layers.values()).find((l) => l.target === target && (!w || l.w === w) && (w || target !== 'panel' || l.w === 440));
+    const snap = (name, which) => {
+        (which || [['hud', '#000000'], ['panel', '#2b2f36']]).forEach((t) => {
+            const l = t[2] || layerOf(t[0]);
             if (!l) return;
             const cv = new Canvas(l.iw + 40, l.ih + 40).clear(t[1]);
             // the layer over the background, by its alpha
@@ -97,12 +98,12 @@ async function main() {
                 const i = (y * l.iw + x) * 4, a = l.px[i + 3] / 255, o = ((y + 20) * cv.w + x + 20) * 4;
                 for (let c = 0; c < 3; c++) cv.d[o + c] = Math.round(l.px[i + c] * a + cv.d[o + c] * (1 - a));
             }
-            fs.writeFileSync(path.join(OUT, name + '_' + (t[0] === 'panel' ? 'cluster' : 'hud') + '.png'), cv.png());
+            fs.writeFileSync(path.join(OUT, name + '_' + (t[3] || (t[0] === 'panel' ? 'cluster' : 'hud')) + '.png'), cv.png());
         });
     };
-    check(!!layerOf('hud') && !!layerOf('panel'), 'the app made a HUD layer and a cluster layer on cluster-render');
-    check(layerOf('hud').klass === undefined ? layerOf('hud').class === 'alert' : true, 'layers are in the alert class');
-    check(!layerOf('hud').visible && !layerOf('panel').visible, 'nothing on the glass while no camera is near');
+    const vis = (t, w) => { const l = layerOf(t, w); return !!(l && l.visible); };
+    check(srv.log.some((m) => m.op === 'hello'), 'the app connected to cluster-render');
+    check(!Array.from(srv.layers.values()).some((l) => l.visible), 'nothing on the glass while no camera is near');
 
     // a highway camera: drive 2.5 km towards it at 90 km/h, then 600 m past it (one fix = 25 m, every 250 ms)
     const row = DB.rows.find((r) => r[4] === 'М-06');
@@ -119,8 +120,8 @@ async function main() {
         const toCam = 2500 - s;
         put(p, toCam < 400 && toCam > -100 ? 78 : 90);
         await sleep(260);
-        const vis = layerOf('hud').visible && layerOf('panel').visible;
-        if (vis) {
+        const vis2 = vis('hud') && vis('panel');
+        if (vis2) {
             onCount++;
             if (firstOn === null) firstOn = toCam;
             distances.push(toCam);
@@ -143,7 +144,7 @@ async function main() {
     for (let s = 0; s <= 1000; s += 25) {
         put(geo.offset(away0.lat, away0.lon, brg, s), 90);
         await sleep(120);
-        if (layerOf('hud').visible) awayOn = true;
+        if (vis('hud')) awayOn = true;
     }
     check(!awayOn, 'no warning while driving away from the camera');
 
@@ -152,10 +153,37 @@ async function main() {
     await sleep(400);
     hu.handlers.BTN_TEST();
     await sleep(1200);
-    check(layerOf('hud').visible && layerOf('panel').visible, 'the test button shows a warning on both screens');
+    check(vis('hud') && vis('panel'), 'the test button shows a warning on both screens');
+    check(layerOf('hud').class === 'alert' && layerOf('panel').class === 'alert', 'layers are in the alert class');
     snap('test_button');
     page = null; await hu.loopFn(); if (page) fs.writeFileSync(path.join(OUT, 'page_test.png'), page.png());
     check(!!page, 'the page draws');
+    await sleep(13500);
+    check(!vis('hud') && !vis('panel'), 'the test warning goes after 14 s');
+
+    // Maps on cluster shows Waze / Google on the cluster's map target: the warning becomes a banner inside it
+    srv.emit({ ev: 'target', target: 'map', state: 'shown', holder: 'none', reason: '', retry_in_ms: -1, rendering: 'verified' });
+    await sleep(300);
+    hu.handlers.BTN_TEST();
+    await sleep(1500);
+    const mapL = layerOf('map', 640);
+    check(!!mapL && mapL.visible && mapL.class === 'alert', 'with the phone map on the cluster: a banner on the map target');
+    check(!vis('panel') && vis('hud'), '... instead of the cluster card, the HUD as before');
+    check(mapL && mapL.x + mapL.w <= 1088 && mapL.y >= 0 && mapL.y + mapL.h <= 480, '... inside the 1088x480 map');
+    page = null; await hu.loopFn(); if (page) fs.writeFileSync(path.join(OUT, 'page_map.png'), page.png());
+    snap('in_map', [['map', '#4a6b52', mapL, 'banner']]);
+    await sleep(13000);
+    check(!mapL.visible, 'the banner goes with the warning');
+
+    // a cluster theme hosts the map in its own scene on the panel: the banner goes to the top of that rect
+    srv.emit({ ev: 'target', target: 'map', state: 'idle', holder: 'none', reason: '', retry_in_ms: -1, rendering: 'none' });
+    srv.emit({ ev: 'host', target: 'map', into: 'panel', shown: 1, x: 420, y: 160, w: 1080, h: 476 });
+    await sleep(300);
+    hu.handlers.BTN_TEST();
+    await sleep(1500);
+    const hostL = layerOf('panel', 640);
+    check(!!hostL && hostL.visible && hostL.x >= 420 && hostL.x + hostL.w <= 1500 && hostL.y >= 160 && hostL.y < 200, 'map hosted by a theme: the banner on the panel, at the top of the hosted map');
+    check(!mapL.visible && !vis('panel'), '... and nothing on the map target or the cluster card');
 
     srv.close();
     console.log(fails.length ? '\n' + fails.length + ' check(s) failed' : '\nall checks passed; pictures in ' + OUT);

@@ -5,7 +5,6 @@ const path = require('path');
 const A = path.join(__dirname, '..', 'apps', 'speedcam_ua');
 const { findPair, scaleOf, isLatKey, isLonKey } = require(path.join(A, 'position'));
 const geo = require(path.join(A, 'geo'));
-const { translit } = require(path.join(A, 'translit'));
 let n = 0;
 const ok = (c, m) => { assert(c, m); n++; };
 
@@ -35,11 +34,6 @@ ok(Math.abs(geo.bearing(50, 30, 51, 30)) < 0.01, 'due north');
 ok(geo.angleDiff(350, 10) === 20 && geo.angleDiff(10, 350) === -20, 'angle wrap');
 const p = geo.offset(50, 30, 90, 1000);
 ok(Math.abs(geo.distance(50, 30, p.lat, p.lon) - 1000) < 0.5, 'offset');
-
-// transliteration
-ok(translit('вул. Олени Теліги, 37') === 'vul. Oleny Telihy, 37', translit('вул. Олени Теліги, 37'));
-ok(translit('Київ – Чоп') === 'Kyiv - Chop', translit('Київ – Чоп'));
-ok(translit('Згурівка') === 'Zghurivka', translit('Згурівка'));
 
 // the camera list
 const DB = require(path.join(A, 'cameras'));

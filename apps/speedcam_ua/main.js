@@ -10,7 +10,6 @@
  */
 const mgu = require('./kit/mgu');
 const DB = require('./cameras');
-const { translit } = require('./translit');
 const { PositionSource, mono } = require('./position');
 const { AlertEngine } = require('./alerts');
 const { Overlay } = require('./overlay');
@@ -21,13 +20,11 @@ try { CANDS = require('./position_candidates'); } catch (e) { CANDS = { list: []
 const W = 1600, H = 520;
 const SPEED = { iface: 'de.bmw.infotainment.vehicle.Vehicle2', field: 'statusCarSpeed2', factor: 0.015625, invalid: 65535 };
 
-/** The road index in Latin letters (М-06 -> M-06) for the kit's fonts. */
-function latinRoad(r) { return String(r || '').replace(/М/g, 'M').replace(/Н/g, 'H').replace(/Р/g, 'P').replace(/Т/g, 'T').replace(/О/g, 'O'); }
-
+/** "М-06, км 21+730" on a road, "Львів, вул. Городоцька, 120" in a city (the kit's cyrillic atlas draws it). */
 function cameras() {
     return DB.rows.map((r) => ({
         id: r[0], lat: r[1], lon: r[2], limit: r[3],
-        label: r[4] ? latinRoad(r[4]) + ' km ' + r[5] : translit(r[7]) + ', ' + translit(r[6]).replace(/^m\. /, ''),
+        label: r[4] ? r[4] + ', км ' + r[5] : String(r[6]).replace(/^м\.\s*/, '') + ', ' + r[7],
     }));
 }
 
@@ -36,7 +33,7 @@ function testAlert(test, speed) {
     const t = (Date.now() - test.t0) / 1000;
     const dist = Math.max(0, 800 - t * 800 / 12);
     const sp = speed > 5 ? Math.round(speed) : 72;
-    return { id: -1, dist: Math.round(dist / 10) * 10, limit: 50, speed: sp, over: sp > 70 ? 2 : sp > 50 ? 1 : 0, label: 'TEST' };
+    return { id: -1, dist: Math.round(dist / 10) * 10, limit: 50, speed: sp, over: sp > 70 ? 2 : sp > 50 ? 1 : 0, label: 'Тест: Львів, вул. Городоцька, 120' };
 }
 
 /** Everything that runs with or without the page. */
@@ -57,7 +54,8 @@ function background(bg) {
     const pos = new PositionSource(signals, log, CANDS.list).start();
     const eng = new AlertEngine(list, () => ({ lead: settings.get('lead'), minWarn: settings.get('minWarn'), maxWarn: 1200, tolerance: settings.get('tolerance') }));
     const ov = new Overlay(bg.spec.id, log, () => ({
-        hud: settings.get('showHud'), cluster: settings.get('showCluster'), clusterPlace: settings.get('clusterPlace'), units: 'kmh',
+        hud: settings.get('showHud'), cluster: settings.get('showCluster'), clusterPlace: settings.get('clusterPlace'),
+        inMap: settings.get('inMap'), mapPlace: settings.get('mapPlace'),
         socketPath: bg.spec.config && bg.spec.config.socketPath,
     })).start();
 
@@ -87,7 +85,7 @@ function background(bg) {
     return { st, pos, eng, ov, list };
 }
 
-function fmtAge(s) { return s === null ? '-' : s < 2 ? 'now' : s < 120 ? s + ' s ago' : Math.round(s / 60) + ' min ago'; }
+function fmtAge(s) { return s === null ? '–' : s < 2 ? 'щойно' : s < 120 ? s + ' с тому' : Math.round(s / 60) + ' хв тому'; }
 
 mgu.run({
     background,
@@ -99,52 +97,47 @@ mgu.run({
 
         const render = async () => {
             const t = ctx.theme(), cv = ctx.canvas(W, H).clear(t.bg);
-            const L = (s, x, y, size, c, o) => cv.text(String(s), x, y, size, c || t.text || '#ffffff', Object.assign({ literal: true }, o || {}));
-            const dim = t.dim || '#8a93a0', ok = '#2fd27a', warn = '#ffb31a', bad = '#ff4040';
-            L('SpeedCam UA', 40, 56, 44, '#ffffff', { font: 'bold' });
-            L(core.list.length + ' cameras, official list of ' + DB.meta.fetched + ' (patrolpolice.gov.ua)', 360, 54, 24, dim);
+            const L = (s, x, y, size, c) => cv.text(String(s), x, y, size, c || '#ffffff', { literal: true });
+            const dim = '#8a93a0', ok = '#2fd27a', warn = '#ffb31a', bad = '#ff4040';
+            const km = (d) => (d >= 10000 ? Math.round(d / 1000) + ' км' : d >= 1000 ? (d / 1000).toFixed(1).replace('.', ',') + ' км' : Math.round(d) + ' м');
+            L('SpeedCam UA', 40, 56, 44);
+            L(core.list.length + ' камер · офіційний список від ' + DB.meta.fetched + ' (patrolpolice.gov.ua)', 360, 54, 24, dim);
 
-            // position
             const fix = st.fix, ps = core.pos.status();
             let y = 112;
-            L('POSITION', 40, y, 22, dim, { font: 'bold' });
+            L('ПОЗИЦІЯ', 40, y, 22, dim);
             if (fix) {
-                L(fix.lat.toFixed(5) + ', ' + fix.lon.toFixed(5), 220, y, 30, ok, { font: 'bold' });
-                L('from ' + fix.src + (st.heading !== null ? ', heading ' + Math.round(st.heading) + ' deg' : ', heading: drive a little'), 620, y, 24, dim);
+                L(fix.lat.toFixed(5) + ', ' + fix.lon.toFixed(5), 250, y, 30, ok);
+                L('з ' + fix.src + (st.heading !== null ? ', курс ' + Math.round(st.heading) + '°' : ', курс: проїдьте трохи'), 650, y, 24, dim);
             } else if (!CANDS.list.length) {
-                L('No GPS source found on this unit', 220, y, 30, bad, { font: 'bold' });
-                L(CANDS.note || 'run tools/find_position.js over SSH (README)', 700, y, 22, dim);
+                L('GPS-джерело не знайдено на цьому блоці', 250, y, 30, bad);
+                L('див. README: tools/find_position.js', 900, y, 22, dim);
             } else {
-                L('waiting for the navigation (' + CANDS.list.length + ' sources watched)', 220, y, 30, warn, { font: 'bold' });
+                L('чекаю на навігацію (джерел: ' + CANDS.list.length + ')', 250, y, 30, warn);
             }
             y += 46;
-            L('SPEED', 40, y, 22, dim, { font: 'bold' });
-            L(st.speed === null ? '-' : Math.round(st.speed) + ' km/h', 220, y, 30, '#ffffff', { font: 'bold' });
-
-            // nearest camera and the warning
+            L('ШВИДКІСТЬ', 40, y, 22, dim);
+            L(st.speed === null ? '–' : Math.round(st.speed) + ' км/год', 250, y, 30);
             const n = core.eng.nearest(fix);
-            L('NEAREST', 620, y, 22, dim, { font: 'bold' });
-            L(n ? (n.d >= 10000 ? Math.round(n.d / 1000) + ' km' : n.d >= 1000 ? (n.d / 1000).toFixed(1) + ' km' : Math.round(n.d) + ' m') + '  ' + n.cam.limit + '  ' + n.cam.label : '-', 790, y, 26, '#ffffff');
+            L('НАЙБЛИЖЧА', 560, y, 22, dim);
+            L(n ? km(n.d) + ' · ' + n.cam.limit + ' · ' + n.cam.label : '–', 720, y, 26);
             y += 46;
             const a = st.test ? null : st.alert;
-            L('WARNING', 40, y, 22, dim, { font: 'bold' });
-            L(st.test ? 'test running on the HUD / cluster' : a ? 'camera in ' + a.dist + ' m, limit ' + a.limit + ' - ' + a.label : settings.get('enabled') ? 'none (' + st.alerts + ' this drive)' : 'warnings are off (Settings)', 220, y, 28, st.test || a ? warn : '#ffffff', { font: 'bold' });
-
-            // the screens
+            L('КАМЕРА', 40, y, 22, dim);
+            L(st.test ? 'тест: дивіться на HUD і приладку' : a ? 'через ' + a.dist + ' м, ліміт ' + a.limit + ' · ' + a.label
+                : settings.get('enabled') ? 'немає поруч (за поїздку: ' + st.alerts + ')' : 'попередження вимкнені (Налаштування)', 250, y, 28, st.test || a ? warn : '#ffffff');
             y += 46;
             const ov = core.ov.status();
-            L('DISPLAY', 40, y, 22, dim, { font: 'bold' });
-            L(ov.connected ? 'cluster-render connected' : 'cluster-render not reachable (install it from the Store)', 220, y, 26, ov.connected ? ok : bad);
-            L('HUD ' + (settings.get('showHud') ? ov.hud : 'off') + ' / cluster ' + (settings.get('showCluster') ? ov.cluster : 'off'), 820, y, 22, dim);
-
-            // the candidates
+            L('ЕКРАНИ', 40, y, 22, dim);
+            L(ov.connected ? 'cluster-render підключено' : 'cluster-render недоступний (встановіть зі Store)', 250, y, 26, ov.connected ? ok : bad);
+            L(ov.phoneMap ? 'мапа телефона ' + (ov.phoneMap === 'on the cluster' ? 'на приладці' : 'в темі приладки') + (settings.get('inMap') ? ': банер у мапі' : '') : 'мапи телефона на приладці немає', 820, y, 22, ov.phoneMap ? ok : dim);
             y += 52;
-            L('GPS SOURCES ON THIS UNIT' + (CANDS.built ? ' (found ' + CANDS.built + ')' : ''), 40, y, 22, dim, { font: 'bold' });
+            L('ДЖЕРЕЛА GPS НА БЛОЦІ' + (CANDS.built ? ' (знайдено ' + CANDS.built + ')' : ''), 40, y, 22, dim);
             ps.slice(0, 5).forEach((c, i) => {
                 const yy = y + 34 + i * 30;
                 const col = c.inUse ? ok : c.count ? '#ffffff' : c.error ? bad : dim;
                 L((c.inUse ? '> ' : '  ') + c.name, 40, yy, 22, col);
-                L(c.error ? 'error: ' + c.error.slice(0, 50) : c.count ? c.count + ' fixes, ' + (c.scale || '?') + ', ' + fmtAge(c.age) : c.misses ? c.misses + ' values, no lat/lon' : 'nothing yet', 900, yy, 22, col);
+                L(c.error ? 'помилка: ' + c.error.slice(0, 50) : c.count ? c.count + ' фіксів, ' + (c.scale || '?') + ', ' + fmtAge(c.age) : c.misses ? c.misses + ' значень без координат' : 'ще нічого', 900, yy, 22, col);
             });
             await ui.image('MAIN_GFX', cv);
         };

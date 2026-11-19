@@ -22,4 +22,5 @@ SOFTWARE.
 
 Third-party parts keep their own licences: kit/ (MIT, kit/LICENSE.kit),
 apps/speedcam_ua/cluster_render_client.js (MPL-2.0, Robert Nisipeanu),
-kit/runtime/fonts (SIL Open Font License, OFL-*.txt next to them).
+kit/runtime/fonts (SIL Open Font License and Ubuntu Font Licence, OFL-*.txt and
+UFL-Ubuntu.txt next to them).
