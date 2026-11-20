@@ -111,7 +111,7 @@ mgu.run({
                 L('з ' + fix.src + (st.heading !== null ? ', курс ' + Math.round(st.heading) + '°' : ', курс: проїдьте трохи'), 650, y, 24, dim);
             } else if (!CANDS.list.length) {
                 L('GPS-джерело не знайдено на цьому блоці', 250, y, 30, bad);
-                L('див. README: tools/find_position.js', 900, y, 22, dim);
+                L('див. docs/speedcam_ua: find_position.js', 900, y, 22, dim);
             } else {
                 L('чекаю на навігацію (джерел: ' + CANDS.list.length + ')', 250, y, 30, warn);
             }

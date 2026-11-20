@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Official list of automatic speed enforcement cameras (patrolpolice.gov.ua) -> data/cameras.json.
+"""Official list of automatic speed enforcement cameras (patrolpolice.gov.ua) -> data/speedcam_ua/cameras.json.
 
-    python3 tools/import_cameras.py kaf.html            # the saved page
-    python3 tools/import_cameras.py --fetch             # downloads the page
+    python3 tools/speedcam_ua/import_cameras.py kaf.html            # the saved page
+    python3 tools/speedcam_ua/import_cameras.py --fetch             # downloads the page
 
 Source: https://patrolpolice.gov.ua/automatic_fixation/informatsiya-pro-vstanovleni-kaf/
 (table: №, road index, region, km, location, speed limit, GPS). Fixes the few rows written with decimal commas
@@ -55,10 +55,10 @@ def main():
     else:
         page = open(sys.argv[1], encoding='utf-8', errors='replace').read()
     cams = parse(page)
-    root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+    root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
     meta = {'source': URL, 'fetched': datetime.date.today().isoformat(), 'count': len(cams)}
-    os.makedirs(os.path.join(root, 'data'), exist_ok=True)
-    json.dump({'meta': meta, 'cameras': cams}, open(os.path.join(root, 'data', 'cameras.json'), 'w', encoding='utf-8'),
+    os.makedirs(os.path.join(root, 'data', 'speedcam_ua'), exist_ok=True)
+    json.dump({'meta': meta, 'cameras': cams}, open(os.path.join(root, 'data', 'speedcam_ua', 'cameras.json'), 'w', encoding='utf-8'),
               ensure_ascii=False, indent=1)
     print('%d cameras' % len(cams))
 

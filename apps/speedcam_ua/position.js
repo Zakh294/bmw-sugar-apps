@@ -10,7 +10,7 @@
  * Here every candidate is watched, the latitude / longitude pair is found inside whatever the car sends, its unit is
  * worked out (degrees, micro- or 1e-7 degrees, 2^32 per turn, radians, milliarcseconds) and the source that gives
  * fresh positions is used. The page shows each candidate and what it gave, so a car that sends none can be looked at
- * (tools/find_position.js over SSH).
+ * (tools/speedcam_ua/find_position.js over SSH).
  *
  * Plain Node 8 (the car's 8.16.2).
  */

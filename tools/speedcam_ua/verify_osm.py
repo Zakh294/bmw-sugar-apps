@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Cross-check data/cameras.json against OpenStreetMap (Nominatim reverse, 1 request/s, their usage policy):
-the nearest road's name/ref and the oblast/city each point falls in. Writes data/osm_check.json."""
+"""Cross-check data/speedcam_ua/cameras.json against OpenStreetMap (Nominatim reverse, 1 request/s, their usage policy):
+the nearest road's name/ref and the oblast/city each point falls in. Writes data/speedcam_ua/osm_check.json."""
 import json, os, sys, time, urllib.request, urllib.parse
-root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-cams = json.load(open(os.path.join(root, 'data', 'cameras.json'), encoding='utf-8'))['cameras']
-out_path = os.path.join(root, 'data', 'osm_check.json')
+root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
+cams = json.load(open(os.path.join(root, 'data', 'speedcam_ua', 'cameras.json'), encoding='utf-8'))['cameras']
+out_path = os.path.join(root, 'data', 'speedcam_ua', 'osm_check.json')
 done = {}
 if os.path.exists(out_path):
     done = {str(k): v for k, v in json.load(open(out_path, encoding='utf-8')).items()}

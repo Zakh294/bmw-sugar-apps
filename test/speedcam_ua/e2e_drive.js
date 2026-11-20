@@ -3,7 +3,7 @@
  * End-to-end test on the PC: the Store's build step with a made-up interface catalog, the built app in the kit's
  * stubbed head unit, a fake cluster-render, and a drive past a real camera from the list.
  *
- *   node test/e2e_drive.js [outDir]      (exit code 1 on a failed check; pictures in outDir, default preview/)
+ *   node test/speedcam_ua/e2e_drive.js [outDir]      (exit code 1 on a failed check; pictures in outDir, default preview/)
  *
  * Checks: the build finds the position field (and not the destination / POI decoys), the app reads 1e-7 degree
  * integers, the warning comes up ahead of the camera on the HUD and the cluster, counts down, goes after the camera,
@@ -13,8 +13,8 @@ const fs = require('fs');
 const path = require('path');
 const cp = require('child_process');
 
-const ROOT = path.resolve(__dirname, '..');
-const OUT = path.resolve(process.argv[2] || path.join(ROOT, 'preview'));
+const ROOT = path.resolve(__dirname, '..', '..');
+const OUT = path.resolve(process.argv[2] || path.join(ROOT, 'preview', 'speedcam_ua'));
 const TMP = fs.mkdtempSync('/tmp/speedcam-e2e-');
 const POS_IFACE = 'de.bmw.infotainment.navigation.positioning.Positioning';
 const fails = [];
@@ -65,7 +65,7 @@ async function main() {
     rt.config.socketPath = sockPath;
     fs.writeFileSync(specPath, JSON.stringify(rt));
 
-    const srv = await require('./fake_cluster_render').start(sockPath);
+    const srv = await require('../lib/fake_cluster_render').start(sockPath);
     const js = path.join(stage, 'source', 'javascript');
     const { Canvas } = require(path.join(js, 'kit', 'canvas'));
     const geo = require(path.join(js, 'geo'));

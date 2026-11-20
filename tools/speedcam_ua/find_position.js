@@ -5,7 +5,7 @@
  * has a latitude and a longitude, best first - the same ranking tools/store_build.py uses when the Store builds the app.
  *
  * From Windows (cmd), with the key from the MGU Store setup:
- *   ssh -i %USERPROFILE%\.ssh\mgu_root_key -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa root@172.16.222.97 "node -" < tools\find_position.js
+ *   ssh -i %USERPROFILE%\.ssh\mgu_root_key -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa root@172.16.222.97 "node -" < tools\speedcam_ua\find_position.js
  * Optional: a name filter as the first argument (e.g. "posit") lists every interface whose name matches, with fields.
  * Plain Node 8 (the car's 8.16.2).
  */

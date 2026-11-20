@@ -1,8 +1,8 @@
 'use strict';
-/** Unit checks for the parts that need no head unit: node test/unit.js */
+/** Unit checks for the parts that need no head unit: node test/speedcam_ua/unit.js */
 const assert = require('assert');
 const path = require('path');
-const A = path.join(__dirname, '..', 'apps', 'speedcam_ua');
+const A = path.join(__dirname, '..', '..', 'apps', 'speedcam_ua');
 const { findPair, scaleOf, isLatKey, isLonKey } = require(path.join(A, 'position'));
 const geo = require(path.join(A, 'geo'));
 let n = 0;

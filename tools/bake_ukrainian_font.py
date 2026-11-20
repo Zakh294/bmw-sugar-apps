@@ -8,7 +8,7 @@ Russian atlas lacks (і ї є ґ ʼ), plus Latin, digits and the punctuation the
 Font: Ubuntu Bold, Ubuntu Font Licence 1.0 (kit/runtime/fonts/UFL-Ubuntu.txt),
 https://github.com/google/fonts/tree/main/ufl/ubuntu
 """
-import hashlib, importlib.util, json, os, sys
+import glob, hashlib, importlib.util, json, os, sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 UA = 'АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯабвгґдеєжзиіїйклмнопрстуфхцчшщьюя'
@@ -24,9 +24,10 @@ def main():
     baker = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(baker)
     baker.FONTDIR = os.path.dirname(font)
-    # the place names of the camera list too, so every one of them draws
-    cams = json.load(open(os.path.join(ROOT, 'data', 'cameras.json'), encoding='utf-8'))['cameras']
-    names = ''.join(c['place'] + c['region'] + (c['road'] or '') + (c['km'] or '') for c in cams)
+    # every character of the apps' data files too (the camera list's place names), so all of them draw
+    names = ''
+    for p in glob.glob(os.path.join(ROOT, 'data', '*', '*.json')):
+        names += ''.join(ch for ch in open(p, encoding='utf-8').read() if '\u0400' <= ch <= '\u04ff')
     chars = ''.join(sorted(set(baker.TEXT + UA + EXTRA + names)))
     atlas = baker.bake(os.path.basename(font), None, SIZE, chars)
     missing = sorted(set(UA) - set(chr(int(k)) for k in atlas['glyphs']))

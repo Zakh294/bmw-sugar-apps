@@ -5,3 +5,4 @@ apps/*/kit
 __pycache__/
 *.pyc
 node_modules/
+preview/
