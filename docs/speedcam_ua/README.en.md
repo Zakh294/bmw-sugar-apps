@@ -79,7 +79,7 @@ An iDrive list screen ("Camera databases" button):
 
 | Setting | Default | What it does |
 |---|---|---|
-| Мова / Language | Українська | the language of the page, the warnings, the buttons and the settings (8 languages) |
+| Мова / Language | automatic | the language of the page, the warnings, the buttons and the settings: "Automatic" = the language of the country the car is in (Ukraine Ukrainian, Germany and Austria German, Poland Polish…, English where none of the 8 is spoken), or one of the 8 |
 | Camera warnings | on | main switch |
 | When to show | at every camera | "Only when I am over the limit": warning and chime only above the limit (+ tolerance). A camera with no known limit always shows |
 | Countries where warnings are not allowed (DE, CH…) | off | "On: at my own responsibility" — warn there too (see "Countries and the law") |
