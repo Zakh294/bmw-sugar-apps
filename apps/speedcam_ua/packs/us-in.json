@@ -1,0 +1,10 @@
+[{"bbox": [39.383565, -87.428394, 40.404027, -85.987441], "code": "us-in", "count": 9, "en": "Indiana", "fetched": "2026-11-21", "group": "us", "iso": "US-IN", "legal": "ok", "license": "OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)", "name": "Indiana", "source": "OpenStreetMap (Overpass)", "uk": "Indiana", "units": "mph", "updated": "2026-11-21"},
+["o14005778265", 39.442313, -85.987441, 112.7, "Indiana", 190],
+["o6028551289", 40.404027, -86.113521, null, "Indiana", 150],
+["o6028551290", 40.403615, -86.113308, null, "Indiana", 330],
+["o7732297337", 39.466763, -87.295309, 64.4, "Indiana", null],
+["o7866724516", 39.383565, -87.397452, null, "Indiana", 0],
+["o8304511822", 39.481304, -87.321442, 72.4, "Indiana", 260],
+["o8770657385", 39.423774, -87.428394, 48.3, "Indiana", 90],
+["o9041590419", 39.486761, -87.314253, 24.1, "Indiana", 0],
+["o9354576299", 39.760244, -86.143811, null, "Indiana", null]]

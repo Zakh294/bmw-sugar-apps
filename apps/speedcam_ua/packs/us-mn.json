@@ -1,0 +1,5 @@
+[{"bbox": [43.825216, -94.428133, 44.890897, -92.657398], "code": "us-mn", "count": 4, "en": "Minnesota", "fetched": "2026-11-21", "group": "us", "iso": "US-MN", "legal": "ok", "license": "OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)", "name": "Minnesota", "source": "OpenStreetMap (Overpass)", "uk": "Minnesota", "units": "mph", "updated": "2026-11-21"},
+["o13071175514", 44.890897, -93.110174, 48.3, "Minnesota", 120],
+["o7125332314", 44.629364, -92.657685, null, "Minnesota", null],
+["o7125332344", 44.629569, -92.657398, null, "Minnesota", null],
+["o9960573818", 43.825216, -94.428133, null, "Minnesota", null]]
