@@ -69,8 +69,60 @@ ok(al.cards.join() === '0 dirana3,1 dummy' && al.pcm.length === 2 && al.confPcm.
 ok(sound.CANDIDATE.test('NaviAnnouncement') && sound.CANDIDATE.test('Gong_1') && !sound.CANDIDATE.test('TelRing_Inband_1') && !sound.CANDIDATE.test('FmDABCombined'),
     'chime candidates: navigation and gongs yes, phone ring and radio no');
 const pr = sound.probe(fakeSignals, quietLog, { delayMs: 0, retryMs: 20, tries: 5 });
+// the chime: a WAV, and the AudioManager / MediaPlayer steps with a fake bus
+const { Chime, wav, STYLES } = require(path.join(A, 'chime'));
+Object.keys(STYLES).forEach((k) => {
+    const b = wav(1, k);
+    let pk = 0;
+    for (let i = 44; i < b.length; i += 4) pk = Math.max(pk, Math.abs(b.readInt16LE(i)));
+    ok(b.length === 44 + Math.round(48000 * STYLES[k].len) * 4 && pk > 26000 && pk <= 26214, 'sound "' + k + '": ' + STYLES[k].len + ' s, peak ' + pk);
+});
+const w = wav(0.5);
+let peak = 0;
+for (let i = 44; i < w.length; i += 2) peak = Math.max(peak, Math.abs(w.readInt16LE(i)));
+ok(w.toString('ascii', 0, 4) === 'RIFF' && w.readUInt32LE(24) === 48000 && w.length === 44 + 24000 * 4 && peak > 5000 && peak <= 32767 * 0.8 * 0.5 + 1,
+    'chime WAV: 0.5 s, 48 kHz stereo, at the volume (peak ' + peak + ')');
+function fakeBus(o) {
+    const calls = [];
+    let conns = (o.prev || []).slice();
+    return {
+        calls,
+        proxy: (iface, inst) => Promise.resolve({ iface, inst }),
+        onAvailable: (p, fn) => { if (!(o.noPlayer && /MediaPlayer/.test(p.iface))) setTimeout(() => fn(true), 1); return Promise.resolve(); },
+        call: (p, m, a) => {
+            calls.push(m + (a && a.sourceID !== undefined ? ' ' + a.sourceID + '>' + a.sinkID : '') + (a && a.mainConnectionID !== undefined ? ' ' + a.mainConnectionID : '')
+                + (m === 'playFile' ? ' ' + p.inst : ''));
+            if (m === 'getListMainSources') return Promise.resolve({ listMainSources: [{ sourceID: 1048, name: 'OAPGenericOverlay' }, { sourceID: 1046, name: 'OAPGenericMedia' }] });
+            if (m === 'getListMainConnections') return Promise.resolve({ listMainConnections: conns });
+            if (m === 'connect') {
+                if (o.refuse) return Promise.resolve({ amError: 'E_NOT_POSSIBLE' });
+                conns = conns.filter((c) => c.sinkID !== a.sinkID).concat([{ mainConnectionID: 77, sourceID: a.sourceID, sinkID: a.sinkID, connectionState: 2 }]);
+                return Promise.resolve({ amError: 'E_OK', mainConnectionID: 77 });
+            }
+            if (m === 'disconnect') { conns = conns.filter((c) => c.mainConnectionID !== a.mainConnectionID); return Promise.resolve({ amError: 'E_OK' }); }
+            return Promise.resolve({});
+        },
+    };
+}
+const tmpD = fs.mkdtempSync(path.join(os.tmpdir(), 'chime-'));
+const chimeRuns = [
+    ['overlay', {}, (c, l) => c.join() === 'getListMainSources,getListMainConnections,connect 1048>1024,getListMainConnections,playFile OapGenericOverlay,disconnect 77' && l.ok],
+    ['media', { prev: [{ mainConnectionID: 5, sourceID: 1, sinkID: 1024, connectionState: 2 }] },
+        (c, l) => /connect 1046>1024,.*playFile OapGenericMedia,disconnect 77,connect 1>1024$/.test(c.join()) && l.ok],
+    ['overlay', { refuse: true }, (c, l) => !/playFile|disconnect/.test(c.join()) && !l.ok && /відхилено/.test(l.steps[0])],
+    ['interrupt', { noPlayer: true }, (c, l) => /connect 1047>1024/.test(c.join()) && /disconnect 77$/.test(c.join()) && !l.ok && /not offered/.test(l.steps.join())],
+];
+const chimeDone = chimeRuns.map((r) => {
+    const bus = fakeBus(r[1]);
+    const dd = fs.mkdtempSync(path.join(tmpD, 'd-'));
+    const ch = new Chime(bus, quietLog, { scale: 0.01, tmpDir: tmpD, dataDir: dd });
+    return ch.play(r[0], 0.7).then((last) => {
+        ok(r[2](bus.calls, last) && !fs.existsSync(path.join(dd, 'chime-connection.json')),
+            'chime ' + r[0] + (r[1].refuse ? ' refused' : r[1].noPlayer ? ' without its player' : '') + ': ' + bus.calls.join(', '));
+    });
+});
 setTimeout(() => {
     ok(pr.done && pr.sources.length === 1 && pr.sources[0].name === 'MediaPlayer' && pr.sinks[0].id === 1024 && pr.tries === 3 && !pr.error,
         'audio probe retries until the audio manager answers (' + pr.tries + ' tries)');
-    console.log('unit: ' + n + ' checks passed');
+    Promise.all(chimeDone).then(() => console.log('unit: ' + n + ' checks passed'));
 }, 400);

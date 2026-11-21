@@ -78,12 +78,19 @@ async function main() {
     const hu = headUnit(stage, { dataDir: path.join(TMP, 'data'), fresh: true, image: (name, cv) => { page = cv; }, log });
     fs.mkdirSync(path.join(TMP, 'data'), { recursive: true });
     const subs = {};
+    const busCalls = [];
+    let busConns = [];
     hu.ctx.signals = {
         watch: async (iface, inst, handlers) => { (subs[iface] = subs[iface] || []).push(handlers); return { iface, available: true, error: null, shutdown: () => Promise.resolve() }; },
         // a made-up audio manager: 59 sources (the first six as the car showed them), 4 sinks
-        proxy: async () => ({}),
+        proxy: async (iface, inst) => ({ iface, inst }),
         onAvailable: async (p, fn) => { fn(true); },
-        call: async (p, m) => {
+        call: async (p, m, a) => {
+            busCalls.push(m + (m === 'playFile' ? ' ' + p.inst + ' ' + a.path : a && a.sourceID !== undefined ? ' ' + a.sourceID + '>' + a.sinkID : ''));
+            if (m === 'connect') { busConns = [{ mainConnectionID: 9, sourceID: a.sourceID, sinkID: a.sinkID, connectionState: 2 }]; return { amError: 'E_OK', mainConnectionID: 9 }; }
+            if (m === 'getListMainConnections') return { listMainConnections: busConns };
+            if (m === 'disconnect') { busConns = []; return { amError: 'E_OK' }; }
+            if (m === 'playFile') return {};
             const names = ['FmDABCombined', 'HFPSource_1', 'HFPSource_2', 'TelRing_Inband_1', 'TelRing_Inband_2', 'TelRing_Out', 'NaviAnnouncement', 'Gong_Warning'];
             for (let i = names.length; i < 59; i++) names.push('Source_' + i);
             return m === 'getListMainSources' ? { listMainSources: names.map((n, i) => ({ sourceID: 100 + i, name: n, sourceClassID: 1 + (i % 5) })) }
@@ -238,6 +245,26 @@ async function main() {
     check(!!au && /108 "Source_8"/.test(au), 'the audio probe lists the sources in the log');
     check(logLines.some((l) => /^audio: alsa cards /.test(l)), 'the ALSA facts are in the log');
     hu.handlers.BTN_AUDIO();
+
+    // the sound button: overlay source to the front speakers, BMW's player on the overlay instance, then disconnect
+    busCalls.length = 0;
+    hu.ctx.settings.set('soundStyle', 'gong');
+    hu.handlers.BTN_SOUND();
+    await sleep(4000);
+    page = null; await hu.loopFn(); if (page) fs.writeFileSync(path.join(OUT, 'page_sound.png'), page.png());
+    check(/^connect 1048>1024,.*playFile OapGenericOverlay \/tmp\/speedcam-chime-gong-70\.wav.*,disconnect$/.test(busCalls.filter((c) => !/^getList/.test(c)).join()), 'the sound button plays a chime over the music: ' + busCalls.filter((c) => !/^getList/.test(c)).join(', '));
+    // a camera warning chimes by itself (route from the settings)
+    busCalls.length = 0;
+    hu.ctx.settings.set('sound', 'interrupt');
+    hu.handlers.BTN_TEST();
+    await sleep(3500);
+    check(busCalls.some((c) => /^playFile OapGenericInterrupt/.test(c)), 'a warning chimes on the chosen route (interrupt)');
+    busCalls.length = 0;
+    hu.ctx.settings.set('sound', 'off');
+    await sleep(15000);
+    hu.handlers.BTN_TEST();
+    await sleep(2500);
+    check(!busCalls.some((c) => /^playFile/.test(c)), 'sound off: no chime');
 
     srv.close();
     console.log(fails.length ? '\n' + fails.length + ' check(s) failed' : '\nall checks passed; pictures in ' + OUT);

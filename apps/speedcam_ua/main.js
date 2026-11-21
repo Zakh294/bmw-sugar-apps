@@ -8,6 +8,8 @@
  * state and has the test button; it is not needed for the warnings.
  * Plain Node 8 (the car's 8.16.2).
  */
+const fs = require('fs');
+const path = require('path');
 const mgu = require('./kit/mgu');
 const DB = require('./cameras');
 const { PositionSource, mono } = require('./position');
@@ -15,6 +17,7 @@ const { AlertEngine } = require('./alerts');
 const { Overlay } = require('./overlay');
 const sun = require('./sun');
 const sound = require('./sound');
+const { Chime } = require('./chime');
 const geo = require('./geo');
 let CANDS;
 try { CANDS = require('./position_candidates'); } catch (e) { CANDS = { list: [], note: 'position_candidates.js missing' }; }
@@ -75,6 +78,21 @@ function background(bg) {
     setInterval(nightCheck, 60000);
     st.audio = sound.probe(signals, log);
     st.alsa = sound.alsaInfo();
+    const chime = new Chime(signals, log, { dataDir: bg.dataDir });
+    st.chime = chime;
+    setTimeout(() => { chime.sweep().catch(() => {}); }, 25000);
+    st.ding = (why) => {
+        const route = settings.get('sound');
+        if (route === 'off' && why !== 'button') return;
+        const style = why === 'over' && settings.get('soundOver') ? 'alarm' : settings.get('soundStyle') || 'ding';
+        chime.play(route === 'off' ? 'overlay' : route, (settings.get('soundVol') || 70) / 100, style);
+    };
+    st.chimed = { key: null, over: false };
+    // what the installer left out because this unit lacks it (kit/missing-interfaces.json)
+    try {
+        const miss = JSON.parse(fs.readFileSync(path.join(__dirname, 'kit', 'missing-interfaces.json'), 'utf8'));
+        st.mpMissing = Object.keys(miss).filter((k) => /mediaplayer|commandcontrol/i.test(k)).map((k) => k.replace(/^.*\.(\w+:?)/, '$1')).join('; ') || null;
+    } catch (e) { st.mpMissing = null; }
     log.info('audio: alsa cards ' + JSON.stringify(st.alsa.cards) + ', pcm ' + JSON.stringify(st.alsa.pcm)
         + ', asound.conf ' + JSON.stringify(st.alsa.confPcm) + ', players ' + JSON.stringify(st.alsa.players));
 
@@ -99,6 +117,10 @@ function background(bg) {
                 if (alert && settings.get('showWhen') === 'over' && !alert.over) alert = null;
             }
             ov.show(alert, eng.warnDistance(speed));
+            // the chime: when a warning appears, and again when the speed goes over its limit
+            const key = alert ? (alert.id === -1 ? 'test' + st.test.t0 : alert.id) : null;
+            if (key !== st.chimed.key) { if (key !== null) st.ding('alert'); st.chimed = { key, over: !!(alert && alert.over) }; }
+            else if (alert && alert.over && !st.chimed.over) { st.chimed.over = true; st.ding('over'); }
         } catch (e) { log.warn('tick: ' + (e && e.stack || e)); }
     };
     setInterval(tick, 250);
@@ -108,7 +130,7 @@ function background(bg) {
 
 /** The sound probe in full: every source and sink of the audio manager, likely chime carriers in yellow, ALSA below. */
 function audioPage(st, L, c) {
-    const au = st.audio || {}, al = st.alsa || {};
+    const au = st.audio || {};
     L('АУДІО-ДЖЕРЕЛА', 40, 50, 36);
     L('жовтим: можуть підійти для сигналу · ще раз «Аудіо-джерела» — назад', 400, 48, 22, c.dim);
     if (!au.done) { L(au.tries ? 'аудіосистема ще не готова, спроба ' + au.tries + '…' : 'чекаю на аудіосистему…', 40, 110, 28, c.warn); }
@@ -123,11 +145,18 @@ function audioPage(st, L, c) {
         L(s.id + ' ' + String(s.name).slice(0, 26) + (s.cls !== undefined ? ' ·' + s.cls : ''), x, y, 18, sound.CANDIDATE.test(s.name) ? c.warn : '#ffffff');
     });
     if (src.length > ROWS * 4) L('+ ще ' + (src.length - ROWS * 4) + ' (повний список у лозі)', 40 + 3 * COLW, 146 + ROWS * 20, 18, c.dim);
-    const yy = 146 + ROWS * 20 + 4;
-    L('ALSA', 40, yy, 20, c.dim);
-    L('карти: ' + ((al.cards || []).join(', ') || '–') + ' · програвачі: ' + ((al.players || []).join(', ') || 'немає'), 140, yy, 20);
-    L('pcm: ' + (((al.confPcm || []).join(', ') || '–') + ' | ' + (al.pcm || []).length + ' пристроїв').slice(0, 140), 140, yy + 24, 20);
+    const yy = 146 + ROWS * 20 + 4, ch = st.chime && st.chime.last;
+    L('ТЕСТ ЗВУКУ', 40, yy, 20, c.dim);
+    if (!ch) L('ще не було · кнопка «Тест звуку» внизу (маршрут — у Налаштуваннях: «Звук попередження»)', 200, yy, 20);
+    else {
+        L(ROUTE_UA[ch.route] + ' · «' + (STYLE_UA[ch.style] || ch.style) + '»' + (ch.done ? '' : ' · грає…') + ' · ' + new Date(ch.at).toTimeString().slice(0, 8), 200, yy, 20, ch.done ? (ch.ok ? c.ok : c.bad) : c.warn);
+        L(ch.steps.join(' · ').slice(0, 150), 200, yy + 24, 18);
+    }
+    if (st.mpMissing) L('немає на блоці: ' + st.mpMissing.slice(0, 60), 900, yy, 18, c.bad);
 }
+
+const STYLE_UA = { ding: 'дзень', gong: 'гонг', beep3: 'три біпи', soft: 'м\'який', radar: 'радар', alarm: 'тривога' };
+const ROUTE_UA = { overlay: 'поверх музики (OAPGenericOverlay)', interrupt: 'перериває музику (OAPGenericInterrupt)', media: 'через медіаплеєр (OAPGenericMedia)' };
 
 function fmtAge(s) { return s === null ? '–' : s < 2 ? 'щойно' : s < 120 ? s + ' с тому' : Math.round(s / 60) + ' хв тому'; }
 
@@ -138,6 +167,7 @@ mgu.run({
         const core = ctx.background || background(ctx);
         const st = core.st;
         ui.onClick('BTN_TEST', () => { st.page = null; st.test = { t0: Date.now() }; ctx.log.info('test warning'); });
+        ui.onClick('BTN_SOUND', () => { st.page = 'audio'; st.ding('button'); });
         ui.onClick('BTN_AUDIO', () => { st.page = st.page === 'audio' ? null : 'audio'; });
 
         const render = async () => {
@@ -186,8 +216,10 @@ mgu.run({
                 L(c.error ? 'помилка: ' + c.error.slice(0, 50) : c.count ? c.count + ' фіксів, ' + (c.scale || '?') + ', ' + fmtAge(c.age) : c.misses ? c.misses + ' значень без координат' : 'ще нічого', 900, yy, 22, col);
             });
             const au = st.audio || {};
-            L('ЗВУК (розвідка)', 40, y + 34 + 3 * 30 + 14, 22, dim);
-            L(!au.done ? (au.tries ? 'аудіосистема ще не готова, спроба ' + au.tries + '…' : 'чекаю на аудіосистему…') : au.error && !au.sources.length ? 'немає відповіді: ' + String(au.error).slice(0, 60)
+            const ch = st.chime && st.chime.last;
+            const auLine = !ch ? null : 'сигнал ' + (ch.done ? (ch.ok ? 'надіслано' : 'не пройшов') : 'грає…') + ': ' + ch.steps.slice(-1).join('').slice(0, 70) + ' · деталі: «Аудіо-джерела»';
+            L('ЗВУК', 40, y + 34 + 3 * 30 + 14, 22, dim);
+            L(auLine ? auLine : !au.done ? (au.tries ? 'аудіосистема ще не готова, спроба ' + au.tries + '…' : 'чекаю на аудіосистему…') : au.error && !au.sources.length ? 'немає відповіді: ' + String(au.error).slice(0, 60)
                 : au.sources.length + ' джерел, ' + au.sinks.length + ' виходів · повний список: кнопка «Аудіо-джерела» внизу', 330, y + 34 + 3 * 30 + 14, 22, au.done && au.sources.length ? '#ffffff' : dim);
             await ui.image('MAIN_GFX', cv);
         };

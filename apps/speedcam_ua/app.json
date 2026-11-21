@@ -2,7 +2,7 @@
   "id": "speedcam_ua",
   "title": "SpeedCam UA",
   "description": "Офлайн-попередження про 426 стаціонарних камер автофіксації України на HUD, приладці та всередині мапи Waze / Google (Maps on cluster), за GPS машини, без телефона",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "vendor": "custom",
   "loggingId": "OASC",
   "iconGlyph": "CAM",
@@ -18,11 +18,26 @@
       "statusCarSpeed2": "rs"
     },
     "org.genivi.am.commandinterface.CommandControl": {
-      "_optional": "the audio manager's lists of sources and sinks (read-only, for the chime to come)",
+      "_optional": "звук попередження і розвідка аудіосистеми",
       "_instances": "1",
       "_methods": [
         "getListMainSources",
-        "getListMainSinks"
+        "getListMainSinks",
+        "getListMainConnections",
+        "connect",
+        "disconnect"
+      ]
+    },
+    "de.bmw.infotainment.entertainment.mediaplayer.MediaPlayer": {
+      "_optional": "звук попередження: медіаплеєр BMW для застосунків",
+      "_instances": [
+        "OapGenericOverlay",
+        "OapGenericInterrupt",
+        "OapGenericMedia"
+      ],
+      "playerState": "r",
+      "_methods": [
+        "playFile"
       ]
     }
   },
@@ -39,6 +54,10 @@
         [
           "BTN_AUDIO",
           "Аудіо-джерела"
+        ],
+        [
+          "BTN_SOUND",
+          "Тест звуку"
         ],
         [
           "BTN_SETTINGS",
@@ -68,6 +87,79 @@
           "over",
           "Лише коли перевищую ліміт"
         ]
+      ]
+    },
+    {
+      "key": "sound",
+      "label": "Звук попередження",
+      "type": "choice",
+      "default": "overlay",
+      "options": [
+        [
+          "off",
+          "Вимкнено"
+        ],
+        [
+          "overlay",
+          "Поверх музики (як підказка навігації)"
+        ],
+        [
+          "interrupt",
+          "Перериває музику на мить"
+        ],
+        [
+          "media",
+          "Через медіаплеєр (музика стане на паузу)"
+        ]
+      ]
+    },
+    {
+      "key": "soundStyle",
+      "label": "Вид сигналу",
+      "type": "choice",
+      "default": "ding",
+      "options": [
+        [
+          "ding",
+          "Дзень: дві ноти вгору"
+        ],
+        [
+          "gong",
+          "Гонг: дві ноти вниз, як у BMW"
+        ],
+        [
+          "beep3",
+          "Три короткі біпи"
+        ],
+        [
+          "soft",
+          "М'який: одна тиха нота"
+        ],
+        [
+          "radar",
+          "Радар: два свисти вгору"
+        ]
+      ]
+    },
+    {
+      "key": "soundOver",
+      "label": "Тривожний сигнал при перевищенні",
+      "type": "bool",
+      "default": true
+    },
+    {
+      "key": "soundVol",
+      "label": "Гучність сигналу",
+      "type": "number",
+      "unit": "%",
+      "default": 70,
+      "markDefault": true,
+      "steps": [
+        30,
+        50,
+        70,
+        85,
+        100
       ]
     },
     {
