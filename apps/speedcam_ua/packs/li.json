@@ -1,0 +1,5 @@
+[{"bbox": [47.125505, 9.504194, 47.21026, 9.553875], "code": "li", "count": 4, "en": "Liechtenstein", "fetched": "2026-11-21", "group": "eu", "iso": "LI", "legal": "banned", "license": "OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)", "name": "Liechtenstein", "source": "OpenStreetMap (Overpass)", "uk": "Ліхтенштейн", "units": "kmh", "updated": "2026-11-21"},
+["o10811342088", 47.125505, 9.523556, 50, "Liechtenstein", null],
+["o13648142413", 47.208882, 9.553875, 50, "Liechtenstein", null],
+["o5357811368", 47.21026, 9.504194, null, "Liechtenstein", null],
+["o8752526435", 47.198478, 9.542991, 50, "Liechtenstein", null]]
