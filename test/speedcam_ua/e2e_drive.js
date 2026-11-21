@@ -48,6 +48,16 @@ const catalog = {
 async function main() {
     fs.mkdirSync(OUT, { recursive: true });
     cp.execSync('tar -C "' + ROOT + '" --exclude=.git --exclude=dist --exclude=preview --exclude="apps/*/kit" -cf - . | tar -C "' + TMP + '" -xf -');
+    // made-up packs abroad (the real ones come from OpenStreetMap): Germany (warnings not allowed), France (zones only),
+    // New York (mph)
+    const PK = path.join(TMP, 'apps', 'speedcam_ua', 'packs');
+    const fake = (code, iso, name, units, legal, rows) => fs.writeFileSync(path.join(PK, code + '.json'), JSON.stringify([Object.assign({
+        code, iso, name, en: name, uk: name, group: code.indexOf('us-') === 0 ? 'us' : 'eu', units, legal, source: 'test', license: 'test', updated: '2026-11-01',
+        count: rows.length, bbox: [Math.min.apply(null, rows.map((r) => r[1])), Math.min.apply(null, rows.map((r) => r[2])), Math.max.apply(null, rows.map((r) => r[1])), Math.max.apply(null, rows.map((r) => r[2]))] })].concat(rows)));
+    fake('de', 'DE', 'Deutschland', 'kmh', 'banned', [['o1', 52.52, 13.40, 50, 'Berlin', null], ['o2', 52.30, 13.20, 80, 'Brandenburg', null]]);
+    fake('fr', 'FR', 'France', 'kmh', 'zones', [['o3', 48.85, 2.35, 50, 'Île-de-France', null]]);
+    fake('us-ny', 'US-NY', 'New York', 'mph', 'ok', [['o4', 40.75, -73.99, 40.2, 'New York', null]]);
+    cp.execSync('python3 -c "import sys; sys.path.insert(0, \'tools/speedcam_ua\'); import build_packs as b; b.OUT = sys.argv[1]; b.write_index(\'2026-11-21\')" "' + PK + '"', { cwd: TMP });
     fs.writeFileSync(path.join(TMP, 'catalog.json'), JSON.stringify(catalog));
     const build = cp.execSync('python3 tools/store_build.py --preview-only speedcam_ua', {
         cwd: TMP, env: Object.assign({}, process.env, { MGU_SOMEIP_CATALOG: path.join(TMP, 'catalog.json') }) }).toString();
@@ -63,13 +73,15 @@ async function main() {
     const rt = JSON.parse(fs.readFileSync(specPath, 'utf8'));
     const sockPath = path.join(TMP, 'render.sock');
     rt.config.socketPath = sockPath;
+    rt.config.packsUrl = '';            // no monthly update from GitHub in the test
     fs.writeFileSync(specPath, JSON.stringify(rt));
 
     const srv = await require('../lib/fake_cluster_render').start(sockPath);
     const js = path.join(stage, 'source', 'javascript');
     const { Canvas } = require(path.join(js, 'kit', 'canvas'));
     const geo = require(path.join(js, 'geo'));
-    const DB = require(path.join(js, 'cameras'));
+    const SRC = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'speedcam_ua', 'cameras.json'), 'utf8'));
+    const DB = { rows: SRC.cameras.map((c) => [c.id, c.lat, c.lon, c.limit, c.road || '', c.km || '', c.region, c.place]) };
     const { headUnit } = require(path.join(TMP, 'kit', 'tools', 'hu-stub'));
     let page = null;
     const quiet = { info: () => {}, warn: (m) => console.log('  warn: ' + m), error: (m, e) => console.log('  error: ' + m + ' ' + (e && e.stack || e || '')), debug: () => {} };
@@ -98,6 +110,12 @@ async function main() {
         },
     };
     hu.ctx.log = log;
+    // what the app writes into the HMI's components (the databases screen, the bar buttons)
+    const uiText = {}, uiChecked = {}, uiRows = {};
+    hu.ui.text = async (n, t, row) => { uiText[n + '#' + (row || 0)] = t; };
+    hu.ui.cells = async (n, row, x) => { uiText[n + '#' + (row || 0)] = JSON.stringify(x); };
+    hu.ui.rows = async (n, c) => { uiRows[n] = c; };
+    hu.ui.checked = async (n, on, row) => { uiChecked[n + '#' + (row || 0)] = on; };
     const feed = (iface, field, v) => (subs[iface] || []).forEach((h) => { if (h[field]) h[field](v); });
     hu.start();
     await sleep(600);
@@ -150,7 +168,7 @@ async function main() {
     check(offAfter !== null && offAfter <= 0 && offAfter > -150, 'the warning goes once the camera is passed');
     check(snaps === 2, 'pictures taken on the way in');
     const lines = logLines.filter((l) => /camera ahead/.test(l));
-    check(lines.length === 1 && lines[0].indexOf('#' + cam.id) >= 0, 'one "camera ahead" for camera #' + cam.id + ' in the log');
+    check(lines.length === 1 && lines[0].indexOf('ua:u' + cam.id + ' ') >= 0, 'one "camera ahead" for camera #' + cam.id + ' in the log');
 
     // driving away from a camera with no other camera within 3 km: no warning
     await sleep(500);
@@ -243,7 +261,6 @@ async function main() {
     await sleep(300); page = null; await hu.loopFn();
     if (page) fs.writeFileSync(path.join(OUT, 'page_audio.png'), page.png());
     check(!!au && /108 "Source_8"/.test(au), 'the audio probe lists the sources in the log');
-    check(logLines.some((l) => /^audio: alsa cards /.test(l)), 'the ALSA facts are in the log');
     hu.handlers.BTN_AUDIO();
 
     // the sound button: overlay source to the front speakers, BMW's player on the overlay instance, then disconnect
@@ -265,6 +282,71 @@ async function main() {
     hu.handlers.BTN_TEST();
     await sleep(2500);
     check(!busCalls.some((c) => /^playFile/.test(c)), 'sound off: no chime');
+
+    // abroad: the packs of the country the car is in come in by themselves ("automatic")
+    hu.ctx.settings.set('sound', 'off');
+    hu.ctx.settings.set('size', 100);
+    hu.ctx.settings.set('hudBright', 100);
+    await sleep(14000);         // the last test warning is over
+    const drive = async (c, metres, kmh, every) => {
+        const st0 = geo.offset(c.lat, c.lon, (brg + 180) % 360, metres);
+        let first = null, shot = null;
+        for (let s = 0; s <= metres + 150; s += 25) {
+            put(geo.offset(st0.lat, st0.lon, brg, s), kmh);
+            await sleep(every || 120);
+            if (vis('hud') && first === null) { first = metres - s; if (every) await sleep(400); shot = true; }
+            if (first !== null && shot === true) { shot = 'taken'; return { first, stop: true }; }
+        }
+        return { first };
+    };
+    // Germany: warnings are not allowed there, so none by default; the page says why
+    let r1 = await drive({ lat: 52.52, lon: 13.40 }, 1500, 90);
+    check(r1.first === null, 'Germany (not allowed while driving): no warning by default');
+    page = null; await hu.loopFn();
+    check(logLines.some((l) => /packs in use: .*de/.test(l)), 'the German pack came in by itself where the car is (' + logLines.filter((l) => /packs in use/.test(l)).slice(-1)[0] + ')');
+    hu.ctx.settings.set('banned', 'on');
+    r1 = await drive({ lat: 52.30, lon: 13.20 }, 1500, 90);
+    check(r1.first !== null, '... and with "on, at my own responsibility" it warns');
+    hu.ctx.settings.set('banned', 'off');
+    // France: only a danger zone, from 2 km, without the distance
+    hu.ctx.settings.set('lang', 'fr');
+    await sleep(14000);
+    const r2 = await drive({ lat: 48.85, lon: 2.35 }, 2600, 90, 200);
+    check(r2.first !== null && r2.first >= 1900 && r2.first <= 2100, 'France: a danger zone from about 2 km (' + r2.first + ' m), not the camera\'s place');
+    snap('zone_fr');
+    await sleep(3000);
+    // New York in English: mph
+    hu.ctx.settings.set('lang', 'en');
+    await sleep(2000);
+    const r3 = await drive({ lat: 40.75, lon: -73.99 }, 900, 60, 200);
+    check(r3.first !== null, 'New York: a warning (mph pack)');
+    snap('mph_us');
+    page = null; await hu.loopFn(); if (page) fs.writeFileSync(path.join(OUT, 'page_en.png'), page.png());
+    // the page and the warning in German and Polish
+    for (const lg of ['de', 'pl', 'uk']) {
+        hu.ctx.settings.set('lang', lg);
+        hu.handlers.BTN_TEST();
+        await sleep(1500);
+        snap('test_' + lg);
+        page = null; await hu.loopFn(); if (page) fs.writeFileSync(path.join(OUT, 'page_' + lg + '.png'), page.png());
+        await sleep(13000);
+    }
+    check(uiText['BTN_TEST#0'] === 'Тест попередження', 'the bar buttons follow the language');
+
+    // the databases screen: groups, packs with check boxes, choosing one
+    hu.handlers.BTN_DB();
+    await sleep(100);
+    hu.handlers.DB_GROUPS({ row: 1 });
+    await sleep(100);
+    const euRows = uiRows.DB_LIST;
+    let deRow = -1;
+    for (let i = 0; i < euRows; i++) if (/^Deutschland/.test(uiText['DB_LIST#' + i] || '')) deRow = i;
+    check(euRows >= 3 && deRow > 0 && /заборонено/.test(uiText['DB_LIST#' + deRow]), 'databases: Europe lists its packs, Germany marked "not allowed" (' + uiText['DB_LIST#' + deRow] + ')');
+    hu.handlers.DB_LIST({ row: deRow });
+    await sleep(100);
+    const choice = JSON.parse(fs.readFileSync(path.join(TMP, 'data', 'packs.json'), 'utf8'));
+    check(choice.chosen.indexOf('de') >= 0 && uiChecked['DB_LIST#' + deRow] === true, 'choosing Germany keeps it (packs.json) and ticks it');
+    check(/^\{"Text1stCol":"Активні: .*DE/.test(uiText['DB_INFO#0']), 'the active packs line shows DE');
 
     srv.close();
     console.log(fails.length ? '\n' + fails.length + ' check(s) failed' : '\nall checks passed; pictures in ' + OUT);

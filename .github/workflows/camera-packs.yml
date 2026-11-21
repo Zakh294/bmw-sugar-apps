@@ -38,7 +38,7 @@ jobs:
         run: |
           git config user.name "camera-packs bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/speedcam_ua/packs data/speedcam_ua apps/speedcam_ua/cameras.js
+          git add apps/speedcam_ua/packs data/speedcam_ua
           if git diff --cached --quiet; then echo "nothing changed"; exit 0; fi
           git commit -m "camera packs $(date -u +%Y-%m-%d)"
           git push

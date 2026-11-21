@@ -2,18 +2,26 @@
 /**
  * badge.js - the picture of a camera warning, as straight RGBA for a cluster-render image layer.
  *
- *   draw(alert, kind, { warnDist, blink }) -> kit Canvas (cv.w x cv.h, cv.d = RGBA bytes)
+ *   draw(alert, kind, { warnDist, blink, tr, units }) -> kit Canvas (cv.w x cv.h, cv.d = RGBA bytes)
+ *   tr: the language (lang.make), units: 'kmh' | 'mph' | 'auto' (as the camera's country: alert.units)
  *   kind: 'hud'     the windshield HUD: no background (black is see-through on a projection)
  *         'cluster' the instrument cluster without a phone map: a compact dark card
  *         'map'     inside the Waze / Google map on the cluster (Maps on cluster): a wide banner like a navigation
  *                   alert - the limit sign, "КАМЕРА" with the distance, where the camera is, the car's speed, a bar
  *
- * Every kind: the speed-limit sign (red ring, white disc, the limit), the distance (м / км), the car's speed (white
- * within the limit, amber over it, red and blinking past the fine threshold) and a bar that runs out at the camera.
- * Ukrainian text draws with the kit's "cyrillic" atlas (kit/runtime/fonts/cyrillic.json, tools/bake_ukrainian_font.py).
+ * Every kind: the speed-limit sign (red ring, white disc, the limit), the distance (m / km, or ft / mi with mph), the
+ * car's speed (white within the limit, amber over it, red and blinking past the fine threshold) and a bar that runs
+ * out at the camera. A danger zone (France: alert.zone) shows the zone instead of the distance, and no bar.
+ * Text in any of the app's languages: the kit picks its "cyrillic" atlas for Cyrillic, the Latin atlases carry the
+ * European letters (tools/bake_fonts_i18n.py).
  * Plain Node 8.
  */
-const { Canvas } = require('./kit/canvas');
+// the kit beside the app when built, the repository's kit/ for the tests
+let Canvas;
+try { Canvas = require('./kit/canvas').Canvas; } catch (e) { Canvas = require('../../kit/runtime/canvas').Canvas; }
+const lang = require('./lang');
+
+const MPH = 1.609344;
 
 const SIZE = { hud: [300, 150], cluster: [440, 168], map: [640, 132] };
 const RED = '#e3141b', AMBER = '#ffb31a', WHITE = '#ffffff', GREY = '#a7b0ba', CARD = [14, 16, 20, 238];
@@ -35,10 +43,23 @@ function sign(cv, cx, cy, r, limit) {
     cv.text(lim, cx, cy + fs * 0.36, fs, [0, 0, 0, 255], { font: 'bold', align: 'center', literal: true });
 }
 
-function fmtDist(m) {
-    if (m >= 1000) return { v: (Math.round(m / 100) / 10).toFixed(1).replace('.', ','), u: 'км' };
-    return { v: String(Math.max(0, Math.round(m / 10) * 10)), u: 'м' };
+/** A distance as { v, u }: m / km (1,2 km), or with mph ft / mi (0.4 mi). */
+function fmtDist(m, units, tr) {
+    tr = tr || lang.make('uk');
+    if (units === 'mph') {
+        const ft = m / 0.3048;
+        if (ft < 1000) return { v: String(Math.max(0, Math.round(ft / 50) * 50)), u: tr('ft') };
+        return { v: (Math.round(m / MPH / 100) / 10).toFixed(1), u: tr('mi') };
+    }
+    const comma = tr.lang !== 'en';
+    if (m >= 1000) { const v = (Math.round(m / 100) / 10).toFixed(1); return { v: comma ? v.replace('.', ',') : v, u: tr('km') }; }
+    return { v: String(Math.max(0, Math.round(m / 10) * 10)), u: tr('m') };
 }
+
+/** km/h in the units: a whole number (a limit in mph comes back to its round value). */
+function inUnits(kmh, units) { return kmh === null || kmh === undefined ? null : Math.round(units === 'mph' ? kmh / MPH : kmh); }
+
+function unitsOf(a, opts) { return opts.units === 'kmh' || opts.units === 'mph' ? opts.units : a.units === 'mph' ? 'mph' : 'kmh'; }
 
 function speedColour(a, plain) { return a.over === 2 ? RED : a.over === 1 ? AMBER : plain; }
 
@@ -56,31 +77,36 @@ function bar(cv, x, y, w, h, f, a, track) {
 }
 
 function drawMap(cv, a, opts) {
-    const W = cv.w, H = cv.h;
+    const W = cv.w, H = cv.h, tr = opts.tr || lang.make('uk'), u = unitsOf(a, opts);
     // a red left edge: the red card, the dark one over it from x 10
     cv.roundRect(0, 0, W, H, 22, RED);
     cv.roundRect(10, 0, W - 10, H, 22, [14, 16, 20, 255]);
     if (a.over === 2 && !opts.blink) cv.strokeRoundRect(1, 1, W - 2, H - 2, 21, 4, RED);
-    sign(cv, 30 + 50, H / 2, 50, a.limit);
+    sign(cv, 30 + 50, H / 2, 50, inUnits(a.limit, u));
     const x0 = 152;
-    // line 1: the camera, "КАМЕРА", the distance
+    // line 1: the camera, "CAMERA", the distance (a zone: its name)
     camera(cv, x0, 18, 30, RED, CARD);
-    cv.text('КАМЕРА', x0 + 50, 44, 24, GREY, { literal: true });
-    const lw = cv.textWidth('КАМЕРА', 24, { literal: true });
-    const d = fmtDist(a.dist);
-    const dx = x0 + 50 + lw + 16;
-    const dw = cv.text(d.v, dx, 50, 50, WHITE, { font: 'num', literal: true });
-    cv.text(d.u, dx + dw + 6, 50, 30, GREY, { literal: true });
+    if (a.zone) {
+        cv.text(fit(cv, tr('zone'), 34, W - x0 - 160), x0 + 50, 50, 34, WHITE, { font: 'bold', literal: true });
+    } else {
+        const head = tr('camera');
+        cv.text(head, x0 + 50, 44, 24, GREY, { literal: true });
+        const lw = cv.textWidth(head, 24, { literal: true });
+        const d = fmtDist(a.dist, u, tr);
+        const dx = x0 + 50 + lw + 16;
+        const dw = cv.text(d.v, dx, 50, 50, WHITE, { font: 'num', literal: true });
+        cv.text(d.u, dx + dw + 6, 50, 30, GREY, { literal: true });
+    }
     // the car's speed, right
     const right = W - 22;
     if (a.speed > 0 && !(a.over === 2 && opts.blink)) {
-        cv.text(String(a.speed), right, 50, 46, speedColour(a, WHITE), { font: 'bold', align: 'right', literal: true });
-        cv.text('км/год', right, 74, 18, GREY, { align: 'right', literal: true });
+        cv.text(String(inUnits(a.speed, u)), right, 50, 46, speedColour(a, WHITE), { font: 'bold', align: 'right', literal: true });
+        cv.text(tr(u), right, 74, 18, GREY, { align: 'right', literal: true });
     }
-    // line 2: where it is
-    cv.text(fit(cv, a.label || '', 22, right - x0 - (a.speed > 0 ? 90 : 0)), x0, 92, 22, '#dfe5ec', { literal: true });
+    // line 2: where it is (a zone: what it is, not where)
+    cv.text(fit(cv, a.zone ? tr('zone_hint') : a.label || '', 22, right - x0 - (a.speed > 0 ? 90 : 0)), x0, 92, 22, '#dfe5ec', { literal: true });
     // the bar
-    bar(cv, x0, H - 22, right - x0, 8, Math.max(0, Math.min(1, a.dist / (opts.warnDist || 800))), a, [60, 64, 72, 255]);
+    if (!a.zone) bar(cv, x0, H - 22, right - x0, 8, Math.max(0, Math.min(1, a.dist / (opts.warnDist || 800))), a, [60, 64, 72, 255]);
 }
 
 function draw(alert, kind, opts) {
@@ -88,29 +114,37 @@ function draw(alert, kind, opts) {
     const sz = SIZE[kind] || SIZE.hud, W = sz[0], H = sz[1];
     const cv = new Canvas(W, H).clear([0, 0, 0, 0]);
     if (kind === 'map') { drawMap(cv, alert, opts); return cv; }
-    const hud = kind === 'hud';
+    const hud = kind === 'hud', tr = opts.tr || lang.make('uk'), u = unitsOf(alert, opts);
     const pad = hud ? 4 : 14;
     if (!hud) {
         cv.roundRect(0, 0, W, H, 22, CARD);
         cv.strokeRoundRect(1, 1, W - 2, H - 2, 21, 4, RED);
     }
     const r = hud ? 62 : 64, cx = pad + r + 2, cy = hud ? 70 : H / 2 - 6;
-    sign(cv, cx, cy, r, alert.limit);
+    sign(cv, cx, cy, r, inUnits(alert.limit, u));
 
-    // distance, big
+    // distance, big (a zone: its name)
     const x0 = cx + r + (hud ? 16 : 22);
-    const d = fmtDist(alert.dist);
-    const w = cv.text(d.v, x0, hud ? 64 : 70, hud ? 62 : 64, WHITE, { font: 'num', literal: true });
-    cv.text(d.u, x0 + w + 6, hud ? 64 : 70, hud ? 30 : 32, GREY, { literal: true });
+    if (alert.zone) {
+        const words = tr('zone').split(' ');
+        const top = words.length > 1 ? words.slice(0, -1).join(' ') : words[0], bottom = words.length > 1 ? words[words.length - 1] : '';
+        cv.text(fit(cv, top, hud ? 30 : 32, W - pad - x0), x0, hud ? 34 : 40, hud ? 30 : 32, WHITE, { font: 'bold', literal: true });
+        if (bottom) cv.text(fit(cv, bottom, hud ? 30 : 32, W - pad - x0), x0, hud ? 68 : 76, hud ? 30 : 32, WHITE, { font: 'bold', literal: true });
+    } else {
+        const d = fmtDist(alert.dist, u, tr);
+        const w = cv.text(d.v, x0, hud ? 64 : 70, hud ? 62 : 64, WHITE, { font: 'num', literal: true });
+        cv.text(d.u, x0 + w + 6, hud ? 64 : 70, hud ? 30 : 32, GREY, { literal: true });
+    }
 
     // the camera and the car's speed
     const blinkOff = alert.over === 2 && opts.blink;
     camera(cv, x0, hud ? 82 : 88, hud ? 30 : 32, RED, hud ? [0, 0, 0, 255] : CARD);
     if (alert.speed > 0 && !blinkOff) {
         const sx = x0 + (hud ? 52 : 56);
-        const sw = cv.text(String(alert.speed), sx, hud ? 112 : 120, hud ? 36 : 40, speedColour(alert, hud ? '#d9e4ee' : WHITE), { font: 'bold', literal: true });
-        cv.text('км/год', sx + sw + 5, hud ? 112 : 120, hud ? 18 : 20, GREY, { literal: true });
+        const sw = cv.text(String(inUnits(alert.speed, u)), sx, hud ? 112 : 120, hud ? 36 : 40, speedColour(alert, hud ? '#d9e4ee' : WHITE), { font: 'bold', literal: true });
+        cv.text(tr(u), sx + sw + 5, hud ? 112 : 120, hud ? 18 : 20, GREY, { literal: true });
     }
+    if (alert.zone) return cv;
     const f = Math.max(0, Math.min(1, alert.dist / (opts.warnDist || 800)));
     const bh = hud ? 8 : 9;
     bar(cv, x0, H - (hud ? 18 : 24), W - pad - x0, bh, f, alert, hud ? [80, 80, 80, 255] : [60, 64, 72, 255]);
@@ -126,4 +160,4 @@ function dim(cv, k) {
     return cv;
 }
 
-module.exports = { draw, dim, SIZE, fmtDist };
+module.exports = { draw, dim, SIZE, fmtDist, inUnits };

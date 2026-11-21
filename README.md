@@ -1,63 +1,87 @@
-# BMW Sugar Apps — власні додатки для iDrive 7 (MGU)
+# BMW Sugar Apps — custom apps for BMW iDrive 7 (MGU)
 
-Тут лежать наші додатки для головного блока MGU (iDrive 7) через [MGU Store](https://github.com/robertnisipeanu/mgu-store). Це одне джерело Store, з якого ставиться будь-який додаток. Блок збирає їх сам із вихідного коду, так само як `bimmer-lab/apps`.
+*Українською: [README.uk.md](README.uk.md)*
 
-## Додатки
+Apps for the BMW iDrive 7 head unit (MGU, e.g. G01 X3, G20 3 Series, G30 5 Series), installed through the
+community [MGU Store](https://github.com/robertnisipeanu/mgu-store). This repository is one Store source: the head
+unit downloads an app's source from here and builds it itself.
 
-| Додаток | Папка | Версія | Що робить | Опис |
+> **Unofficial, not affiliated with BMW. Needs root access to the head unit. Use at your own risk.**
+> Read [LEGAL.md](LEGAL.md) before installing: disclaimer, the law on speed camera warnings, data licences.
+
+## Apps
+
+| App | Folder | Version | What it does | Manual |
 |---|---|---|---|---|
-| SpeedCam UA | `apps/speedcam_ua` | 0.4.0 | офлайн-попередження про 426 камер автофіксації на HUD, приладці та всередині мапи Waze / Google | [docs/speedcam_ua](docs/speedcam_ua/README.md) |
+| SpeedCam | `apps/speedcam_ua` | 0.5.0 | Offline speed camera warnings on the head-up display, the instrument cluster and inside the Waze / Google map on the cluster. Ukraine (official police list), Europe and the USA (OpenStreetMap), 8 languages, a chime, monthly database updates | [English](docs/speedcam_ua/README.en.md) · [Українська](docs/speedcam_ua/README.md) |
 
-## Підключення до машини
+### SpeedCam at a glance
 
-1. **Токен для Store** (репозиторій приватний, тож це потрібно один раз). На GitHub: Settings → Developer settings → Fine-grained tokens → доступ лише до `bmw-sugar-apps`, права Contents: Read-only. Далі на ноутбуці в PowerShell (машина на хотспоті `DIRECT-BMW`):
-   ```powershell
-   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/robertnisipeanu/mgu-store/main/deploy/install.ps1))) token --identity $HOME\.ssh\mgu_root_key
-   ```
-2. **Джерело:** Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps` → **Branch** `main` → **Check now**.
-3. Вибери додаток у Store → **Install**.
-4. **Оновлення:** Installed → **Update all**. Store бачить нову версію, коли в `apps/<id>/app.json` зростає `version`.
+| HUD | Instrument cluster | Inside the Waze / Google map |
+|---|---|---|
+| ![HUD](docs/speedcam_ua/img/hud.png) | ![Cluster](docs/speedcam_ua/img/cluster.png) | ![Map banner](docs/speedcam_ua/img/in_map.png) |
 
-Якщо раніше було додано джерело `Zakh294/bmw-speedcam-ua`, прибери його: GitHub уже перенаправляє стару назву сюди, а два джерела з тими самими додатками не потрібні.
+| France: danger zone only | USA: mph | German |
+|---|---|---|
+| ![Zone](docs/speedcam_ua/img/zone_fr.png) | ![mph](docs/speedcam_ua/img/mph_us.png) | ![German](docs/speedcam_ua/img/test_de.png) |
 
-## Гілки
+![The app's page](docs/speedcam_ua/img/page_en.png)
 
-- **`main`** — стабільна. Саме її підключаєш у машині.
-- **`dev`** — для перевірки нового. Щоб потестувати, у Store заміни гілку джерела на `dev`, а після перевірки поверни `main`. Обидві гілки одночасно не підключай: додатки там з однаковими id, і Store ставить ту версію, що новіша.
-- Нове спершу йде в `dev`, після перевірки в машині — у `main`.
-- **Точки відкату** — гілки `release/<id>-<версія>`, наприклад `release/speedcam_ua-0.2.0`: стан, який уже працював у машині. Щоб відкотитися, в Store заміни гілку джерела на таку гілку → Check now. Store поставить ту версію, якщо вона новіша за встановлену; інакше спершу видали додаток (Installed → Remove) і постав знову. Щоб повернутися на свіже, знову вибери `main`.
+- Uses the car's own GPS: no phone, no internet needed while driving.
+- Warns ahead of the camera (distance = speed × 20 s, 300 m at least), shows the limit, your speed (amber over the
+  limit, red and blinking far over it) and a bar that runs out at the camera. Optional chime over the music.
+- Ukraine: the Patrol Police's official list. Europe (EU + UK, Norway, Switzerland, Balkans, Moldova) and the 50 US
+  states: OpenStreetMap. Packs per country / state; the one where the car is loads by itself.
+- **Respects the law by default:** off in Germany, Switzerland, Liechtenstein, Cyprus, North Macedonia (can be switched
+  on at your own responsibility); France: danger zones only. See [LEGAL.md](LEGAL.md).
+- Languages: Українська, English, Deutsch, Polski, Français, Italiano, Español, Čeština.
 
-Релізи (готові `.tgz`) тут не використовуються. Додатки збираються в самій машині, бо частина збірки залежить від конкретного блока: SpeedCam UA шукає GPS у його каталозі інтерфейсів.
+## Install
 
-## Структура
+You need a head unit with root access and the MGU Store installed (see the
+[MGU Store's guide](https://github.com/robertnisipeanu/mgu-store)), plus its **cluster-render** service (in the Store).
+
+1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, branch **`main`** → **Check now**.
+2. Pick the app → **Install**. The head unit builds it (a minute or two).
+3. Updates: Installed → **Update all** (a new app version), and SpeedCam's camera databases update themselves once a
+   month from this repository.
+
+Step-by-step with pictures: [SpeedCam manual](docs/speedcam_ua/README.en.md).
+
+## Branches
+
+- **`main`** — stable, the one to connect in the car.
+- **`dev`** — testing. Switch the Store source to `dev` to try something, then back to `main`. Don't add both: same
+  app ids, the Store installs the newer version.
+- **`release/<id>-<version>`** — known-good versions to roll back to (switch the source branch, Check now; if the
+  installed version is newer, Remove the app first).
+- The camera databases are rebuilt on the 2nd of every month by a GitHub workflow
+  ([.github/workflows/camera-packs.yml](.github/workflows/camera-packs.yml)), committed to `main`.
+
+## Repository layout
 
 ```
-mgu-repo.json            опис для Store: кожна папка apps/* — окремий додаток
-kit/                     MGU App Kit (cauliflowermossgrape, MIT) + український шрифт
-tools/store_build.py     спільний крок збірки в машині, далі kit/tools/build.py
-tools/bake_ukrainian_font.py
-apps/<id>/               код додатка: app.json, main.js, icon.png, модулі .js
-docs/<id>/               опис, інструкції, картинки
-data/<id>/               дані додатка у вихідному вигляді (бази, експорти)
-tools/<id>/              скрипти додатка (імпорт даних, діагностика по SSH)
-test/<id>/, test/lib/    тести; спільні заглушки в test/lib
+mgu-repo.json            the Store's description: every folder apps/* is an app
+apps/<id>/               an app's code (app.json, main.js, icon.png, modules); a subfolder is a data pack
+apps/speedcam_ua/packs/  the camera databases (index.json + one JSON per country / US state)
+docs/<id>/               manuals and pictures
+data/<id>/               source data (e.g. the Ukrainian list as JSON, GeoJSON, CSV, KML, GPX)
+tools/                   build step on the car (store_build.py), font baking, per-app scripts
+test/<id>/, test/lib/    tests
+kit/                     MGU App Kit (cauliflowermossgrape, MIT), its fonts extended with European letters
 ```
 
-## Новий додаток
+## Development
 
-1. `apps/<id>/app.json`: унікальні `id` і 4-символьний `loggingId`, `version`, `mguHmi: ["ID7"]`, `signals`, `screens`, `settings`. За зразок бери `apps/speedcam_ua/app.json` і [довідку App Kit](https://github.com/cauliflowermossgrape/idrive7-apps).
-2. `apps/<id>/main.js` + `icon.png` 140×140.
-3. **Папок усередині `apps/<id>/` не роби**, крім даних для пакування: збірка упаковує кожну підпапку як data pack. Документацію клади в `docs/<id>/`, вихідні дані — в `data/<id>/`.
-4. Код має працювати на **Node 8.16.2**, як на блоці: без `?.`, `??` і `catch {}`. Скрипти збірки в машині запускає Python 3.12.
-5. Перевірка: `python3 kit/tools/build.py --preview-only <id>` і тести в `test/<id>/`.
-6. Рядок у таблиці вище.
+- Code runs on the car's **Node 8.16.2**: no `?.`, `??`, `catch {}`, object spread.
+- Tests: `node test/speedcam_ua/unit.js`, `node test/speedcam_ua/e2e_drive.js`, `python3 test/speedcam_ua/packs_test.py`;
+  preview: `python3 kit/tools/build.py --preview-only speedcam_ua`.
+- Contributing (languages, cameras, code): [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Чого тут ніколи не має бути
+## Licences
 
-SSH-ключі блока, токени, VIN-прив'язані бекапи (FA, SVT, кодування, файли E-Sys), паролі Wi-Fi.
+Code: MIT ([LICENSE](LICENSE)). `kit/`: MIT (cauliflowermossgrape). `cluster_render_client.js`: MPL-2.0 (Robert
+Nisipeanu). Fonts: Ubuntu Font Licence / SIL OFL. Camera data: Ukrainian police list (public information);
+© OpenStreetMap contributors, ODbL 1.0. Details: [LEGAL.md](LEGAL.md).
 
-## Ліцензії
-
-Наш код — MIT ([LICENSE](LICENSE)). `kit/` — MIT (cauliflowermossgrape). `cluster_render_client.js` — MPL-2.0 (Robert Nisipeanu). Шрифти — SIL OFL / Ubuntu Font Licence (файли поруч зі шрифтами). Ліцензії даних — в описі кожного додатка.
-
-Неофіційні додатки, не від BMW. Ставиш на свій ризик.
+**Never in this repository:** head unit SSH keys, tokens, VIN-bound backups (FA, SVT, coding, E-Sys files).

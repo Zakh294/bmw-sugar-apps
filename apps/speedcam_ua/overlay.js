@@ -29,7 +29,7 @@ const PLACE = {
 };
 
 class Overlay {
-    /** opts(): { hud, cluster, inMap, mapPlace, clusterPlace, size (%), hudBright (%), night, socketPath } read on every paint. */
+    /** opts(): { hud, cluster, inMap, mapPlace, clusterPlace, size (%), hudBright (%), night, socketPath, tr, units } read on every paint. */
     constructor(appId, log, opts) {
         this.log = log;
         this.opts = opts;
@@ -143,7 +143,7 @@ class Overlay {
         const a = this.shown, o = this.opts();
         const mode = this.mode || 'cluster';
         const key = a ? [a.id, a.dist, a.speed, a.limit, a.over, a.label, this.blink, o.hud, o.cluster, mode, o.mapPlace, o.clusterPlace,
-            o.size, o.hudBright, o.night].join('|') : 'off|' + o.hud + '|' + o.cluster;
+            o.size, o.hudBright, o.night, a.zone, o.units, o.tr && o.tr.lang].join('|') : 'off|' + o.hud + '|' + o.cluster;
         if (!force && key === this.lastKey) return;
         this.lastKey = key;
         const want = {
@@ -157,7 +157,7 @@ class Overlay {
             const ref = this._layer(k, o);
             if (!ref) return;
             if (want[k]) {
-                const cv = badge.draw(a, k === 'hosted' ? 'map' : k, { warnDist: this.warnDist, blink: this.blink });
+                const cv = badge.draw(a, k === 'hosted' ? 'map' : k, { warnDist: this.warnDist, blink: this.blink, tr: o.tr, units: o.units });
                 // the HUD at its brightness setting; every screen a step down at night
                 const lvl = (k === 'hud' ? (o.hudBright || 100) / 100 : 1) * (o.night ? (k === 'hud' ? NIGHT.hud : NIGHT.other) : 1);
                 if (lvl < 0.995) badge.dim(cv, lvl);

@@ -172,7 +172,7 @@ class Chime {
             const sourceID = src ? src.sourceID : R.id;
             if (route === 'media') prev = arr(lists[1]).find((c) => c && c.sinkID === SINK && c.sourceID !== sourceID) || null;
             const r = await this._call(am, 'connect', { sourceID, sinkID: SINK });
-            if (!okReply(r)) { step('з\'єднання ' + sourceID + ' > ' + SINK + ' відхилено: ' + short(r)); return; }
+            if (!okReply(r)) { step('connect ' + sourceID + '>' + SINK + ' refused: ' + short(r)); return; }
             conn = r.amError === 'E_ALREADY_EXISTS' ? null : r.mainConnectionID;
             if (conn !== null && conn !== undefined) this._remember(conn);
             let state = null;
@@ -181,7 +181,7 @@ class Chime {
                 const c = arr(await this._call(am, 'getListMainConnections')).find((x) => x && x.sourceID === sourceID && x.sinkID === SINK);
                 state = c ? c.connectionState : null;
             }
-            step('з\'єднання ' + sourceID + ' > ' + SINK + ': ' + (state === 2 ? 'є' : 'стан ' + state));
+            step('connect ' + sourceID + '>' + SINK + ': ' + (state === 2 ? 'connected' : 'state ' + state));
             if (!this.mp[R.inst]) this.mp[R.inst] = await this._proxy(MP, R.inst, 5000);
             const p = await this._call(this.mp[R.inst], 'playFile', { path: file, languageCode: 0 });
             step('playFile: ' + short(p));
@@ -191,19 +191,19 @@ class Chime {
             try {
                 ps = await Promise.race([new Promise((res) => setImmediate(() => res(mp.getValue ? mp.getValue('playerState', 2000) : null))), wait(2500).then(() => null)]);
             } catch (e) { ps = 'error ' + e.message; }
-            if (ps !== null && ps !== undefined) step('плеєр: ' + short(ps));
+            if (ps !== null && ps !== undefined) step('player: ' + short(ps));
             last.ok = true;
             await this._w(STYLES[last.style].len * 1000 + 500);
         };
-        return run().catch((e) => { step('помилка: ' + (e && e.message || e)); })
+        return run().catch((e) => { step('error: ' + (e && e.message || e)); })
             .then(async () => {
                 if (conn !== null && conn !== undefined && this.am) {
-                    try { step('відключено: ' + short(await this._call(this.am, 'disconnect', { mainConnectionID: conn }))); } catch (e) { step('відключення: ' + e.message); }
+                    try { step('disconnect: ' + short(await this._call(this.am, 'disconnect', { mainConnectionID: conn }))); } catch (e) { step('disconnect: ' + e.message); }
                     this._remember(null);
                 }
                 if (prev && this.am) {
                     await this._w(500);
-                    try { step('повернуто джерело ' + prev.sourceID + ': ' + short(await this._call(this.am, 'connect', { sourceID: prev.sourceID, sinkID: SINK }))); } catch (e) { step('повернення джерела: ' + e.message); }
+                    try { step('back to source ' + prev.sourceID + ': ' + short(await this._call(this.am, 'connect', { sourceID: prev.sourceID, sinkID: SINK }))); } catch (e) { step('back to source: ' + e.message); }
                 }
                 last.done = true;
                 this.busy = false;

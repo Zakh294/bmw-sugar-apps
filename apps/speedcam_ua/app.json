@@ -1,8 +1,8 @@
 {
   "id": "speedcam_ua",
-  "title": "SpeedCam UA",
-  "description": "Офлайн-попередження про 426 стаціонарних камер автофіксації України на HUD, приладці та всередині мапи Waze / Google (Maps on cluster), за GPS машини, без телефона",
-  "version": "0.4.0",
+  "title": "SpeedCam",
+  "description": "Офлайн-попередження про камери швидкості на HUD, приладці та в мапі Waze / Google: Україна (офіційний список поліції), Європа та США (OpenStreetMap), 8 мов, оновлення баз раз на місяць",
+  "version": "0.5.0",
   "vendor": "custom",
   "loggingId": "OASC",
   "iconGlyph": "CAM",
@@ -45,28 +45,109 @@
     {
       "name": "MAIN",
       "kind": "canvas",
-      "title": "SpeedCam UA",
+      "title": "SpeedCam",
       "buttons": [
         [
           "BTN_TEST",
           "Тест попередження"
         ],
         [
-          "BTN_AUDIO",
-          "Аудіо-джерела"
+          "BTN_DB",
+          "Бази камер"
         ],
         [
           "BTN_SOUND",
           "Тест звуку"
         ],
         [
+          "BTN_AUDIO",
+          "Діагностика"
+        ],
+        [
           "BTN_SETTINGS",
           "Налаштування"
+        ]
+      ]
+    },
+    {
+      "name": "DB",
+      "kind": "menu",
+      "title": "Бази камер",
+      "items": [
+        [
+          "twocol",
+          "DB_INFO",
+          "Активні"
+        ],
+        [
+          "checkbox",
+          "DB_AUTO",
+          "Автоматично: база країни, де машина"
+        ],
+        [
+          "button",
+          "DB_UPDATE",
+          "Перевірити оновлення зараз"
+        ],
+        [
+          "button",
+          "DB_STATUS",
+          "—"
+        ],
+        [
+          "button",
+          "DB_GROUPS",
+          "Україна"
+        ],
+        [
+          "checkbox",
+          "DB_LIST",
+          "—"
         ]
       ]
     }
   ],
   "settings": [
+    {
+      "key": "lang",
+      "label": "Мова / Language",
+      "type": "choice",
+      "default": "uk",
+      "options": [
+        [
+          "uk",
+          "Українська"
+        ],
+        [
+          "en",
+          "English"
+        ],
+        [
+          "de",
+          "Deutsch"
+        ],
+        [
+          "pl",
+          "Polski"
+        ],
+        [
+          "fr",
+          "Français"
+        ],
+        [
+          "it",
+          "Italiano"
+        ],
+        [
+          "es",
+          "Español"
+        ],
+        [
+          "cs",
+          "Čeština"
+        ]
+      ]
+    },
     {
       "key": "enabled",
       "label": "Попередження про камери",
@@ -86,6 +167,42 @@
         [
           "over",
           "Лише коли перевищую ліміт"
+        ]
+      ]
+    },
+    {
+      "key": "banned",
+      "label": "Країни, де попередження заборонені (DE, CH…)",
+      "type": "choice",
+      "default": "off",
+      "options": [
+        [
+          "off",
+          "Вимкнено (за законом)"
+        ],
+        [
+          "on",
+          "Увімкнено: відповідальність на мені"
+        ]
+      ]
+    },
+    {
+      "key": "units",
+      "label": "Одиниці",
+      "type": "choice",
+      "default": "auto",
+      "options": [
+        [
+          "auto",
+          "Як у країні камери"
+        ],
+        [
+          "kmh",
+          "км/год"
+        ],
+        [
+          "mph",
+          "миль/год"
         ]
       ]
     },
@@ -303,9 +420,16 @@
       "label": "Вночі тьмяніше (за сонцем у місці, де машина)",
       "type": "bool",
       "default": true
+    },
+    {
+      "key": "autoUpdate",
+      "label": "Оновлювати бази раз на місяць",
+      "type": "bool",
+      "default": true
     }
   ],
   "config": {
-    "socketPath": "/dev/shm/cluster-render/render.sock"
+    "socketPath": "/dev/shm/cluster-render/render.sock",
+    "packsUrl": "https://raw.githubusercontent.com/Zakh294/bmw-sugar-apps/main/apps/speedcam_ua/packs/"
   }
 }

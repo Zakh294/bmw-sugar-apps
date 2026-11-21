@@ -25,7 +25,9 @@ const PASS_M = 90;              // closer than this, then further again: passed
 const COOL_MS = 120000;         // a passed camera is quiet this long
 const PAIR_M = 200;             // ... and so are the cameras this close to it (the other carriageway's, 70 such pairs)
 const MIN_KMH = 8;              // no new alerts slower than this
-const FINE_OVER = 20;           // Ukraine: fined above the limit + 20 km/h
+const FINE_OVER = 20;           // red past the limit + 20 km/h (Ukraine fines from there)
+const ZONE_M = 2000;            // a danger zone (France) starts this far before the camera ...
+const ZONE_FAST_M = 4000;       // ... at motorway speed (110 km/h and over)
 
 class Track {
     constructor() { this.anchor = null; this.heading = null; this.headingT = 0; }
@@ -45,16 +47,32 @@ class Track {
 
 class AlertEngine {
     /**
-     * cameras: [{ id, lat, lon, limit, label }]; opts(): { lead (s), minWarn (m), maxWarn (m), tolerance (km/h) }
+     * cameras: [{ id, lat, lon, limit (km/h or null), label, legal ('ok' | 'zones'), units }]; opts(): { lead (s), minWarn (m), maxWarn (m), tolerance (km/h) }
      * (read on every update, so a settings change works at once).
      */
     constructor(cameras, opts) {
-        this.index = new geo.GridIndex(cameras);
+        this.setCameras(cameras);
         this.opts = typeof opts === 'function' ? opts : () => (opts || {});
         this.track = new Track();
         this.active = null;        // { cam, minD, lastD, growing }
         this.cool = new Map();     // id -> t until quiet
         this.lastFix = null;
+    }
+
+    /** A new camera list (the packs in use changed): the camera being warned about stays until it is passed. */
+    setCameras(cameras) {
+        this.index = new geo.GridIndex(cameras);
+        this.count = cameras.length;
+        this.hasZones = cameras.some((c) => c.legal === 'zones');
+    }
+
+    /**
+     * Where a camera's warning starts. A "zones" country (France) may only be told of a danger zone, never of the
+     * camera's place: the zone starts 2 km before it, 4 km at motorway speed, so it does not give the place away.
+     */
+    warnFor(cam, speedKmh) {
+        const d = this.warnDistance(speedKmh);
+        return cam && cam.legal === 'zones' ? Math.max(d, speedKmh >= 110 ? ZONE_FAST_M : ZONE_M) : d;
     }
 
     warnDistance(speedKmh) {
@@ -72,7 +90,8 @@ class AlertEngine {
 
     _alert(a, speed) {
         const d = Math.round(a.lastD / 10) * 10;
-        return { id: a.cam.id, cam: a.cam, dist: d, limit: a.cam.limit, speed: Math.round(speed), over: this._over(speed, a.cam.limit), label: a.cam.label };
+        return { id: a.cam.id, cam: a.cam, dist: d, limit: a.cam.limit, speed: Math.round(speed), over: this._over(speed, a.cam.limit), label: a.cam.label,
+            zone: a.cam.legal === 'zones', units: a.cam.units || 'kmh' };
     }
 
     update(fix, speedKmh) {
@@ -90,7 +109,7 @@ class AlertEngine {
             a.growing = d > a.lastD + 3 ? a.growing + 1 : d < a.lastD - 3 ? 0 : a.growing;
             a.minD = Math.min(a.minD, d);
             a.lastD = d;
-            const passed = behind || (a.minD < PASS_M && a.growing >= 2) || d > this.warnDistance(speed) + 400;
+            const passed = behind || (a.minD < PASS_M && a.growing >= 2) || d > this.warnFor(c, speed) + 400;
             if (!passed) return this._alert(a, speed);
             this.cool.set(c.id, fix.t + COOL_MS);
             this.index.near(c.lat, c.lon, PAIR_M).forEach((n) => this.cool.set(n.item.id, fix.t + COOL_MS));
@@ -98,11 +117,11 @@ class AlertEngine {
         }
 
         if (heading === null || speed < MIN_KMH) return null;
-        const reach = this.warnDistance(speed);
+        const reach = this.hasZones ? this.warnFor({ legal: 'zones' }, speed) : this.warnDistance(speed);
         const near = this.index.near(fix.lat, fix.lon, reach);
         for (const n of near) {
             const c = n.item;
-            if (this.cool.has(c.id)) continue;
+            if (this.cool.has(c.id) || n.d > this.warnFor(c, speed)) continue;
             const diff = Math.abs(geo.angleDiff(heading, geo.bearing(fix.lat, fix.lon, c.lat, c.lon)));
             if (diff > (n.d < NEAR_M ? AHEAD_NEAR_DEG : AHEAD_DEG)) continue;
             this.active = { cam: c, minD: n.d, lastD: n.d, growing: 0 };

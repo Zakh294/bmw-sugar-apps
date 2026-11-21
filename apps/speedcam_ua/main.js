@@ -1,53 +1,55 @@
 'use strict';
 /**
- * SpeedCam UA - offline warnings for Ukraine's automatic speed cameras on the HUD and the instrument cluster.
+ * SpeedCam - offline warnings for speed cameras on the HUD and the instrument cluster: Ukraine (the Patrol Police's
+ * official list), Europe and the USA (OpenStreetMap), in eight languages.
  *
  * Runs in the background from start-up (app.json "autostart"): the car's position from its own navigation
- * (position.js), the official camera list built in (cameras.js, no internet), the warning logic (alerts.js) and the
- * picture on the HUD / cluster through cluster-render (overlay.js). The page on the center screen only shows the
- * state and has the test button; it is not needed for the warnings.
+ * (position.js), the camera packs built in and updated once a month (packs.js, updater.js), the warning logic
+ * (alerts.js), the picture on the HUD / cluster through cluster-render (overlay.js) and a chime (chime.js).
+ * Where a country does not allow camera warnings while driving, they are off unless the owner switches them on
+ * (setting "banned"); in France only a danger zone is shown, never the camera's place.
+ * The page on the center screen shows the state; "Camera databases" chooses the packs. Not needed for the warnings.
  * Plain Node 8 (the car's 8.16.2).
  */
 const fs = require('fs');
 const path = require('path');
 const mgu = require('./kit/mgu');
-const DB = require('./cameras');
 const { PositionSource, mono } = require('./position');
 const { AlertEngine } = require('./alerts');
 const { Overlay } = require('./overlay');
+const { Packs } = require('./packs');
+const { Updater } = require('./updater');
+const badge = require('./badge');
+const lang = require('./lang');
 const sun = require('./sun');
 const sound = require('./sound');
 const { Chime } = require('./chime');
 const geo = require('./geo');
+
 let CANDS;
 try { CANDS = require('./position_candidates'); } catch (e) { CANDS = { list: [], note: 'position_candidates.js missing' }; }
 
 const W = 1600, H = 520;
 const SPEED = { iface: 'de.bmw.infotainment.vehicle.Vehicle2', field: 'statusCarSpeed2', factor: 0.015625, invalid: 65535 };
-
-/** "М-06, км 21+730" on a road, "Львів, вул. Городоцька, 120" in a city (the kit's cyrillic atlas draws it). */
-function cameras() {
-    return DB.rows.map((r) => ({
-        id: r[0], lat: r[1], lon: r[2], limit: r[3],
-        label: r[4] ? r[4] + ', км ' + r[5] : String(r[6]).replace(/^м\.\s*/, '') + ', ' + r[7],
-    }));
-}
+const BUTTONS = { BTN_TEST: 'btn_test', BTN_DB: 'btn_db', BTN_SOUND: 'btn_sound', BTN_AUDIO: 'btn_audio', BTN_SETTINGS: 'btn_settings' };
+const GROUPS = ['ua', 'eu', 'us'];
 
 /** A made-up camera run for the test button: 800 m to 0 in 12 s, then 2 s past it. */
-function testAlert(test, speed) {
+function testAlert(test, speed, tr) {
     const t = (Date.now() - test.t0) / 1000;
     const dist = Math.max(0, 800 - t * 800 / 12);
     const sp = speed > 5 ? Math.round(speed) : 72;
-    return { id: -1, dist: Math.round(dist / 10) * 10, limit: 50, speed: sp, over: sp > 70 ? 2 : sp > 50 ? 1 : 0, label: 'Тест: Львів, вул. Городоцька, 120' };
+    return { id: -1, dist: Math.round(dist / 10) * 10, limit: 50, speed: sp, over: sp > 70 ? 2 : sp > 50 ? 1 : 0, label: tr('test_label'), units: 'kmh', zone: false };
 }
 
 /** Everything that runs with or without the page. */
 function background(bg) {
     const { settings, signals, log } = bg;
-    const list = cameras();
-    const st = { speed: null, speedT: 0, fix: null, lastFixT: -1, alert: null, test: null, heading: null, alerts: 0 };
-    log.info('cameras: ' + list.length + ' (list of ' + DB.meta.fetched + '); position candidates: ' + CANDS.list.length +
-        (CANDS.note ? ' (' + CANDS.note + ')' : ''));
+    const tr = () => lang.make(settings.get('lang'));
+    lang.settings(settings.schema, settings.get('lang'));
+
+    const packs = new Packs({ dir: path.join(__dirname, 'packs'), dataDir: bg.dataDir, log });
+    const st = { speed: null, speedT: 0, fix: null, lastFixT: -1, alert: null, test: null, heading: null, alerts: 0, codes: [], count: 0, banned: null };
 
     const handlers = {};
     handlers[SPEED.field] = (v) => {
@@ -57,12 +59,32 @@ function background(bg) {
     if (signals && signals.watch) Promise.resolve(signals.watch(SPEED.iface, '1', handlers, log)).catch((e) => log.warn('speed: ' + e));
 
     const pos = new PositionSource(signals, log, CANDS.list).start();
-    const eng = new AlertEngine(list, () => ({ lead: settings.get('lead'), minWarn: settings.get('minWarn'), maxWarn: 1200, tolerance: settings.get('tolerance') }));
+    const eng = new AlertEngine([], () => ({ lead: settings.get('lead'), minWarn: settings.get('minWarn'), maxWarn: 1200, tolerance: settings.get('tolerance') }));
+
+    // the packs in use: the chosen ones + (automatic) the ones where the car is; looked at every 30 s and every 2 km
+    const refreshPacks = (force) => {
+        const codes = packs.active(st.fix);
+        if (!force && codes.join() === st.codes.join()) return;
+        const list = packs.cameras(codes);
+        eng.setCameras(list);
+        st.codes = codes;
+        st.count = list.length;
+        log.info('packs in use: ' + (codes.join(', ') || 'none') + ' (' + list.length + ' cameras)');
+    };
+    refreshPacks(true);
+    setInterval(() => { try { refreshPacks(false); } catch (e) { log.warn('packs: ' + e); } }, 30000);
+    const updater = new Updater({
+        packs, base: bg.spec.config && bg.spec.config.packsUrl, dataDir: bg.dataDir, log,
+        wanted: () => packs.wanted(st.codes), enabled: () => settings.get('autoUpdate') !== false,
+        onChange: () => { refreshPacks(true); if (st.onDb) st.onDb(); },
+    }).start();
+    log.info('cameras: ' + st.count + ' in ' + st.codes.join(', ') + '; position candidates: ' + CANDS.list.length + (CANDS.note ? ' (' + CANDS.note + ')' : ''));
+
     const ov = new Overlay(bg.spec.id, log, () => ({
         hud: settings.get('showHud'), cluster: settings.get('showCluster'), clusterPlace: settings.get('clusterPlace'),
         inMap: settings.get('inMap'), mapPlace: settings.get('mapPlace'),
         size: settings.get('size'), hudBright: settings.get('hudBright'), night: !!settings.get('nightDim') && st.night,
-        socketPath: bg.spec.config && bg.spec.config.socketPath,
+        socketPath: bg.spec.config && bg.spec.config.socketPath, tr: tr(), units: settings.get('units') || 'auto',
     })).start();
 
     // night: the sun below civil twilight where the car is (the middle of Ukraine until the first fix), once a minute
@@ -76,8 +98,9 @@ function background(bg) {
     };
     nightCheck();
     setInterval(nightCheck, 60000);
+
+    // the chime (chime.js) and the audio manager probe behind the diagnostics page (sound.js)
     st.audio = sound.probe(signals, log);
-    st.alsa = sound.alsaInfo();
     const chime = new Chime(signals, log, { dataDir: bg.dataDir });
     st.chime = chime;
     setTimeout(() => { chime.sweep().catch(() => {}); }, 25000);
@@ -93,30 +116,38 @@ function background(bg) {
         const miss = JSON.parse(fs.readFileSync(path.join(__dirname, 'kit', 'missing-interfaces.json'), 'utf8'));
         st.mpMissing = Object.keys(miss).filter((k) => /mediaplayer|commandcontrol/i.test(k)).map((k) => k.replace(/^.*\.(\w+:?)/, '$1')).join('; ') || null;
     } catch (e) { st.mpMissing = null; }
-    log.info('audio: alsa cards ' + JSON.stringify(st.alsa.cards) + ', pcm ' + JSON.stringify(st.alsa.pcm)
-        + ', asound.conf ' + JSON.stringify(st.alsa.confPcm) + ', players ' + JSON.stringify(st.alsa.players));
 
     const tick = () => {
         try {
             const speed = st.speed !== null && mono() - st.speedT < 5000 ? st.speed : 0;
             const fix = pos.fix();
             st.fix = fix;
+            // moved 2 km since the packs were last looked at (or crossed into another country): look again
+            if (fix && (!st.packFix || geo.distance(fix.lat, fix.lon, st.packFix.lat, st.packFix.lon) > 2000)) { st.packFix = fix; refreshPacks(false); }
             let alert = null;
-            if (st.test && Date.now() - st.test.t0 < 14000) alert = testAlert(st.test, speed);
+            if (st.test && Date.now() - st.test.t0 < 14000) alert = testAlert(st.test, speed, tr());
             else {
                 st.test = null;
                 if (settings.get('enabled') && fix && fix.t !== st.lastFixT) {
                     st.lastFixT = fix.t;
                     st.alert = eng.update(fix, speed);
                     st.heading = eng.track.heading;
-                    if (st.alert && (!st.prev || st.prev.id !== st.alert.id)) { st.alerts++; log.info('camera ahead: #' + st.alert.id + ' ' + st.alert.label + ', ' + st.alert.dist + ' m'); }
+                    if (st.alert && (!st.prev || st.prev.id !== st.alert.id)) { st.alerts++; log.info('camera ahead: ' + st.alert.id + ' ' + st.alert.label + ', ' + st.alert.dist + ' m'); }
                     st.prev = st.alert;
                 } else if (!settings.get('enabled') || !fix) st.alert = null;
                 alert = st.alert;
-                // "only when I'm over the limit": the warning stays off while the speed is within it (+ tolerance)
-                if (alert && settings.get('showWhen') === 'over' && !alert.over) alert = null;
+                // a country that does not allow the warnings while driving: nothing shown, unless the owner chose so
+                if (alert && alert.cam && alert.cam.legal === 'banned' && settings.get('banned') !== 'on') {
+                    st.banned = { pack: alert.cam.pack, t: Date.now() };
+                    alert = null;
+                }
+                // "only when I'm over the limit": the warning stays off while the speed is within it (+ tolerance);
+                // a camera with no known limit is always shown
+                if (alert && settings.get('showWhen') === 'over' && !alert.over && alert.limit > 0) alert = null;
             }
-            ov.show(alert, eng.warnDistance(speed));
+            const warn = alert && alert.cam ? eng.warnFor(alert.cam, speed) : eng.warnDistance(speed);
+            ov.show(alert, warn);
+            st.shown = alert;
             // the chime: when a warning appears, and again when the speed goes over its limit
             const key = alert ? (alert.id === -1 ? 'test' + st.test.t0 : alert.id) : null;
             if (key !== st.chimed.key) { if (key !== null) st.ding('alert'); st.chimed = { key, over: !!(alert && alert.over) }; }
@@ -125,40 +156,98 @@ function background(bg) {
     };
     setInterval(tick, 250);
     process.on('exit', () => ov.stop());
-    return { st, pos, eng, ov, list };
+    return { st, pos, eng, ov, packs, updater, refreshPacks, tr };
 }
 
-/** The sound probe in full: every source and sink of the audio manager, likely chime carriers in yellow, ALSA below. */
-function audioPage(st, L, c) {
+function fmtAge(s, tr) { return s === null ? '–' : s < 2 ? tr('now') : s < 120 ? tr('s_ago', { n: s }) : tr('min_ago', { n: Math.round(s / 60) }); }
+
+function packName(m, tr) { return !m ? '' : m.group === 'eu' ? m.name : m.group === 'us' ? m.en : tr('group_ua'); }
+
+/** The diagnostics page: every source and sink of the audio manager, likely chime carriers in yellow, the last chime. */
+function audioPage(st, L, c, tr) {
     const au = st.audio || {};
-    L('АУДІО-ДЖЕРЕЛА', 40, 50, 36);
-    L('жовтим: можуть підійти для сигналу · ще раз «Аудіо-джерела» — назад', 400, 48, 22, c.dim);
-    if (!au.done) { L(au.tries ? 'аудіосистема ще не готова, спроба ' + au.tries + '…' : 'чекаю на аудіосистему…', 40, 110, 28, c.warn); }
-    else if (!au.sources.length) { L('немає відповіді: ' + String(au.error || '').slice(0, 90), 40, 110, 26, c.bad); }
+    L(tr('diag'), 40, 50, 36);
+    L(tr('diag_hint'), 520, 48, 22, c.dim);
+    if (!au.done) L(au.tries ? tr('audio_try', { n: au.tries }) : tr('audio_wait'), 40, 110, 28, c.warn);
+    else if (!au.sources.length) L(tr('audio_none', { e: String(au.error || '').slice(0, 90) }), 40, 110, 26, c.bad);
     const sinks = (au.sinks || []).map((s) => s.id + ' ' + s.name).join(' · ');
-    L('ВИХОДИ (' + (au.sinks || []).length + ')', 40, 92, 20, c.dim);
-    L(sinks.slice(0, 120), 200, 92, 20);
+    L(tr('sinks') + ' (' + (au.sinks || []).length + ')', 40, 92, 20, c.dim);
+    L(sinks.slice(0, 120), 220, 92, 20);
     const src = au.sources || [], ROWS = 16, COLW = 390;
-    L('ДЖЕРЕЛА (' + src.length + ')', 40, 124, 20, c.dim);
+    L(tr('sources') + ' (' + src.length + ')', 40, 124, 20, c.dim);
     src.slice(0, ROWS * 4).forEach((s, i) => {
         const x = 40 + Math.floor(i / ROWS) * COLW, y = 146 + (i % ROWS) * 20;
         L(s.id + ' ' + String(s.name).slice(0, 26) + (s.cls !== undefined ? ' ·' + s.cls : ''), x, y, 18, sound.CANDIDATE.test(s.name) ? c.warn : '#ffffff');
     });
-    if (src.length > ROWS * 4) L('+ ще ' + (src.length - ROWS * 4) + ' (повний список у лозі)', 40 + 3 * COLW, 146 + ROWS * 20, 18, c.dim);
+    if (src.length > ROWS * 4) L(tr('more_in_log', { n: src.length - ROWS * 4 }), 40 + 3 * COLW, 146 + ROWS * 20, 18, c.dim);
     const yy = 146 + ROWS * 20 + 4, ch = st.chime && st.chime.last;
-    L('ТЕСТ ЗВУКУ', 40, yy, 20, c.dim);
-    if (!ch) L('ще не було · кнопка «Тест звуку» внизу (маршрут — у Налаштуваннях: «Звук попередження»)', 200, yy, 20);
+    L(tr('sound_test'), 40, yy, 20, c.dim);
+    if (!ch) L(tr('sound_test_none'), 220, yy, 20);
     else {
-        L(ROUTE_UA[ch.route] + ' · «' + (STYLE_UA[ch.style] || ch.style) + '»' + (ch.done ? '' : ' · грає…') + ' · ' + new Date(ch.at).toTimeString().slice(0, 8), 200, yy, 20, ch.done ? (ch.ok ? c.ok : c.bad) : c.warn);
-        L(ch.steps.join(' · ').slice(0, 150), 200, yy + 24, 18);
+        L(tr('route_' + ch.route) + ' · ' + ch.style + (ch.done ? '' : ' · ' + tr('chime_playing')) + ' · ' + new Date(ch.at).toTimeString().slice(0, 8), 220, yy, 20, ch.done ? (ch.ok ? c.ok : c.bad) : c.warn);
+        L(ch.steps.join(' · ').slice(0, 150), 220, yy + 24, 18);
     }
-    if (st.mpMissing) L('немає на блоці: ' + st.mpMissing.slice(0, 60), 900, yy, 18, c.bad);
+    if (st.mpMissing) L(tr('unit_lacks', { x: st.mpMissing.slice(0, 60) }), 900, yy, 18, c.bad);
 }
 
-const STYLE_UA = { ding: 'дзень', gong: 'гонг', beep3: 'три біпи', soft: 'м\'який', radar: 'радар', alarm: 'тривога' };
-const ROUTE_UA = { overlay: 'поверх музики (OAPGenericOverlay)', interrupt: 'перериває музику (OAPGenericInterrupt)', media: 'через медіаплеєр (OAPGenericMedia)' };
-
-function fmtAge(s) { return s === null ? '–' : s < 2 ? 'щойно' : s < 120 ? s + ' с тому' : Math.round(s / 60) + ' хв тому'; }
+/** The "Camera databases" screen: the active packs, automatic, the update, the groups and the packs of one group. */
+function dbScreen(ctx, core) {
+    const { ui } = ctx, { packs, updater, st } = core;
+    let group = 'ua';
+    let rows = [];                  // the DB_LIST rows: { all: true } or { code }
+    const legalTxt = (m, tr) => (m.legal === 'banned' ? ' · ' + tr('legal_banned') : m.legal === 'zones' ? ' · ' + tr('legal_zones') : '');
+    const date = (t) => (t ? new Date(t).toISOString().slice(0, 10) : '–');
+    const render = () => {
+        const tr = core.tr(), all = packs.list();
+        const ust = updater.state;
+        ui.cells('DB_INFO', 0, { Text1stCol: tr('db_active', { list: st.codes.map((c) => c.toUpperCase()).join(', ') || '–' }), Text2ndCol: tr('db_cams', { n: st.count }) });
+        ui.text('DB_AUTO', tr('db_auto'));
+        ui.checked('DB_AUTO', !!packs.choice.auto);
+        ui.text('DB_UPDATE', ust.checking ? tr('db_checking') : tr('db_update'));
+        ui.text('DB_STATUS', ust.error && !ust.ok ? tr('db_offline', { e: String(ust.error).slice(0, 40) })
+            : ust.last ? tr('db_checked', { d: date(ust.last), n: date(updater.next()) }) + (ust.updated ? ' · ' + tr('db_result', { n: ust.updated }) : '')
+                + (ust.error ? ' · ' + tr('db_offline', { e: String(ust.error).slice(0, 30) }) : '')
+                : tr('db_never'));
+        ui.rows('DB_GROUPS', GROUPS.length);
+        GROUPS.forEach((g, i) => {
+            const inG = all.filter((m) => m.group === g), on = inG.filter((m) => packs.chosen(m.code)).length;
+            ui.text('DB_GROUPS', (g === group ? '▸ ' : '') + tr('group_' + g) + ' · ' + tr('db_none_sel', { k: on, n: inG.length }), i);
+        });
+        const inGroup = all.filter((m) => m.group === group);
+        rows = (inGroup.length > 1 ? [{ all: true }] : []).concat(inGroup.map((m) => ({ code: m.code })));
+        ui.rows('DB_LIST', rows.length);
+        rows.forEach((r, i) => {
+            if (r.all) {
+                const allOn = inGroup.every((m) => packs.chosen(m.code));
+                ui.text('DB_LIST', tr('db_all') + ' (' + inGroup.length + ')', i);
+                ui.checked('DB_LIST', allOn, i);
+                return;
+            }
+            const m = packs.meta(r.code);
+            ui.text('DB_LIST', packName(m, tr) + ' · ' + (m.count || 0) + legalTxt(m, tr), i);
+            ui.checked('DB_LIST', packs.chosen(r.code), i);
+        });
+    };
+    st.onDb = () => { if (ui.isVisible('DB')) render(); };
+    ui.onClick('DB_AUTO', () => { packs.setAuto(!packs.choice.auto); core.refreshPacks(true); render(); });
+    ui.onClick('DB_UPDATE', () => { updater.check(true).then(render); render(); });
+    ui.onClick('DB_GROUPS', (ev) => { group = GROUPS[ev && ev.row] || group; render(); });
+    ui.onClick('DB_LIST', (ev) => {
+        const r = rows[ev && ev.row];
+        if (!r) return;
+        let get = [];
+        if (r.all) {
+            const inGroup = packs.list().filter((m) => m.group === group);
+            const on = !inGroup.every((m) => packs.chosen(m.code));
+            inGroup.forEach((m) => packs.toggle(m.code, on));
+            if (on) get = inGroup.filter((m) => m.src === 'remote').map((m) => m.code);
+        } else if (packs.toggle(r.code) && packs.meta(r.code).src === 'remote') get = [r.code];
+        core.refreshPacks(true);
+        render();
+        if (get.length) updater.check(true, get).then(render);
+    });
+    return render;
+}
 
 mgu.run({
     background,
@@ -166,64 +255,98 @@ mgu.run({
         const { ui, settings } = ctx;
         const core = ctx.background || background(ctx);
         const st = core.st;
+        const labels = () => {
+            const tr = core.tr();
+            lang.settings(settings.schema, settings.get('lang'));
+            Object.keys(BUTTONS).forEach((b) => ui.text(b, tr(BUTTONS[b])));
+            // the HMI's own settings screen: the drop-downs' header and rows (the kit writes the check boxes' labels)
+            settings.schema.forEach((s) => {
+                const comp = 'SET_' + s.key.toUpperCase();
+                if (s.type === 'choice' && ui.comp(comp)) {
+                    ui.cells(comp, 0, { HeaderText: s.label });
+                    (s.options || []).forEach((o, i) => ui.cells(comp, i, { ItemText: o[1] }));
+                } else if (s.type === 'number' && ui.comp(comp)) ui.cells(comp, 0, { HeaderText: s.label });
+            });
+        };
+        labels();
+        settings.onChange((k) => { if (k === 'lang') labels(); });
+        const renderDb = dbScreen(ctx, core);
         ui.onClick('BTN_TEST', () => { st.page = null; st.test = { t0: Date.now() }; ctx.log.info('test warning'); });
         ui.onClick('BTN_SOUND', () => { st.page = 'audio'; st.ding('button'); });
         ui.onClick('BTN_AUDIO', () => { st.page = st.page === 'audio' ? null : 'audio'; });
+        ui.onClick('BTN_DB', () => { renderDb(); return ui.open('DB'); });
 
         const render = async () => {
+            const tr = core.tr();
             const t = ctx.theme(), cv = ctx.canvas(W, H).clear(t.bg);
             const L = (s, x, y, size, c) => cv.text(String(s), x, y, size, c || '#ffffff', { literal: true });
             const dim = '#8a93a0', ok = '#2fd27a', warn = '#ffb31a', bad = '#ff4040';
-            if (st.page === 'audio') { audioPage(st, L, { dim, ok, warn, bad }); await ui.image('MAIN_GFX', cv); return; }
-            const km = (d) => (d >= 10000 ? Math.round(d / 1000) + ' км' : d >= 1000 ? (d / 1000).toFixed(1).replace('.', ',') + ' км' : Math.round(d) + ' м');
-            L('SpeedCam UA', 40, 56, 44);
-            L(core.list.length + ' камер · офіційний список від ' + DB.meta.fetched + ' (patrolpolice.gov.ua)', 360, 54, 24, dim);
+            if (st.page === 'audio') { audioPage(st, L, { dim, ok, warn, bad }, tr); await ui.image('MAIN_GFX', cv); return; }
+            const unitsFor = (cam) => (settings.get('units') === 'kmh' || settings.get('units') === 'mph' ? settings.get('units') : cam && cam.units === 'mph' ? 'mph' : 'kmh');
+            const dist = (d, u) => { const f = badge.fmtDist(d, u, tr); return f.v + ' ' + f.u; };
+            L('SpeedCam', 40, 56, 44);
+            const names = st.codes.map((c) => packName(core.packs.meta(c), tr)).join(', ');
+            L(tr('cams_info', { n: st.count, packs: names.length > 70 ? st.codes.map((c) => c.toUpperCase()).join(', ') : names }).slice(0, 110), 300, 54, 24, dim);
 
             const fix = st.fix, ps = core.pos.status();
             let y = 112;
-            L('ПОЗИЦІЯ', 40, y, 22, dim);
+            L(tr('position'), 40, y, 22, dim);
             if (fix) {
                 L(fix.lat.toFixed(5) + ', ' + fix.lon.toFixed(5), 250, y, 30, ok);
-                L('з ' + fix.src + (st.heading !== null ? ', курс ' + Math.round(st.heading) + '°' : ', курс: проїдьте трохи'), 650, y, 24, dim);
+                L(tr('from_src', { src: fix.src }) + ', ' + (st.heading !== null ? tr('heading', { deg: Math.round(st.heading) }) : tr('heading_wait')), 650, y, 24, dim);
             } else if (!CANDS.list.length) {
-                L('GPS-джерело не знайдено на цьому блоці', 250, y, 30, bad);
-                L('див. docs/speedcam_ua: find_position.js', 900, y, 22, dim);
+                L(tr('no_gps'), 250, y, 30, bad);
+                L(tr('see_docs'), 900, y, 22, dim);
             } else {
-                L('чекаю на навігацію (джерел: ' + CANDS.list.length + ')', 250, y, 30, warn);
+                L(tr('waiting_nav', { n: CANDS.list.length }), 250, y, 30, warn);
             }
             y += 46;
-            L('ШВИДКІСТЬ', 40, y, 22, dim);
-            L(st.speed === null ? '–' : Math.round(st.speed) + ' км/год', 250, y, 30);
             const n = core.eng.nearest(fix);
-            L('НАЙБЛИЖЧА', 560, y, 22, dim);
-            L(n ? km(n.d) + ' · ' + n.cam.limit + ' · ' + n.cam.label : '–', 720, y, 26);
+            const nu = unitsFor(n && n.cam);
+            L(tr('speed'), 40, y, 22, dim);
+            L(st.speed === null ? '–' : badge.inUnits(st.speed, nu) + ' ' + tr(nu), 250, y, 30);
+            L(tr('nearest'), 560, y, 22, dim);
+            if (n) {
+                const u = unitsFor(n.cam);
+                L(dist(n.d, u) + ' · ' + (n.cam.limit ? badge.inUnits(n.cam.limit, u) : '?') + ' · ' + (n.cam.legal === 'zones' ? tr('zone_hint') : n.cam.label), 760, y, 26);
+            } else L('–', 760, y, 26);
             y += 46;
-            const a = st.test ? null : st.alert;
-            L('КАМЕРА', 40, y, 22, dim);
-            L(st.test ? 'тест: дивіться на HUD і приладку' : a ? 'через ' + a.dist + ' м, ліміт ' + a.limit + ' · ' + a.label
-                : settings.get('enabled') ? 'немає поруч (за поїздку: ' + st.alerts + ')' : 'попередження вимкнені (Налаштування)', 250, y, 28, st.test || a ? warn : '#ffffff');
+            const a = st.test ? null : st.shown;
+            L(tr('camera_row'), 40, y, 22, dim);
+            const banned = st.banned && Date.now() - st.banned.t < 60000 ? packName(core.packs.meta(st.banned.pack), tr) : null;
+            L(st.test ? tr('test_look')
+                : a && a.zone ? tr('in_zone', { label: packName(core.packs.meta(a.cam.pack), tr) })
+                    : a ? tr('in_dist', { d: dist(a.dist, unitsFor(a.cam)), l: a.limit ? badge.inUnits(a.limit, unitsFor(a.cam)) : '?', label: a.label })
+                        : banned ? tr('banned_here', { country: banned })
+                            : settings.get('enabled') ? tr('none_near', { n: st.alerts }) : tr('disabled'), 250, y, 28, st.test || a ? warn : banned ? dim : '#ffffff');
             y += 46;
             const ov = core.ov.status();
-            L('ЕКРАНИ', 40, y, 22, dim);
-            L(ov.connected ? 'cluster-render підключено' : 'cluster-render недоступний (встановіть зі Store)', 250, y, 26, ov.connected ? ok : bad);
-            L(ov.phoneMap ? 'мапа телефона ' + (ov.phoneMap === 'on the cluster' ? 'на приладці' : 'в темі приладки') + (settings.get('inMap') ? ': банер у мапі' : '') : 'мапи телефона на приладці немає', 820, y, 22, ov.phoneMap ? ok : dim);
+            L(tr('screens'), 40, y, 22, dim);
+            L(ov.connected ? tr('cr_ok') : tr('cr_missing'), 250, y, 26, ov.connected ? ok : bad);
+            L(ov.phoneMap ? tr('phone_map') + (settings.get('inMap') ? tr('banner_in_map') : '') : tr('no_phone_map'), 820, y, 22, ov.phoneMap ? ok : dim);
+            y += 46;
+            const ust = core.updater.state;
+            L(tr('databases'), 40, y, 22, dim);
+            L((st.codes.map((c) => c.toUpperCase()).join(', ') || '–') + ' · ' + (ust.checking ? tr('db_checking')
+                : ust.last ? tr('db_checked', { d: new Date(ust.last).toISOString().slice(0, 10), n: new Date(core.updater.next()).toISOString().slice(0, 10) }) : tr('db_never')), 250, y, 24);
             y += 52;
-            L('ДЖЕРЕЛА GPS НА БЛОЦІ' + (CANDS.built ? ' (знайдено ' + CANDS.built + ')' : ''), 40, y, 22, dim);
+            L(tr('gps_sources') + (CANDS.built ? ' (' + tr('found_on', { d: CANDS.built }) + ')' : ''), 40, y, 22, dim);
             ps.slice(0, 3).forEach((c, i) => {
                 const yy = y + 34 + i * 30;
                 const col = c.inUse ? ok : c.count ? '#ffffff' : c.error ? bad : dim;
                 L((c.inUse ? '> ' : '  ') + c.name, 40, yy, 22, col);
-                L(c.error ? 'помилка: ' + c.error.slice(0, 50) : c.count ? c.count + ' фіксів, ' + (c.scale || '?') + ', ' + fmtAge(c.age) : c.misses ? c.misses + ' значень без координат' : 'ще нічого', 900, yy, 22, col);
+                L(c.error ? tr('error', { e: c.error.slice(0, 50) }) : c.count ? tr('fixes', { n: c.count, scale: c.scale || '?', age: fmtAge(c.age, tr) })
+                    : c.misses ? tr('no_coords', { n: c.misses }) : tr('nothing_yet'), 900, yy, 22, col);
             });
             const au = st.audio || {};
             const ch = st.chime && st.chime.last;
-            const auLine = !ch ? null : 'сигнал ' + (ch.done ? (ch.ok ? 'надіслано' : 'не пройшов') : 'грає…') + ': ' + ch.steps.slice(-1).join('').slice(0, 70) + ' · деталі: «Аудіо-джерела»';
-            L('ЗВУК', 40, y + 34 + 3 * 30 + 14, 22, dim);
-            L(auLine ? auLine : !au.done ? (au.tries ? 'аудіосистема ще не готова, спроба ' + au.tries + '…' : 'чекаю на аудіосистему…') : au.error && !au.sources.length ? 'немає відповіді: ' + String(au.error).slice(0, 60)
-                : au.sources.length + ' джерел, ' + au.sinks.length + ' виходів · повний список: кнопка «Аудіо-джерела» внизу', 330, y + 34 + 3 * 30 + 14, 22, au.done && au.sources.length ? '#ffffff' : dim);
+            const auLine = !ch ? null : (ch.done ? (ch.ok ? tr('chime_sent') : tr('chime_failed')) : tr('chime_playing')) + ': ' + ch.steps.slice(-1).join('').slice(0, 70) + ' · ' + tr('details_audio');
+            const sy = y + 34 + 3 * 30 + 14;
+            L(tr('sound'), 40, sy, 22, dim);
+            L(auLine ? auLine : !au.done ? (au.tries ? tr('audio_try', { n: au.tries }) : tr('audio_wait')) : au.error && !au.sources.length ? tr('audio_none', { e: String(au.error).slice(0, 60) })
+                : tr('audio_count', { s: au.sources.length, k: au.sinks.length }), 250, sy, 22, au.done && au.sources.length ? '#ffffff' : dim);
             await ui.image('MAIN_GFX', cv);
         };
         ctx.loop('MAIN', 2, render);
     },
 });
-
