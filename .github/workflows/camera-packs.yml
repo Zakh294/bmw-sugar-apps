@@ -29,9 +29,9 @@ jobs:
           python-version: '3.12'
       - name: Ukraine (the police list; kept as it is when the site does not answer)
         continue-on-error: true
-        run: python3 tools/speedcam_ua/import_cameras.py --fetch && python3 tools/speedcam_ua/gen_app_data.py
+        run: python3 -u tools/speedcam_ua/import_cameras.py --fetch && python3 tools/speedcam_ua/gen_app_data.py
       - name: Packs
-        run: python3 tools/speedcam_ua/build_packs.py
+        run: python3 -u tools/speedcam_ua/build_packs.py --minutes 90
       - name: Tests
         run: python3 test/speedcam_ua/packs_test.py
       - name: Commit

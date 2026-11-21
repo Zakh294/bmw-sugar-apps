@@ -8,7 +8,7 @@
 Sources
     ua      the official list of the Patrol Police (data/speedcam_ua/cameras.json, tools/speedcam_ua/import_cameras.py)
     Europe  OpenStreetMap, nodes highway=speed_camera, one Overpass query per country (regions: admin_level 4)
-    USA     OpenStreetMap, one Overpass query, one pack per state (ISO 3166-2 of the state's area)
+    USA     OpenStreetMap, one Overpass query and one pack per state (ISO 3166-2 of the state's area)
 OpenStreetMap data (c) OpenStreetMap contributors, ODbL 1.0: the packs built from it are under the ODbL too.
 
 A pack is a JSON array: [meta, row, row, ...], row = [id, lat, lon, limit km/h or null, label, direction deg or null].
@@ -35,7 +35,7 @@ MPH = 1.609344
 
 def query_country(iso):
     """All speed cameras of a country, then per admin_level 4 region: the region's tags and the ids in it."""
-    return ('[out:json][timeout:900];'
+    return ('[out:json][timeout:300];'
             'area["ISO3166-1"="%s"][admin_level=2][boundary=administrative]->.c;'
             'node(area.c)[highway=speed_camera]->.all;'
             '.all out qt;'
@@ -44,20 +44,32 @@ def query_country(iso):
             'foreach.regs->.r(.r out tags;node.all(area.r);out ids qt;);' % iso)
 
 
+def query_state(iso2):
+    """The speed cameras of one US state (ISO 3166-2, e.g. US-CA)."""
+    return ('[out:json][timeout:180];'
+            'area["ISO3166-2"="%s"][admin_level=4][boundary=administrative]->.s;'
+            'node(area.s)[highway=speed_camera];out qt;' % iso2)
+
+
+DEADLINE = [None]       # time.time() after which no new query starts (the workflow's time limit)
+
+
 def overpass(q, log, fixture=None):
     if fixture is not None:
         return fixture(q)
     body = urllib.parse.urlencode({'data': q}).encode()
     last = None
-    for attempt in range(6):
+    for attempt in range(4):
+        if DEADLINE[0] and time.time() > DEADLINE[0]:
+            raise RuntimeError('out of time')
         url = OVERPASS[attempt % len(OVERPASS)]
         try:
             req = urllib.request.Request(url, data=body, headers={'User-Agent': UA_AGENT})
-            return json.loads(urllib.request.urlopen(req, timeout=960).read().decode('utf-8'))
+            return json.loads(urllib.request.urlopen(req, timeout=330).read().decode('utf-8'))
         except Exception as e:  # noqa: BLE001 - any network / server error: try the next server, later
             last = e
-            log('  %s: %s, again in %d s' % (url, e, 20 * (attempt + 1)))
-            time.sleep(20 * (attempt + 1))
+            log('  %s: %s, again in %d s' % (url, e, 15 * (attempt + 1)))
+            time.sleep(15 * (attempt + 1))
     raise RuntimeError('Overpass failed: %s' % last)
 
 
@@ -183,19 +195,21 @@ def build(only=None, offline=False, fixture=None, log=print, today=None, pause=5
             failed.append(p['code'])
             log('%s: FAILED %s (pack kept)' % (p['code'], e))
         time.sleep(pause)
-    states = [p for p in packs if p['group'] == 'us']
-    if states:
+    for p in [p for p in packs if p['group'] == 'us']:
         try:
-            got = osm_rows(overpass(query_country('US'), log, fixture).get('elements', []))
-            by_state = {}
-            for rid, (rt, rows) in got.items():
-                by_state.setdefault(rt.get('ISO3166-2', ''), []).extend(rows)
-            for p in states:
-                write_pack(p, by_state.get(p['iso'], []), 'OpenStreetMap (Overpass)', OSM_NOTE, today, log)
-            log('us: %d cameras in %d states (%d outside a state)' % (sum(len(v) for k, v in by_state.items() if k), len([k for k in by_state if k]), len(by_state.get('', []))))
+            got = osm_rows(overpass(query_state(p['iso']), log, fixture).get('elements', []))
+            rows = [r for k in got for r in got[k][1]]
+            for r in rows:
+                if r[4].startswith('OSM '):
+                    r[4] = p['en']
+                elif p['en'] not in r[4]:
+                    r[4] = (r[4] + ' · ' + p['en'])[:48]
+            write_pack(p, rows, 'OpenStreetMap (Overpass)', OSM_NOTE, today, log)
+            log('%s: %d cameras' % (p['code'], len(rows)))
         except Exception as e:  # noqa: BLE001
-            failed.append('us')
-            log('us: FAILED %s (packs kept)' % e)
+            failed.append(p['code'])
+            log('%s: FAILED %s (pack kept)' % (p['code'], e))
+        time.sleep(pause)
     return write_index(today), failed
 
 
@@ -203,11 +217,14 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--only', help='comma-separated pack codes (us = every state)')
     ap.add_argument('--offline', action='store_true', help='Ukraine only, no network')
+    ap.add_argument('--minutes', type=float, default=0, help='start no new query after this many minutes (0: no limit)')
     a = ap.parse_args()
+    if a.minutes:
+        DEADLINE[0] = time.time() + a.minutes * 60
     index, failed = build(set(a.only.split(',')) if a.only else None, a.offline)
     print('index: %d packs, %d cameras; failed: %s' % (len(index['packs']), sum(p['count'] or 0 for p in index['packs'].values()), ', '.join(failed) or 'none'))
-    # some countries failing is normal for a busy Overpass (they are kept); all of them failing is an error
-    if failed and len(failed) >= len([p for p in all_packs() if p['group'] == 'eu']):
+    # some packs failing is normal for a busy Overpass (they are kept); all of them failing is an error
+    if failed and len(failed) >= len([p for p in all_packs() if p['group'] != 'ua']):
         sys.exit(1)
 
 

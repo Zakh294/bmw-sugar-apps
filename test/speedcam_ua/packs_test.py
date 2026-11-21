@@ -30,15 +30,10 @@ def fake(q):
             {'type': 'area', 'id': 3600130957, 'tags': {'name': 'województwo małopolskie', 'ISO3166-2': 'PL-12'}},
             {'type': 'node', 'id': 12}, {'type': 'node', 'id': 13},
         ]}
-    if '"ISO3166-1"="US"' in q:
-        return {'elements': [
-            {'type': 'node', 'id': 21, 'lat': 34.05, 'lon': -118.24, 'tags': {'highway': 'speed_camera', 'maxspeed': '35 mph'}},
-            {'type': 'node', 'id': 22, 'lat': 40.71, 'lon': -74.0, 'tags': {'highway': 'speed_camera', 'maxspeed': '25 mph'}},
-            {'type': 'area', 'id': 1, 'tags': {'name': 'California', 'name:en': 'California', 'ISO3166-2': 'US-CA'}},
-            {'type': 'node', 'id': 21},
-            {'type': 'area', 'id': 2, 'tags': {'name': 'New York', 'ISO3166-2': 'US-NY'}},
-            {'type': 'node', 'id': 22},
-        ]}
+    if '"ISO3166-2"="US-CA"' in q:
+        return {'elements': [{'type': 'node', 'id': 21, 'lat': 34.05, 'lon': -118.24, 'tags': {'highway': 'speed_camera', 'maxspeed': '35 mph'}}]}
+    if '"ISO3166-2"="US-NY"' in q:
+        return {'elements': [{'type': 'node', 'id': 22, 'lat': 40.71, 'lon': -74.0, 'tags': {'highway': 'speed_camera', 'maxspeed': '25 mph', 'name': 'Broadway'}}]}
     if '"ISO3166-1"="DE"' in q:
         raise RuntimeError('Overpass busy')
     return {'elements': []}
@@ -58,6 +53,8 @@ ok(ca[0]['units'] == 'mph' and ca[1][3] == 56.3 and ca[1][4] == 'California', 'u
 ok(failed == ['de'] and not os.path.exists(os.path.join(tmp, 'de.json')), 'a failed country is reported and no pack is written')
 ua = json.load(open(os.path.join(tmp, 'ua.json'), encoding='utf-8'))
 ok(ua[0]['count'] > 400 and ua[1][0].startswith('u'), 'ua pack from the police list (%d)' % ua[0]['count'])
+ny = json.load(open(os.path.join(tmp, 'us-ny.json'), encoding='utf-8'))
+ok(ny[1][4] == 'Broadway · New York', 'us-ny: the name and the state as label')
 ok(index['packs']['pl']['sha256'] and index['packs']['us-ny']['count'] == 1 and index['checked'] == '2026-12-01', 'index: sha256, counts, checked')
 
 # the next month, nothing changed: dates stay, only "checked" moves; a country that finds nothing keeps its cameras
