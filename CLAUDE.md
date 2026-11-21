@@ -9,7 +9,8 @@ Own apps for the BMW iDrive 7 head unit (MGU), installed through MGU Store as a 
   The Store build runs `tools/store_build.py <id>` with Python 3.12 on the car, then `kit/tools/build.py`.
 - `kit/` is the vendored MGU App Kit (cauliflowermossgrape, MIT); keep it unchanged apart from
   `kit/runtime/fonts/cyrillic.json` (Ukrainian atlas, `tools/bake_ukrainian_font.py`).
-- Work on `dev`; merge to `main` only when asked, tag `<id>-v<version>`. Bump `version` in `apps/<id>/app.json` for
+- Work on `dev`; merge to `main` only when asked. Before moving `main` past a version that worked in the car, keep it as
+  branch `release/<id>-<version>` (tag pushes are refused by the agent git proxy; branches work and the Store can use them). Bump `version` in `apps/<id>/app.json` for
   any change that should reach the car.
 - Before pushing: `node test/<id>/*.js` and `python3 kit/tools/build.py --preview-only <id>`.
 - Never commit SSH keys, tokens, VIN-specific backups (FA, SVT, coding, E-Sys files).
