@@ -6,7 +6,7 @@ name: camera packs
 
 on:
   schedule:
-    - cron: '17 3 2 * *'          # the 2nd of every month, 03:17 UTC
+    - cron: '17 3 2-7 * *'        # the 2nd to the 7th of every month, 03:17 UTC: a busy Overpass leaves packs for the next day
   workflow_dispatch: {}
   push:
     branches: ['actions/packs']   # push to this branch to build the packs there (testing the workflow)
@@ -31,7 +31,7 @@ jobs:
         continue-on-error: true
         run: python3 -u tools/speedcam_ua/import_cameras.py --fetch && python3 tools/speedcam_ua/gen_app_data.py
       - name: Packs
-        run: python3 -u tools/speedcam_ua/build_packs.py --minutes 90
+        run: python3 -u tools/speedcam_ua/build_packs.py --minutes 90 --fresh-days 20
       - name: Tests
         run: python3 test/speedcam_ua/packs_test.py
       - name: Commit

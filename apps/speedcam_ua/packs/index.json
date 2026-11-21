@@ -1,6 +1,195 @@
 {
  "checked": "2026-11-21",
  "packs": {
+  "ad": {
+   "bbox": [
+    42.439502,
+    1.476835,
+    42.579872,
+    1.697991
+   ],
+   "bytes": 1113,
+   "count": 11,
+   "en": "Andorra",
+   "fetched": null,
+   "group": "eu",
+   "iso": "AD",
+   "legal": "ok",
+   "name": "Andorra",
+   "sha256": "c793efab580cad9fc666b51f810a013aa3794c8065fd8268ecadb660b5c612e3",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Андорра",
+   "units": "kmh",
+   "updated": "2026-11-21"
+  },
+  "al": {
+   "bbox": [
+    41.112812,
+    19.6749,
+    41.572079,
+    20.027031
+   ],
+   "bytes": 1887,
+   "count": 24,
+   "en": "Albania",
+   "fetched": null,
+   "group": "eu",
+   "iso": "AL",
+   "legal": "ok",
+   "name": "Shqipëria",
+   "sha256": "6ccbeba947755c385ac2d497997634ad3ca501a12f944d5d230a24174f752d5c",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Албанія",
+   "units": "kmh",
+   "updated": "2026-11-21"
+  },
+  "at": {
+   "bbox": [
+    46.529338,
+    9.579249,
+    48.97838,
+    17.085744
+   ],
+   "bytes": 92158,
+   "count": 1426,
+   "en": "Austria",
+   "fetched": null,
+   "group": "eu",
+   "iso": "AT",
+   "legal": "ok",
+   "name": "Österreich",
+   "sha256": "885b5553a4da6c7383e2950a8db0ce53eb857df3981d959736b20311d1dfef6e",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Австрія",
+   "units": "kmh",
+   "updated": "2026-11-21"
+  },
+  "bg": {
+   "bbox": [
+    41.720557,
+    23.074802,
+    43.841293,
+    27.894348
+   ],
+   "bytes": 5882,
+   "count": 80,
+   "en": "Bulgaria",
+   "fetched": null,
+   "group": "eu",
+   "iso": "BG",
+   "legal": "ok",
+   "name": "България",
+   "sha256": "7f45610d53e19f65180eb45edab0fc51f0c53ea609c7fababd63fedde1e40344",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Болгарія",
+   "units": "kmh",
+   "updated": "2026-11-21"
+  },
+  "cz": {
+   "bbox": [
+    48.756488,
+    12.512988,
+    50.980708,
+    18.619051
+   ],
+   "bytes": 92705,
+   "count": 1343,
+   "en": "Czechia",
+   "fetched": null,
+   "group": "eu",
+   "iso": "CZ",
+   "legal": "ok",
+   "name": "Česko",
+   "sha256": "c0a22d1d4f9f7298b48c486f08251d51b902d2bac969ff623c89bf4f331c2e9f",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Чехія",
+   "units": "kmh",
+   "updated": "2026-11-21"
+  },
+  "ee": {
+   "bbox": [
+    58.145865,
+    23.741711,
+    59.454203,
+    28.031846
+   ],
+   "bytes": 6717,
+   "count": 88,
+   "en": "Estonia",
+   "fetched": null,
+   "group": "eu",
+   "iso": "EE",
+   "legal": "ok",
+   "name": "Eesti",
+   "sha256": "41debd0eb43aec6b6764f86b7ed270b97d1132113633c8f79e0928138a16a1ef",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Естонія",
+   "units": "kmh",
+   "updated": "2026-11-21"
+  },
+  "fi": {
+   "bbox": [
+    59.956107,
+    21.506157,
+    66.808654,
+    30.161376
+   ],
+   "bytes": 59821,
+   "count": 930,
+   "en": "Finland",
+   "fetched": null,
+   "group": "eu",
+   "iso": "FI",
+   "legal": "ok",
+   "name": "Suomi",
+   "sha256": "8bb98af54b9ac4ceb2c1d52cbfedd48e22b7bfd2d0fae930787c4a4db90d2954",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Фінляндія",
+   "units": "kmh",
+   "updated": "2026-11-21"
+  },
+  "gr": {
+   "bbox": [
+    35.103505,
+    20.25882,
+    41.651033,
+    26.455154
+   ],
+   "bytes": 56112,
+   "count": 409,
+   "en": "Greece",
+   "fetched": null,
+   "group": "eu",
+   "iso": "GR",
+   "legal": "ok",
+   "name": "Ελλάδα",
+   "sha256": "03919f8fbb7f62de210673144e582c6d370238d7baf11aa5ee299f64e8be28d9",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Греція",
+   "units": "kmh",
+   "updated": "2026-11-21"
+  },
+  "hr": {
+   "bbox": [
+    42.515604,
+    13.52119,
+    46.52618,
+    19.390961
+   ],
+   "bytes": 91550,
+   "count": 1040,
+   "en": "Croatia",
+   "fetched": null,
+   "group": "eu",
+   "iso": "HR",
+   "legal": "ok",
+   "name": "Hrvatska",
+   "sha256": "bbf088e84479fe69f66b83e3e580899cce5e27ff6e14e4f2862b0f8eb004aab1",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Хорватія",
+   "units": "kmh",
+   "updated": "2026-11-21"
+  },
   "ua": {
    "bbox": [
     45.32507,
@@ -11,6 +200,7 @@
    "bytes": 37606,
    "count": 426,
    "en": "Ukraine",
+   "fetched": null,
    "group": "ua",
    "iso": "UA",
    "legal": "ok",

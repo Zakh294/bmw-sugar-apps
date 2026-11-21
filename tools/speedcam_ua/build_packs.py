@@ -7,8 +7,10 @@
 
 Sources
     ua      the official list of the Patrol Police (data/speedcam_ua/cameras.json, tools/speedcam_ua/import_cameras.py)
-    Europe  OpenStreetMap, nodes highway=speed_camera, one Overpass query per country (regions: admin_level 4)
+    Europe  OpenStreetMap, nodes highway=speed_camera, one Overpass query per country
     USA     OpenStreetMap, one Overpass query and one pack per state (ISO 3166-2 of the state's area)
+Overpass is often busy: a run reads the packs read longest ago first and stops starting queries after --minutes;
+--fresh-days skips the ones read recently, so the workflow's runs on the first days of a month finish the set.
 OpenStreetMap data (c) OpenStreetMap contributors, ODbL 1.0: the packs built from it are under the ODbL too.
 
 A pack is a JSON array: [meta, row, row, ...], row = [id, lat, lon, limit km/h or null, label, direction deg or null].
@@ -34,14 +36,10 @@ MPH = 1.609344
 
 
 def query_country(iso):
-    """All speed cameras of a country, then per admin_level 4 region: the region's tags and the ids in it."""
-    return ('[out:json][timeout:300];'
+    """All speed cameras of a country (a plain area query: the cheapest Overpass has)."""
+    return ('[out:json][timeout:240];'
             'area["ISO3166-1"="%s"][admin_level=2][boundary=administrative]->.c;'
-            'node(area.c)[highway=speed_camera]->.all;'
-            '.all out qt;'
-            'rel(area.c)[boundary=administrative][admin_level=4];'
-            'map_to_area->.regs;'
-            'foreach.regs->.r(.r out tags;node.all(area.r);out ids qt;);' % iso)
+            'node(area.c)[highway=speed_camera];out qt;' % iso)
 
 
 def query_state(iso2):
@@ -59,17 +57,17 @@ def overpass(q, log, fixture=None):
         return fixture(q)
     body = urllib.parse.urlencode({'data': q}).encode()
     last = None
-    for attempt in range(4):
+    for attempt in range(3):
         if DEADLINE[0] and time.time() > DEADLINE[0]:
             raise RuntimeError('out of time')
         url = OVERPASS[attempt % len(OVERPASS)]
         try:
             req = urllib.request.Request(url, data=body, headers={'User-Agent': UA_AGENT})
-            return json.loads(urllib.request.urlopen(req, timeout=330).read().decode('utf-8'))
+            return json.loads(urllib.request.urlopen(req, timeout=260).read().decode('utf-8'))
         except Exception as e:  # noqa: BLE001 - any network / server error: try the next server, later
             last = e
-            log('  %s: %s, again in %d s' % (url, e, 15 * (attempt + 1)))
-            time.sleep(15 * (attempt + 1))
+            log('  %s: %s, again in %d s' % (url, e, 20 * (attempt + 1)))
+            time.sleep(20 * (attempt + 1))
     raise RuntimeError('Overpass failed: %s' % last)
 
 
@@ -133,7 +131,10 @@ def bbox(rows):
     return [min(r[1] for r in rows), min(r[2] for r in rows), max(r[1] for r in rows), max(r[2] for r in rows)]
 
 
-def write_pack(p, rows, source, license_, today, log):
+SMALL = {'ad', 'mc', 'sm', 'li', 'mt', 'xk', 'is', 'me', 'ba', 'al', 'md', 'mk', 'cy', 'lu'}
+
+
+def write_pack(p, rows, source, license_, today, log, fetched=None):
     path = os.path.join(OUT, p['code'] + '.json')
     old = None
     try:
@@ -147,6 +148,8 @@ def write_pack(p, rows, source, license_, today, log):
     rows = sorted(rows, key=lambda r: r[0])
     updated = old[0].get('updated') if old_rows is not None and old_rows == rows else today
     meta = dict(p, source=source, license=license_, updated=updated, count=len(rows), bbox=bbox(rows))
+    if fetched:
+        meta['fetched'] = fetched
     if old and old[0] == meta and old_rows == rows:
         return meta
     with open(path, 'w', encoding='utf-8', newline='\n') as f:
@@ -165,7 +168,7 @@ def write_index(today):
             continue
         raw = open(path, 'rb').read()
         meta = json.loads(raw.decode('utf-8'))[0]
-        packs[p['code']] = {k: meta.get(k) for k in ('iso', 'name', 'en', 'uk', 'group', 'units', 'legal', 'count', 'bbox', 'updated', 'source')}
+        packs[p['code']] = {k: meta.get(k) for k in ('iso', 'name', 'en', 'uk', 'group', 'units', 'legal', 'count', 'bbox', 'updated', 'fetched', 'source')}
         packs[p['code']].update(sha256=hashlib.sha256(raw).hexdigest(), bytes=len(raw))
     index = {'schema': 1, 'checked': today, 'packs': packs}
     with open(os.path.join(OUT, 'index.json'), 'w', encoding='utf-8', newline='\n') as f:
@@ -174,7 +177,17 @@ def write_index(today):
     return index
 
 
-def build(only=None, offline=False, fixture=None, log=print, today=None, pause=5):
+def fetched_on(code):
+    """The date a pack was last read from OpenStreetMap ('' if never)."""
+    try:
+        return json.load(open(os.path.join(OUT, code + '.json'), encoding='utf-8'))[0].get('fetched') or ''
+    except (OSError, ValueError, IndexError):
+        return ''
+
+
+def build(only=None, offline=False, fixture=None, log=print, today=None, pause=5, fresh_days=0):
+    """Ukraine, then the OpenStreetMap packs, the longest-unread first; a pack read less than fresh_days ago is
+    skipped (the workflow runs on several days at the start of a month and goes on where the last run stopped)."""
     today = today or datetime.date.today().isoformat()
     os.makedirs(OUT, exist_ok=True)
     packs = [p for p in all_packs() if not only or p['code'] in only or (p['group'] == 'us' and 'us' in only)]
@@ -185,26 +198,25 @@ def build(only=None, offline=False, fixture=None, log=print, today=None, pause=5
         log('ua: %d cameras (patrolpolice.gov.ua, %s)' % (len(rows), meta['fetched']))
     if offline:
         return write_index(today), failed
-    for p in [p for p in packs if p['group'] == 'eu']:
+    limit = (datetime.date.fromisoformat(today) - datetime.timedelta(days=fresh_days)).isoformat() if fresh_days else None
+    osm = [p for p in packs if p['group'] in ('eu', 'us')]
+    osm.sort(key=lambda p: fetched_on(p['code']))
+    for p in osm:
+        if limit and fetched_on(p['code']) > limit:
+            continue
         try:
-            got = osm_rows(overpass(query_country(p['iso']), log, fixture).get('elements', []))
+            q = query_state(p['iso']) if p['group'] == 'us' else query_country(p['iso'])
+            got = osm_rows(overpass(q, log, fixture).get('elements', []))
             rows = [r for k in got for r in got[k][1]]
-            write_pack(p, rows, 'OpenStreetMap (Overpass)', OSM_NOTE, today, log)
-            log('%s: %d cameras, %d regions' % (p['code'], len(rows), len([k for k in got if k is not None])))
-        except Exception as e:  # noqa: BLE001
-            failed.append(p['code'])
-            log('%s: FAILED %s (pack kept)' % (p['code'], e))
-        time.sleep(pause)
-    for p in [p for p in packs if p['group'] == 'us']:
-        try:
-            got = osm_rows(overpass(query_state(p['iso']), log, fixture).get('elements', []))
-            rows = [r for k in got for r in got[k][1]]
+            if not rows and p['code'] not in SMALL and p['group'] == 'eu':
+                raise RuntimeError('no cameras at all: not trusted')
+            name = p['en'] if p['group'] == 'us' else p['name']
             for r in rows:
                 if r[4].startswith('OSM '):
-                    r[4] = p['en']
-                elif p['en'] not in r[4]:
-                    r[4] = (r[4] + ' · ' + p['en'])[:48]
-            write_pack(p, rows, 'OpenStreetMap (Overpass)', OSM_NOTE, today, log)
+                    r[4] = name
+                elif p['group'] == 'us' and name not in r[4]:
+                    r[4] = (r[4] + ' · ' + name)[:48]
+            write_pack(p, rows, 'OpenStreetMap (Overpass)', OSM_NOTE, today, log, fetched=today)
             log('%s: %d cameras' % (p['code'], len(rows)))
         except Exception as e:  # noqa: BLE001
             failed.append(p['code'])
@@ -218,14 +230,13 @@ def main():
     ap.add_argument('--only', help='comma-separated pack codes (us = every state)')
     ap.add_argument('--offline', action='store_true', help='Ukraine only, no network')
     ap.add_argument('--minutes', type=float, default=0, help='start no new query after this many minutes (0: no limit)')
+    ap.add_argument('--fresh-days', type=int, default=0, help='skip packs read from OpenStreetMap fewer days ago than this')
     a = ap.parse_args()
     if a.minutes:
         DEADLINE[0] = time.time() + a.minutes * 60
-    index, failed = build(set(a.only.split(',')) if a.only else None, a.offline)
+    index, failed = build(set(a.only.split(',')) if a.only else None, a.offline, fresh_days=a.fresh_days)
     print('index: %d packs, %d cameras; failed: %s' % (len(index['packs']), sum(p['count'] or 0 for p in index['packs'].values()), ', '.join(failed) or 'none'))
-    # some packs failing is normal for a busy Overpass (they are kept); all of them failing is an error
-    if failed and len(failed) >= len([p for p in all_packs() if p['group'] != 'ua']):
-        sys.exit(1)
+    # some packs failing is normal for a busy Overpass (they are kept, the next run tries them first)
 
 
 if __name__ == '__main__':
