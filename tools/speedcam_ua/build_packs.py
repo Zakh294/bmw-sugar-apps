@@ -1,0 +1,215 @@
+#!/usr/bin/env python3
+"""Builds the camera packs the app ships and downloads: apps/speedcam_ua/packs/<code>.json + index.json.
+
+    python3 tools/speedcam_ua/build_packs.py                 # everything: Ukraine + Europe + USA
+    python3 tools/speedcam_ua/build_packs.py --only ua,pl    # some packs
+    python3 tools/speedcam_ua/build_packs.py --offline       # Ukraine only, from data/speedcam_ua/cameras.json
+
+Sources
+    ua      the official list of the Patrol Police (data/speedcam_ua/cameras.json, tools/speedcam_ua/import_cameras.py)
+    Europe  OpenStreetMap, nodes highway=speed_camera, one Overpass query per country (regions: admin_level 4)
+    USA     OpenStreetMap, one Overpass query, one pack per state (ISO 3166-2 of the state's area)
+OpenStreetMap data (c) OpenStreetMap contributors, ODbL 1.0: the packs built from it are under the ODbL too.
+
+A pack is a JSON array: [meta, row, row, ...], row = [id, lat, lon, limit km/h or null, label, direction deg or null].
+index.json lists every pack with its count, bounding box, date and sha256, for the app's monthly update. A pack whose
+rows did not change keeps its date (no churn in git); "checked" is always today's. A failed query leaves the pack
+as it was; a query that suddenly finds nothing where there were more than 20 cameras is not trusted either.
+
+Runs monthly on GitHub (.github/workflows/camera-packs.yml); needs only Python 3 (no packages).
+"""
+import argparse, datetime, hashlib, json, os, re, sys, time, urllib.parse, urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from countries import all_packs  # noqa: E402
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+OUT = os.path.join(ROOT, 'apps', 'speedcam_ua', 'packs')
+UA_JSON = os.path.join(ROOT, 'data', 'speedcam_ua', 'cameras.json')
+OVERPASS = ['https://overpass-api.de/api/interpreter', 'https://overpass.private.coffee/api/interpreter',
+            'https://overpass.kumi.systems/api/interpreter']
+UA_AGENT = 'speedcam-packs/1.0 (+https://github.com/Zakh294/bmw-sugar-apps)'
+OSM_NOTE = 'OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)'
+MPH = 1.609344
+
+
+def query_country(iso):
+    """All speed cameras of a country, then per admin_level 4 region: the region's tags and the ids in it."""
+    return ('[out:json][timeout:900];'
+            'area["ISO3166-1"="%s"][admin_level=2][boundary=administrative]->.c;'
+            'node(area.c)[highway=speed_camera]->.all;'
+            '.all out qt;'
+            'rel(area.c)[boundary=administrative][admin_level=4];'
+            'map_to_area->.regs;'
+            'foreach.regs->.r(.r out tags;node.all(area.r);out ids qt;);' % iso)
+
+
+def overpass(q, log, fixture=None):
+    if fixture is not None:
+        return fixture(q)
+    body = urllib.parse.urlencode({'data': q}).encode()
+    last = None
+    for attempt in range(6):
+        url = OVERPASS[attempt % len(OVERPASS)]
+        try:
+            req = urllib.request.Request(url, data=body, headers={'User-Agent': UA_AGENT})
+            return json.loads(urllib.request.urlopen(req, timeout=960).read().decode('utf-8'))
+        except Exception as e:  # noqa: BLE001 - any network / server error: try the next server, later
+            last = e
+            log('  %s: %s, again in %d s' % (url, e, 20 * (attempt + 1)))
+            time.sleep(20 * (attempt + 1))
+    raise RuntimeError('Overpass failed: %s' % last)
+
+
+def limit_kmh(tags):
+    m = re.match(r'^\s*(\d+(?:\.\d+)?)\s*(mph)?', tags.get('maxspeed', ''))
+    if not m:
+        return None
+    v = float(m.group(1)) * (MPH if m.group(2) else 1)
+    return round(v, 1) if m.group(2) else int(round(v))
+
+
+def direction(tags):
+    m = re.match(r'^\s*(\d{1,3})\s*$', tags.get('direction', ''))
+    return int(m.group(1)) % 360 if m else None
+
+
+def osm_rows(elements):
+    """Overpass output (nodes, then area + ids per region) -> {region key: (region tags, [rows])}; key None: no region."""
+    nodes, region_of, regions, cur = {}, {}, {}, None
+    for e in elements:
+        if e.get('type') == 'area':
+            cur = e.get('id')
+            regions[cur] = e.get('tags', {})
+        elif e.get('type') == 'node' and 'lat' in e:
+            if cur is None:
+                nodes[e['id']] = e
+            else:
+                region_of.setdefault(e['id'], cur)
+        elif e.get('type') == 'node' and cur is not None:
+            region_of.setdefault(e['id'], cur)
+    out, seen = {}, set()
+    for nid, e in sorted(nodes.items()):
+        t = e.get('tags', {})
+        if t.get('disused') == 'yes' or t.get('highway') != 'speed_camera':
+            continue
+        key = (round(e['lat'], 5), round(e['lon'], 5))
+        if key in seen:
+            continue
+        seen.add(key)
+        rid = region_of.get(nid)
+        rt = regions.get(rid, {})
+        rname = rt.get('name:en') if rt.get('ISO3166-2', '').startswith('US-') else rt.get('name') or rt.get('name:en')
+        what = t.get('name') or t.get('ref') or ''
+        label = ' · '.join(x for x in (what, rname) if x)[:48] or 'OSM %d' % nid
+        out.setdefault(rid, (rt, []))[1].append(['o%d' % nid, round(e['lat'], 6), round(e['lon'], 6), limit_kmh(t), label, direction(t)])
+    return out
+
+
+def ua_rows():
+    src = json.load(open(UA_JSON, encoding='utf-8'))
+    rows = []
+    for c in src['cameras']:
+        label = ('%s, км %s' % (c['road'], c['km'])) if c.get('road') else '%s, %s' % (re.sub(r'^м\.\s*', '', c['region']), c['place'])
+        rows.append(['u%d' % c['id'], c['lat'], c['lon'], c['limit'], label, None])
+    return rows, src['meta']
+
+
+def bbox(rows):
+    if not rows:
+        return None
+    return [min(r[1] for r in rows), min(r[2] for r in rows), max(r[1] for r in rows), max(r[2] for r in rows)]
+
+
+def write_pack(p, rows, source, license_, today, log):
+    path = os.path.join(OUT, p['code'] + '.json')
+    old = None
+    try:
+        old = json.load(open(path, encoding='utf-8'))
+    except (OSError, ValueError):
+        pass
+    old_rows = old[1:] if old else None
+    if old_rows is not None and len(old_rows) > 20 and not rows:
+        log('  %s: nothing found where there were %d, kept' % (p['code'], len(old_rows)))
+        return old[0]
+    rows = sorted(rows, key=lambda r: r[0])
+    updated = old[0].get('updated') if old_rows is not None and old_rows == rows else today
+    meta = dict(p, source=source, license=license_, updated=updated, count=len(rows), bbox=bbox(rows))
+    if old and old[0] == meta and old_rows == rows:
+        return meta
+    with open(path, 'w', encoding='utf-8', newline='\n') as f:
+        f.write('[' + json.dumps(meta, ensure_ascii=False, sort_keys=True))
+        for r in rows:
+            f.write(',\n' + json.dumps(r, ensure_ascii=False))
+        f.write(']\n')
+    return meta
+
+
+def write_index(today):
+    packs = {}
+    for p in all_packs():
+        path = os.path.join(OUT, p['code'] + '.json')
+        if not os.path.isfile(path):
+            continue
+        raw = open(path, 'rb').read()
+        meta = json.loads(raw.decode('utf-8'))[0]
+        packs[p['code']] = {k: meta.get(k) for k in ('iso', 'name', 'en', 'uk', 'group', 'units', 'legal', 'count', 'bbox', 'updated', 'source')}
+        packs[p['code']].update(sha256=hashlib.sha256(raw).hexdigest(), bytes=len(raw))
+    index = {'schema': 1, 'checked': today, 'packs': packs}
+    with open(os.path.join(OUT, 'index.json'), 'w', encoding='utf-8', newline='\n') as f:
+        json.dump(index, f, ensure_ascii=False, indent=1, sort_keys=True)
+        f.write('\n')
+    return index
+
+
+def build(only=None, offline=False, fixture=None, log=print, today=None, pause=5):
+    today = today or datetime.date.today().isoformat()
+    os.makedirs(OUT, exist_ok=True)
+    packs = [p for p in all_packs() if not only or p['code'] in only or (p['group'] == 'us' and 'us' in only)]
+    failed = []
+    if any(p['code'] == 'ua' for p in packs):
+        rows, meta = ua_rows()
+        write_pack(next(p for p in packs if p['code'] == 'ua'), rows, meta['source'], 'official list of the National Police of Ukraine', meta['fetched'], log)
+        log('ua: %d cameras (patrolpolice.gov.ua, %s)' % (len(rows), meta['fetched']))
+    if offline:
+        return write_index(today), failed
+    for p in [p for p in packs if p['group'] == 'eu']:
+        try:
+            got = osm_rows(overpass(query_country(p['iso']), log, fixture).get('elements', []))
+            rows = [r for k in got for r in got[k][1]]
+            write_pack(p, rows, 'OpenStreetMap (Overpass)', OSM_NOTE, today, log)
+            log('%s: %d cameras, %d regions' % (p['code'], len(rows), len([k for k in got if k is not None])))
+        except Exception as e:  # noqa: BLE001
+            failed.append(p['code'])
+            log('%s: FAILED %s (pack kept)' % (p['code'], e))
+        time.sleep(pause)
+    states = [p for p in packs if p['group'] == 'us']
+    if states:
+        try:
+            got = osm_rows(overpass(query_country('US'), log, fixture).get('elements', []))
+            by_state = {}
+            for rid, (rt, rows) in got.items():
+                by_state.setdefault(rt.get('ISO3166-2', ''), []).extend(rows)
+            for p in states:
+                write_pack(p, by_state.get(p['iso'], []), 'OpenStreetMap (Overpass)', OSM_NOTE, today, log)
+            log('us: %d cameras in %d states (%d outside a state)' % (sum(len(v) for k, v in by_state.items() if k), len([k for k in by_state if k]), len(by_state.get('', []))))
+        except Exception as e:  # noqa: BLE001
+            failed.append('us')
+            log('us: FAILED %s (packs kept)' % e)
+    return write_index(today), failed
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
+    ap.add_argument('--only', help='comma-separated pack codes (us = every state)')
+    ap.add_argument('--offline', action='store_true', help='Ukraine only, no network')
+    a = ap.parse_args()
+    index, failed = build(set(a.only.split(',')) if a.only else None, a.offline)
+    print('index: %d packs, %d cameras; failed: %s' % (len(index['packs']), sum(p['count'] or 0 for p in index['packs'].values()), ', '.join(failed) or 'none'))
+    # some countries failing is normal for a busy Overpass (they are kept); all of them failing is an error
+    if failed and len(failed) >= len([p for p in all_packs() if p['group'] == 'eu']):
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()

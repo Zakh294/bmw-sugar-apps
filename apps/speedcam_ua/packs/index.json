@@ -1,0 +1,26 @@
+{
+ "checked": "2026-11-21",
+ "packs": {
+  "ua": {
+   "bbox": [
+    45.32507,
+    22.271784,
+    51.542763,
+    35.9145
+   ],
+   "bytes": 37606,
+   "count": 426,
+   "en": "Ukraine",
+   "group": "ua",
+   "iso": "UA",
+   "legal": "ok",
+   "name": "Україна",
+   "sha256": "c85c7a424236d10c5c1b056eae342aed60c12c7d9740ceb5335f51e131361bb5",
+   "source": "https://patrolpolice.gov.ua/automatic_fixation/informatsiya-pro-vstanovleni-kaf/",
+   "uk": "Україна",
+   "units": "kmh",
+   "updated": "2026-11-18"
+  }
+ },
+ "schema": 1
+}
