@@ -97,6 +97,7 @@ An iDrive list screen ("Camera databases" button):
 | HUD brightness | 100 % | 40–100 %, HUD only |
 | Dimmer at night | on | after sunset the HUD at 60 %, the cluster and the map at 80 % |
 | Update the databases monthly | on | the monthly update (below) |
+| Made in Ukraine | — | not a switch, a note: Russia is the aggressor, support Ukraine (u24.gov.ua) |
 
 ## Countries and the law
 

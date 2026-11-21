@@ -9,6 +9,14 @@ unit downloads an app's source from here and builds it itself.
 > **Unofficial, not affiliated with BMW. Needs root access to the head unit. Use at your own risk.**
 > Read [LEGAL.md](LEGAL.md) before installing: disclaimer, the law on speed camera warnings, data licences.
 
+## 🇺🇦 Made in Ukraine
+
+These apps are made in Ukraine. Russia is the aggressor in the war against Ukraine: its full-scale invasion of
+24 February 2022 continues the aggression it began in 2014 with the occupation of Crimea and parts of Donbas. The UN
+General Assembly condemned it as aggression (resolution ES-11/1, 2 March 2022). If these apps are useful to you,
+please support Ukraine, for example through [UNITED24](https://u24.gov.ua), the official fundraising platform of
+Ukraine. SpeedCam says the same in the last row of its settings.
+
 ## Apps
 
 | App | Folder | Version | What it does | Manual |

@@ -121,6 +121,7 @@ ok(spec.settings.every((s) => lang.SETTINGS[s.key] && (s.options || []).every((o
 const sch = JSON.parse(JSON.stringify(spec.settings));
 lang.settings(sch, 'de');
 ok(sch.find((s) => s.key === 'sound').label === 'Warnton' && sch.find((s) => s.key === 'banned').options[0][1] === 'Aus (wie vorgeschrieben)', 'settings in German');
+ok(sch.find((s) => s.key === 'ukraine').label === 'Entwickelt in der Ukraine' && /^Russland ist der Aggressor/.test(sch.find((s) => s.key === 'ukraine').default), '"Made in Ukraine" row in German');
 ok(lang.make('pl')('in_dist', { d: '300 m', l: 50, label: 'A4' }) === 'za 300 m, limit 50 · A4' && lang.make('xx')('camera') === 'КАМЕРА', 'filling in; an unknown language falls back to Ukrainian');
 
 // units and zones

@@ -53,13 +53,19 @@ function background(bg) {
     try { st.autoLang = fs.readFileSync(langFile, 'utf8').trim() || null; } catch (e) { st.autoLang = null; }
     const curLang = () => (settings.get('lang') === 'auto' || !settings.get('lang') ? st.autoLang || 'uk' : settings.get('lang'));
     const tr = () => lang.make(curLang());
+    // the settings in that language; the "Made in Ukraine" row is a text, its value set here (never a choice)
+    const applyLang = (l) => {
+        lang.settings(settings.schema, l);
+        const u = settings.item('ukraine');
+        if (u) settings.values.ukraine = u.default;
+    };
     st.langNow = curLang();
-    lang.settings(settings.schema, st.langNow);
+    applyLang(st.langNow);
     const langCheck = () => {
         const l = curLang();
         if (l === st.langNow) return;
         st.langNow = l;
-        lang.settings(settings.schema, l);
+        applyLang(l);
         log.info('language: ' + l);
         if (st.onLang) st.onLang();
     };
@@ -278,6 +284,8 @@ mgu.run({
         const labels = () => {
             const tr = core.tr();
             lang.settings(settings.schema, tr.lang);
+            const uk = settings.item('ukraine');
+            if (uk) { settings.values.ukraine = uk.default; if (ui.comp('SET_UKRAINE')) ui.cells('SET_UKRAINE', 0, { Text1stRow: uk.label, Text2ndRow: uk.default }); }
             Object.keys(BUTTONS).forEach((b) => ui.text(b, tr(BUTTONS[b])));
             // the HMI's own settings screen: the drop-downs' header and rows (the kit writes the check boxes' labels)
             settings.schema.forEach((s) => {

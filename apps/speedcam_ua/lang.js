@@ -3,7 +3,7 @@
  * lang.js - the app's languages: Ukrainian, English, German, Polish, French, Italian, Spanish, Czech.
  *
  *   const L = lang.make('de');  L('nearest')  L('in_dist', { d: '300 m', l: 50, label: 'A4' })
- *   lang.settings(schema, 'pl')                 the settings' labels and choices in that language (in place)
+ *   lang.settings(schema, 'pl')                 the settings' labels, choices and texts in that language (in place)
  *   lang.forCountry('at')                       'de': "automatic" picks the language of the country the car is in
  *
  * A missing text falls back to English, then to the key. {name} is replaced from the values. Plain Node 8.
@@ -167,6 +167,14 @@ const SETTINGS = {
     size: { label: ['Розмір попередження', 'Warning size', 'Größe der Warnung', 'Rozmiar ostrzeżenia', 'Taille de l\'alerte', 'Dimensione dell\'avviso', 'Tamaño del aviso', 'Velikost varování'] },
     hudBright: { label: ['Яскравість на HUD', 'HUD brightness', 'HUD-Helligkeit', 'Jasność HUD', 'Luminosité du HUD', 'Luminosità HUD', 'Brillo del HUD', 'Jas HUD'] },
     nightDim: { label: ['Вночі тьмяніше (за сонцем)', 'Dimmer at night (by the sun)', 'Nachts dunkler (nach der Sonne)', 'W nocy ciemniej (wg słońca)', 'Plus sombre la nuit (selon le soleil)', 'Più tenue di notte (secondo il sole)', 'Más tenue de noche (según el sol)', 'V noci tlumeněji (podle slunce)'] },
+    // the last row of the settings: where the app comes from (a text, not a switch)
+    ukraine: {
+        label: ['Зроблено в Україні', 'Made in Ukraine', 'Entwickelt in der Ukraine', 'Stworzone w Ukrainie', 'Conçu en Ukraine', 'Creato in Ucraina', 'Hecho en Ucrania', 'Vytvořeno na Ukrajině'],
+        text: ['Росія — держава-агресор. Підтримайте Україну: u24.gov.ua', 'Russia is the aggressor. Support Ukraine: u24.gov.ua',
+            'Russland ist der Aggressor. Unterstützen Sie die Ukraine: u24.gov.ua', 'Rosja jest agresorem. Wesprzyj Ukrainę: u24.gov.ua',
+            'La Russie est l\'agresseur. Soutenez l\'Ukraine : u24.gov.ua', 'La Russia è l\'aggressore. Sostieni l\'Ucraina: u24.gov.ua',
+            'Rusia es el agresor. Apoya a Ucrania: u24.gov.ua', 'Rusko je agresor. Podpořte Ukrajinu: u24.gov.ua'],
+    },
     autoUpdate: { label: ['Оновлювати бази раз на місяць', 'Update the databases monthly', 'Datenbanken monatlich aktualisieren', 'Aktualizuj bazy co miesiąc', 'Mettre à jour les bases chaque mois', 'Aggiorna i database ogni mese', 'Actualizar las bases cada mes', 'Aktualizovat databáze měsíčně'] },
 };
 
@@ -200,6 +208,7 @@ function settings(schema, lang) {
         if (!tr) return;
         s.label = tr.label[i] || tr.label[1];
         if (s.options) s.options.forEach((o) => { if (tr[o[0]]) o[1] = tr[o[0]][i] || tr[o[0]][1]; });
+        if (s.type === 'text' && tr.text) s.default = tr.text[i] || tr.text[1];
     });
     return schema;
 }
