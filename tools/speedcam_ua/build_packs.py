@@ -63,7 +63,11 @@ def overpass(q, log, fixture=None):
         url = OVERPASS[attempt % len(OVERPASS)]
         try:
             req = urllib.request.Request(url, data=body, headers={'User-Agent': UA_AGENT})
-            return json.loads(urllib.request.urlopen(req, timeout=260).read().decode('utf-8'))
+            out = json.loads(urllib.request.urlopen(req, timeout=260).read().decode('utf-8'))
+            # a query Overpass gave up on still answers 200, with a remark and no (or partial) elements
+            if re.search(r'error|timed out|out of memory', str(out.get('remark', '')), re.I):
+                raise RuntimeError('Overpass: ' + str(out['remark'])[:80])
+            return out
         except Exception as e:  # noqa: BLE001 - any network / server error: try the next server, later
             last = e
             log('  %s: %s, again in %d s' % (url, e, 20 * (attempt + 1)))

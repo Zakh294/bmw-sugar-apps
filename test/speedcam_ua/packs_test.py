@@ -32,6 +32,8 @@ def fake(q):
         return {'elements': [{'type': 'node', 'id': 22, 'lat': 40.71, 'lon': -74.0, 'tags': {'highway': 'speed_camera', 'maxspeed': '25 mph', 'name': 'Broadway'}}]}
     if '"ISO3166-1"="DE"' in q:
         raise RuntimeError('Overpass busy')
+    if '"ISO3166-1"="IT"' in q:
+        return {'remark': 'runtime error: Query timed out in "query" at line 1 after 240 seconds.', 'elements': []}
     return {'elements': []}
 
 
@@ -67,5 +69,19 @@ big = [pl[0]] + [['o%d' % i, 50 + i / 1000, 20, None, 'x', None] for i in range(
 json.dump(big, open(os.path.join(tmp, 'pl.json'), 'w'))
 bp.build({'pl'}, fixture=fake_pl_empty, log=logs.append, today='2027-02-01', pause=0)
 ok(len(json.load(open(os.path.join(tmp, 'pl.json')))) == 31, 'a query that suddenly finds nothing does not wipe 30 cameras')
+# a 200 answer with a "timed out" remark is a failure, not an empty country
+import urllib.request as ur  # noqa: E402
+class Resp:  # noqa: E302
+    def read(self):
+        return json.dumps(fake('"ISO3166-1"="IT"')).encode()
+orig = ur.urlopen
+ur.urlopen = lambda *a, **k: Resp()
+bp.time.sleep = lambda s: None
+try:
+    bp.overpass(bp.query_country('IT'), logs.append)
+    ok(False, 'remark')
+except RuntimeError as e:
+    ok('Overpass failed' in str(e), 'an Overpass "timed out" remark counts as a failure')
+ur.urlopen = orig
 shutil.rmtree(tmp)
 print('packs: %d checks passed' % n)
