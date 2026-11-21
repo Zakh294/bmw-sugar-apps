@@ -10,6 +10,7 @@
  *   const p = new Packs({ dir: path.join(__dirname, 'packs'), dataDir, log });
  *   p.list()                      every pack known: [{ code, name, en, uk, group, units, legal, count, bbox, updated, src }]
  *   p.at(lat, lon)                the packs whose area holds that point
+ *   p.here(lat, lon)              the one of them with the nearest camera (the country the car is in)
  *   p.active(fix)                 the codes in use now
  *   p.cameras(codes)              [{ id, lat, lon, limit, label, dir, pack, iso, units, legal }]
  *   p.toggle(code) / p.setAuto(b) the owner's choice
@@ -89,6 +90,23 @@ class Packs {
             const b = this.index[k].bbox;
             return b && lat >= b[0] - MARGIN && lat <= b[2] + MARGIN && lon >= b[1] - MARGIN && lon <= b[3] + MARGIN;
         });
+    }
+
+    /**
+     * The pack of the country the car is in, as far as the cameras tell: of the packs whose area holds the point (the
+     * areas are boxes and overlap at borders), the one with the camera nearest to it. null: none around.
+     */
+    here(lat, lon) {
+        let best = null, bestD = Infinity;
+        const k = Math.cos(lat * Math.PI / 180);
+        this.at(lat, lon).forEach((code) => {
+            if (this.index[code].src === 'remote') return;
+            this.rows(code).forEach((r) => {
+                const dy = r[1] - lat, dx = (r[2] - lon) * k, d = dy * dy + dx * dx;
+                if (d < bestD) { bestD = d; best = code; }
+            });
+        });
+        return best;
     }
 
     /** The codes in use: the chosen ones, plus with "automatic" the ones where the car is (a pack not here yet: left out). */

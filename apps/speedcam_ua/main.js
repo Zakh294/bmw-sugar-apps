@@ -45,11 +45,25 @@ function testAlert(test, speed, tr) {
 /** Everything that runs with or without the page. */
 function background(bg) {
     const { settings, signals, log } = bg;
-    const tr = () => lang.make(settings.get('lang'));
-    lang.settings(settings.schema, settings.get('lang'));
-
     const packs = new Packs({ dir: path.join(__dirname, 'packs'), dataDir: bg.dataDir, log });
     const st = { speed: null, speedT: 0, fix: null, lastFixT: -1, alert: null, test: null, heading: null, alerts: 0, codes: [], count: 0, banned: null };
+    // the language: chosen, or "automatic" = the language of the country the car is in (the last one kept for the
+    // next start, so the page does not come up in another language before the first fix)
+    const langFile = bg.dataDir ? path.join(bg.dataDir, 'lang.txt') : null;
+    try { st.autoLang = fs.readFileSync(langFile, 'utf8').trim() || null; } catch (e) { st.autoLang = null; }
+    const curLang = () => (settings.get('lang') === 'auto' || !settings.get('lang') ? st.autoLang || 'uk' : settings.get('lang'));
+    const tr = () => lang.make(curLang());
+    st.langNow = curLang();
+    lang.settings(settings.schema, st.langNow);
+    const langCheck = () => {
+        const l = curLang();
+        if (l === st.langNow) return;
+        st.langNow = l;
+        lang.settings(settings.schema, l);
+        log.info('language: ' + l);
+        if (st.onLang) st.onLang();
+    };
+    settings.onChange((k) => { if (k === 'lang') langCheck(); });
 
     const handlers = {};
     handlers[SPEED.field] = (v) => {
@@ -63,6 +77,12 @@ function background(bg) {
 
     // the packs in use: the chosen ones + (automatic) the ones where the car is; looked at every 30 s and every 2 km
     const refreshPacks = (force) => {
+        // the country the car is in (its nearest camera's pack): the language for "automatic"
+        const here = st.fix ? packs.here(st.fix.lat, st.fix.lon) : null;
+        if (here) {
+            const al = lang.forCountry(here);
+            if (al !== st.autoLang) { st.autoLang = al; try { if (langFile) fs.writeFileSync(langFile, al); } catch (e) { /* read-only */ } langCheck(); }
+        }
         const codes = packs.active(st.fix);
         if (!force && codes.join() === st.codes.join()) return;
         const list = packs.cameras(codes);
@@ -257,7 +277,7 @@ mgu.run({
         const st = core.st;
         const labels = () => {
             const tr = core.tr();
-            lang.settings(settings.schema, settings.get('lang'));
+            lang.settings(settings.schema, tr.lang);
             Object.keys(BUTTONS).forEach((b) => ui.text(b, tr(BUTTONS[b])));
             // the HMI's own settings screen: the drop-downs' header and rows (the kit writes the check boxes' labels)
             settings.schema.forEach((s) => {
@@ -269,7 +289,7 @@ mgu.run({
             });
         };
         labels();
-        settings.onChange((k) => { if (k === 'lang') labels(); });
+        st.onLang = labels;
         const renderDb = dbScreen(ctx, core);
         ui.onClick('BTN_TEST', () => { st.page = null; st.test = { t0: Date.now() }; ctx.log.info('test warning'); });
         ui.onClick('BTN_SOUND', () => { st.page = 'audio'; st.ding('button'); });

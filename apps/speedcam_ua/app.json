@@ -112,8 +112,12 @@
       "key": "lang",
       "label": "Мова / Language",
       "type": "choice",
-      "default": "uk",
+      "default": "auto",
       "options": [
+        [
+          "auto",
+          "Автоматично (мова країни)"
+        ],
         [
           "uk",
           "Українська"

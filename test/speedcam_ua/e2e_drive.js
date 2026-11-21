@@ -304,6 +304,7 @@ async function main() {
     check(r1.first === null, 'Germany (not allowed while driving): no warning by default');
     page = null; await hu.loopFn();
     check(logLines.some((l) => /packs in use: .*de/.test(l)), 'the German pack came in by itself where the car is (' + logLines.filter((l) => /packs in use/.test(l)).slice(-1)[0] + ')');
+    check(logLines.some((l) => l === 'language: de'), '"automatic" language: German in Germany');
     hu.ctx.settings.set('banned', 'on');
     r1 = await drive({ lat: 52.30, lon: 13.20 }, 1500, 90);
     check(r1.first !== null, '... and with "on, at my own responsibility" it warns');

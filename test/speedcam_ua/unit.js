@@ -43,6 +43,7 @@ ok(sun.isNight(49.84, 24.03, Date.UTC(2026, 10, 20, 16, 48)) && !sun.isNight(49.
 // the camera list
 const fs = require('fs'), os = require('os'), crypto = require('crypto');
 const { Packs } = require(path.join(A, 'packs'));
+const lang = require(path.join(A, 'lang'));
 const P0 = new Packs({ dir: path.join(A, 'packs') });
 const UA = P0.cameras(['ua']);
 ok(UA.length === P0.meta('ua').count && UA.length > 400, 'ua pack: ' + UA.length + ' cameras');
@@ -81,6 +82,8 @@ const bundle = { de: packFile('de', 'banned', [['o1', 52.5, 13.4, 50, 'Berlin', 
 const fakeBundled = { json: (n) => (n === 'index.json' ? { checked: '2026-11-01', packs: { de: Object.assign({ sha256: 'x' }, bundle.de[0]), pl: Object.assign({ sha256: 'y' }, bundle.pl[0]) } } : bundle[n.replace('.json', '')]) };
 const P1 = new Packs({ bundled: fakeBundled, dataDir: PD });
 ok(P1.active(null).join() === '' && P1.active({ lat: 52.5, lon: 13.4 }).join() === 'de', 'automatic: the pack where the car is (and "ua" chosen but not here: left out)');
+ok(P1.here(52.49, 13.39) === 'de' && P1.here(10, 10) === null, 'the country the car is in: the pack with the nearest camera');
+ok(lang.forCountry('at') === 'de' && lang.forCountry('us-ny') === 'en' && lang.forCountry('ua') === 'uk' && lang.forCountry(null) === 'uk', 'automatic language by country');
 P1.toggle('pl');
 ok(P1.active(null).join() === 'pl' && JSON.parse(fs.readFileSync(path.join(PD, 'packs.json'), 'utf8')).chosen.indexOf('pl') >= 0, 'a chosen pack is in use and kept');
 P1.setAuto(false);
@@ -111,11 +114,10 @@ const upd = U.check(false).then((st1) => {
 });
 
 // languages: every text in all eight, the settings translated in place
-const lang = require(path.join(A, 'lang'));
 ok(Object.keys(lang.T).every((k) => lang.T[k].length === 8 && lang.T[k].every((x) => typeof x === 'string' && x)), 'every text in all 8 languages');
 ok(Object.keys(lang.SETTINGS).every((k) => Object.keys(lang.SETTINGS[k]).every((o) => lang.SETTINGS[k][o].length === 8)), 'every setting in all 8 languages');
 const spec = JSON.parse(fs.readFileSync(path.join(A, 'app.json'), 'utf8'));
-ok(spec.settings.every((s) => lang.SETTINGS[s.key] && (s.options || []).every((o) => s.key === 'lang' || lang.SETTINGS[s.key][o[0]])), 'every setting of app.json (and its choices) has its translations');
+ok(spec.settings.every((s) => lang.SETTINGS[s.key] && (s.options || []).every((o) => (s.key === 'lang' && o[0] !== 'auto') || lang.SETTINGS[s.key][o[0]])), 'every setting of app.json (and its choices) has its translations');
 const sch = JSON.parse(JSON.stringify(spec.settings));
 lang.settings(sch, 'de');
 ok(sch.find((s) => s.key === 'sound').label === 'Warnton' && sch.find((s) => s.key === 'banned').options[0][1] === 'Aus (wie vorgeschrieben)', 'settings in German');

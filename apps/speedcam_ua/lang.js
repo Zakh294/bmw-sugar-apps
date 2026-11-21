@@ -4,6 +4,7 @@
  *
  *   const L = lang.make('de');  L('nearest')  L('in_dist', { d: '300 m', l: 50, label: 'A4' })
  *   lang.settings(schema, 'pl')                 the settings' labels and choices in that language (in place)
+ *   lang.forCountry('at')                       'de': "automatic" picks the language of the country the car is in
  *
  * A missing text falls back to English, then to the key. {name} is replaced from the values. Plain Node 8.
  */
@@ -107,7 +108,10 @@ const T = {
 };
 
 const SETTINGS = {
-    lang: { label: ['Мова', 'Language', 'Sprache', 'Język', 'Langue', 'Lingua', 'Idioma', 'Jazyk'] },
+    lang: {
+        label: ['Мова / Language', 'Language / Мова', 'Sprache / Language', 'Język / Language', 'Langue / Language', 'Lingua / Language', 'Idioma / Language', 'Jazyk / Language'],
+        auto: ['Автоматично (мова країни)', 'Automatic (the country\'s language)', 'Automatisch (Landessprache)', 'Automatycznie (język kraju)', 'Automatique (langue du pays)', 'Automatico (lingua del paese)', 'Automático (idioma del país)', 'Automaticky (jazyk země)'],
+    },
     enabled: { label: ['Попередження про камери', 'Camera warnings', 'Blitzer-Warnungen', 'Ostrzeżenia o fotoradarach', 'Alertes radars', 'Avvisi autovelox', 'Avisos de radares', 'Varování před radary'] },
     showWhen: {
         label: ['Коли показувати', 'When to show', 'Wann anzeigen', 'Kiedy pokazywać', 'Quand afficher', 'Quando mostrare', 'Cuándo mostrar', 'Kdy zobrazit'],
@@ -168,6 +172,11 @@ const SETTINGS = {
 
 const idx = (lang) => Math.max(0, LANGS.indexOf(lang));
 
+// "automatic": the language of the country the car is in (its pack); English where none of the eight is spoken
+const BY_COUNTRY = { ua: 'uk', de: 'de', at: 'de', ch: 'de', li: 'de', lu: 'de', pl: 'pl', fr: 'fr', mc: 'fr', be: 'fr', it: 'it', sm: 'it',
+    es: 'es', ad: 'es', cz: 'cs', sk: 'cs' };
+function forCountry(code, fallback) { return code ? BY_COUNTRY[code] || 'en' : fallback || 'uk'; }
+
 function fill(s, v) {
     return v ? String(s).replace(/\{(\w+)\}/g, (m, k) => (v[k] !== undefined && v[k] !== null ? String(v[k]) : m)) : s;
 }
@@ -195,4 +204,4 @@ function settings(schema, lang) {
     return schema;
 }
 
-module.exports = { LANGS, NATIVE, T, SETTINGS, make, settings, fill };
+module.exports = { LANGS, NATIVE, T, SETTINGS, make, settings, fill, forCountry, BY_COUNTRY };
