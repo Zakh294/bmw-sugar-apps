@@ -70,4 +70,30 @@ function probe(signals, log, opts) {
     return st;
 }
 
-module.exports = { probe, IFACE };
+/** Source names worth a look for a chime: navigation prompts, gongs, warnings, speech (not the phone ring). */
+const CANDIDATE = /navi|tts|speech|sds|announce|prompt|gong|chime|signal|warn|info|traffic|tone|beep|pdc|alert|notif|acoustic|park/i;
+
+/**
+ * What could carry the sound itself, read-only: ALSA cards and PCM devices, the PCM names in asound.conf and which
+ * players exist. `root` is for the tests. Never throws.
+ */
+function alsaInfo(root) {
+    const fs = require('fs');
+    root = root || '';
+    const read = (f) => { try { return fs.readFileSync(root + f, 'utf8'); } catch (e) { return ''; } };
+    const lines = (t) => t.split('\n').map((l) => l.trim()).filter((l) => l);
+    const cards = lines(read('/proc/asound/cards')).filter((l) => /^\d+\s*\[/.test(l))
+        .map((l) => l.replace(/^(\d+)\s*\[\s*([^\]]*?)\s*\].*$/, '$1 $2'));
+    const pcm = lines(read('/proc/asound/pcm')).map((l) => l.replace(/\s+/g, ' ').slice(0, 60));
+    let conf = '';
+    ['/etc/asound.conf', '/usr/share/alsa/alsa.conf.d/asound.conf'].forEach((f) => { conf += '\n' + read(f); });
+    try { fs.readdirSync(root + '/etc/asound.conf.d').forEach((f) => { conf += '\n' + read('/etc/asound.conf.d/' + f); }); } catch (e) { /* none */ }
+    const names = {};
+    conf.replace(/^\s*pcm\.(!?[\w-]+)/gm, (m, n) => { names[n.replace('!', '')] = 1; return m; });
+    const players = ['/usr/bin/aplay', '/bin/aplay', '/usr/bin/gst-launch-1.0', '/usr/bin/paplay', '/usr/bin/pacat', '/usr/bin/speaker-test']
+        .filter((f) => { try { return fs.statSync(root + f).isFile(); } catch (e) { return false; } })
+        .map((f) => f.split('/').pop());
+    return { cards, pcm, confPcm: Object.keys(names), players };
+}
+
+module.exports = { probe, alsaInfo, CANDIDATE, IFACE };

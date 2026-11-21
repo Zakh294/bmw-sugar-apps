@@ -55,6 +55,19 @@ const fakeSignals = {
             : { listMainSinks: [{ sinkID: 1024, name: 'Main', sinkClassID: 1 }] })),
 };
 const quietLog = { info: () => {}, warn: () => {} };
+// ALSA facts from a fake root
+const fs = require('fs'), os = require('os');
+const R = fs.mkdtempSync(path.join(os.tmpdir(), 'alsa-'));
+['/proc/asound', '/etc', '/usr/bin'].forEach((d) => d.split('/').reduce((a, b) => { a += '/' + b; try { fs.mkdirSync(R + a); } catch (e) { /* exists */ } return a; }, ''));
+fs.writeFileSync(R + '/proc/asound/cards', ' 0 [dirana3       ]: Dirana - Dirana3\n                      Dirana3\n 1 [dummy ]: x - y\n');
+fs.writeFileSync(R + '/proc/asound/pcm', '00-00: dirana3 Main : : playback 1\n00-01: dirana3 Navi : : playback 1\n');
+fs.writeFileSync(R + '/etc/asound.conf', 'pcm.!default { type plug }\npcm.entNavi {\n type dmix }\n# pcm.off\n');
+fs.writeFileSync(R + '/usr/bin/aplay', '');
+const al = sound.alsaInfo(R);
+ok(al.cards.join() === '0 dirana3,1 dummy' && al.pcm.length === 2 && al.confPcm.join() === 'default,entNavi' && al.players.join() === 'aplay',
+    'alsaInfo reads cards, pcm devices, asound.conf names and players');
+ok(sound.CANDIDATE.test('NaviAnnouncement') && sound.CANDIDATE.test('Gong_1') && !sound.CANDIDATE.test('TelRing_Inband_1') && !sound.CANDIDATE.test('FmDABCombined'),
+    'chime candidates: navigation and gongs yes, phone ring and radio no');
 const pr = sound.probe(fakeSignals, quietLog, { delayMs: 0, retryMs: 20, tries: 5 });
 setTimeout(() => {
     ok(pr.done && pr.sources.length === 1 && pr.sources[0].name === 'MediaPlayer' && pr.sinks[0].id === 1024 && pr.tries === 3 && !pr.error,

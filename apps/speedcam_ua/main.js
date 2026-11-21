@@ -74,6 +74,9 @@ function background(bg) {
     nightCheck();
     setInterval(nightCheck, 60000);
     st.audio = sound.probe(signals, log);
+    st.alsa = sound.alsaInfo();
+    log.info('audio: alsa cards ' + JSON.stringify(st.alsa.cards) + ', pcm ' + JSON.stringify(st.alsa.pcm)
+        + ', asound.conf ' + JSON.stringify(st.alsa.confPcm) + ', players ' + JSON.stringify(st.alsa.players));
 
     const tick = () => {
         try {
@@ -103,6 +106,29 @@ function background(bg) {
     return { st, pos, eng, ov, list };
 }
 
+/** The sound probe in full: every source and sink of the audio manager, likely chime carriers in yellow, ALSA below. */
+function audioPage(st, L, c) {
+    const au = st.audio || {}, al = st.alsa || {};
+    L('АУДІО-ДЖЕРЕЛА', 40, 50, 36);
+    L('жовтим: можуть підійти для сигналу · ще раз «Аудіо-джерела» — назад', 400, 48, 22, c.dim);
+    if (!au.done) { L(au.tries ? 'аудіосистема ще не готова, спроба ' + au.tries + '…' : 'чекаю на аудіосистему…', 40, 110, 28, c.warn); }
+    else if (!au.sources.length) { L('немає відповіді: ' + String(au.error || '').slice(0, 90), 40, 110, 26, c.bad); }
+    const sinks = (au.sinks || []).map((s) => s.id + ' ' + s.name).join(' · ');
+    L('ВИХОДИ (' + (au.sinks || []).length + ')', 40, 92, 20, c.dim);
+    L(sinks.slice(0, 120), 200, 92, 20);
+    const src = au.sources || [], ROWS = 16, COLW = 390;
+    L('ДЖЕРЕЛА (' + src.length + ')', 40, 124, 20, c.dim);
+    src.slice(0, ROWS * 4).forEach((s, i) => {
+        const x = 40 + Math.floor(i / ROWS) * COLW, y = 146 + (i % ROWS) * 20;
+        L(s.id + ' ' + String(s.name).slice(0, 26) + (s.cls !== undefined ? ' ·' + s.cls : ''), x, y, 18, sound.CANDIDATE.test(s.name) ? c.warn : '#ffffff');
+    });
+    if (src.length > ROWS * 4) L('+ ще ' + (src.length - ROWS * 4) + ' (повний список у лозі)', 40 + 3 * COLW, 146 + ROWS * 20, 18, c.dim);
+    const yy = 146 + ROWS * 20 + 4;
+    L('ALSA', 40, yy, 20, c.dim);
+    L('карти: ' + ((al.cards || []).join(', ') || '–') + ' · програвачі: ' + ((al.players || []).join(', ') || 'немає'), 140, yy, 20);
+    L('pcm: ' + (((al.confPcm || []).join(', ') || '–') + ' | ' + (al.pcm || []).length + ' пристроїв').slice(0, 140), 140, yy + 24, 20);
+}
+
 function fmtAge(s) { return s === null ? '–' : s < 2 ? 'щойно' : s < 120 ? s + ' с тому' : Math.round(s / 60) + ' хв тому'; }
 
 mgu.run({
@@ -111,12 +137,14 @@ mgu.run({
         const { ui, settings } = ctx;
         const core = ctx.background || background(ctx);
         const st = core.st;
-        ui.onClick('BTN_TEST', () => { st.test = { t0: Date.now() }; ctx.log.info('test warning'); });
+        ui.onClick('BTN_TEST', () => { st.page = null; st.test = { t0: Date.now() }; ctx.log.info('test warning'); });
+        ui.onClick('BTN_AUDIO', () => { st.page = st.page === 'audio' ? null : 'audio'; });
 
         const render = async () => {
             const t = ctx.theme(), cv = ctx.canvas(W, H).clear(t.bg);
             const L = (s, x, y, size, c) => cv.text(String(s), x, y, size, c || '#ffffff', { literal: true });
             const dim = '#8a93a0', ok = '#2fd27a', warn = '#ffb31a', bad = '#ff4040';
+            if (st.page === 'audio') { audioPage(st, L, { dim, ok, warn, bad }); await ui.image('MAIN_GFX', cv); return; }
             const km = (d) => (d >= 10000 ? Math.round(d / 1000) + ' км' : d >= 1000 ? (d / 1000).toFixed(1).replace('.', ',') + ' км' : Math.round(d) + ' м');
             L('SpeedCam UA', 40, 56, 44);
             L(core.list.length + ' камер · офіційний список від ' + DB.meta.fetched + ' (patrolpolice.gov.ua)', 360, 54, 24, dim);
@@ -160,7 +188,7 @@ mgu.run({
             const au = st.audio || {};
             L('ЗВУК (розвідка)', 40, y + 34 + 3 * 30 + 14, 22, dim);
             L(!au.done ? (au.tries ? 'аудіосистема ще не готова, спроба ' + au.tries + '…' : 'чекаю на аудіосистему…') : au.error && !au.sources.length ? 'немає відповіді: ' + String(au.error).slice(0, 60)
-                : au.sources.length + ' джерел, ' + au.sinks.length + ' виходів: ' + au.sources.map((s) => s.name).join(', ').slice(0, 90), 330, y + 34 + 3 * 30 + 14, 22, au.done && au.sources.length ? '#ffffff' : dim);
+                : au.sources.length + ' джерел, ' + au.sinks.length + ' виходів · повний список: кнопка «Аудіо-джерела» внизу', 330, y + 34 + 3 * 30 + 14, 22, au.done && au.sources.length ? '#ffffff' : dim);
             await ui.image('MAIN_GFX', cv);
         };
         ctx.loop('MAIN', 2, render);

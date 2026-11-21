@@ -6,7 +6,7 @@
 
 | Додаток | Папка | Версія | Що робить | Опис |
 |---|---|---|---|---|
-| SpeedCam UA | `apps/speedcam_ua` | 0.3.1 | офлайн-попередження про 426 камер автофіксації на HUD, приладці та всередині мапи Waze / Google | [docs/speedcam_ua](docs/speedcam_ua/README.md) |
+| SpeedCam UA | `apps/speedcam_ua` | 0.3.2 | офлайн-попередження про 426 камер автофіксації на HUD, приладці та всередині мапи Waze / Google | [docs/speedcam_ua](docs/speedcam_ua/README.md) |
 
 ## Підключення до машини
 

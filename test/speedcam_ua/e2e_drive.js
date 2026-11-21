@@ -80,6 +80,15 @@ async function main() {
     const subs = {};
     hu.ctx.signals = {
         watch: async (iface, inst, handlers) => { (subs[iface] = subs[iface] || []).push(handlers); return { iface, available: true, error: null, shutdown: () => Promise.resolve() }; },
+        // a made-up audio manager: 59 sources (the first six as the car showed them), 4 sinks
+        proxy: async () => ({}),
+        onAvailable: async (p, fn) => { fn(true); },
+        call: async (p, m) => {
+            const names = ['FmDABCombined', 'HFPSource_1', 'HFPSource_2', 'TelRing_Inband_1', 'TelRing_Inband_2', 'TelRing_Out', 'NaviAnnouncement', 'Gong_Warning'];
+            for (let i = names.length; i < 59; i++) names.push('Source_' + i);
+            return m === 'getListMainSources' ? { listMainSources: names.map((n, i) => ({ sourceID: 100 + i, name: n, sourceClassID: 1 + (i % 5) })) }
+                : { listMainSinks: ['Main', 'Rear', 'Headphone_1', 'Headphone_2'].map((n, i) => ({ sinkID: 1 + i, name: n, sinkClassID: 1 })) };
+        },
     };
     hu.ctx.log = log;
     const feed = (iface, field, v) => (subs[iface] || []).forEach((h) => { if (h[field]) h[field](v); });
@@ -218,6 +227,17 @@ async function main() {
     for (let i = 0; i < hl.px.length; i += 4) maxR = Math.max(maxR, hl.px[i]);
     check(maxR > 100 && maxR <= 130, 'HUD brightness 50 %: the brightest red at half (' + maxR + ')');
     snap('small_dim', [['hud', '#000000'], ['panel', '#2b2f36']]);
+
+    // the audio page: every source of the audio manager, chime candidates in yellow
+    hu.handlers.BTN_AUDIO();
+    const t0 = Date.now();
+    let au = null;
+    while (Date.now() - t0 < 30000) { await sleep(500); page = null; await hu.loopFn(); au = logLines.find((l) => /^audio: sources /.test(l)); if (au) break; }
+    await sleep(300); page = null; await hu.loopFn();
+    if (page) fs.writeFileSync(path.join(OUT, 'page_audio.png'), page.png());
+    check(!!au && /108 "Source_8"/.test(au), 'the audio probe lists the sources in the log');
+    check(logLines.some((l) => /^audio: alsa cards /.test(l)), 'the ALSA facts are in the log');
+    hu.handlers.BTN_AUDIO();
 
     srv.close();
     console.log(fails.length ? '\n' + fails.length + ' check(s) failed' : '\nall checks passed; pictures in ' + OUT);
