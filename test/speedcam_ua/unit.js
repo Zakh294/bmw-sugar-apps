@@ -44,4 +44,20 @@ ok(sun.isNight(49.84, 24.03, Date.UTC(2026, 10, 20, 16, 48)) && !sun.isNight(49.
 const DB = require(path.join(A, 'cameras'));
 ok(DB.rows.length === DB.meta.count && DB.rows.length > 400, 'cameras: ' + DB.rows.length);
 ok(DB.rows.every((r) => r[1] > 44 && r[1] < 53 && r[2] > 22 && r[2] < 41 && r[3] >= 30 && r[3] <= 130), 'every camera in Ukraine with a sane limit');
-console.log('unit: ' + n + ' checks passed');
+// the audio probe: the provider says "Service unavailable" twice, then answers
+const sound = require(path.join(A, 'sound'));
+let calls = 0;
+const fakeSignals = {
+    proxy: () => Promise.resolve({}),
+    onAvailable: (p, fn) => { setTimeout(() => fn(true), 10); return Promise.resolve(); },
+    call: (p, m) => (++calls <= 4 ? Promise.reject(new Error('Service unavailable for call ' + m + '()'))
+        : Promise.resolve(m === 'getListMainSources' ? { listMainSources: [{ sourceID: 1046, name: 'MediaPlayer', sourceClassID: 1 }] }
+            : { listMainSinks: [{ sinkID: 1024, name: 'Main', sinkClassID: 1 }] })),
+};
+const quietLog = { info: () => {}, warn: () => {} };
+const pr = sound.probe(fakeSignals, quietLog, { delayMs: 0, retryMs: 20, tries: 5 });
+setTimeout(() => {
+    ok(pr.done && pr.sources.length === 1 && pr.sources[0].name === 'MediaPlayer' && pr.sinks[0].id === 1024 && pr.tries === 3 && !pr.error,
+        'audio probe retries until the audio manager answers (' + pr.tries + ' tries)');
+    console.log('unit: ' + n + ' checks passed');
+}, 400);

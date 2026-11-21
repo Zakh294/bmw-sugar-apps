@@ -159,7 +159,7 @@ mgu.run({
             });
             const au = st.audio || {};
             L('ЗВУК (розвідка)', 40, y + 34 + 3 * 30 + 14, 22, dim);
-            L(!au.done ? 'питаю аудіосистему…' : au.error && !au.sources.length ? 'немає відповіді: ' + String(au.error).slice(0, 60)
+            L(!au.done ? (au.tries ? 'аудіосистема ще не готова, спроба ' + au.tries + '…' : 'чекаю на аудіосистему…') : au.error && !au.sources.length ? 'немає відповіді: ' + String(au.error).slice(0, 60)
                 : au.sources.length + ' джерел, ' + au.sinks.length + ' виходів: ' + au.sources.map((s) => s.name).join(', ').slice(0, 90), 330, y + 34 + 3 * 30 + 14, 22, au.done && au.sources.length ? '#ffffff' : dim);
             await ui.image('MAIN_GFX', cv);
         };

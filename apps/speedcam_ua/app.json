@@ -2,7 +2,7 @@
   "id": "speedcam_ua",
   "title": "SpeedCam UA",
   "description": "Офлайн-попередження про 426 стаціонарних камер автофіксації України на HUD, приладці та всередині мапи Waze / Google (Maps on cluster), за GPS машини, без телефона",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "vendor": "custom",
   "loggingId": "OASC",
   "iconGlyph": "CAM",
