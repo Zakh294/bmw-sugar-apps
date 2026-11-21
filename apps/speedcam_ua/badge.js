@@ -117,4 +117,13 @@ function draw(alert, kind, opts) {
     return cv;
 }
 
-module.exports = { draw, SIZE, fmtDist };
+/** The picture at k brightness (0..1): colours scaled, alpha kept. */
+function dim(cv, k) {
+    const d = cv.d;
+    for (let i = 0; i < d.length; i += 4) {
+        d[i] = Math.round(d[i] * k); d[i + 1] = Math.round(d[i + 1] * k); d[i + 2] = Math.round(d[i + 2] * k);
+    }
+    return cv;
+}
+
+module.exports = { draw, dim, SIZE, fmtDist };

@@ -87,7 +87,7 @@ async function main() {
     await sleep(600);
 
     // the compact cluster card is 440 wide, the banner in the phone map 640
-    const layerOf = (target, w) => Array.from(srv.layers.values()).find((l) => l.target === target && (!w || l.w === w) && (w || target !== 'panel' || l.w === 440));
+    const layerOf = (target, w) => Array.from(srv.layers.values()).find((l) => l.target === target && (!w || l.iw === w) && (w || target !== 'panel' || l.iw === 440));
     const snap = (name, which) => {
         (which || [['hud', '#000000'], ['panel', '#2b2f36']]).forEach((t) => {
             const l = t[2] || layerOf(t[0]);
@@ -184,6 +184,40 @@ async function main() {
     const hostL = layerOf('panel', 640);
     check(!!hostL && hostL.visible && hostL.x >= 420 && hostL.x + hostL.w <= 1500 && hostL.y >= 160 && hostL.y < 200, 'map hosted by a theme: the banner on the panel, at the top of the hosted map');
     check(!mapL.visible && !vis('panel'), '... and nothing on the map target or the cluster card');
+
+    // "only when I'm over the limit": the next camera warns only while the speed is above its limit
+    srv.emit({ ev: 'host', target: 'map', into: '', shown: 0 });
+    await sleep(14000);
+    hu.ctx.settings.set('showWhen', 'over');
+    const cam2 = DB.rows.find((r) => r[4] && r[0] !== cam.id && !DB.rows.some((b) => b[0] !== r[0] && geo.distance(r[1], r[2], b[1], b[2]) < 3000));
+    const c2 = { lat: cam2[1], lon: cam2[2], limit: cam2[3] };
+    const s2 = geo.offset(c2.lat, c2.lon, (brg + 180) % 360, 1500);
+    let quietOn = false, overOn = false;
+    for (let s = 0; s <= 1400; s += 25) {
+        const kmh = s < 900 ? c2.limit - 10 : c2.limit + 15;
+        put(geo.offset(s2.lat, s2.lon, brg, s), kmh);
+        await sleep(150);
+        if (s < 900 && vis('hud')) quietOn = true;
+        if (s > 950 && vis('hud')) overOn = true;
+    }
+    check(!quietOn, '"only when over": no warning within the limit (' + (c2.limit - 10) + ' km/h at a ' + c2.limit + ' camera)');
+    check(overOn, '"only when over": the warning comes once over the limit (' + (c2.limit + 15) + ' km/h)');
+    hu.ctx.settings.set('showWhen', 'always');
+
+    // size 70 %: the layers shrink, the image keeps its pixels; the HUD dims to its brightness setting
+    hu.ctx.settings.set('size', 70);
+    hu.ctx.settings.set('hudBright', 50);
+    hu.ctx.settings.set('nightDim', false);
+    await sleep(600);
+    hu.handlers.BTN_TEST();
+    await sleep(1500);
+    const hl = layerOf('hud'), cl = layerOf('panel');
+    check(hl.w === 210 && hl.h === 105 && hl.iw === 300, 'size 70 %: the HUD layer 210x105 from a 300x150 image');
+    check(cl.w === 308 && cl.y + cl.h === 468 + 168, 'size 70 %: the cluster card keeps its bottom edge');
+    let maxR = 0;
+    for (let i = 0; i < hl.px.length; i += 4) maxR = Math.max(maxR, hl.px[i]);
+    check(maxR > 100 && maxR <= 130, 'HUD brightness 50 %: the brightest red at half (' + maxR + ')');
+    snap('small_dim', [['hud', '#000000'], ['panel', '#2b2f36']]);
 
     srv.close();
     console.log(fails.length ? '\n' + fails.length + ' check(s) failed' : '\nall checks passed; pictures in ' + OUT);

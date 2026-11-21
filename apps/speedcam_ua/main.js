@@ -13,6 +13,8 @@ const DB = require('./cameras');
 const { PositionSource, mono } = require('./position');
 const { AlertEngine } = require('./alerts');
 const { Overlay } = require('./overlay');
+const sun = require('./sun');
+const sound = require('./sound');
 const geo = require('./geo');
 let CANDS;
 try { CANDS = require('./position_candidates'); } catch (e) { CANDS = { list: [], note: 'position_candidates.js missing' }; }
@@ -56,8 +58,22 @@ function background(bg) {
     const ov = new Overlay(bg.spec.id, log, () => ({
         hud: settings.get('showHud'), cluster: settings.get('showCluster'), clusterPlace: settings.get('clusterPlace'),
         inMap: settings.get('inMap'), mapPlace: settings.get('mapPlace'),
+        size: settings.get('size'), hudBright: settings.get('hudBright'), night: !!settings.get('nightDim') && st.night,
         socketPath: bg.spec.config && bg.spec.config.socketPath,
     })).start();
+
+    // night: the sun below civil twilight where the car is (the middle of Ukraine until the first fix), once a minute
+    st.night = false;
+    const nightCheck = () => {
+        const f = st.fix || st.lastPlace || { lat: 49.0, lon: 31.0 };
+        if (st.fix) st.lastPlace = { lat: st.fix.lat, lon: st.fix.lon };
+        const n = sun.isNight(f.lat, f.lon, Date.now());
+        if (n !== st.night) log.info('night: ' + n);
+        st.night = n;
+    };
+    nightCheck();
+    setInterval(nightCheck, 60000);
+    st.audio = sound.probe(signals, log);
 
     const tick = () => {
         try {
@@ -76,6 +92,8 @@ function background(bg) {
                     st.prev = st.alert;
                 } else if (!settings.get('enabled') || !fix) st.alert = null;
                 alert = st.alert;
+                // "only when I'm over the limit": the warning stays off while the speed is within it (+ tolerance)
+                if (alert && settings.get('showWhen') === 'over' && !alert.over) alert = null;
             }
             ov.show(alert, eng.warnDistance(speed));
         } catch (e) { log.warn('tick: ' + (e && e.stack || e)); }
@@ -133,12 +151,16 @@ mgu.run({
             L(ov.phoneMap ? 'мапа телефона ' + (ov.phoneMap === 'on the cluster' ? 'на приладці' : 'в темі приладки') + (settings.get('inMap') ? ': банер у мапі' : '') : 'мапи телефона на приладці немає', 820, y, 22, ov.phoneMap ? ok : dim);
             y += 52;
             L('ДЖЕРЕЛА GPS НА БЛОЦІ' + (CANDS.built ? ' (знайдено ' + CANDS.built + ')' : ''), 40, y, 22, dim);
-            ps.slice(0, 5).forEach((c, i) => {
+            ps.slice(0, 3).forEach((c, i) => {
                 const yy = y + 34 + i * 30;
                 const col = c.inUse ? ok : c.count ? '#ffffff' : c.error ? bad : dim;
                 L((c.inUse ? '> ' : '  ') + c.name, 40, yy, 22, col);
                 L(c.error ? 'помилка: ' + c.error.slice(0, 50) : c.count ? c.count + ' фіксів, ' + (c.scale || '?') + ', ' + fmtAge(c.age) : c.misses ? c.misses + ' значень без координат' : 'ще нічого', 900, yy, 22, col);
             });
+            const au = st.audio || {};
+            L('ЗВУК (розвідка)', 40, y + 34 + 3 * 30 + 14, 22, dim);
+            L(!au.done ? 'питаю аудіосистему…' : au.error && !au.sources.length ? 'немає відповіді: ' + String(au.error).slice(0, 60)
+                : au.sources.length + ' джерел, ' + au.sinks.length + ' виходів: ' + au.sources.map((s) => s.name).join(', ').slice(0, 90), 330, y + 34 + 3 * 30 + 14, 22, au.done && au.sources.length ? '#ffffff' : dim);
             await ui.image('MAIN_GFX', cv);
         };
         ctx.loop('MAIN', 2, render);

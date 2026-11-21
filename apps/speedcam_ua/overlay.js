@@ -19,6 +19,8 @@ const { ClusterRender } = require('./cluster_render_client');
 const badge = require('./badge');
 
 const MAP = { w: 1088, h: 480 };
+// at night (the sun below civil twilight at the car, "nightDim" on): the HUD to 60 %, the cluster pictures to 80 %
+const NIGHT = { hud: 0.6, other: 0.8 };
 const PLACE = {
     hud: { x: 372, y: 112 },
     cluster: { center: { x: 740, y: 468 }, left: { x: 150, y: 470 }, right: { x: 1330, y: 470 } },
@@ -27,12 +29,13 @@ const PLACE = {
 };
 
 class Overlay {
-    /** opts(): { hud, cluster, inMap, mapPlace, clusterPlace, socketPath } read on every paint. */
+    /** opts(): { hud, cluster, inMap, mapPlace, clusterPlace, size (%), hudBright (%), night, socketPath } read on every paint. */
     constructor(appId, log, opts) {
         this.log = log;
         this.opts = opts;
         this.cr = new ClusterRender(appId, (opts() || {}).socketPath);
         this.layers = {};
+        this.at = {};           // each layer's last { x, y, w, h }
         this.state = {};
         this.targets = {};
         this.mapByOthers = false;
@@ -75,7 +78,7 @@ class Overlay {
         this.timer = setInterval(() => {
             if (!this.shown || this.shown.over !== 2) return;
             this.blink = !this.blink;
-            this._paint(true);
+            try { this._paint(true); } catch (e) { this.log.warn('blink: ' + (e && e.stack || e)); }
         }, 500);
         return this;
     }
@@ -92,22 +95,32 @@ class Overlay {
         return { x: Math.max(0, x), y: Math.max(0, y) };
     }
 
+    /**
+     * Where layer k goes and how big: the image keeps its size (badge.SIZE), the layer is shown at size % of it
+     * (the service scales). Anchors: HUD top left, cluster card bottom centre, map banner top centre.
+     */
+    _rect(k, o) {
+        const kind = k === 'hosted' ? 'map' : k, iw = badge.SIZE[kind][0], ih = badge.SIZE[kind][1];
+        const f = Math.max(0.5, Math.min(1, (o.size || 100) / 100));
+        const w = Math.round(iw * f), h = Math.round(ih * f);
+        let x, y;
+        if (k === 'hud') { x = PLACE.hud.x; y = PLACE.hud.y; }
+        else if (k === 'cluster') { const p = PLACE.cluster[o.clusterPlace] || PLACE.cluster.center; x = p.x + Math.round((iw - w) / 2); y = p.y + ih - h; }
+        else if (k === 'map') { const p = PLACE.map[o.mapPlace] || PLACE.map.center; x = p.x + Math.round((iw - w) / 2); y = p.y; }
+        else { const p = this._hostedPlace(o.mapPlace); x = p.x + Math.round((iw - w) / 2); y = p.y; }
+        return { x, y, w, h, iw, ih };
+    }
+
     _layer(k, o) {
-        const hs = badge.SIZE.hud, cs = badge.SIZE.cluster, ms = badge.SIZE.map;
-        if (k === 'hud') {
-            if (!this.layers.hud) this.layers.hud = this.cr.image({ target: 'hud', klass: 'alert', z: 50, x: PLACE.hud.x, y: PLACE.hud.y, w: hs[0], h: hs[1], visible: false });
-        } else if (k === 'cluster') {
-            const p = PLACE.cluster[o.clusterPlace] || PLACE.cluster.center;
-            if (!this.layers.cluster) { this.layers.cluster = this.cr.image({ target: 'panel', klass: 'alert', z: 50, x: p.x, y: p.y, w: cs[0], h: cs[1], visible: false }); this.at = { cluster: p }; }
-            else if (this.at.cluster !== p) { this.cr.set(this.layers.cluster, { x: p.x, y: p.y }); this.at.cluster = p; }
-        } else if (k === 'map') {
-            const p = PLACE.map[o.mapPlace] || PLACE.map.center;
-            if (!this.layers.map) { this.layers.map = this.cr.image({ target: 'map', klass: 'alert', z: 50, x: p.x, y: p.y, w: ms[0], h: ms[1], visible: false }); this.atMap = p; }
-            else if (this.atMap !== p) { this.cr.set(this.layers.map, { x: p.x, y: p.y }); this.atMap = p; }
-        } else if (k === 'hosted') {
-            const p = this._hostedPlace(o.mapPlace);
-            if (!this.layers.hosted) { this.layers.hosted = this.cr.image({ target: 'panel', klass: 'alert', z: 50, x: p.x, y: p.y, w: ms[0], h: ms[1], visible: false }); this.atHost = p; }
-            else if (!this.atHost || this.atHost.x !== p.x || this.atHost.y !== p.y) { this.cr.set(this.layers.hosted, { x: p.x, y: p.y }); this.atHost = p; }
+        // the hosted banner once the theme stopped hosting the map: only hidden, where it was
+        if (k === 'hosted' && !this.hosted) return this.layers.hosted || null;
+        const r = this._rect(k, o), target = { hud: 'hud', cluster: 'panel', map: 'map', hosted: 'panel' }[k];
+        if (!this.layers[k]) {
+            this.layers[k] = this.cr.image({ target, klass: 'alert', z: 50, x: r.x, y: r.y, w: r.w, h: r.h, iw: r.iw, ih: r.ih, visible: false });
+            this.at[k] = r;
+        } else {
+            const was = this.at[k];
+            if (was.x !== r.x || was.y !== r.y || was.w !== r.w || was.h !== r.h) { this.cr.set(this.layers[k], { x: r.x, y: r.y, w: r.w, h: r.h }); this.at[k] = r; }
         }
         return this.layers[k];
     }
@@ -129,8 +142,8 @@ class Overlay {
     _paint(force) {
         const a = this.shown, o = this.opts();
         const mode = this.mode || 'cluster';
-        const key = a ? [a.id, a.dist, a.speed, a.limit, a.over, a.label, this.blink, o.hud, o.cluster, mode, o.mapPlace, o.clusterPlace].join('|')
-            : 'off|' + o.hud + '|' + o.cluster;
+        const key = a ? [a.id, a.dist, a.speed, a.limit, a.over, a.label, this.blink, o.hud, o.cluster, mode, o.mapPlace, o.clusterPlace,
+            o.size, o.hudBright, o.night].join('|') : 'off|' + o.hud + '|' + o.cluster;
         if (!force && key === this.lastKey) return;
         this.lastKey = key;
         const want = {
@@ -142,8 +155,12 @@ class Overlay {
         ['hud', 'cluster', 'map', 'hosted'].forEach((k) => {
             if (!want[k] && !this.layers[k]) return;
             const ref = this._layer(k, o);
+            if (!ref) return;
             if (want[k]) {
                 const cv = badge.draw(a, k === 'hosted' ? 'map' : k, { warnDist: this.warnDist, blink: this.blink });
+                // the HUD at its brightness setting; every screen a step down at night
+                const lvl = (k === 'hud' ? (o.hudBright || 100) / 100 : 1) * (o.night ? (k === 'hud' ? NIGHT.hud : NIGHT.other) : 1);
+                if (lvl < 0.995) badge.dim(cv, lvl);
                 this.cr.pixels(ref, null, Buffer.from(cv.d.buffer, cv.d.byteOffset, cv.d.byteLength));
             }
             this.cr.set(ref, { visible: want[k] });

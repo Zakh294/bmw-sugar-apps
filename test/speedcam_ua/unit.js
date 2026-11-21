@@ -35,6 +35,11 @@ ok(geo.angleDiff(350, 10) === 20 && geo.angleDiff(10, 350) === -20, 'angle wrap'
 const p = geo.offset(50, 30, 90, 1000);
 ok(Math.abs(geo.distance(50, 30, p.lat, p.lon) - 1000) < 0.5, 'offset');
 
+// the sun (Lviv): high at noon in June, dark at 18:48 local in November, light at noon in November
+const sun = require(path.join(A, 'sun'));
+ok(Math.abs(sun.elevation(49.84, 24.03, Date.UTC(2026, 5, 21, 10, 13)) - 63.6) < 1, 'sun at noon, June');
+ok(sun.isNight(49.84, 24.03, Date.UTC(2026, 10, 20, 16, 48)) && !sun.isNight(49.84, 24.03, Date.UTC(2026, 10, 21, 10, 0)), 'night in the evening, day at noon');
+
 // the camera list
 const DB = require(path.join(A, 'cameras'));
 ok(DB.rows.length === DB.meta.count && DB.rows.length > 400, 'cameras: ' + DB.rows.length);

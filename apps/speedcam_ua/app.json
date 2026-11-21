@@ -2,7 +2,7 @@
   "id": "speedcam_ua",
   "title": "SpeedCam UA",
   "description": "Офлайн-попередження про 426 стаціонарних камер автофіксації України на HUD, приладці та всередині мапи Waze / Google (Maps on cluster), за GPS машини, без телефона",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "vendor": "custom",
   "loggingId": "OASC",
   "iconGlyph": "CAM",
@@ -16,6 +16,14 @@
   "signals": {
     "de.bmw.infotainment.vehicle.Vehicle2": {
       "statusCarSpeed2": "rs"
+    },
+    "org.genivi.am.commandinterface.CommandControl": {
+      "_optional": "the audio manager's lists of sources and sinks (read-only, for the chime to come)",
+      "_instances": "1",
+      "_methods": [
+        "getListMainSources",
+        "getListMainSinks"
+      ]
     }
   },
   "screens": [
@@ -41,6 +49,22 @@
       "label": "Попередження про камери",
       "type": "bool",
       "default": true
+    },
+    {
+      "key": "showWhen",
+      "label": "Коли показувати",
+      "type": "choice",
+      "default": "always",
+      "options": [
+        [
+          "always",
+          "Біля кожної камери"
+        ],
+        [
+          "over",
+          "Лише коли перевищую ліміт"
+        ]
+      ]
     },
     {
       "key": "showHud",
@@ -145,6 +169,44 @@
         10,
         15
       ]
+    },
+    {
+      "key": "size",
+      "label": "Розмір попередження",
+      "type": "number",
+      "unit": "%",
+      "default": 100,
+      "markDefault": true,
+      "steps": [
+        60,
+        70,
+        80,
+        90,
+        100
+      ]
+    },
+    {
+      "key": "hudBright",
+      "label": "Яскравість на HUD",
+      "type": "number",
+      "unit": "%",
+      "default": 100,
+      "markDefault": true,
+      "steps": [
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100
+      ]
+    },
+    {
+      "key": "nightDim",
+      "label": "Вночі тьмяніше (за сонцем у місці, де машина)",
+      "type": "bool",
+      "default": true
     }
   ],
   "config": {
