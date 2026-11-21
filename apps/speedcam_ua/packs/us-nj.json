@@ -1,0 +1,7 @@
+[{"bbox": [40.512753, -74.489618, 40.987696, -74.10199], "code": "us-nj", "count": 6, "en": "New Jersey", "fetched": "2026-11-21", "group": "us", "iso": "US-NJ", "legal": "ok", "license": "OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)", "name": "New Jersey", "source": "OpenStreetMap (Overpass)", "uk": "New Jersey", "units": "mph", "updated": "2026-11-21"},
+["o10962671993", 40.792274, -74.481324, 40.2, "New Jersey", 130],
+["o10962671996", 40.789748, -74.477146, 40.2, "New Jersey", 30],
+["o14330022629", 40.512753, -74.489618, null, "New Jersey", null],
+["o7529907196", 40.987696, -74.102303, 40.2, "New Jersey", 110],
+["o7529907293", 40.98754, -74.10199, 40.2, "New Jersey", 300],
+["o8252955321", 40.952632, -74.158875, 40.2, "New Jersey", 270]]

@@ -1,0 +1,7 @@
+[{"bbox": [35.271198, -81.155532, 36.095093, -78.641768], "code": "us-nc", "count": 6, "en": "North Carolina", "fetched": "2026-11-21", "group": "us", "iso": "US-NC", "legal": "ok", "license": "OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)", "name": "North Carolina", "source": "OpenStreetMap (Overpass)", "uk": "North Carolina", "units": "mph", "updated": "2026-11-21"},
+["o2657820981", 36.082841, -79.460036, null, "Traffic Camera · North Carolina", null],
+["o2657831404", 36.090688, -79.431383, null, "Traffic Camera · North Carolina", null],
+["o2657832314", 36.095093, -79.405767, null, "Traffic Camera · North Carolina", null],
+["o7185723263", 35.779574, -78.641768, null, "North Carolina", null],
+["o7306694523", 35.271198, -81.155532, null, "North Carolina", null],
+["o9518479307", 35.779886, -78.643395, null, "North Carolina", null]]

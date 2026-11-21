@@ -1,0 +1,4 @@
+[{"bbox": [43.596976, -73.176561, 44.716639, -72.03043], "code": "us-vt", "count": 3, "en": "Vermont", "fetched": "2026-11-21", "group": "us", "iso": "US-VT", "legal": "ok", "license": "OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)", "name": "Vermont", "source": "OpenStreetMap (Overpass)", "uk": "Vermont", "units": "mph", "updated": "2026-11-21"},
+["o13446790721", 44.449393, -73.176561, null, "Vermont", null],
+["o7785914159", 43.596976, -72.970331, null, "Vermont", null],
+["o8672203203", 44.716639, -72.03043, null, "Vermont", null]]

@@ -1,0 +1,6 @@
+[{"bbox": [35.232668, -85.17648, 35.720059, -83.508937], "code": "us-tn", "count": 5, "en": "Tennessee", "fetched": "2026-11-21", "group": "us", "iso": "US-TN", "legal": "ok", "license": "OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)", "name": "Tennessee", "source": "OpenStreetMap (Overpass)", "uk": "Tennessee", "units": "mph", "updated": "2026-11-21"},
+["o11639996473", 35.238014, -85.17648, 45, "Tennessee", null],
+["o11639996474", 35.237511, -85.176434, 45, "Tennessee", null],
+["o12798966181", 35.232836, -85.175376, 72.4, "Tennessee", null],
+["o12798966182", 35.232668, -85.175093, 72.4, "Tennessee", null],
+["o14161534057", 35.720059, -83.508937, null, "Tennessee", 205]]

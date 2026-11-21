@@ -1,0 +1,6 @@
+[{"bbox": [29.974667, -91.827146, 30.123254, -90.100333], "code": "us-la", "count": 5, "en": "Louisiana", "fetched": "2026-11-21", "group": "us", "iso": "US-LA", "legal": "ok", "license": "OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)", "name": "Louisiana", "source": "OpenStreetMap (Overpass)", "uk": "Louisiana", "units": "mph", "updated": "2026-11-21"},
+["o13979256672", 30.123254, -91.827146, 40.2, "Louisiana", 50],
+["o582915308", 29.999968, -90.114591, null, "Louisiana", null],
+["o582915312", 29.974667, -90.100333, null, "Louisiana", null],
+["o582915319", 29.974789, -90.100794, null, "Louisiana", null],
+["o582915329", 30.004357, -90.10826, null, "Louisiana", null]]

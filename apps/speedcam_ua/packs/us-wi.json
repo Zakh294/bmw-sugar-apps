@@ -1,0 +1,6 @@
+[{"bbox": [43.306766, -89.525924, 45.968322, -88.26034], "code": "us-wi", "count": 5, "en": "Wisconsin", "fetched": "2026-11-21", "group": "us", "iso": "US-WI", "legal": "ok", "license": "OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)", "name": "Wisconsin", "source": "OpenStreetMap (Overpass)", "uk": "Wisconsin", "units": "mph", "updated": "2026-11-21"},
+["o10742587425", 45.968322, -88.653906, 88.5, "Wisconsin", null],
+["o11899529298", 43.306766, -89.525924, null, "Wisconsin", null],
+["o11899529299", 43.317242, -89.523096, 40.2, "Wisconsin", 55],
+["o2913809770", 44.246771, -88.260524, null, "Wisconsin", null],
+["o2913809771", 44.246641, -88.26034, null, "Wisconsin", null]]
