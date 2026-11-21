@@ -1,0 +1,9 @@
+[{"bbox": [38.723647, -75.775611, 39.684042, -75.123142], "code": "us-de", "count": 8, "en": "Delaware", "fetched": "2026-11-21", "group": "us", "iso": "US-DE", "legal": "ok", "license": "OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright)", "name": "Delaware", "source": "OpenStreetMap (Overpass)", "uk": "Delaware", "units": "mph", "updated": "2026-11-21"},
+["o1358373464", 39.648638, -75.697194, null, "Delaware", 250],
+["o13648192319", 39.682028, -75.760244, 40.2, "Delaware", 15],
+["o13911338128", 38.728078, -75.12951, 72.4, "Delaware", 110],
+["o13911338129", 38.727958, -75.128629, 72.4, "Delaware", 270],
+["o13911338130", 38.723647, -75.123142, 72.4, "Delaware", 290],
+["o13911338131", 38.723948, -75.124253, 72.4, "Delaware", 110],
+["o14325566510", 39.684042, -75.775611, 48.3, "Delaware", 150],
+["o14396885921", 39.671284, -75.7532, 40.2, "Delaware", 330]]
