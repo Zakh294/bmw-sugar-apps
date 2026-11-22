@@ -21,7 +21,7 @@ Ukraine. SpeedCam says the same in the last row of its settings.
 
 | App | Folder | Version | What it does | Manual |
 |---|---|---|---|---|
-| SpeedCam | `apps/speedcam_ua` | 0.5.1 | Offline speed camera warnings on the head-up display, the instrument cluster and inside the Waze / Google map on the cluster. Ukraine (official police list), Europe and the USA (OpenStreetMap), 8 languages, a chime, monthly database updates | [English](docs/speedcam_ua/README.en.md) · [Українська](docs/speedcam_ua/README.md) |
+| SpeedCam | `apps/speedcam_ua` | 0.5.2 | Offline speed camera warnings on the head-up display, the instrument cluster and inside the Waze / Google map on the cluster. Ukraine (official police list), Europe and the USA (OpenStreetMap), 8 languages, a chime, monthly database updates | [English](docs/speedcam_ua/README.en.md) · [Українська](docs/speedcam_ua/README.md) |
 
 ### SpeedCam at a glance
 
@@ -54,7 +54,8 @@ You need a head unit with root access and the MGU Store installed (see the
 
 1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, branch **`main`** → **Check now**.
 2. Pick the app → **Install**. The head unit builds it (a minute or two).
-3. Updates: Installed → **Update all** (a new app version), and SpeedCam's camera databases update themselves once a
+3. Updates: Installed → **Update all** (a new app version; the app's page in the Store and the
+   [CHANGELOG](docs/speedcam_ua/CHANGELOG.en.md) say what is new), and SpeedCam's camera databases update themselves once a
    month from this repository. Roughly how many cars use it:
    [STATS.md](docs/speedcam_ua/STATS.md).
 

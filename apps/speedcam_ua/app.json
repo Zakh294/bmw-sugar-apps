@@ -1,8 +1,31 @@
 {
   "id": "speedcam_ua",
   "title": "SpeedCam",
-  "description": "Офлайн-попередження про камери швидкості на HUD, приладці та в мапі Waze / Google: Україна (офіційний список поліції), Європа та США (OpenStreetMap), 8 мов, оновлення баз раз на місяць",
-  "version": "0.5.1",
+  "description": "Offline speed camera warnings on the HUD, the instrument cluster and inside the Waze / Google map: Ukraine (the police's official list), Europe and the USA (OpenStreetMap), 8 languages, monthly database updates.\n\nWhat's new in 0.5.2:\n• HUD: the car's speed can be left out (BMW's panel shows it), and the warning moves up or down to the level of BMW's panel\n• HUD: our limit sign hides while the car shows the same limit (its sign recognition, found when the Store builds the app)\n• The Store shows what is new in each version",
+  "texts": {
+    "uk": {
+      "description": "Офлайн-попередження про камери швидкості на HUD, приладці та в мапі Waze / Google: Україна (офіційний список поліції), Європа та США (OpenStreetMap), 8 мов, оновлення баз раз на місяць.\n\nНове у 0.5.2:\n• HUD: швидкість авто можна сховати (її вже показує панель BMW), а попередження підняти чи опустити на рівень панелі BMW\n• HUD: наш знак ліміту ховається, коли авто показує той самий ліміт (розпізнавання знаків, шукається під час збірки в Store)\n• Store показує, що нового в кожній версії"
+    },
+    "de": {
+      "description": "Offline-Blitzerwarnungen im HUD, im Kombiinstrument und in der Waze- / Google-Karte: Ukraine (offizielle Polizeiliste), Europa und USA (OpenStreetMap), 8 Sprachen, monatliche Datenbank-Updates.\n\nNeu in 0.5.2:\n• HUD: die Geschwindigkeit lässt sich ausblenden (BMW zeigt sie bereits), die Warnung lässt sich auf die Höhe der BMW-Anzeige schieben\n• HUD: unser Limit-Schild verschwindet, solange das Auto dasselbe Limit zeigt (Verkehrszeichenerkennung, beim Bau im Store gesucht)\n• Der Store zeigt, was in jeder Version neu ist"
+    },
+    "pl": {
+      "description": "Ostrzeżenia offline o fotoradarach na HUD, zegarach i w mapie Waze / Google: Ukraina (oficjalna lista policji), Europa i USA (OpenStreetMap), 8 języków, comiesięczna aktualizacja baz.\n\nNowości w 0.5.2:\n• HUD: prędkość auta można ukryć (panel BMW już ją pokazuje), a ostrzeżenie przesunąć w górę lub w dół do poziomu panelu BMW\n• HUD: nasz znak limitu znika, gdy auto pokazuje ten sam limit (rozpoznawanie znaków, wyszukiwane przy budowie w Store)\n• Store pokazuje nowości każdej wersji"
+    },
+    "fr": {
+      "description": "Alertes radars hors ligne au HUD, au combiné et dans la carte Waze / Google : Ukraine (liste officielle de la police), Europe et États-Unis (OpenStreetMap), 8 langues, bases mises à jour chaque mois.\n\nNouveautés de la 0.5.2 :\n• HUD : la vitesse peut être masquée (le panneau BMW l'affiche déjà) et l'alerte montée ou descendue au niveau du panneau BMW\n• HUD : notre panneau de limite disparaît quand la voiture affiche la même limite (lecture des panneaux, cherchée à la construction dans le Store)\n• Le Store montre les nouveautés de chaque version"
+    },
+    "it": {
+      "description": "Avvisi autovelox offline sull'HUD, sul quadro e nella mappa Waze / Google: Ucraina (elenco ufficiale della polizia), Europa e USA (OpenStreetMap), 8 lingue, database aggiornati ogni mese.\n\nNovità della 0.5.2:\n• HUD: la velocità si può nascondere (la mostra già il pannello BMW) e l'avviso si sposta su o giù al livello del pannello BMW\n• HUD: il nostro cartello del limite si nasconde quando l'auto mostra lo stesso limite (riconoscimento segnali, cercato durante la build nello Store)\n• Lo Store mostra le novità di ogni versione"
+    },
+    "es": {
+      "description": "Avisos de radares sin conexión en el HUD, el cuadro y dentro del mapa de Waze / Google: Ucrania (lista oficial de la policía), Europa y EE. UU. (OpenStreetMap), 8 idiomas, bases actualizadas cada mes.\n\nNovedades de la 0.5.2:\n• HUD: la velocidad se puede ocultar (el panel de BMW ya la muestra) y el aviso subir o bajar al nivel del panel de BMW\n• HUD: nuestra señal de límite se oculta mientras el coche muestra el mismo límite (lectura de señales, buscada al compilar en la Store)\n• La Store muestra las novedades de cada versión"
+    },
+    "cs": {
+      "description": "Offline varování před radary na HUD, přístrojích a v mapě Waze / Google: Ukrajina (oficiální seznam policie), Evropa a USA (OpenStreetMap), 8 jazyků, měsíční aktualizace databází.\n\nNovinky ve 0.5.2:\n• HUD: rychlost auta lze skrýt (panel BMW ji už ukazuje) a varování posunout nahoru či dolů na úroveň panelu BMW\n• HUD: naše značka limitu se skryje, když auto ukazuje stejný limit (rozpoznávání značek, hledá se při sestavení ve Store)\n• Store ukazuje novinky každé verze"
+    }
+  },
+  "version": "0.5.2",
   "vendor": "custom",
   "loggingId": "OASC",
   "iconGlyph": "CAM",
@@ -401,6 +424,56 @@
         90,
         100
       ]
+    },
+    {
+      "key": "hudSpeed",
+      "label": "Швидкість авто на HUD",
+      "type": "bool",
+      "default": true
+    },
+    {
+      "key": "hudLimit",
+      "label": "Знак ліміту на HUD",
+      "type": "choice",
+      "default": "auto",
+      "options": [
+        [
+          "auto",
+          "Ховати, коли авто показує той самий"
+        ],
+        [
+          "show",
+          "Завжди"
+        ],
+        [
+          "hide",
+          "Ніколи"
+        ]
+      ]
+    },
+    {
+      "key": "hudY",
+      "label": "Висота на HUD (+ вище, - нижче)",
+      "type": "number",
+      "unit": "px",
+      "default": 0,
+      "markDefault": true,
+      "steps": [
+        -150,
+        -120,
+        -90,
+        -60,
+        -30,
+        0,
+        30,
+        60,
+        90
+      ],
+      "labels": {
+        "30": "+30 px",
+        "60": "+60 px",
+        "90": "+90 px"
+      }
     },
     {
       "key": "hudBright",

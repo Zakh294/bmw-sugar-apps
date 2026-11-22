@@ -135,6 +135,36 @@ ok(lang.make('pl')('in_dist', { d: '300 m', l: 50, label: 'A4' }) === 'za 300 m,
 const badge = require(path.join(A, 'badge'));
 ok(badge.fmtDist(1240, 'kmh', lang.make('de')).v === '1,2' && badge.fmtDist(1240, 'kmh', lang.make('en')).v === '1.2' && badge.fmtDist(250, 'mph', lang.make('en')).u === 'ft'
     && badge.fmtDist(3218, 'mph', lang.make('en')).v === '2.0' && badge.inUnits(40.2, 'mph') === 25, 'distances and speeds in km / mi, limit 40.2 km/h = 25 mph');
+
+// the HUD without the car's speed / without our sign: pixels where the sign is (left) and where the speed is (row 2)
+const hudA = { id: 1, dist: 500, limit: 50, speed: 72, over: 2, label: 'x', units: 'kmh', zone: false };
+const px = (cv, x, y) => cv.d[(y * cv.w + x) * 4 + 3];
+const lit = (cv, x0, y0, x1, y1) => { let k = 0; for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) if (px(cv, x, y)) k++; return k; };
+const hFull = badge.draw(hudA, 'hud', {}), hNoSpeed = badge.draw(hudA, 'hud', { noSpeed: true }), hNoSign = badge.draw(hudA, 'hud', { noLimit: true });
+ok(lit(hFull, 198, 88, 296, 116) > 50 && lit(hNoSpeed, 198, 112, 296, 116) === 0, 'HUD: the speed is left out with noSpeed');
+ok(lit(hNoSpeed, 194, 92, 296, 104) > 200 && lit(hNoSpeed, 146, 126, 296, 150) === 0, 'HUD without the speed: the bar beside the camera, nothing below');
+ok(lit(hFull, 60, 4, 76, 12) > 0 && lit(hNoSign, 60, 4, 76, 12) === 0, 'HUD: no sign with noLimit');
+
+// the car's own limit (car_limit.js)
+const { CarLimit, findLimit } = require(path.join(A, 'car_limit'));
+ok(findLimit(50).v === 50 && findLimit(0) === null && findLimit(255) === null && findLimit(53) === null, 'car limit: a plain number');
+ok(findLimit({ speedLimit: { value: 70 }, unit: 1, status: 2 }).v === 70 && findLimit({ signType: 3, speedLimitValue: 90 }).v === 90, 'car limit: inside a struct');
+ok(findLimit({ counter: 40, distanceToSign: 100 }) === null && findLimit({ a: 35, b: 10, c: 20, d: 1 }) === null, 'car limit: no guess among unnamed numbers');
+const clHandlers = {};
+const cl = new CarLimit({ watch: (i, inst, h) => { Object.assign(clHandlers, h); return Promise.resolve({}); } }, quietLog,
+    [{ iface: 'de.bmw.x.SpeedLimitInfo', inst: '1', name: 'speedLimit', kind: 'field' }]).start();
+ok(!cl.shows(50), 'car limit: nothing before the car says anything');
+clHandlers.speedLimit({ value: 50 });
+ok(cl.shows(50) && !cl.shows(70) && cl.status()[0].value === 50, 'car limit: the same limit is seen');
+clHandlers.speedLimit({ value: 30 });
+ok(cl.shows(48.3) && !cl.shows(50), 'car limit: 30 mph = a 48 km/h camera');
+clHandlers.speedLimit({ value: 0 });
+ok(!cl.shows(50) && cl.values().length === 0, 'car limit: 0 = no limit known');
+
+// the Store's page: what is new in this version, in English and the other 7 languages
+const newIn = (s) => typeof s === 'string' && s.indexOf(spec.version) > 0 && s.length <= 1000;
+ok(newIn(spec.description) && ['uk', 'de', 'pl', 'fr', 'it', 'es', 'cs'].every((c) => spec.texts && spec.texts[c] && newIn(spec.texts[c].description)),
+    'the Store description says what is new in ' + spec.version + ' in all 8 languages');
 const { AlertEngine } = require(path.join(A, 'alerts'));
 const eng = new AlertEngine([{ id: 'fr:1', lat: 48.85, lon: 2.35, limit: 50, legal: 'zones' }, { id: 'pl:1', lat: 52.2, lon: 21, limit: 50, legal: 'ok' }], () => ({ lead: 20, minWarn: 300 }));
 ok(eng.warnFor({ legal: 'zones' }, 90) === 2000 && eng.warnFor({ legal: 'zones' }, 130) === 4000 && eng.warnFor({ legal: 'ok' }, 90) === 500, 'a danger zone starts 2 km (4 km on a motorway) before the camera');

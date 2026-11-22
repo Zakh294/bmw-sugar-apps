@@ -4,7 +4,8 @@
  * (robertnisipeanu/idrive-apps, the service HUD Widgets, Cluster Themes and Maps on cluster draw with).
  *
  * Image layers of class "alert" (on top of every other app's layers), hidden while there is no warning:
- *   hud      the HUD, right of BMW's own speed and limit sign (which BMW draws over anything bottom left)
+ *   hud      the HUD, right of BMW's own speed and limit sign (which BMW draws over anything bottom left); "hudY"
+ *            moves it up or down to BMW's panel's level
  *   cluster  a compact card in the lower part of the cluster (target panel), when no phone map shows
  *   map      a wide banner inside the phone's map (Waze, Google Maps, Apple Maps) on the cluster's map target,
  *            while Maps on cluster shows it there ("Inside the Waze / Google map" setting)
@@ -19,6 +20,7 @@ const { ClusterRender } = require('./cluster_render_client');
 const badge = require('./badge');
 
 const MAP = { w: 1088, h: 480 };
+const HUD = { w: 800, h: 480 };
 // at night (the sun below civil twilight at the car, "nightDim" on): the HUD to 60 %, the cluster pictures to 80 %
 const NIGHT = { hud: 0.6, other: 0.8 };
 const PLACE = {
@@ -29,7 +31,10 @@ const PLACE = {
 };
 
 class Overlay {
-    /** opts(): { hud, cluster, inMap, mapPlace, clusterPlace, size (%), hudBright (%), night, socketPath, tr, units } read on every paint. */
+    /**
+     * opts(): { hud, cluster, inMap, mapPlace, clusterPlace, size (%), hudBright (%), hudY (px up), hudSpeed, night, socketPath,
+     * tr, units } read on every paint; an alert with noHudLimit is drawn on the HUD without its sign.
+     */
     constructor(appId, log, opts) {
         this.log = log;
         this.opts = opts;
@@ -104,7 +109,7 @@ class Overlay {
         const f = Math.max(0.5, Math.min(1, (o.size || 100) / 100));
         const w = Math.round(iw * f), h = Math.round(ih * f);
         let x, y;
-        if (k === 'hud') { x = PLACE.hud.x; y = PLACE.hud.y; }
+        if (k === 'hud') { x = PLACE.hud.x; y = Math.max(0, Math.min(HUD.h - h, PLACE.hud.y - (Number(o.hudY) || 0))); }
         else if (k === 'cluster') { const p = PLACE.cluster[o.clusterPlace] || PLACE.cluster.center; x = p.x + Math.round((iw - w) / 2); y = p.y + ih - h; }
         else if (k === 'map') { const p = PLACE.map[o.mapPlace] || PLACE.map.center; x = p.x + Math.round((iw - w) / 2); y = p.y; }
         else { const p = this._hostedPlace(o.mapPlace); x = p.x + Math.round((iw - w) / 2); y = p.y; }
@@ -143,7 +148,7 @@ class Overlay {
         const a = this.shown, o = this.opts();
         const mode = this.mode || 'cluster';
         const key = a ? [a.id, a.dist, a.speed, a.limit, a.over, a.label, this.blink, o.hud, o.cluster, mode, o.mapPlace, o.clusterPlace,
-            o.size, o.hudBright, o.night, a.zone, o.units, o.tr && o.tr.lang].join('|') : 'off|' + o.hud + '|' + o.cluster;
+            o.size, o.hudBright, o.night, a.zone, o.units, o.tr && o.tr.lang, o.hudY, o.hudSpeed, a.noHudLimit].join('|') : 'off|' + o.hud + '|' + o.cluster;
         if (!force && key === this.lastKey) return;
         this.lastKey = key;
         const want = {
@@ -157,7 +162,8 @@ class Overlay {
             const ref = this._layer(k, o);
             if (!ref) return;
             if (want[k]) {
-                const cv = badge.draw(a, k === 'hosted' ? 'map' : k, { warnDist: this.warnDist, blink: this.blink, tr: o.tr, units: o.units });
+                const cv = badge.draw(a, k === 'hosted' ? 'map' : k, { warnDist: this.warnDist, blink: this.blink, tr: o.tr, units: o.units,
+                    noSpeed: k === 'hud' && o.hudSpeed === false, noLimit: k === 'hud' && !!a.noHudLimit });
                 // the HUD at its brightness setting; every screen a step down at night
                 const lvl = (k === 'hud' ? (o.hudBright || 100) / 100 : 1) * (o.night ? (k === 'hud' ? NIGHT.hud : NIGHT.other) : 1);
                 if (lvl < 0.995) badge.dim(cv, lvl);

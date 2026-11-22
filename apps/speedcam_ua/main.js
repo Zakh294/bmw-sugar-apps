@@ -15,6 +15,7 @@ const fs = require('fs');
 const path = require('path');
 const mgu = require('./kit/mgu');
 const { PositionSource, mono } = require('./position');
+const { CarLimit } = require('./car_limit');
 const { AlertEngine } = require('./alerts');
 const { Overlay } = require('./overlay');
 const { Packs } = require('./packs');
@@ -28,6 +29,8 @@ const geo = require('./geo');
 
 let CANDS;
 try { CANDS = require('./position_candidates'); } catch (e) { CANDS = { list: [], note: 'position_candidates.js missing' }; }
+let LIMITS;
+try { LIMITS = require('./limit_candidates'); } catch (e) { LIMITS = { list: [], note: 'limit_candidates.js missing' }; }
 
 const W = 1600, H = 520;
 const SPEED = { iface: 'de.bmw.infotainment.vehicle.Vehicle2', field: 'statusCarSpeed2', factor: 0.015625, invalid: 65535 };
@@ -79,6 +82,8 @@ function background(bg) {
     if (signals && signals.watch) Promise.resolve(signals.watch(SPEED.iface, '1', handlers, log)).catch((e) => log.warn('speed: ' + e));
 
     const pos = new PositionSource(signals, log, CANDS.list).start();
+    // the speed limit the car shows itself: our sign leaves the HUD while it says the same ("hudLimit")
+    const carLimit = new CarLimit(signals, log, LIMITS.list).start();
     const eng = new AlertEngine([], () => ({ lead: settings.get('lead'), minWarn: settings.get('minWarn'), maxWarn: 1200, tolerance: settings.get('tolerance') }));
 
     // the packs in use: the chosen ones + (automatic) the ones where the car is; looked at every 30 s and every 2 km
@@ -104,12 +109,14 @@ function background(bg) {
         wanted: () => packs.wanted(st.codes), enabled: () => settings.get('autoUpdate') !== false,
         onChange: () => { refreshPacks(true); if (st.onDb) st.onDb(); },
     }).start();
-    log.info('cameras: ' + st.count + ' in ' + st.codes.join(', ') + '; position candidates: ' + CANDS.list.length + (CANDS.note ? ' (' + CANDS.note + ')' : ''));
+    log.info('cameras: ' + st.count + ' in ' + st.codes.join(', ') + '; position candidates: ' + CANDS.list.length + (CANDS.note ? ' (' + CANDS.note + ')' : '')
+        + '; car limit candidates: ' + LIMITS.list.length);
 
     const ov = new Overlay(bg.spec.id, log, () => ({
         hud: settings.get('showHud'), cluster: settings.get('showCluster'), clusterPlace: settings.get('clusterPlace'),
         inMap: settings.get('inMap'), mapPlace: settings.get('mapPlace'),
         size: settings.get('size'), hudBright: settings.get('hudBright'), night: !!settings.get('nightDim') && st.night,
+        hudY: settings.get('hudY') || 0, hudSpeed: settings.get('hudSpeed') !== false,
         socketPath: bg.spec.config && bg.spec.config.socketPath, tr: tr(), units: settings.get('units') || 'auto',
     })).start();
 
@@ -171,6 +178,10 @@ function background(bg) {
                 // a camera with no known limit is always shown
                 if (alert && settings.get('showWhen') === 'over' && !alert.over && alert.limit > 0) alert = null;
             }
+            // the HUD's limit sign: left out where BMW's own HUD panel shows the same limit (or always, by choice)
+            const hl = settings.get('hudLimit') || 'auto';
+            st.carSame = !!alert && alert.limit > 0 && carLimit.shows(alert.limit);
+            if (alert && (hl === 'hide' || (hl === 'auto' && st.carSame))) alert = Object.assign({}, alert, { noHudLimit: true });
             const warn = alert && alert.cam ? eng.warnFor(alert.cam, speed) : eng.warnDistance(speed);
             ov.show(alert, warn);
             st.shown = alert;
@@ -182,7 +193,7 @@ function background(bg) {
     };
     setInterval(tick, 250);
     process.on('exit', () => ov.stop());
-    return { st, pos, eng, ov, packs, updater, refreshPacks, tr };
+    return { st, pos, eng, ov, packs, updater, refreshPacks, tr, carLimit };
 }
 
 function fmtAge(s, tr) { return s === null ? '–' : s < 2 ? tr('now') : s < 120 ? tr('s_ago', { n: s }) : tr('min_ago', { n: Math.round(s / 60) }); }
@@ -362,7 +373,7 @@ mgu.run({
                 : ust.last ? tr('db_checked', { d: new Date(ust.last).toISOString().slice(0, 10), n: new Date(core.updater.next()).toISOString().slice(0, 10) }) : tr('db_never')), 250, y, 24);
             y += 52;
             L(tr('gps_sources') + (CANDS.built ? ' (' + tr('found_on', { d: CANDS.built }) + ')' : ''), 40, y, 22, dim);
-            ps.slice(0, 3).forEach((c, i) => {
+            ps.slice(0, 2).forEach((c, i) => {
                 const yy = y + 34 + i * 30;
                 const col = c.inUse ? ok : c.count ? '#ffffff' : c.error ? bad : dim;
                 L((c.inUse ? '> ' : '  ') + c.name, 40, yy, 22, col);
@@ -372,7 +383,13 @@ mgu.run({
             const au = st.audio || {};
             const ch = st.chime && st.chime.last;
             const auLine = !ch ? null : (ch.done ? (ch.ok ? tr('chime_sent') : tr('chime_failed')) : tr('chime_playing')) + ': ' + ch.steps.slice(-1).join('').slice(0, 70) + ' · ' + tr('details_audio');
-            const sy = y + 34 + 3 * 30 + 14;
+            // the car's own speed limit (car_limit.js)
+            const ly = y + 34 + 2 * 30 + 8, cl = core.carLimit.status(), clNow = cl.filter((c) => c.value !== null);
+            L(tr('car_sign'), 40, ly, 22, dim);
+            if (!cl.length) L(tr('sign_none'), 250, ly, 22, dim);
+            else if (!clNow.length) L((tr('sign_wait', { n: cl.length }) + (cl.some((c) => c.count) ? ' · ' + cl.filter((c) => c.count).map((c) => c.name + ': ' + (c.raw || '-')).join(' · ') : '')).slice(0, 110), 250, ly, 22, dim);
+            else L(clNow.map((c) => c.value + ' · ' + c.name + ' · ' + fmtAge(c.age, tr)).join('; ').slice(0, 90) + (st.shown && st.shown.noHudLimit ? tr('sign_hidden') : ''), 250, ly, 22, ok);
+            const sy = ly + 36;
             L(tr('sound'), 40, sy, 22, dim);
             L(auLine ? auLine : !au.done ? (au.tries ? tr('audio_try', { n: au.tries }) : tr('audio_wait')) : au.error && !au.sources.length ? tr('audio_none', { e: String(au.error).slice(0, 60) })
                 : tr('audio_count', { s: au.sources.length, k: au.sinks.length }), 250, sy, 22, au.done && au.sources.length ? '#ffffff' : dim);

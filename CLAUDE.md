@@ -20,7 +20,9 @@ docs/<id>/README.en.md in English); keep both languages in step.
   there (testing the workflow).
 - Work on `dev`; merge to `main` only when asked. Before moving `main` past a version that worked in the car, keep it as
   branch `release/<id>-<version>` (tag pushes are refused by the agent git proxy; branches work and the Store can use
-  them). Bump `version` in `apps/<id>/app.json` for any change that should reach the car.
+  them). Bump `version` in `apps/<id>/app.json` for any change that should reach the car, and with it the "What's new" part of
+  its Store `description` + `texts` (8 languages, ≤ 1000 characters; SpeedCam's unit test checks the version is named)
+  and `docs/<id>/CHANGELOG.md` / `CHANGELOG.en.md`.
 - Before pushing: `node test/<id>/*.js`, `python3 test/<id>/*.py` and `python3 kit/tools/build.py --preview-only <id>`.
 - Never commit SSH keys, tokens, VIN-specific backups (FA, SVT, coding, E-Sys files), photos with a VIN, a plate or the
   owner's home position.

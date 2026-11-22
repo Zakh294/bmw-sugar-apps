@@ -22,7 +22,7 @@
 
 | Додаток | Папка | Версія | Що робить | Інструкція |
 |---|---|---|---|---|
-| SpeedCam | `apps/speedcam_ua` | 0.5.1 | Офлайн-попередження про камери швидкості на HUD, приладці та всередині мапи Waze / Google на приладці. Україна (офіційний список поліції), Європа і США (OpenStreetMap), 8 мов, звуковий сигнал, оновлення баз раз на місяць | [Українська](docs/speedcam_ua/README.md) · [English](docs/speedcam_ua/README.en.md) |
+| SpeedCam | `apps/speedcam_ua` | 0.5.2 | Офлайн-попередження про камери швидкості на HUD, приладці та всередині мапи Waze / Google на приладці. Україна (офіційний список поліції), Європа і США (OpenStreetMap), 8 мов, звуковий сигнал, оновлення баз раз на місяць | [Українська](docs/speedcam_ua/README.md) · [English](docs/speedcam_ua/README.en.md) |
 
 | HUD | Приладка | У мапі Waze / Google |
 |---|---|---|
@@ -49,7 +49,7 @@
 
 1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, гілка **`main`** → **Check now**.
 2. Вибери додаток → **Install**. Блок збере його сам (хвилина-дві).
-3. Оновлення: Installed → **Update all** (нова версія додатка). Бази камер SpeedCam оновлюються самі раз на місяць. Скільки машин приблизно ним користується — [STATS.md](docs/speedcam_ua/STATS.md).
+3. Оновлення: Installed → **Update all** (нова версія додатка; що в ній нового, пише сторінка додатка в Store і [CHANGELOG](docs/speedcam_ua/CHANGELOG.md)). Бази камер SpeedCam оновлюються самі раз на місяць. Скільки машин приблизно ним користується — [STATS.md](docs/speedcam_ua/STATS.md).
 
 Покроково з картинками: [інструкція SpeedCam](docs/speedcam_ua/README.md).
 

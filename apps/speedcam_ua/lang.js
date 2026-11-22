@@ -108,6 +108,14 @@ const T = {
     db_none_sel: ['вибрано {k} з {n}', '{k} of {n} chosen', '{k} von {n} gewählt', 'wybrano {k} z {n}', '{k} sur {n} choisis', '{k} di {n} scelti', '{k} de {n} elegidos', 'vybráno {k} z {n}'],
     legal_banned: ['заборонено', 'not allowed', 'verboten', 'zabronione', 'interdit', 'vietato', 'prohibido', 'zakázáno'],
     legal_zones: ['лише зони', 'zones only', 'nur Zonen', 'tylko strefy', 'zones seulement', 'solo zone', 'solo zonas', 'jen zóny'],
+    car_sign: ['ЛІМІТ АВТО', 'CAR\'S LIMIT', 'LIMIT AUTO', 'LIMIT AUTA', 'LIMITE VOITURE', 'LIMITE AUTO', 'LÍMITE COCHE', 'LIMIT AUTA'],
+    sign_none: ['не знайдено в цій машині: наш знак на HUD завжди', 'not found in this car: our HUD sign always shows', 'in diesem Auto nicht gefunden: unser Schild im HUD immer',
+        'nie znaleziono w tym aucie: nasz znak na HUD zawsze', 'introuvable dans cette voiture : notre panneau toujours au HUD', 'non trovato in quest\'auto: il nostro cartello sempre sull\'HUD',
+        'no encontrado en este coche: nuestra señal siempre en el HUD', 'v tomto autě nenalezeno: naše značka na HUD vždy'],
+    sign_wait: ['чекаю на знак ({n} джерел)', 'waiting for a sign ({n} sources)', 'warte auf ein Schild ({n} Quellen)', 'czekam na znak ({n} źródeł)',
+        'en attente d\'un panneau ({n} sources)', 'in attesa di un cartello ({n} fonti)', 'esperando una señal ({n} fuentes)', 'čekám na značku ({n} zdrojů)'],
+    sign_hidden: [' · наш знак на HUD сховано', ' · our HUD sign hidden', ' · unser HUD-Schild ausgeblendet', ' · nasz znak na HUD ukryty', ' · notre panneau HUD masqué',
+        ' · il nostro cartello HUD nascosto', ' · nuestra señal del HUD oculta', ' · naše značka na HUD skryta'],
 };
 
 const SETTINGS = {
@@ -168,6 +176,16 @@ const SETTINGS = {
     minWarn: { label: ['Не ближче ніж за', 'Not closer than', 'Nicht näher als', 'Nie bliżej niż', 'Pas plus près que', 'Non più vicino di', 'No más cerca de', 'Ne blíže než'] },
     tolerance: { label: ['Жовта швидкість, якщо понад ліміт на', 'Amber speed when over the limit by', 'Gelbe Geschwindigkeit ab Überschreitung um', 'Żółta prędkość, gdy ponad limit o', 'Vitesse orange au-delà de la limite de', 'Velocità gialla oltre il limite di', 'Velocidad ámbar al superar el límite en', 'Žlutá rychlost při překročení o'] },
     size: { label: ['Розмір попередження', 'Warning size', 'Größe der Warnung', 'Rozmiar ostrzeżenia', 'Taille de l\'alerte', 'Dimensione dell\'avviso', 'Tamaño del aviso', 'Velikost varování'] },
+    hudSpeed: { label: ['Швидкість авто на HUD', 'Car speed on the HUD', 'Geschwindigkeit im HUD', 'Prędkość auta na HUD', 'Vitesse sur le HUD', 'Velocità sull\'HUD', 'Velocidad en el HUD', 'Rychlost na HUD'] },
+    hudLimit: {
+        label: ['Знак ліміту на HUD', 'Limit sign on the HUD', 'Limit-Schild im HUD', 'Znak limitu na HUD', 'Panneau de limite au HUD', 'Cartello del limite sull\'HUD', 'Señal de límite en el HUD', 'Značka limitu na HUD'],
+        auto: ['Ховати, коли авто показує той самий', 'Hide when the car shows the same', 'Ausblenden, wenn das Auto dasselbe zeigt', 'Ukryj, gdy auto pokazuje ten sam',
+            'Masquer si la voiture affiche la même', 'Nascondi se l\'auto mostra lo stesso', 'Ocultar si el coche muestra el mismo', 'Skrýt, když auto ukazuje stejný'],
+        show: ['Завжди', 'Always', 'Immer', 'Zawsze', 'Toujours', 'Sempre', 'Siempre', 'Vždy'],
+        hide: ['Ніколи', 'Never', 'Nie', 'Nigdy', 'Jamais', 'Mai', 'Nunca', 'Nikdy'],
+    },
+    hudY: { label: ['Висота на HUD (+ вище, - нижче)', 'Height on the HUD (+ up, - down)', 'Höhe im HUD (+ höher, - tiefer)', 'Wysokość na HUD (+ wyżej, - niżej)',
+        'Hauteur au HUD (+ plus haut, - plus bas)', 'Altezza sull\'HUD (+ su, - giù)', 'Altura en el HUD (+ arriba, - abajo)', 'Výška na HUD (+ výš, - níž)'] },
     hudBright: { label: ['Яскравість на HUD', 'HUD brightness', 'HUD-Helligkeit', 'Jasność HUD', 'Luminosité du HUD', 'Luminosità HUD', 'Brillo del HUD', 'Jas HUD'] },
     nightDim: { label: ['Вночі тьмяніше (за сонцем)', 'Dimmer at night (by the sun)', 'Nachts dunkler (nach der Sonne)', 'W nocy ciemniej (wg słońca)', 'Plus sombre la nuit (selon le soleil)', 'Più tenue di notte (secondo il sole)', 'Más tenue de noche (según el sol)', 'V noci tlumeněji (podle slunce)'] },
     // the last row of the settings: where the app comes from (a text, not a switch)

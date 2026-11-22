@@ -94,6 +94,9 @@ An iDrive list screen ("Camera databases" button):
 | Warn ahead by / Not closer than | 20 s / 300 m | warning distance = speed × time, at least the minimum |
 | Amber speed when over the limit by | 0 km/h | tolerance for amber and for "only when over" |
 | Warning size | 100 % | 60–100 %, every screen |
+| Car speed on the HUD | on | off: our HUD warning keeps only the sign, the camera, the distance and the bar; BMW's panel beside it shows the speed anyway |
+| Limit sign on the HUD | hide when the car shows the same | our sign leaves the HUD while the car (its sign recognition / the map's limit) shows the same limit; or "always", "never". See "The limit the car shows" |
+| Height on the HUD | 0 px | −150 to +90 px: moves the warning up (+) or down (−) to the level of BMW's panel |
 | HUD brightness | 100 % | 40–100 %, HUD only |
 | Dimmer at night | on | after sunset the HUD at 60 %, the cluster and the map at 80 % |
 | Update the databases monthly | on | the monthly update (below) |
@@ -178,6 +181,20 @@ Useful lines: `position source: …`, `packs in use: …`, `update: …`, `clust
 
 **The Store does not install the app** and names an interface (`IFConfigGenerator`, `Interface … not found`)? The GPS
 search at build time is switched off by a file `apps/speedcam_ua/position.disable`; open an issue with the error.
+
+## The limit the car shows
+
+As with the GPS, the name of the sign-recognition signal is not documented and can differ between firmware versions.
+When the Store builds the app, `tools/store_build.py` searches the interface catalogue for fields and events named
+like "speed limit", "traffic sign", "SLI", "KAFAS" and so on, and writes the best 8 to `limit_candidates.js`. The app
+listens to all of them and looks for a plausible limit in each (a multiple of 5 from 5 to 160). The **CAR'S LIMIT**
+row on the page shows what the car says now and whether our HUD sign is hidden.
+
+- "not found in this car": nothing like it in the catalogue; our HUD sign always shows (or choose "never").
+- "waiting for a sign" followed by numbers: a source is there but its value does not look like a limit; send a
+  photo of that row and the search gets adjusted.
+- The candidates without a build: `python3 tools/store_build.py --scan-limits` on the unit (over SSH). If the Store
+  fails to install the app because of this search, a file `apps/speedcam_ua/limit.disable` switches it off.
 
 ## Limitations
 

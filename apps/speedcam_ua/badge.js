@@ -2,9 +2,10 @@
 /**
  * badge.js - the picture of a camera warning, as straight RGBA for a cluster-render image layer.
  *
- *   draw(alert, kind, { warnDist, blink, tr, units }) -> kit Canvas (cv.w x cv.h, cv.d = RGBA bytes)
+ *   draw(alert, kind, { warnDist, blink, tr, units, noSpeed, noLimit }) -> kit Canvas (cv.w x cv.h, cv.d = RGBA bytes)
  *   tr: the language (lang.make), units: 'kmh' | 'mph' | 'auto' (as the camera's country: alert.units)
- *   kind: 'hud'     the windshield HUD: no background (black is see-through on a projection)
+ *   kind: 'hud'     the windshield HUD: no background (black is see-through on a projection); noSpeed / noLimit leave
+ *                   out the car's speed / the limit sign there, which BMW's own HUD panel already shows
  *         'cluster' the instrument cluster without a phone map: a compact dark card
  *         'map'     inside the Waze / Google map on the cluster (Maps on cluster): a wide banner like a navigation
  *                   alert - the limit sign, "КАМЕРА" with the distance, where the camera is, the car's speed, a bar
@@ -109,45 +110,82 @@ function drawMap(cv, a, opts) {
     if (!a.zone) bar(cv, x0, H - 22, right - x0, 8, Math.max(0, Math.min(1, a.dist / (opts.warnDist || 800))), a, [60, 64, 72, 255]);
 }
 
-function draw(alert, kind, opts) {
-    opts = opts || {};
-    const sz = SIZE[kind] || SIZE.hud, W = sz[0], H = sz[1];
-    const cv = new Canvas(W, H).clear([0, 0, 0, 0]);
-    if (kind === 'map') { drawMap(cv, alert, opts); return cv; }
-    const hud = kind === 'hud', tr = opts.tr || lang.make('uk'), u = unitsOf(alert, opts);
-    const pad = hud ? 4 : 14;
-    if (!hud) {
-        cv.roundRect(0, 0, W, H, 22, CARD);
-        cv.strokeRoundRect(1, 1, W - 2, H - 2, 21, 4, RED);
+/**
+ * The HUD: no background. opts.noSpeed leaves out the car's speed (BMW shows it beside), opts.noLimit the limit sign
+ * (the car shows the same one): without the speed the camera goes beside the bar, without the sign a big camera
+ * takes its place.
+ */
+function drawHud(cv, a, opts) {
+    const W = cv.w, H = cv.h, tr = opts.tr || lang.make('uk'), u = unitsOf(a, opts), pad = 4, BLACK = [0, 0, 0, 255];
+    const withSign = !opts.noLimit, withSpeed = !opts.noSpeed;
+    let x0;
+    if (withSign) { sign(cv, pad + 64, 70, 62, inUnits(a.limit, u)); x0 = pad + 142; }
+    else { camera(cv, pad + 2, 44, 46, RED, BLACK); x0 = pad + 84; }
+    // line 1: the distance, big (a zone: its name in two lines)
+    if (a.zone) {
+        const words = tr('zone').split(' ');
+        const top = words.length > 1 ? words.slice(0, -1).join(' ') : words[0], bottom = words.length > 1 ? words[words.length - 1] : '';
+        cv.text(fit(cv, top, 30, W - pad - x0), x0, 34, 30, WHITE, { font: 'bold', literal: true });
+        if (bottom) cv.text(fit(cv, bottom, 30, W - pad - x0), x0, 68, 30, WHITE, { font: 'bold', literal: true });
+    } else {
+        const d = fmtDist(a.dist, u, tr);
+        const w = cv.text(d.v, x0, 64, 62, WHITE, { font: 'num', literal: true });
+        cv.text(d.u, x0 + w + 6, 64, 30, GREY, { literal: true });
     }
-    const r = hud ? 62 : 64, cx = pad + r + 2, cy = hud ? 70 : H / 2 - 6;
-    sign(cv, cx, cy, r, inUnits(alert.limit, u));
+    // line 2: the camera (beside the sign) and the car's speed; without the speed the bar comes up to this line
+    let barX = x0, barY = H - 18;
+    if (withSign && withSpeed) camera(cv, x0, 82, 30, RED, BLACK);
+    else if (withSign) { camera(cv, x0, 84, 28, RED, BLACK); barX = x0 + 48; barY = 94; }
+    else if (!withSpeed) barY = 94;
+    if (withSpeed && a.speed > 0 && !(a.over === 2 && opts.blink)) {
+        const sx = withSign ? x0 + 52 : x0;
+        const sw = cv.text(String(inUnits(a.speed, u)), sx, 112, 36, speedColour(a, '#d9e4ee'), { font: 'bold', literal: true });
+        cv.text(tr(u), sx + sw + 5, 112, 18, GREY, { literal: true });
+    }
+    if (a.zone) return cv;
+    bar(cv, barX, barY, W - pad - barX, 8, Math.max(0, Math.min(1, a.dist / (opts.warnDist || 800))), a, [80, 80, 80, 255]);
+    return cv;
+}
 
-    // distance, big (a zone: its name)
-    const x0 = cx + r + (hud ? 16 : 22);
+/** The cluster card (dark, red edge). */
+function drawCard(cv, alert, opts) {
+    const W = cv.w, H = cv.h, tr = opts.tr || lang.make('uk'), u = unitsOf(alert, opts), pad = 14;
+    cv.roundRect(0, 0, W, H, 22, CARD);
+    cv.strokeRoundRect(1, 1, W - 2, H - 2, 21, 4, RED);
+    const r = 64, cx = pad + r + 2, cy = H / 2 - 6;
+    sign(cv, cx, cy, r, inUnits(alert.limit, u));
+    const x0 = cx + r + 22;
     if (alert.zone) {
         const words = tr('zone').split(' ');
         const top = words.length > 1 ? words.slice(0, -1).join(' ') : words[0], bottom = words.length > 1 ? words[words.length - 1] : '';
-        cv.text(fit(cv, top, hud ? 30 : 32, W - pad - x0), x0, hud ? 34 : 40, hud ? 30 : 32, WHITE, { font: 'bold', literal: true });
-        if (bottom) cv.text(fit(cv, bottom, hud ? 30 : 32, W - pad - x0), x0, hud ? 68 : 76, hud ? 30 : 32, WHITE, { font: 'bold', literal: true });
+        cv.text(fit(cv, top, 32, W - pad - x0), x0, 40, 32, WHITE, { font: 'bold', literal: true });
+        if (bottom) cv.text(fit(cv, bottom, 32, W - pad - x0), x0, 76, 32, WHITE, { font: 'bold', literal: true });
     } else {
         const d = fmtDist(alert.dist, u, tr);
-        const w = cv.text(d.v, x0, hud ? 64 : 70, hud ? 62 : 64, WHITE, { font: 'num', literal: true });
-        cv.text(d.u, x0 + w + 6, hud ? 64 : 70, hud ? 30 : 32, GREY, { literal: true });
+        const w = cv.text(d.v, x0, 70, 64, WHITE, { font: 'num', literal: true });
+        cv.text(d.u, x0 + w + 6, 70, 32, GREY, { literal: true });
     }
-
-    // the camera and the car's speed
     const blinkOff = alert.over === 2 && opts.blink;
-    camera(cv, x0, hud ? 82 : 88, hud ? 30 : 32, RED, hud ? [0, 0, 0, 255] : CARD);
+    camera(cv, x0, 88, 32, RED, CARD);
     if (alert.speed > 0 && !blinkOff) {
-        const sx = x0 + (hud ? 52 : 56);
-        const sw = cv.text(String(inUnits(alert.speed, u)), sx, hud ? 112 : 120, hud ? 36 : 40, speedColour(alert, hud ? '#d9e4ee' : WHITE), { font: 'bold', literal: true });
-        cv.text(tr(u), sx + sw + 5, hud ? 112 : 120, hud ? 18 : 20, GREY, { literal: true });
+        const sx = x0 + 56;
+        const sw = cv.text(String(inUnits(alert.speed, u)), sx, 120, 40, speedColour(alert, WHITE), { font: 'bold', literal: true });
+        cv.text(tr(u), sx + sw + 5, 120, 20, GREY, { literal: true });
     }
     if (alert.zone) return cv;
     const f = Math.max(0, Math.min(1, alert.dist / (opts.warnDist || 800)));
-    const bh = hud ? 8 : 9;
-    bar(cv, x0, H - (hud ? 18 : 24), W - pad - x0, bh, f, alert, hud ? [80, 80, 80, 255] : [60, 64, 72, 255]);
+    bar(cv, x0, H - 24, W - pad - x0, 9, f, alert, [60, 64, 72, 255]);
+    return cv;
+}
+
+/** opts: { warnDist, blink, tr, units, noSpeed, noLimit } (the last two: the HUD only). */
+function draw(alert, kind, opts) {
+    opts = opts || {};
+    const sz = SIZE[kind] || SIZE.hud;
+    const cv = new Canvas(sz[0], sz[1]).clear([0, 0, 0, 0]);
+    if (kind === 'map') drawMap(cv, alert, opts);
+    else if (kind === 'cluster') drawCard(cv, alert, opts);
+    else drawHud(cv, alert, opts);
     return cv;
 }
 
