@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2"><Document>
-<name>Камери автофіксації України (426, 2026-11-21)</name>
+<name>Камери автофіксації України (426, 2026-11-22)</name>
 <description>https://patrolpolice.gov.ua/automatic_fixation/informatsiya-pro-vstanovleni-kaf/</description>
 <Style id="cam50"><IconStyle><color>ff1f1fe1</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href></Icon></IconStyle></Style>
 <Style id="cam70"><IconStyle><color>ff0080ff</color><scale>1.1</scale><Icon><href>http://maps.google.com/mapfiles/kml/shapes/camera.png</href></Icon></IconStyle></Style>

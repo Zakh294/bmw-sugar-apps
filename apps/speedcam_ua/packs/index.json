@@ -1,5 +1,5 @@
 {
- "checked": "2026-11-21",
+ "checked": "2026-11-22",
  "packs": {
   "ad": {
    "bbox": [
@@ -1596,6 +1596,27 @@
    "units": "mph",
    "updated": "2026-11-21"
   },
+  "us-pa": {
+   "bbox": [
+    39.937096,
+    -80.065927,
+    41.377615,
+    -75.110327
+   ],
+   "bytes": 1399,
+   "count": 13,
+   "en": "Pennsylvania",
+   "fetched": "2026-11-22",
+   "group": "us",
+   "iso": "US-PA",
+   "legal": "ok",
+   "name": "Pennsylvania",
+   "sha256": "c2a5a42415123df7a793125f2ebe0b87103e28d90785b8c952a0e52c8569cfe7",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Pennsylvania",
+   "units": "mph",
+   "updated": "2026-11-22"
+  },
   "us-ri": {
    "bbox": [
     41.788501,
@@ -1616,6 +1637,27 @@
    "uk": "Rhode Island",
    "units": "mph",
    "updated": "2026-11-21"
+  },
+  "us-sc": {
+   "bbox": [
+    34.176527,
+    -82.025863,
+    34.176527,
+    -82.025863
+   ],
+   "bytes": 476,
+   "count": 1,
+   "en": "South Carolina",
+   "fetched": "2026-11-22",
+   "group": "us",
+   "iso": "US-SC",
+   "legal": "ok",
+   "name": "South Carolina",
+   "sha256": "710cde9c9b9a6f4f138d67501cbcc90adf86f224029647382a245c60a99539d1",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "South Carolina",
+   "units": "mph",
+   "updated": "2026-11-22"
   },
   "us-sd": {
    "bbox": null,
@@ -1653,6 +1695,27 @@
    "uk": "Tennessee",
    "units": "mph",
    "updated": "2026-11-21"
+  },
+  "us-tx": {
+   "bbox": [
+    29.769863,
+    -97.207629,
+    33.056332,
+    -95.427314
+   ],
+   "bytes": 6028,
+   "count": 96,
+   "en": "Texas",
+   "fetched": "2026-11-22",
+   "group": "us",
+   "iso": "US-TX",
+   "legal": "ok",
+   "name": "Texas",
+   "sha256": "9f62928be2b532c63ec0599e0c0837bd7573d3258cd6acd42fdd2ac489adfb1e",
+   "source": "OpenStreetMap (Overpass)",
+   "uk": "Texas",
+   "units": "mph",
+   "updated": "2026-11-22"
   },
   "us-ut": {
    "bbox": [
