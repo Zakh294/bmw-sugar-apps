@@ -43,6 +43,9 @@ Ukraine. SpeedCam says the same in the last row of its settings.
 - **Respects the law by default:** off in Germany, Switzerland, Liechtenstein, Cyprus, North Macedonia (can be switched
   on at your own responsibility); France: danger zones only. See [LEGAL.md](LEGAL.md).
 - Languages: Українська, English, Deutsch, Polski, Français, Italiano, Español, Čeština.
+- **Tested on a real car:** the author's 2021 BMW X3 (G01, iDrive 7): GPS, HUD, cluster, the banner in the Waze / Google
+  map and the chime, on Ukrainian roads. Europe and the USA (packs, legal modes, mph) and the languages are tested on a PC
+  (`test/speedcam_ua/e2e_drive.js`) so far.
 
 ## Install
 
