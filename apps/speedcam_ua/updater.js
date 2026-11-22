@@ -2,6 +2,9 @@
 /**
  * updater.js - the monthly update of the camera packs, from the repository on GitHub.
  *
+ * The index comes from the latest monthly release on GitHub (releases/latest/download/index.json): GitHub counts its
+ * downloads, and that count is the only way the authors see roughly how many cars use the app. Nothing else is sent.
+ *
  * Once a month at most after a check that reached GitHub, every 6 hours while it cannot (and when the owner asks, or chooses a pack that is not here yet) it reads the index the
  * monthly GitHub workflow publishes (apps/speedcam_ua/packs/index.json on the main branch) and downloads only the
  * packs in use whose checksum changed: a few kilobytes to a few hundred. Each file is checked against its sha256
@@ -56,6 +59,7 @@ class Updater {
     constructor(o) {
         this.packs = o.packs;
         this.base = String(o.base || '').replace(/\/?$/, '/');
+        this.indexUrl = o.indexUrl || '';
         this.log = o.log || { info: () => {}, warn: () => {} };
         this.wanted = o.wanted || (() => []);
         this.enabled = o.enabled || (() => true);
@@ -94,7 +98,15 @@ class Updater {
         const st = this.state;
         let reached = false;
         st.checking = true;
-        this.busy = this.get(this.base + 'index.json', 20000)
+        // the index: the latest monthly release first (its downloads are counted: roughly how many cars use the
+        // app, docs/speedcam_ua/STATS.md), the copy on the main branch when that fails
+        const urls = (this.indexUrl ? [this.indexUrl] : []).concat([this.base + 'index.json']);
+        const getIndex = (i) => this.get(urls[i], 20000).catch((e) => {
+            if (i + 1 >= urls.length) throw e;
+            this.log.warn('update: ' + urls[i] + ': ' + e.message + ', trying the branch');
+            return getIndex(i + 1);
+        });
+        this.busy = getIndex(0)
             .then((buf) => {
                 const remote = JSON.parse(buf.toString('utf8'));
                 if (!remote || !remote.packs) throw new Error('no index');

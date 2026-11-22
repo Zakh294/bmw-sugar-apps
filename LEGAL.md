@@ -51,9 +51,11 @@ responsibility.
 
 ## Privacy
 
-The apps work offline. The only network access is SpeedCam's monthly update: an HTTPS request to
-`raw.githubusercontent.com` for the camera packs (GitHub sees the car's IP address, as with any download). No
-position, VIN or other data is sent anywhere. Logs stay on the head unit.
+The apps work offline. The only network access is SpeedCam's monthly update: HTTPS requests to GitHub for the camera
+index (an asset of the latest `packs-…` release) and the packs that changed (GitHub sees the car's IP address, as with
+any download). GitHub counts the index's downloads, and that public count is all the authors see: roughly how many cars
+use the app per month ([docs/speedcam_ua/STATS.md](docs/speedcam_ua/STATS.md)). No position, VIN, id or other data is
+sent anywhere. Logs stay on the head unit. Switch the monthly update off in the settings and nothing is downloaded.
 
 ---
 
@@ -85,5 +87,8 @@ MIT). Автори й учасники **не відповідають** за б
 **Дані:** Україна — офіційний перелік Національної поліції (патрульна поліція), публічна інформація. Європа та США —
 © учасники OpenStreetMap, ODbL 1.0: пакети з цих даних поширюються за ODbL, з посиланням на OpenStreetMap.
 
-**Приватність:** додатки працюють офлайн. Єдиний вихід у мережу — щомісячне оновлення баз SpeedCam з
-`raw.githubusercontent.com`. Ні позиція, ні VIN, ні інші дані нікуди не надсилаються.
+**Приватність:** додатки працюють офлайн. Єдиний вихід у мережу — щомісячне оновлення баз SpeedCam з GitHub (індекс із
+останнього релізу `packs-…` і бази, що змінились). GitHub рахує завантаження індексу, і цей публічний лічильник — усе,
+що бачать автори: приблизно скільки машин користується додатком щомісяця ([STATS.md](docs/speedcam_ua/STATS.md)). Ні
+позиція, ні VIN, ні ідентифікатор, ні інші дані нікуди не надсилаються. Вимкни щомісячне оновлення — і нічого не
+завантажується.

@@ -2,7 +2,7 @@
   "id": "speedcam_ua",
   "title": "SpeedCam",
   "description": "Офлайн-попередження про камери швидкості на HUD, приладці та в мапі Waze / Google: Україна (офіційний список поліції), Європа та США (OpenStreetMap), 8 мов, оновлення баз раз на місяць",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "vendor": "custom",
   "loggingId": "OASC",
   "iconGlyph": "CAM",
@@ -440,6 +440,7 @@
   ],
   "config": {
     "socketPath": "/dev/shm/cluster-render/render.sock",
-    "packsUrl": "https://raw.githubusercontent.com/Zakh294/bmw-sugar-apps/main/apps/speedcam_ua/packs/"
+    "packsUrl": "https://raw.githubusercontent.com/Zakh294/bmw-sugar-apps/main/apps/speedcam_ua/packs/",
+    "indexUrl": "https://github.com/Zakh294/bmw-sugar-apps/releases/latest/download/index.json"
   }
 }

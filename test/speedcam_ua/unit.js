@@ -110,7 +110,14 @@ const upd = U.check(false).then((st1) => {
     ok(P1.meta('de').src === 'update' && P1.cameras(['de']).length === 2 && P1.meta('us-ny').src === 'remote', 'the downloaded pack is used; a pack only on GitHub is listed');
     ok(!U.due(Date.now() + 1000) && U.due(Date.now() + 31 * 24 * 3600 * 1000), 'next check in a month');
     const U2 = new Updater({ packs: P1, base: 'https://example/packs', dataDir: fs.mkdtempSync(path.join(os.tmpdir(), 'upd-')), log: quietLogU(), get: () => Promise.reject(new Error('getaddrinfo ENOTFOUND')) });
-    return U2.check(true).then((st2) => ok(/ENOTFOUND/.test(st2.error) && U2.due(Date.now() + 1000), 'offline: the error is kept and the check is due again (no month lost)'));
+    return U2.check(true).then((st2) => ok(/ENOTFOUND/.test(st2.error) && U2.due(Date.now() + 1000), 'offline: the error is kept and the check is due again (no month lost)'))
+        .then(() => {
+            // the index from the latest release (counted), the branch's copy when the release fails
+            const seen = [];
+            const get3 = (url) => { seen.push(url); return /releases/.test(url) ? Promise.reject(new Error('HTTP 404')) : Promise.resolve(Buffer.from(JSON.stringify(remoteIdx))); };
+            const U3 = new Updater({ packs: P1, base: 'https://example/packs', indexUrl: 'https://example/releases/latest/download/index.json', dataDir: fs.mkdtempSync(path.join(os.tmpdir(), 'upd-')), log: quietLogU(), wanted: () => [], get: get3 });
+            return U3.check(true).then((st3) => ok(seen.join() === 'https://example/releases/latest/download/index.json,https://example/packs/index.json' && !st3.error, 'index: the release first, the branch when the release fails'));
+        });
 });
 
 // languages: every text in all eight, the settings translated in place

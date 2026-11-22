@@ -138,6 +138,9 @@ and the music is not left ducked.
   downloads only the packs in use that changed: a few to a few hundred kilobytes. Every file is checked against its
   sha256 before it replaces the old one; any error keeps the previous packs.
 - No connection: it tries again 6 hours later and keeps using the packs built into the app version.
+- The car takes the index from the latest `packs-…` release on GitHub, or from the `main` branch when that fails.
+  GitHub counts the index's downloads, which tells us roughly how many cars use the app: [STATS.md](STATS.md)
+  (updated monthly). Nothing else is collected.
 - Free: GitHub Actions cost nothing for public repositories (a private one uses a few minutes a month of the free
   allowance). In the car: just those kilobytes of data. No position, VIN or other data is sent anywhere.
 - New cameras in Europe and the USA appear when they are added to OpenStreetMap (`highway=speed_camera`). A camera

@@ -100,7 +100,7 @@ function background(bg) {
     refreshPacks(true);
     setInterval(() => { try { refreshPacks(false); } catch (e) { log.warn('packs: ' + e); } }, 30000);
     const updater = new Updater({
-        packs, base: bg.spec.config && bg.spec.config.packsUrl, dataDir: bg.dataDir, log,
+        packs, base: bg.spec.config && bg.spec.config.packsUrl, indexUrl: bg.spec.config && bg.spec.config.indexUrl, dataDir: bg.dataDir, log,
         wanted: () => packs.wanted(st.codes), enabled: () => settings.get('autoUpdate') !== false,
         onChange: () => { refreshPacks(true); if (st.onDb) st.onDb(); },
     }).start();
@@ -326,7 +326,10 @@ mgu.run({
                 L(tr('no_gps'), 250, y, 30, bad);
                 L(tr('see_docs'), 900, y, 22, dim);
             } else {
-                L(tr('waiting_nav', { n: CANDS.list.length }), 250, y, 30, warn);
+                // a source gave positions before and then stopped: no GPS signal (a garage, a tunnel), not a fault
+                const seen = ps.filter((c) => c.count && c.age !== null).map((c) => c.age);
+                if (seen.length) L(tr('no_signal', { age: fmtAge(Math.min.apply(null, seen), tr) }), 250, y, 28, warn);
+                else L(tr('waiting_nav', { n: CANDS.list.length }), 250, y, 30, warn);
             }
             y += 46;
             const n = core.eng.nearest(fix);

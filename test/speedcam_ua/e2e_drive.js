@@ -74,6 +74,7 @@ async function main() {
     const sockPath = path.join(TMP, 'render.sock');
     rt.config.socketPath = sockPath;
     rt.config.packsUrl = '';            // no monthly update from GitHub in the test
+    rt.config.indexUrl = '';
     fs.writeFileSync(specPath, JSON.stringify(rt));
 
     const srv = await require('../lib/fake_cluster_render').start(sockPath);
