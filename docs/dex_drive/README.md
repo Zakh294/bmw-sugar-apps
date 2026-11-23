@@ -43,7 +43,7 @@
 
 ## Встановлення
 
-1. Store → Settings → Sources: джерело `Zakh294/bmw-sugar-apps`, **Channel → `dev`** (тестова гілка) → Check now.
+1. Store → Settings → Sources: джерело `Zakh294/bmw-sugar-apps`, Channel **`main`** (як для SpeedCam) → Check now.
 2. Store → **DeX Drive** → Install. Store сам поставить **DeX Drive service** (`dex-drive-d`) і mgu-render.
 3. **Перезапусти головний блок** (Settings → Restart head unit): новий сервіс стартує лише після перезапуску
    (так працює recmgr блока). Store до того покаже його як *restart pending*.

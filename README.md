@@ -22,7 +22,7 @@ Ukraine. SpeedCam says the same in the last row of its settings.
 | App | Folder | Version | What it does | Manual |
 |---|---|---|---|---|
 | SpeedCam | `apps/speedcam_ua` | 0.6.0 | Offline speed camera warnings on the head-up display, the instrument cluster and inside the Waze / Google map on the cluster. Ukraine (official police list), Europe and the USA (OpenStreetMap), 8 languages, a chime, monthly database updates | [English](docs/speedcam_ua/README.en.md) · [Українська](docs/speedcam_ua/README.md) |
-| DeX Drive | `apps/dex_drive` | 0.1.0 (test, branch `dev`) | Samsung DeX (One UI 8) on the centre screen: the phone by USB or Wi‑Fi, its desktop on the car's touchscreen, H.264 decoded on the head unit's GPU; parked only by default. Needs the DeX Drive service (`native/dex_drive`, installed with it) and mgu-render | [English](docs/dex_drive/README.en.md) · [Українська](docs/dex_drive/README.md) |
+| DeX Drive | `apps/dex_drive` | 0.1.0 (test) | Samsung DeX (One UI 8) on the centre screen: the phone by USB or Wi‑Fi, its desktop on the car's touchscreen, H.264 decoded on the head unit's GPU; parked only by default. Needs the DeX Drive service (`native/dex_drive`, installed with it) and mgu-render | [English](docs/dex_drive/README.en.md) · [Українська](docs/dex_drive/README.md) |
 
 ### SpeedCam at a glance
 

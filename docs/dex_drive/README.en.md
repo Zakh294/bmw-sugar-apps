@@ -44,7 +44,7 @@ Phone (One UI 8)                           Head unit MGU (iDrive 7)
 
 ## Install
 
-1. Store → Settings → Sources: source `Zakh294/bmw-sugar-apps`, **Channel → `dev`** (the test branch) → Check now.
+1. Store → Settings → Sources: source `Zakh294/bmw-sugar-apps`, Channel **`main`** (as for SpeedCam) → Check now.
 2. Store → **DeX Drive** → Install. The Store installs **DeX Drive service** (`dex-drive-d`) and mgu-render with it.
 3. **Restart the head unit** (Settings → Restart head unit): a new service starts only after a restart (the unit's
    recmgr). Until then the Store shows it as *restart pending*.
