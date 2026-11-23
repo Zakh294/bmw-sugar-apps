@@ -25,6 +25,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"net"
 	"os"
 	"os/signal"
 	"path/filepath"
@@ -36,7 +37,7 @@ import (
 )
 
 // Version is the tool's version (component.json).
-const Version = "0.2.1"
+const Version = "0.2.2"
 
 // Logger writes to a file (kept under 1 MB, one old copy) and to stderr (the journal).
 type Logger struct {
@@ -98,7 +99,8 @@ type config struct {
 	keyName     string
 	idleAfter   time.Duration
 	arp         string
-	wifiOverTCP bool // tests: open port 5555 on a phone met over TCP too (in the car only over USB)
+	wifiOverTCP bool                           // tests: open port 5555 on a phone met over TCP too (in the car only over USB)
+	nets        func() ([]net.IPNet, []string) // the unit's own networks (tests: fixed)
 }
 
 func main() {
@@ -145,23 +147,27 @@ type startReq struct {
 }
 
 type daemon struct {
-	cfg     config
-	log     *Logger
-	mu      sync.Mutex
-	clients map[*client]bool
-	status  map[string]interface{}
-	want    *startReq // nil: no session wanted
-	gen     int       // bumps when want changes
-	sess    *Session
-	lastApp time.Time
-	wake    chan struct{}
-	devName string // the phone, for the status
-	via     string
-	tcpipAt map[string]time.Time // phone -> when we last opened its port 5555 (no loop if it does not stick)
-	lastErr string               // the last error, kept on the page while it tries again ("HH:MM:SS msg")
+	cfg      config
+	log      *Logger
+	mu       sync.Mutex
+	clients  map[*client]bool
+	status   map[string]interface{}
+	want     *startReq // nil: no session wanted
+	gen      int       // bumps when want changes
+	sess     *Session
+	lastApp  time.Time
+	wake     chan struct{}
+	devName  string // the phone, for the status
+	via      string
+	tcpipAt  map[string]time.Time // phone -> when we last opened its port 5555 (no loop if it does not stick)
+	lastErr  string               // the last error, kept on the page while it tries again ("HH:MM:SS msg")
+	lastScan time.Time            // the last Wi-Fi subnet scan for the phone
 }
 
 func newDaemon(cfg config, log *Logger) *daemon {
+	if cfg.nets == nil {
+		cfg.nets = ownNets
+	}
 	d := &daemon{cfg: cfg, log: log, clients: map[*client]bool{}, wake: make(chan struct{}, 1), tcpipAt: map[string]time.Time{},
 		status: map[string]interface{}{"ev": "status", "state": "idle", "version": Version, "video": cfg.video}}
 	go d.run()
@@ -324,7 +330,19 @@ func (d *daemon) once(want startReq, gen int) error {
 			}
 		}
 		if want.TCP != "" {
-			if c, addr := dialPhone(want.TCP, filepath.Join(d.cfg.state, "phone-ip"), d.cfg.arp); c != nil {
+			files := []string{filepath.Join(d.cfg.state, "phone-ip"), filepath.Join(d.cfg.state, "phone-ip.auto")}
+			c, addr := dialPhone(want.TCP, files, d.cfg.arp)
+			if c == nil && want.TCP == "auto" && time.Since(d.lastScan) > 15*time.Second {
+				d.lastScan = time.Now()
+				addrs, names := d.cfg.nets()
+				targets := scanTargets(addrs, names, "5555")
+				if len(targets) > 0 {
+					d.log.Printf("wifi adb: looking for the phone on %d addresses", len(targets))
+					c, addr = dialAny(targets, 400*time.Millisecond)
+				}
+			}
+			if c != nil {
+				d.log.Printf("wifi adb: the phone answers at %s", addr)
 				t = &streamTransport{rw: c, name: "tcp " + addr}
 				via = "tcp"
 				break
@@ -367,6 +385,7 @@ func (d *daemon) once(want startReq, gen int) error {
 		}
 	}
 	if want.TCP == "auto" && (via == "usb" || d.cfg.wifiOverTCP) {
+		d.rememberWifi(conn, model)
 		if d.openWifiPort(conn, model) {
 			return errReconnect
 		}
@@ -450,4 +469,24 @@ func (d *daemon) openWifiPort(conn *Conn, model string) bool {
 	d.log.Printf("wifi adb: %s: %q", model, strings.TrimSpace(string(answer[:n])))
 	conn.Close()
 	return true
+}
+
+// rememberWifi keeps the phone's Wi-Fi addresses (state/phone-ip.auto) while it is on USB: over Wi-Fi later the
+// service knocks there first, whether or not the unit has talked to it since.
+func (d *daemon) rememberWifi(conn *Conn, model string) {
+	out, err := conn.Shell("ip -o -4 addr show", 5*time.Second)
+	if err != nil {
+		d.log.Printf("wifi adb: the phone's addresses: %v", err)
+		return
+	}
+	ips := phoneWifiAddrs(out)
+	if len(ips) == 0 {
+		d.log.Printf("wifi adb: %s has no Wi-Fi address now", model)
+		return
+	}
+	f := filepath.Join(d.cfg.state, "phone-ip.auto")
+	os.MkdirAll(d.cfg.state, 0o700)
+	if err := os.WriteFile(f, []byte(strings.Join(ips, "\n")+"\n"), 0o600); err == nil {
+		d.log.Printf("wifi adb: %s is at %s on Wi-Fi", model, strings.Join(ips, ", "))
+	}
 }

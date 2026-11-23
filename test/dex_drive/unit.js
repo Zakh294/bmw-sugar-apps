@@ -163,6 +163,8 @@ test('the page says what goes on', () => {
     assert.ok(/Помилка: boom/.test(statusText({ state: 'error', msg: 'boom' }, { tr })));
     assert.ok(/Остання помилка 17:40:01 decoder: no GPU/.test(statusText({ state: 'searching', last: '17:40:01 decoder: no GPU' }, { tr })));
     assert.ok(!/Остання/.test(statusText({ state: 'streaming', w: 1, h: 1, last: 'x' }, { tr })));
+    assert.ok(/Controller gate/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, noController: true })));
+    assert.ok(/тачпада/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, noPad: true })));
     assert.ok(/дотиком до меню/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, hidden: 'hmi' })));
     assert.ok(/mgu-render: video 1: cannot open/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, renderError: 'video 1: cannot open x' })));
     assert.ok(/no video|не показує/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, problem: 'no_video' })));
@@ -185,7 +187,7 @@ test('app.json: version named in the Store texts, ids, requirements', () => {
     ['BTN_OPEN', 'STATUS', 'BTN_STOP', 'BTN_PHONE', 'BTN_FORGET'].forEach((id) => assert.ok(ids.indexOf(id) >= 0, id));
     assert.ok(spec.signals['de.bmw.infotainment.ControllerElements']._optional && spec.signals['de.bmw.infotainment.controlelements.FrontCCU']._optional,
         'the controller signals are optional: the app installs without them');
-    assert.ok(spec.requires['dex-drive-d'] && spec.requires['mgu-render']);
+    assert.ok(spec.requires['dex-drive-d'] && spec.requires['mgu-render'] && spec.requires['mgu-inputgate'], 'the controller gate comes with it');
     const comp = require(path.join(__dirname, '..', '..', 'native', 'dex_drive', 'prebuilt', 'component.json'));
     assert.strictEqual(comp.version, spec.requires['dex-drive-d'], 'the app requires the service version in the repo');
 });

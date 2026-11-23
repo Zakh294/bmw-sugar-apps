@@ -49,7 +49,9 @@ mgu.run({
             ov.want(show);
             const text = statusText(st, { tr, wifi: settings.get('conn') === 'usbwifi', fps, moving: moving() && st.state === 'streaming',
                 problem: st.state === 'streaming' ? ov.problem() : null, hidden: st.state === 'streaming' && !ov.shown ? ov.why : null,
-                renderError: st.state === 'streaming' ? ov.lastError : null });
+                renderError: st.state === 'streaming' ? ov.lastError : null,
+                noController: st.state === 'streaming' && settings.get('knob') !== false && !ov.controllerReachable(),
+                noPad: st.state === 'streaming' && padOn() && padShownAt && Date.now() - padShownAt > 15000 && !padSamples });
             if (text !== lastText) {
                 lastText = text;
                 ui.text('STATUS', text);
@@ -109,11 +111,13 @@ mgu.run({
 
         /* ---------- the controller's touchpad: DeX's pointer, taps click, two fingers scroll (pad.js) ---------- */
         const padOn = () => ov.shown && settings.get('touchpad') !== false;
+        let padSamples = 0, padShownAt = 0;    // touchpad samples seen, and since when the picture shows (no signal: say so)
         const pad = new Pad({ move: (dx, dy) => ov.padMove(dx, dy), click: (b) => ov.padClick(b), scroll: (n) => ov.padScroll(n) });
         const touchMode = ctx.signals && ctx.signals.proxy && ctx.signals.set ? new TouchMode(ctx.signals, log) : null;
         if (ctx.signals && ctx.signals.watch) {
             Promise.resolve(ctx.signals.watch('de.bmw.infotainment.ControllerElements', '1', {
                 ZBETouchFrontSide: (v) => {
+                    padSamples++;
                     if (!padOn()) { pad.reset(); return; }
                     if (v && v.statusSystemModeFrontSide !== TOUCH_MODE && touchMode) touchMode.lost();
                     pad.feed(v, Date.now());
@@ -121,7 +125,11 @@ mgu.run({
             }, log)).catch((e) => log.warn('touchpad: ' + e));
         }
         if (touchMode) {
-            setInterval(() => touchMode.want(padOn()), 500);
+            setInterval(() => {
+                if (padOn() && !padShownAt) padShownAt = Date.now();
+                if (!padOn()) padShownAt = 0;
+                touchMode.want(padOn());
+            }, 500);
             if (ctx.app && ctx.app.on) ctx.app.on('shutdown', () => touchMode.want(false));
         }
 

@@ -3,6 +3,16 @@
 A short note on each version. The app's page in the MGU Store shows the same for the current version.
 [Українська](CHANGELOG.md)
 
+## 0.2.2 (2026-11-23)
+- Installs "Controller gate" with it (`mgu-inputgate` from the `cauliflowermossgrape/idrive7-apps` source, Head-unit
+  tools): without it mgu-render does not give an app the controller, so knob, press and tilt did not reach DeX (car
+  test). Restart the unit after the install (it loads into the iDrive menu).
+- The page says when the controller is not reachable and when the controller's touchpad sends nothing.
+- Wi‑Fi after the cable (the phone was not found): while the phone is on USB, the service keeps its Wi‑Fi address
+  (`phone-ip.auto`) and knocks there later; no answer, it goes through its own Wi‑Fi network (/24) on port 5555, at
+  most every 15 s, never the car's internal networks.
+- The dex-drive-d 0.2.2 service.
+
 ## 0.2.1 (2026-11-23)
 - Fixed: black instead of DeX (first car test: S26 Ultra, One UI 9, USB, 20 fps). The renderer opens the video file
   when it is named, and the app named it before the decoder had made it. Now named again once the decoder makes it or

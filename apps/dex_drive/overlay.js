@@ -121,6 +121,9 @@ class Overlay {
         r.connect();
     }
 
+    /** The controller can be ours (the renderer offers it: the controller gate is loaded in the HMI)? */
+    controllerReachable() { return !this.connected || !this.info || !!this.info.controller; }
+
     /** Status for the page: null when all is well, else 'no_renderer' / 'no_video'. */
     problem() {
         if (!this.connected && !Render.available()) return 'no_renderer';

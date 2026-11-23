@@ -1,13 +1,13 @@
 {
   "id": "dex_drive",
   "title": "DeX Drive",
-  "description": "Samsung DeX on the centre screen: the phone (One UI 8 / Android 16) by USB or Wi-Fi, its desktop on the car's touchscreen, decoded on the head unit's GPU. Parked only by default. Needs the \"DeX Drive service\" tool and mgu-render 0.6.11+.\n\nWhat's new in 0.2.1:\n• Fix: the picture stayed black (the renderer was given the video file before the decoder had made it)\n• The page keeps the last error and says why the picture went away\n0.2.0:\n• The iDrive controller works DeX like a laptop: its touchpad moves DeX's pointer, a tap clicks, two fingers scroll, a two-finger tap right-clicks; the knob press clicks (held: long press / drag), tilts are arrow keys, the knob scrolls\n• 0.1.1: a phone plugged in by USB once gets ADB on port 5555 from the car, then DeX works over Wi-Fi",
+  "description": "Samsung DeX on the centre screen: the phone (One UI 8 / Android 16) by USB or Wi-Fi, its desktop on the car's touchscreen, decoded on the head unit's GPU. Parked only by default. Needs the \"DeX Drive service\" tool and mgu-render 0.6.11+.\n\nWhat's new in 0.2.2:\n• Installs the controller gate (mgu-inputgate): without it the knob and the touchpad cannot reach DeX; the page says when the controller or the touchpad is not reachable\n• Wi-Fi after the cable: the phone's address is kept while on USB, else the Wi-Fi network is searched\n• 0.2.1: black picture fixed; 0.2.0: the controller works DeX like a laptop (touchpad, click, arrows)",
   "texts": {
     "uk": {
-      "description": "Samsung DeX на центральному екрані: телефон (One UI 8 / Android 16) по USB або Wi-Fi, його робочий стіл на сенсорному екрані авто, декодування на GPU головного блока. Типово лише на стоянці. Потрібні інструмент «DeX Drive service» і mgu-render 0.6.11+.\n\nНове у 0.2.1:\n• Виправлено: картинка лишалась чорною (рендереру давали відеофайл раніше, ніж декодер його створив)\n• Сторінка тримає останню помилку й каже, чому картинка зникла\n0.2.0:\n• Контролер iDrive керує DeX як ноутбук: тачпад рухає вказівник DeX, тап — клік, два пальці — прокрутка, тап двома — правий клік; натискання коліщатка — клік (утримання — довге натискання / перетягування), нахили — стрілки, поворот — прокрутка\n• 0.1.1: телефон, раз під'єднаний кабелем, отримує від авто ADB на порту 5555, далі DeX працює по Wi-Fi"
+      "description": "Samsung DeX на центральному екрані: телефон (One UI 8 / Android 16) по USB або Wi-Fi, його робочий стіл на сенсорному екрані авто, декодування на GPU головного блока. Типово лише на стоянці. Потрібні інструмент «DeX Drive service» і mgu-render 0.6.11+.\n\nНове у 0.2.2:\n• Ставить «Controller gate» (mgu-inputgate): без нього коліщатко й тачпад не доходять до DeX; сторінка каже, коли контролер чи тачпад недоступні\n• Wi-Fi після кабелю: адресу телефона запам'ятовує з USB, інакше шукає в мережі\n• 0.2.1: виправлено чорну картинку; 0.2.0: контролер керує DeX як ноутбук (тачпад, клік, стрілки)"
     }
   },
-  "version": "0.2.1",
+  "version": "0.2.2",
   "vendor": "custom",
   "loggingId": "OADX",
   "iconGlyph": "DeX",
@@ -16,7 +16,8 @@
   ],
   "requires": {
     "dex-drive-d": "0.2.1",
-    "mgu-render": "0.6.11"
+    "mgu-render": "0.6.11",
+    "mgu-inputgate": "1.2.1"
   },
   "signals": {
     "de.bmw.infotainment.vehicle.Vehicle2": {

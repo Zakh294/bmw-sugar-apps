@@ -37,6 +37,8 @@ Phone (One UI 8)                           Head unit MGU (iDrive 7)
 ## What you need
 
 - An iDrive 7 head unit with root, the MGU Store and **mgu-render 0.6.11+** (the Store installs it; RideTube has it).
+- For the iDrive controller: **Controller gate** (`mgu-inputgate`, source `cauliflowermossgrape/idrive7-apps`, in the
+  Store's "Head-unit tools"). The Store installs it with DeX Drive; restart the unit after it.
 - A Samsung phone with **One UI 8 or later** (Android 16). Older One UI cannot run DeX on a virtual display; the
   service says so.
 - On the phone: **Developer options → USB debugging** on.
@@ -45,7 +47,7 @@ Phone (One UI 8)                           Head unit MGU (iDrive 7)
 ## Install
 
 1. Store → Settings → Sources: source `Zakh294/bmw-sugar-apps`, Channel **`main`** (as for SpeedCam) → Check now.
-2. Store → **DeX Drive** → Install. The Store installs **DeX Drive service** (`dex-drive-d`) and mgu-render with it.
+2. Store → **DeX Drive** → Install. The Store installs **DeX Drive service** (`dex-drive-d`), mgu-render and Controller gate with it.
 3. **Restart the head unit** (Settings → Restart head unit): a new service starts only after a restart (the unit's
    recmgr). Until then the Store shows it as *restart pending*.
 
@@ -71,6 +73,10 @@ The service looks for the phone on port **5555** among the devices the unit sees
   Wi‑Fi…"). Until the phone restarts, no cable is needed;
 - from a PC: `adb tcpip 5555` (the phone on USB), or
 - on the phone itself: Termux (`pkg install android-tools`) or LADB through "Wireless debugging".
+
+While the phone is on the cable, the service keeps its Wi‑Fi address and looks for it there later, else goes
+through its whole Wi‑Fi network on port 5555. The phone and the car must share a network: the phone on the car's
+hotspot, the car on the phone's, or both on one Wi‑Fi.
 
 After the phone restarts, port 5555 is closed again (Android does that). Android 11+ "Wireless debugging" (pairing
 code, TLS) is not supported yet. A phone with a fixed address can be written into

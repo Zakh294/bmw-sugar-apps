@@ -39,6 +39,8 @@ function statusText(st, ctx) {
     if (st.last && st.state !== 'streaming' && st.state !== 'error' && st.state !== 'nosvc') s += tr('last_error', { msg: st.last });
     if (ctx.moving) s += tr('moving');
     if (ctx.hidden) s += tr('hidden_' + ctx.hidden);
+    if (ctx.noController) s += tr('no_controller');
+    if (ctx.noPad) s += tr('no_pad');
     if (ctx.renderError) s += tr('render_error', { msg: ctx.renderError });
     if (ctx.problem) s += tr(ctx.problem);
     return s;

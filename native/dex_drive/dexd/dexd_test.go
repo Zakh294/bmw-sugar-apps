@@ -365,6 +365,14 @@ func (pc *phoneConn) open(host uint32, svc string) {
 		port := p.tcpPort
 		p.mu.Unlock()
 		go func() { write([]byte(port + "\n")); closeIt() }()
+	case svc == "shell:ip -o -4 addr show":
+		_, _, write, closeIt := pc.accept(host)
+		go func() {
+			write([]byte("1: lo    inet 127.0.0.1/8 scope host lo\\       valid_lft forever\n" +
+				"23: rmnet_data0    inet 10.44.1.9/30 scope global rmnet_data0\n" +
+				"31: wlan0    inet 192.168.77.5/24 brd 192.168.77.255 scope global wlan0\\       valid_lft forever\n"))
+			closeIt()
+		}()
 	case svc == "tcpip:5555":
 		_, _, write, _ := pc.accept(host)
 		p.mu.Lock()
@@ -727,18 +735,18 @@ func TestPhoneCandidates(t *testing.T) {
 		"160.48.199.1     0x1         0x2         11:22:33:44:55:66     *        eth0\n"), 0o644)
 	ipf := filepath.Join(dir, "phone-ip")
 	os.WriteFile(ipf, []byte("192.168.43.7\n10.0.0.2:5556\n"), 0o644)
-	got := strings.Join(phoneCandidates("auto", ipf, arp), " ")
+	got := strings.Join(phoneCandidates("auto", []string{ipf, filepath.Join(dir, "none")}, arp), " ")
 	if got != "192.168.43.7:5555 10.0.0.2:5556 172.16.222.40:5555 160.48.199.1:5555" {
 		t.Fatalf("auto: %s", got)
 	}
-	if got := phoneCandidates("192.168.1.5", ipf, arp); len(got) != 1 || got[0] != "192.168.1.5:5555" {
+	if got := phoneCandidates("192.168.1.5", []string{ipf}, arp); len(got) != 1 || got[0] != "192.168.1.5:5555" {
 		t.Fatalf("fixed: %v", got)
 	}
 	// the first one that answers
 	l, _ := net.Listen("tcp", "127.0.0.1:0")
 	defer l.Close()
 	os.WriteFile(ipf, []byte("127.0.0.1:1\n"+l.Addr().String()+"\n"), 0o644)
-	c, addr := dialPhone("auto", ipf, filepath.Join(dir, "none"))
+	c, addr := dialPhone("auto", []string{ipf}, filepath.Join(dir, "none"))
 	if c == nil || addr != l.Addr().String() {
 		t.Fatalf("dial: %v %s", c, addr)
 	}
@@ -772,6 +780,9 @@ func TestWifiPortOpenedOnce(t *testing.T) {
 	phone.mu.Unlock()
 	if n != 1 {
 		t.Fatalf("tcpip:5555 asked %d times, want 1", n)
+	}
+	if b, _ := os.ReadFile(filepath.Join(state, "phone-ip.auto")); string(b) != "192.168.77.5\n" {
+		t.Fatalf("the phone's Wi-Fi address not remembered: %q", b)
 	}
 	// again (port already open): no restart of the phone's adbd
 	app.send(map[string]interface{}{"cmd": "stop"})
@@ -814,5 +825,77 @@ func TestLastErrorKeptWhileRetrying(t *testing.T) {
 	st = app.waitState(t, "idle", 3*time.Second)
 	if st["last"] != nil {
 		t.Fatalf("stop keeps an old error: %v", st)
+	}
+}
+
+func TestWifiDiscovery(t *testing.T) {
+	out := "1: lo    inet 127.0.0.1/8 scope host lo\n" +
+		"30: wlan0    inet 192.168.1.23/24 brd 192.168.1.255 scope global wlan0\\ valid_lft forever\n" +
+		"31: swlan0    inet 10.193.4.1/24 scope global swlan0\n" +
+		"40: rndis0    inet 192.168.42.129/24 scope global rndis0\n" +
+		"23: rmnet_data0    inet 100.64.3.2/30 scope global rmnet_data0\n"
+	if got := strings.Join(phoneWifiAddrs(out), " "); got != "192.168.1.23 10.193.4.1" {
+		t.Fatalf("phone addrs: %s", got)
+	}
+	nets := []net.IPNet{
+		{IP: net.ParseIP("172.16.222.97"), Mask: net.CIDRMask(24, 32)},
+		{IP: net.ParseIP("160.48.199.115"), Mask: net.CIDRMask(24, 32)},
+		{IP: net.ParseIP("169.254.10.2"), Mask: net.CIDRMask(16, 32)},
+		{IP: net.ParseIP("10.20.30.40"), Mask: net.CIDRMask(24, 32)},
+	}
+	tg := scanTargets(nets, []string{"wlan0", "vlan73", "wlan1", "eth0"}, "5555")
+	if len(tg) != 253 || tg[0] != "172.16.222.1:5555" || tg[252] != "172.16.222.254:5555" {
+		t.Fatalf("targets: %d %v ... %v", len(tg), tg[0], tg[len(tg)-1])
+	}
+	for _, a := range tg {
+		if a == "172.16.222.97:5555" || strings.HasPrefix(a, "160.48.") || strings.HasPrefix(a, "10.20.") {
+			t.Fatalf("scans %s", a)
+		}
+	}
+	// the scan finds a listener among many silent addresses
+	l, _ := net.Listen("tcp", "127.0.0.1:0")
+	defer l.Close()
+	_, port, _ := net.SplitHostPort(l.Addr().String())
+	addrs := []string{}
+	for h := 2; h < 40; h++ {
+		addrs = append(addrs, net.JoinHostPort("127.0.0."+fmt.Sprint(h), port))
+	}
+	addrs = append(addrs, l.Addr().String())
+	c, a := dialAny(addrs, 300*time.Millisecond)
+	if c == nil || a != l.Addr().String() {
+		t.Fatalf("scan: %v %s", c, a)
+	}
+	c.Close()
+}
+
+func TestDaemonFindsPhoneByScan(t *testing.T) {
+	dec := buildFakeDecoder(t)
+	dir := t.TempDir()
+	jar := filepath.Join(dir, "scrcpy-server")
+	os.WriteFile(jar, []byte("jar"), 0o644)
+	phone := newFakePhone(t)
+	defer phone.l.Close()
+	cfg := config{sock: filepath.Join(dir, "ctl.sock"), group: os.Getgid(), state: filepath.Join(dir, "state"), server: jar,
+		decoder: dec, video: filepath.Join(dir, "v"), sysUsb: filepath.Join(dir, "nosys"), keyName: "t", idleAfter: time.Minute,
+		arp: filepath.Join(dir, "noarp")}
+	d := newDaemon(cfg, NewLogger(""))
+	// the phone is not in any file nor in the neighbour table: only a scan finds it
+	_, port, _ := net.SplitHostPort(phone.l.Addr().String())
+	d.cfg.nets = func() ([]net.IPNet, []string) { return nil, nil }
+	if err := d.listen(); err != nil {
+		t.Fatal(err)
+	}
+	scanned := make(chan bool, 4)
+	d.cfg.nets = func() ([]net.IPNet, []string) {
+		scanned <- true
+		return []net.IPNet{{IP: net.ParseIP("127.0.0.1"), Mask: net.CIDRMask(24, 32)}}, []string{"wlan0"}
+	}
+	_ = port
+	app := dialApp(t, cfg.sock)
+	app.send(map[string]interface{}{"cmd": "start", "tcp": "auto"})
+	select {
+	case <-scanned:
+	case <-time.After(10 * time.Second):
+		t.Fatalf("no scan while the phone is not found")
 	}
 }
