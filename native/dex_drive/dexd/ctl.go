@@ -69,6 +69,7 @@ type ctlMsg struct {
 	Bitrate int     `json:"bitrate"`
 	TCP     string  `json:"tcp"`
 	A       string  `json:"a"`
+	B       string  `json:"b"`
 	ID      int     `json:"id"`
 	X       float64 `json:"x"`
 	Y       float64 `json:"y"`
@@ -143,6 +144,10 @@ func (d *daemon) serve(c *client) {
 		case "touch":
 			if s != nil {
 				s.Touch(m.A, m.ID, m.X, m.Y)
+			}
+		case "mouse":
+			if s != nil {
+				s.Mouse(m.A, m.B, m.X, m.Y)
 			}
 		case "scroll":
 			if s != nil {

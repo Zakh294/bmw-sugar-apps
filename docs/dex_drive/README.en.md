@@ -8,7 +8,7 @@
 
 A Samsung phone with **One UI 8 (Android 16)** connects to the head unit by USB or Wi‑Fi, and its **DeX** (a desktop
 with windows, a taskbar and a keyboard) opens on the whole centre screen. The screen is a touchscreen: fingers
-(several at once) work as on a tablet, the iDrive knob scrolls. The head unit's GPU decodes the video, and the phone
+(several at once) work as on a tablet, and the iDrive controller as a laptop (touchpad, click, arrows). The head unit's GPU decodes the video, and the phone
 does not mirror its own screen: DeX runs on a virtual display of its own.
 
 ## How it works
@@ -88,11 +88,29 @@ For Wi‑Fi, "Video quality: 4 Mbit/s" works better.
 | Frames per second | 30 or 60 |
 | Video quality | 4 / 8 / 16 Mbit/s |
 | Parked only | on: while driving (over 3 km/h) DeX hides, the session stays |
-| The iDrive knob scrolls DeX | a turn scrolls where the last touch was |
+| The iDrive controller works DeX | knob, press and tilt are DeX's while it shows (below) |
+| The controller's touchpad is DeX's pointer | the touchpad on the knob works as a laptop's |
 | Turn the phone's screen off | after the start, turns off the phone's own screen (DeX keeps running); the power key turns it on |
 
 Changing the scale, frames, quality or connection starts DeX again with them. (The settings' labels are in
 Ukrainian in 0.1.0.)
+
+## The iDrive controller
+
+While DeX is on the screen, the controller works it (MENU / BACK and the on-screen back arrow leave, as always):
+
+| Action | In DeX |
+|---|---|
+| A finger on the touchpad | moves DeX's pointer (a quicker move goes further) |
+| A short tap on the touchpad | left click |
+| A two-finger tap | right click (context menu) |
+| Two fingers up / down | scroll (the content follows the fingers) |
+| Turning the knob | scroll where the pointer is |
+| Pressing the knob | click where the pointer is; held: a long press, with a finger on the touchpad: a drag |
+| Tilt ↑ ↓ ← → | arrow keys |
+
+The pointer goes where you last touched the screen. The touchpad works only in the controller's touch mode: DeX
+Drive turns it on while DeX shows and off after (as the iDrive handwriting screen does).
 
 ## What is tested, what is not
 
@@ -111,7 +129,9 @@ Ukrainian in 0.1.0.)
 - USB through usbfs on the unit (whether another process holds the phone; the car's wired Android Auto);
 - hardware decoding of the phone's live stream (`dexdec`, decoding order for the lowest latency);
 - whether One UI starts DeX on the virtual display by itself or asks;
-- the left column's see-through (the iDrive back arrow over our layer), the knob's direction.
+- the left column's see-through (the iDrive back arrow over our layer), the knob's direction;
+- the controller's touchpad (touch mode, the pointer's direction and speed): the signal values are what others
+  measured in their cars, not yet tried on our G01.
 
 ## Something wrong
 

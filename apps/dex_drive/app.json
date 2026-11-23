@@ -1,13 +1,13 @@
 {
   "id": "dex_drive",
   "title": "DeX Drive",
-  "description": "Samsung DeX on the centre screen: the phone (One UI 8 / Android 16) by USB or Wi-Fi, its desktop on the car's touchscreen, decoded on the head unit's GPU. Parked only by default. Needs the \"DeX Drive service\" tool and mgu-render 0.6.11+.\n\nWhat's new in 0.1.1:\n• With \"USB or Wi-Fi\", a phone plugged in by USB once gets ADB on port 5555 from the car: until it restarts, DeX works over Wi-Fi with no cable and no apps on the phone",
+  "description": "Samsung DeX on the centre screen: the phone (One UI 8 / Android 16) by USB or Wi-Fi, its desktop on the car's touchscreen, decoded on the head unit's GPU. Parked only by default. Needs the \"DeX Drive service\" tool and mgu-render 0.6.11+.\n\nWhat's new in 0.2.0:\n• The iDrive controller works DeX like a laptop: its touchpad moves DeX's pointer, a tap clicks, two fingers scroll, a two-finger tap right-clicks; the knob press clicks (held: long press / drag), tilts are arrow keys, the knob scrolls\n• 0.1.1: a phone plugged in by USB once gets ADB on port 5555 from the car, then DeX works over Wi-Fi",
   "texts": {
     "uk": {
-      "description": "Samsung DeX на центральному екрані: телефон (One UI 8 / Android 16) по USB або Wi-Fi, його робочий стіл на сенсорному екрані авто, декодування на GPU головного блока. Типово лише на стоянці. Потрібні інструмент «DeX Drive service» і mgu-render 0.6.11+.\n\nНове у 0.1.1:\n• З «USB або Wi-Fi» телефон, раз під'єднаний кабелем, отримує від авто ADB на порту 5555: до його перезавантаження DeX працює по Wi-Fi без кабелю й без застосунків на телефоні"
+      "description": "Samsung DeX на центральному екрані: телефон (One UI 8 / Android 16) по USB або Wi-Fi, його робочий стіл на сенсорному екрані авто, декодування на GPU головного блока. Типово лише на стоянці. Потрібні інструмент «DeX Drive service» і mgu-render 0.6.11+.\n\nНове у 0.2.0:\n• Контролер iDrive керує DeX як ноутбук: тачпад рухає вказівник DeX, тап — клік, два пальці — прокрутка, тап двома — правий клік; натискання коліщатка — клік (утримання — довге натискання / перетягування), нахили — стрілки, поворот — прокрутка\n• 0.1.1: телефон, раз під'єднаний кабелем, отримує від авто ADB на порту 5555, далі DeX працює по Wi-Fi"
     }
   },
-  "version": "0.1.1",
+  "version": "0.2.0",
   "vendor": "custom",
   "loggingId": "OADX",
   "iconGlyph": "DeX",
@@ -15,12 +15,20 @@
     "ID7"
   ],
   "requires": {
-    "dex-drive-d": "0.1.1",
+    "dex-drive-d": "0.2.0",
     "mgu-render": "0.6.11"
   },
   "signals": {
     "de.bmw.infotainment.vehicle.Vehicle2": {
       "statusCarSpeed2": "rs"
+    },
+    "de.bmw.infotainment.ControllerElements": {
+      "ZBETouchFrontSide": "rs",
+      "_optional": "the controller's touchpad as DeX's touchpad (pointer, tap, two-finger scroll)"
+    },
+    "de.bmw.infotainment.controlelements.FrontCCU": {
+      "ccsControlTouchCCU": "w",
+      "_optional": "touch mode on the controller's touchpad while DeX shows"
     }
   },
   "screens": [
@@ -151,7 +159,13 @@
     },
     {
       "key": "knob",
-      "label": "Коліщатко iDrive прокручує DeX",
+      "label": "Контролер iDrive керує DeX (коліщатко, натискання, нахили)",
+      "type": "bool",
+      "default": true
+    },
+    {
+      "key": "touchpad",
+      "label": "Тачпад контролера — вказівник DeX",
       "type": "bool",
       "default": true
     },

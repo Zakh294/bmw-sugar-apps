@@ -12,6 +12,7 @@ const { Ops } = require(path.join(app, 'render'));
 const lang = require(path.join(app, 'lang'));
 const { statusText, startCmd, STREAM_KEYS } = require(path.join(app, 'status'));
 const spec = require(path.join(app, 'app.json'));
+const { Pad, fingers } = require(path.join(app, 'pad'));
 
 let n = 0;
 function test(name, fn) { fn(); n++; console.log('ok  ' + name); }
@@ -39,11 +40,95 @@ test('touches map to the fitted video', () => {
     assert.ok(Math.abs(f.h - 720) < 1e-9 && Math.abs(f.w - 1280) < 1e-9 && Math.abs(f.x - (84 + 278)) < 1e-9);
 });
 
-test('knob steps wrap at 16 bits', () => {
+test('knob steps wrap at 16 bits; a counter reset is no turn', () => {
     assert.strictEqual(ov.knobDelta(10, 12), 2);
     assert.strictEqual(ov.knobDelta(12, 10), -2);
     assert.strictEqual(ov.knobDelta(0xffff, 1), 2);
     assert.strictEqual(ov.knobDelta(1, 0xffff), -2);
+    assert.strictEqual(ov.knobDelta(500, 0), 0);
+});
+
+// a pad sample as the car sends it
+const S = (x1, y1, x2, y2, z1) => ({ statusSystemModeFrontSide: 3, touchCoordinatesX1FrontSide: x1, touchCoordinatesY1FrontSide: y1,
+    touchCcoordinatesX2FrontSide: x2 || 0, touchCoordinatesY2FrontSide: y2 || 0, touchCoordinatesZ1FrontSide: z1 || 0 });
+function padLog() {
+    const ev = [];
+    return { ev, pad: new Pad({ move: (dx, dy) => ev.push(['move', dx, dy]), click: (b) => ev.push(['click', b]), scroll: (n) => ev.push(['scroll', n]) }) };
+}
+
+test('touchpad: fingers, no finger, not touch mode', () => {
+    assert.strictEqual(fingers(S(100, 200)).length, 1);
+    assert.strictEqual(fingers(S(100, 200, 150, 210)).length, 2);
+    assert.strictEqual(fingers(S(100, 200, 0, 0, 2)).length, 0);
+    assert.strictEqual(fingers(Object.assign(S(100, 200), { statusSystemModeFrontSide: 1 })).length, 0);
+    assert.strictEqual(fingers(null).length, 0);
+});
+
+test('touchpad: a short still touch clicks, two fingers right-click', () => {
+    let { ev, pad } = padLog();
+    pad.feed(S(200, 200), 1000); pad.feed(S(200, 200), 1010); pad.feed(S(202, 201), 1050); pad.feed(S(0, 0, 0, 0, 2), 1100);
+    assert.deepStrictEqual(ev, [['click', 'left']]);
+    ({ ev, pad } = padLog());
+    pad.feed(S(200, 200, 260, 200), 1000); pad.feed(S(201, 200, 261, 200), 1040); pad.feed(null, 1100);
+    assert.deepStrictEqual(ev, [['click', 'right']]);
+    ({ ev, pad } = padLog());
+    pad.feed(S(200, 200), 1000); pad.feed(null, 1600);             // held too long: no click
+    assert.deepStrictEqual(ev, []);
+});
+
+test('touchpad: one finger moves the pointer (pad Y up = screen up), faster when quick', () => {
+    const { ev, pad } = padLog();
+    let t = 1000;
+    pad.feed(S(100, 100), t);
+    for (let i = 1; i <= 20; i++) pad.feed(S(100 + i * 2, 100 + i * 2), t += 20);     // slow, up-right
+    const moves = ev.filter((e) => e[0] === 'move');
+    const sx = moves.reduce((a, e) => a + e[1], 0), sy = moves.reduce((a, e) => a + e[2], 0);
+    assert.ok(sx > 0 && sy < 0, 'right and up: ' + sx + ',' + sy);
+    const slow = sx;
+    const q = padLog();
+    t = 1000;
+    q.pad.feed(S(100, 100), t);
+    for (let i = 1; i <= 4; i++) q.pad.feed(S(100 + i * 10, 100), t += 10);            // the same 40 units, quick
+    const fast = q.ev.filter((e) => e[0] === 'move').reduce((a, e) => a + e[1], 0);
+    assert.ok(fast > slow, 'acceleration: ' + fast + ' > ' + slow);
+    assert.ok(!q.ev.some((e) => e[0] === 'click'));
+});
+
+test('touchpad: two fingers up scroll the content up (negative notches), no click after', () => {
+    const { ev, pad } = padLog();
+    let t = 1000;
+    pad.feed(S(200, 100, 260, 100), t);
+    for (let i = 1; i <= 10; i++) pad.feed(S(200, 100 + i * 10, 260, 100 + i * 10), t += 20);
+    pad.feed(null, t + 20);
+    const n = ev.filter((e) => e[0] === 'scroll').reduce((a, e) => a + e[1], 0);
+    assert.strictEqual(n, -4);
+    assert.ok(!ev.some((e) => e[0] === 'click' || e[0] === 'move'));
+});
+
+test('controller: press clicks where the pointer is, tilt = arrows, knob scrolls, only while shown', () => {
+    const ev = [];
+    const o = Object.create(ov.Overlay.prototype);
+    Object.assign(o, { knobOn: true, shown: true, ccuLast: null, pressHeld: false, ptr: { nx: 0.25, ny: 0.75 }, vw: 1832, vh: 720,
+        h: { scroll: (x, y, d) => ev.push(['scroll', d]), mouse: (a, b, x, y) => ev.push(['mouse', a, b, x, y]), key: (k) => ev.push(['key', k]) } });
+    const c = (knob, press, tilt) => o._ccu({ knob, press, tilt });
+    c(100, 0, 0);                    // the first event only sets the base
+    c(102, 0, 0);                    // two steps clockwise
+    c(102, 1, 0); c(102, 1, 0);      // press (held: one down)
+    o.padMove(183.2, 0);             // drag right by a tenth of the picture (1832 px wide)
+    c(102, 0, 0);                    // release
+    c(102, 0, 1); c(102, 0, 1); c(102, 0, 0); c(102, 0, 10);   // tilt N (once), W
+    assert.deepStrictEqual(ev.map((e) => e.map((v) => (typeof v === 'number' ? Math.round(v * 1000) / 1000 : v))),
+        [['scroll', -2], ['mouse', 'down', 'left', 0.25, 0.75], ['mouse', 'move', 'left', 0.35, 0.75],
+        ['mouse', 'up', 'left', 0.35, 0.75], ['key', 19], ['key', 21]], JSON.stringify(ev));
+    ev.length = 0;
+    o.padMove(10, 0);
+    assert.deepStrictEqual(ev[0].slice(0, 2), ['mouse', 'hover']);
+    o.shown = false;
+    ev.length = 0;
+    c(110, 1, 4); o.padClick('left'); o.padScroll(3);
+    assert.deepStrictEqual(ev, []);
+    assert.strictEqual(ov.TILT_KEY[4], 22);
+    assert.strictEqual(ov.TILT_KEY[7], 20);
 });
 
 test('draw ops are words as PROTOCOL.md lists them', () => {
@@ -94,6 +179,8 @@ test('app.json: version named in the Store texts, ids, requirements', () => {
     assert.ok(spec.description.length <= 1000 && spec.texts.uk.description.length <= 1000);
     const ids = spec.screens[0].items.map((i) => i[1]);
     ['BTN_OPEN', 'STATUS', 'BTN_STOP', 'BTN_PHONE', 'BTN_FORGET'].forEach((id) => assert.ok(ids.indexOf(id) >= 0, id));
+    assert.ok(spec.signals['de.bmw.infotainment.ControllerElements']._optional && spec.signals['de.bmw.infotainment.controlelements.FrontCCU']._optional,
+        'the controller signals are optional: the app installs without them');
     assert.ok(spec.requires['dex-drive-d'] && spec.requires['mgu-render']);
     const comp = require(path.join(__dirname, '..', '..', 'native', 'dex_drive', 'prebuilt', 'component.json'));
     assert.strictEqual(comp.version, spec.requires['dex-drive-d'], 'the app requires the service version in the repo');

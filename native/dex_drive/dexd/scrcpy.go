@@ -37,10 +37,15 @@ const (
 	ctlBackOrScreen = 4
 	ctlDisplayPower = 10
 
-	actionDown   = 0
-	actionUp     = 1
-	actionMove   = 2
-	actionCancel = 3
+	actionDown      = 0
+	actionUp        = 1
+	actionMove      = 2
+	actionCancel    = 3
+	actionHoverMove = 7
+
+	pointerMouse    = -1 // scrcpy's POINTER_ID_MOUSE: a hover is a real mouse (DeX draws its pointer)
+	buttonPrimary   = 1  // MotionEvent.BUTTON_PRIMARY
+	buttonSecondary = 2  // MotionEvent.BUTTON_SECONDARY
 )
 
 // SessionOpts: the virtual display and the encoder.
@@ -389,6 +394,26 @@ func touchMsg(action int, pointer int64, nx, ny float64, w, h int) []byte {
 	return b
 }
 
+// mouseMsg builds INJECT_TOUCH_EVENT for the mouse pointer: a hover moves DeX's own pointer; down / move / up with
+// a button click and drag (the secondary button is a right click: DeX's context menu).
+func mouseMsg(action int, button int, nx, ny float64, w, h int) []byte {
+	b := touchMsg(action, pointerMouse, nx, ny, w, h)
+	var actionButton, buttons uint32
+	switch action {
+	case actionDown:
+		actionButton, buttons = uint32(button), uint32(button)
+	case actionMove:
+		buttons = uint32(button)
+	case actionUp:
+		actionButton = uint32(button)
+	case actionHoverMove:
+		binary.BigEndian.PutUint16(b[22:], 0)
+	}
+	binary.BigEndian.PutUint32(b[24:], actionButton)
+	binary.BigEndian.PutUint32(b[28:], buttons)
+	return b
+}
+
 // scrollMsg builds INJECT_SCROLL_EVENT: dy notches (+ = content moves up, as a wheel turned towards you).
 func scrollMsg(nx, ny, dx, dy float64, w, h int) []byte {
 	b := make([]byte, 21)
@@ -442,6 +467,24 @@ func (s *Session) Touch(action string, finger int, nx, ny float64) error {
 		return fmt.Errorf("touch action %q", action)
 	}
 	return s.sendControl(touchMsg(a, int64(finger), nx, ny, w, h))
+}
+
+// Mouse moves DeX's pointer (a "hover") or clicks / drags with a button ("left", "right") at nx, ny: action hover,
+// down, move, up.
+func (s *Session) Mouse(action, button string, nx, ny float64) error {
+	w, h := s.Size()
+	if w == 0 {
+		return nil
+	}
+	a, ok := map[string]int{"hover": actionHoverMove, "down": actionDown, "move": actionMove, "up": actionUp}[action]
+	if !ok {
+		return fmt.Errorf("mouse action %q", action)
+	}
+	btn := buttonPrimary
+	if button == "right" {
+		btn = buttonSecondary
+	}
+	return s.sendControl(mouseMsg(a, btn, nx, ny, w, h))
 }
 
 // Scroll scrolls at nx, ny.

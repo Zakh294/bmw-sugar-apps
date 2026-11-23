@@ -117,6 +117,21 @@ func TestControlMessages(t *testing.T) {
 	if len(s) != 21 || s[0] != 3 || int16(binary.BigEndian.Uint16(s[15:])) != -2048 {
 		t.Fatalf("scroll %x", s)
 	}
+	h := mouseMsg(actionHoverMove, buttonPrimary, 0.5, 0.5, 100, 100)
+	if int64(binary.BigEndian.Uint64(h[2:])) != -1 || h[1] != 7 || binary.BigEndian.Uint16(h[22:]) != 0 ||
+		binary.BigEndian.Uint32(h[24:]) != 0 || binary.BigEndian.Uint32(h[28:]) != 0 {
+		t.Fatalf("hover %x", h)
+	}
+	r := mouseMsg(actionDown, buttonSecondary, 0, 0, 100, 100)
+	if r[1] != 0 || binary.BigEndian.Uint32(r[24:]) != 2 || binary.BigEndian.Uint32(r[28:]) != 2 {
+		t.Fatalf("right down %x", r)
+	}
+	if u := mouseMsg(actionUp, buttonPrimary, 0, 0, 100, 100); binary.BigEndian.Uint32(u[24:]) != 1 || binary.BigEndian.Uint32(u[28:]) != 0 {
+		t.Fatalf("up %x", u)
+	}
+	if m := mouseMsg(actionMove, buttonPrimary, 0, 0, 100, 100); binary.BigEndian.Uint32(m[24:]) != 0 || binary.BigEndian.Uint32(m[28:]) != 1 {
+		t.Fatalf("drag %x", m)
+	}
 	k := keyMsg(actionUp, 4)
 	if len(k) != 14 || k[0] != 0 || k[1] != 1 || binary.BigEndian.Uint32(k[2:]) != 4 {
 		t.Fatalf("key %x", k)
@@ -580,18 +595,19 @@ func TestDaemonEndToEnd(t *testing.T) {
 	app.send(map[string]interface{}{"cmd": "touch", "a": "down", "id": 1, "x": 1.0, "y": 0.0})
 	app.send(map[string]interface{}{"cmd": "touch", "a": "up", "id": 1, "x": 1.0, "y": 0.0})
 	app.send(map[string]interface{}{"cmd": "key", "code": 4})
+	app.send(map[string]interface{}{"cmd": "mouse", "a": "hover", "x": 0.5, "y": 0.5})
 	deadline = time.Now().Add(3 * time.Second)
 	for time.Now().Before(deadline) {
 		phone.mu.Lock()
 		n, k := len(phone.touches), len(phone.keys)
 		phone.mu.Unlock()
-		if n >= 2 && k >= 2 {
+		if n >= 3 && k >= 2 {
 			break
 		}
 		time.Sleep(20 * time.Millisecond)
 	}
 	phone.mu.Lock()
-	if len(phone.touches) < 2 || len(phone.keys) < 2 {
+	if len(phone.touches) < 3 || len(phone.keys) < 2 || phone.touches[2][1] != actionHoverMove {
 		t.Fatalf("touches %d keys %d", len(phone.touches), len(phone.keys))
 	}
 	m := phone.touches[0]

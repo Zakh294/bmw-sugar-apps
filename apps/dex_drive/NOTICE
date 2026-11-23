@@ -5,3 +5,5 @@ render.js - DeX Drive's own client for mgu-render's native dialect, written from
 The picture comes from the DeX Drive service (dex-drive-d, native/dex_drive): its NOTICE lists scrcpy-server
 (Apache-2.0) and the GPL-3.0-or-later decoder.
 Samsung and DeX are trademarks of Samsung Electronics Co., Ltd.; this app is not affiliated with Samsung or BMW.
+pad.js - written for DeX Drive; what the controller's touchpad signals mean (touch mode, coordinates, ranges) follows
+what people measured in the car, as RideTube's notes describe it (github.com/JustAnotherPU/ridetube).

@@ -1,7 +1,7 @@
 {
   "id": "dex-drive-d",
   "kind": "tool",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "MIT AND GPL-3.0-or-later AND Apache-2.0",
   "title": "DeX Drive service",
   "description": "The car side of DeX Drive: Samsung DeX (One UI 8) on the centre screen. Talks ADB to the phone over USB (usbfs, only its ADB interface) or Wi-Fi, starts scrcpy-server 5.0.1 on it with a virtual display that DeX takes, decodes the H.264 video on the unit's GPU (dexdec, Intel Media SDK) into mgu-render's video file and passes touches back; controlled by the DeX Drive app over /run/dex-drive-d/ctl.sock",

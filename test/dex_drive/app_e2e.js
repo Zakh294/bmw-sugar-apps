@@ -111,7 +111,7 @@ async function until(what, fn, ms) {
         for (let i = 0; i + 4 <= frame.length; i += 4) if (frame.readUInt32LE(i) === 19 && frame.readUInt32LE(i + 24) === 1) hasVideoOp = true;
         assert.ok(hasVideoOp, 'the frame draws the video');
         const grab = got.render.filter((r) => r.type === 0x4d520002).pop().p;
-        assert.deepStrictEqual([grab.readUInt32LE(0), grab.readUInt32LE(4)], [1, 3], 'knob and press held');
+        assert.deepStrictEqual([grab.readUInt32LE(0), grab.readUInt32LE(4)], [1, 7], 'knob, press and tilt held');
         console.log('ok  the picture is placed, named, claimed and shown');
         // a finger in the middle of the picture, then the menu button
         finger(1, 0, 84 + 918, 360); finger(2, 0, 84 + 920, 370); finger(3, 0, 84 + 920, 370);
@@ -120,6 +120,20 @@ async function until(what, fn, ms) {
         assert.deepStrictEqual(t.map((m) => m.a), ['down', 'move', 'up']);
         assert.ok(Math.abs(t[0].x - 0.5) < 0.002 && Math.abs(t[0].y - 0.5) < 0.002, JSON.stringify(t[0]));
         console.log('ok  a finger reaches the phone: ' + JSON.stringify(t[0]));
+        // the controller: knob turn, press (a click where the last touch was), tilt (an arrow key)
+        const ccu = (seq, knob, press, tilt) => {
+            const b = Buffer.alloc(16);
+            b.writeUInt32LE(0x4d520103, 0); b.writeUInt32LE(8, 4);
+            b[8] = seq; b.writeUInt16BE(knob, 9); b[11] = press; b[12] = tilt;
+            renConn.write(b);
+        };
+        ccu(1, 300, 0, 0); ccu(2, 301, 0, 0); ccu(3, 301, 1, 0); ccu(4, 301, 0, 0); ccu(5, 301, 0, 7); ccu(6, 301, 0, 0);
+        await until('controller', () => got.ctl.some((m) => m.cmd === 'key'));
+        await wait(100);
+        const c = got.ctl.filter((m) => m.cmd === 'scroll' || m.cmd === 'mouse' || m.cmd === 'key');
+        assert.deepStrictEqual(c.map((m) => m.cmd + ':' + (m.a || m.dy || m.code)), ['scroll:-1', 'mouse:down', 'mouse:up', 'key:20']);
+        assert.ok(Math.abs(c[1].x - 0.501) < 0.003, 'the click where the finger was: ' + JSON.stringify(c[1]));
+        console.log('ok  the controller: knob scrolls, press clicks, tilt is an arrow key');
         const shows = got.shows.length;
         finger(1, 1, 40, 670); finger(3, 1, 40, 670);
         await until('picture hidden by the menu button', () => got.shows.slice(shows).indexOf(0) >= 0);

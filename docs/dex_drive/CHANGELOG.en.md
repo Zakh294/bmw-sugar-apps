@@ -3,6 +3,13 @@
 A short note on each version. The app's page in the MGU Store shows the same for the current version.
 [Українська](CHANGELOG.md)
 
+## 0.2.0 (2026-11-23)
+- The iDrive controller works DeX like a laptop: the touchpad moves DeX's pointer, a tap clicks, a two-finger tap
+  right-clicks, two fingers scroll; pressing the knob clicks where the pointer is (held: a long press, with the
+  touchpad: a drag); tilts are arrow keys; turning scrolls.
+- The touchpad's touch mode is on while DeX shows. Setting "The controller's touchpad is DeX's pointer".
+- The dex-drive-d 0.2.0 service: a mouse pointer and clicks (left / right) in DeX.
+
 ## 0.1.1 (2026-11-23)
 - The car opens port 5555: with "USB or Wi‑Fi", a phone plugged in by USB gets ADB on port 5555 (as
   `adb tcpip 5555`). Until the phone restarts, DeX finds it over Wi‑Fi: no cable, no PC, no Termux. Once per phone

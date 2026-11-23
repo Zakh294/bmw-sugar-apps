@@ -4,9 +4,11 @@
  * phone's virtual display (the video dexdec writes) right of the HMI's back-arrow column, and a small menu button
  * at the bottom of that column (back to DeX Drive's own page). The column above it stays the HMI's, see-through:
  * its back arrow leaves DeX as it leaves any app. Touches on the picture go to the phone as fingers (every finger,
- * multi-touch); the iDrive controller's knob scrolls.
+ * multi-touch). The iDrive controller works DeX like a laptop: the knob scrolls, a press clicks (held: a long press /
+ * drag), a tilt is an arrow key, and the controller's touchpad (pad.js) moves DeX's own pointer, taps click and two
+ * fingers scroll. Pointer, press and knob all act at one point: where the pointer is, or the last touch.
  *
- *   const ov = new Overlay(log, { touch(a, id, nx, ny), scroll(nx, ny, dy), menu() });
+ *   const ov = new Overlay(log, { touch(a, id, nx, ny), mouse(a, button, nx, ny), key(code), scroll(nx, ny, dy), menu() });
  *   ov.start(); ov.setVideo(w, h); ov.want(true); ov.update();
  */
 const { Render, Ops } = require('./render');
@@ -54,12 +56,16 @@ function frameOps() {
     return o;
 }
 
-/** Knob counter steps between two readings (u16, wrapping). */
+/** Knob counter steps between two readings (u16, wrapping; a jump over 64 is a counter reset, not a turn). */
 function knobDelta(prev, now) {
     let d = (now - prev) & 0xffff;
     if (d > 0x7fff) d -= 0x10000;
-    return d;
+    return Math.abs(d) > 64 ? 0 : d;
 }
+
+// the controller's tilt (FrontCCU deflection, short and long push per direction) as Android arrow keys
+const TILT_KEY = { 1: 19, 2: 19, 7: 20, 8: 20, 10: 21, 11: 21, 4: 22, 5: 22 };
+const pressed = (v) => v === 1 || v === 2;
 
 class Overlay {
     constructor(log, handlers) {
@@ -72,8 +78,10 @@ class Overlay {
         this.knobOn = true;
         this.vw = 0; this.vh = 0;
         this.fingers = new Map();        // finger id -> 'video' | 'menu'
-        this.lastPoint = { nx: 0.5, ny: 0.5 };
+        this.ptr = { nx: 0.5, ny: 0.5 };  // where the controller acts: DeX's pointer, or the last touch
         this.knob = null;
+        this.ccuLast = null;
+        this.pressHeld = false;
         this.keep = null;
         this.shown = false;
     }
@@ -124,8 +132,8 @@ class Overlay {
         if (show) {
             this.r.frame(frameOps());
             this.r.show(true);
-            // the knob scrolls; the press is held too, so it never presses a button of the page under the picture
-            this.r.grab(this.knobOn && this.info.controller, ['knob', 'press']);
+            // the knob, the press and the tilt are DeX's while it shows (the page under it never gets a press)
+            this.r.grab(this.knobOn && this.info.controller, ['knob', 'press', 'tilt']);
         } else {
             this.r.show(false);
             this._release();
@@ -144,9 +152,11 @@ class Overlay {
     _release() {
         this.r.grab(false);
         this.knob = null;
-        // fingers still down on the phone are lifted there
-        this.fingers.forEach((where, id) => { if (where === 'video') this.h.touch('cancel', id, this.lastPoint.nx, this.lastPoint.ny); });
+        this.ccuLast = null;
+        // fingers still down on the phone are lifted there, and a held press
+        this.fingers.forEach((where, id) => { if (where === 'video') this.h.touch('cancel', id, this.ptr.nx, this.ptr.ny); });
         this.fingers.clear();
+        if (this.pressHeld) { this.pressHeld = false; this.h.mouse('up', 'left', this.ptr.nx, this.ptr.ny); }
     }
 
     _finger(phase, id, x, y) {
@@ -162,21 +172,46 @@ class Overlay {
             return;
         }
         const p = toVideo(x, y, this.vw, this.vh);
-        this.lastPoint = p;
+        this.ptr = { nx: p.nx, ny: p.ny };
         this.h.touch(phase, id, p.nx, p.ny);
         if (phase === 'up' || phase === 'cancel') this.fingers.delete(id);
     }
 
     _ccu(c) {
         if (!this.knobOn || !this.shown) return;
-        if (this.knob === null) { this.knob = c.knob; return; }
-        const d = knobDelta(this.knob, c.knob);
-        this.knob = c.knob;
+        if (c.press === 15 && c.tilt === 15) return;          // no controller behind it
+        const L = this.ccuLast;
+        this.ccuLast = c;
+        if (!L) return;
+        const p = this.ptr;
+        const d = knobDelta(L.knob, c.knob);
         // a turn clockwise moves the content up, as a wheel turned towards you
-        if (d) this.h.scroll(this.lastPoint.nx, this.lastPoint.ny, -d);
+        if (d) this.h.scroll(p.nx, p.ny, -d);
+        // the press: a click where the pointer is; held, a long press (DeX's menu) or a drag with the touchpad
+        if (pressed(c.press) && !pressed(L.press)) { this.pressHeld = true; this.h.mouse('down', 'left', p.nx, p.ny); }
+        if (!pressed(c.press) && pressed(L.press) && this.pressHeld) { this.pressHeld = false; this.h.mouse('up', 'left', p.nx, p.ny); }
+        const key = TILT_KEY[c.tilt];
+        if (key && TILT_KEY[L.tilt] !== key) this.h.key(key);
+    }
+
+    /** The controller's touchpad (pad.js): move the pointer by screen px, click, scroll notches. */
+    padMove(dx, dy) {
+        if (!this.shown) return;
+        const f = fitted(this.vw, this.vh, PICTURE);
+        this.ptr = { nx: Math.max(0, Math.min(1, this.ptr.nx + dx / f.w)), ny: Math.max(0, Math.min(1, this.ptr.ny + dy / f.h)) };
+        // with the press held it drags, else DeX's pointer just moves
+        this.h.mouse(this.pressHeld ? 'move' : 'hover', 'left', this.ptr.nx, this.ptr.ny);
+    }
+    padClick(button) {
+        if (!this.shown) return;
+        this.h.mouse('down', button, this.ptr.nx, this.ptr.ny);
+        this.h.mouse('up', button, this.ptr.nx, this.ptr.ny);
+    }
+    padScroll(n) {
+        if (this.shown && n) this.h.scroll(this.ptr.nx, this.ptr.ny, n);
     }
 
     stop() { this._keep(false); this.r.close(); }
 }
 
-module.exports = { Overlay, displaySize, toVideo, fitted, frameOps, knobDelta, PICTURE, MENU, VIDEO_FILE };
+module.exports = { Overlay, displaySize, toVideo, fitted, frameOps, knobDelta, TILT_KEY, PICTURE, MENU, VIDEO_FILE };

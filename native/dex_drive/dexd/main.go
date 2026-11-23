@@ -13,6 +13,7 @@
 //
 //	app -> daemon: {"cmd":"start","w":1832,"h":720,"dpi":160,"fps":30,"bitrate":8000000,"tcp":"192.168.1.5:5555"}
 //	               {"cmd":"stop"} {"cmd":"touch","a":"down|move|up|cancel","id":0,"x":0.5,"y":0.5}
+//	               {"cmd":"mouse","a":"hover|down|move|up","b":"left|right","x":0.5,"y":0.5}
 //	               {"cmd":"scroll","x":0.5,"y":0.5,"dy":-1} {"cmd":"key","code":4} {"cmd":"text","text":"..."}
 //	               {"cmd":"phone-screen","on":false} {"cmd":"status"} {"cmd":"forget-key"}
 //	daemon -> app: {"ev":"status","state":"idle|searching|auth|connecting|streaming|error","msg":"...","device":"...",
@@ -35,7 +36,7 @@ import (
 )
 
 // Version is the tool's version (component.json).
-const Version = "0.1.1"
+const Version = "0.2.0"
 
 // Logger writes to a file (kept under 1 MB, one old copy) and to stderr (the journal).
 type Logger struct {

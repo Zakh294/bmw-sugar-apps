@@ -13,6 +13,7 @@ const mgu = require('./kit/mgu');
 const parkedWatch = require('./kit/parked');
 const { DexCtl } = require('./dexctl');
 const { Overlay } = require('./overlay');
+const { Pad, TouchMode, TOUCH_MODE } = require('./pad');
 const lang = require('./lang');
 const { statusText, startCmd, STREAM_KEYS } = require('./status');
 
@@ -34,6 +35,8 @@ mgu.run({
 
         const ov = new Overlay(log, {
             touch: (a, id, nx, ny) => ctl.send({ cmd: 'touch', a, id, x: nx, y: ny }),
+            mouse: (a, b, nx, ny) => ctl.send({ cmd: 'mouse', a, b, x: nx, y: ny }),
+            key: (code) => ctl.send({ cmd: 'key', code }),
             scroll: (nx, ny, dy) => ctl.send({ cmd: 'scroll', x: nx, y: ny, dy }),
             menu: () => { wantShow = false; refresh(); },
             closed: () => { wantShow = false; refresh(); },
@@ -56,6 +59,7 @@ mgu.run({
         settings.onChange((k) => {
             if (k === 'lang') { Object.keys(BUTTONS).forEach((b) => ui.text(b, tr(BUTTONS[b]))); lastText = null; }
             if (k === 'knob') ov.setKnob(settings.get('knob') !== false);
+            if (k === 'touchpad' && touchMode) touchMode.want(padOn());
             // DeX running or on its way: start it again with the new display
             if (STREAM_KEYS.indexOf(k) >= 0 && st.state !== 'idle' && st.state !== 'nosvc') ctl.send(startCmd(settings));
             refresh();
@@ -98,6 +102,24 @@ mgu.run({
         ctl.on('missing', () => { if (st.state !== 'nosvc') { st = { state: 'nosvc' }; refresh(); } });
         ctl.on('down', () => { st = { state: 'nosvc' }; refresh(); });
         ctl.on('up', () => ctl.send({ cmd: 'status' }));
+
+        /* ---------- the controller's touchpad: DeX's pointer, taps click, two fingers scroll (pad.js) ---------- */
+        const padOn = () => ov.shown && settings.get('touchpad') !== false;
+        const pad = new Pad({ move: (dx, dy) => ov.padMove(dx, dy), click: (b) => ov.padClick(b), scroll: (n) => ov.padScroll(n) });
+        const touchMode = ctx.signals && ctx.signals.proxy && ctx.signals.set ? new TouchMode(ctx.signals, log) : null;
+        if (ctx.signals && ctx.signals.watch) {
+            Promise.resolve(ctx.signals.watch('de.bmw.infotainment.ControllerElements', '1', {
+                ZBETouchFrontSide: (v) => {
+                    if (!padOn()) { pad.reset(); return; }
+                    if (v && v.statusSystemModeFrontSide !== TOUCH_MODE && touchMode) touchMode.lost();
+                    pad.feed(v, Date.now());
+                },
+            }, log)).catch((e) => log.warn('touchpad: ' + e));
+        }
+        if (touchMode) {
+            setInterval(() => touchMode.want(padOn()), 500);
+            if (ctx.app && ctx.app.on) ctx.app.on('shutdown', () => touchMode.want(false));
+        }
 
         ov.start();
         ctl.connect();
