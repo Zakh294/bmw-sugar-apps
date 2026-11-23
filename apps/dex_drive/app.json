@@ -1,13 +1,13 @@
 {
   "id": "dex_drive",
   "title": "DeX Drive",
-  "description": "Samsung DeX on the centre screen: the phone (One UI 8 / Android 16) by USB or Wi-Fi, its desktop on the car's touchscreen, decoded on the head unit's GPU. Parked only by default. Needs the \"DeX Drive service\" tool and mgu-render 0.6.11+.\n\nWhat's new in 0.1.0:\n• First test version: USB and Wi-Fi (ADB 5555), multi-touch, the iDrive knob scrolls, scale, 30/60 fps",
+  "description": "Samsung DeX on the centre screen: the phone (One UI 8 / Android 16) by USB or Wi-Fi, its desktop on the car's touchscreen, decoded on the head unit's GPU. Parked only by default. Needs the \"DeX Drive service\" tool and mgu-render 0.6.11+.\n\nWhat's new in 0.1.1:\n• With \"USB or Wi-Fi\", a phone plugged in by USB once gets ADB on port 5555 from the car: until it restarts, DeX works over Wi-Fi with no cable and no apps on the phone",
   "texts": {
     "uk": {
-      "description": "Samsung DeX на центральному екрані: телефон (One UI 8 / Android 16) по USB або Wi-Fi, його робочий стіл на сенсорному екрані авто, декодування на GPU головного блока. Типово лише на стоянці. Потрібні інструмент «DeX Drive service» і mgu-render 0.6.11+.\n\nНове у 0.1.0:\n• Перша тестова версія: USB і Wi-Fi (ADB 5555), мультитач, коліщатко iDrive прокручує, масштаб, 30/60 к/с"
+      "description": "Samsung DeX на центральному екрані: телефон (One UI 8 / Android 16) по USB або Wi-Fi, його робочий стіл на сенсорному екрані авто, декодування на GPU головного блока. Типово лише на стоянці. Потрібні інструмент «DeX Drive service» і mgu-render 0.6.11+.\n\nНове у 0.1.1:\n• З «USB або Wi-Fi» телефон, раз під'єднаний кабелем, отримує від авто ADB на порту 5555: до його перезавантаження DeX працює по Wi-Fi без кабелю й без застосунків на телефоні"
     }
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "vendor": "custom",
   "loggingId": "OADX",
   "iconGlyph": "DeX",
@@ -15,7 +15,7 @@
     "ID7"
   ],
   "requires": {
-    "dex-drive-d": "0.1.0",
+    "dex-drive-d": "0.1.1",
     "mgu-render": "0.6.11"
   },
   "signals": {

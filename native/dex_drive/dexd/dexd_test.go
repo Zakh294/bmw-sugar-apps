@@ -160,6 +160,8 @@ type fakePhone struct {
 	prompted bool
 	sdk      string
 	frames   int
+	tcpPort  string // service.adb.tcp.port
+	tcpips   int    // tcpip:5555 asked
 }
 
 func newFakePhone(t *testing.T) *fakePhone {
@@ -340,6 +342,24 @@ func (pc *phoneConn) open(host uint32, svc string) {
 					buf = buf[8+n:]
 				}
 			}
+		}()
+	case svc == "shell:getprop service.adb.tcp.port":
+		_, _, write, closeIt := pc.accept(host)
+		p.mu.Lock()
+		port := p.tcpPort
+		p.mu.Unlock()
+		go func() { write([]byte(port + "\n")); closeIt() }()
+	case svc == "tcpip:5555":
+		_, _, write, _ := pc.accept(host)
+		p.mu.Lock()
+		p.tcpips++
+		p.tcpPort = "5555"
+		p.mu.Unlock()
+		go func() {
+			write([]byte("restarting in TCP mode port: 5555\n"))
+			// adbd restarts: every connection ends
+			time.Sleep(50 * time.Millisecond)
+			pc.tr.Close()
 		}()
 	case strings.HasPrefix(svc, "shell:getprop"):
 		_, _, write, closeIt := pc.accept(host)
@@ -698,4 +718,45 @@ func TestPhoneCandidates(t *testing.T) {
 		t.Fatalf("dial: %v %s", c, addr)
 	}
 	c.Close()
+}
+
+func TestWifiPortOpenedOnce(t *testing.T) {
+	dec := buildFakeDecoder(t)
+	dir := t.TempDir()
+	jar := filepath.Join(dir, "scrcpy-server")
+	os.WriteFile(jar, []byte("jar"), 0o644)
+	phone := newFakePhone(t)
+	defer phone.l.Close()
+	state := filepath.Join(dir, "state")
+	os.MkdirAll(state, 0o700)
+	os.WriteFile(filepath.Join(state, "phone-ip"), []byte(phone.l.Addr().String()+"\n"), 0o644)
+	os.Setenv("DEXDEC_ANY_PATH", "1")
+	cfg := config{sock: filepath.Join(dir, "ctl.sock"), group: os.Getgid(), state: state, server: jar, decoder: dec,
+		video: filepath.Join(dir, "v"), sysUsb: filepath.Join(dir, "nosys"), keyName: "t", idleAfter: time.Minute,
+		arp: filepath.Join(dir, "noarp"), wifiOverTCP: true}
+	d := newDaemon(cfg, NewLogger(""))
+	if err := d.listen(); err != nil {
+		t.Fatal(err)
+	}
+	app := dialApp(t, cfg.sock)
+	app.send(map[string]interface{}{"cmd": "start", "tcp": "auto"})
+	app.waitState(t, "wifi-setup", 10*time.Second)
+	app.waitState(t, "streaming", 15*time.Second)
+	phone.mu.Lock()
+	n := phone.tcpips
+	phone.mu.Unlock()
+	if n != 1 {
+		t.Fatalf("tcpip:5555 asked %d times, want 1", n)
+	}
+	// again (port already open): no restart of the phone's adbd
+	app.send(map[string]interface{}{"cmd": "stop"})
+	app.waitState(t, "idle", 3*time.Second)
+	app.send(map[string]interface{}{"cmd": "start", "tcp": "auto", "dpi": 200})
+	app.waitState(t, "streaming", 10*time.Second)
+	phone.mu.Lock()
+	n = phone.tcpips
+	phone.mu.Unlock()
+	if n != 1 {
+		t.Fatalf("port 5555 opened again while open (%d)", n)
+	}
 }

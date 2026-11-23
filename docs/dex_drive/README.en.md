@@ -66,8 +66,11 @@ Next time: plug in → open DeX Drive → DeX is on the screen (at once if the s
 The service looks for the phone on port **5555** among the devices the unit sees (the phone on the car's hotspot
 `DIRECT-BMW`, or the unit on the phone's hotspot through mgu-uplink). Port 5555 is opened:
 
+- **by the car (simplest):** with "USB or Wi‑Fi", plug the phone in by USB once after it has started. The service
+  opens port 5555 on it (as `adb tcpip 5555`; USB reconnects for a few seconds, the page says "Turning on ADB over
+  Wi‑Fi…"). Until the phone restarts, no cable is needed;
 - from a PC: `adb tcpip 5555` (the phone on USB), or
-- on the phone itself, no PC: with apps such as LADB / Shizuku through "Wireless debugging".
+- on the phone itself: Termux (`pkg install android-tools`) or LADB through "Wireless debugging".
 
 After the phone restarts, port 5555 is closed again (Android does that). Android 11+ "Wireless debugging" (pairing
 code, TLS) is not supported yet. A phone with a fixed address can be written into

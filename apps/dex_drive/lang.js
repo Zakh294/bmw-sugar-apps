@@ -16,6 +16,8 @@ const T = {
     searching_wifi: ['Шукаю телефон на USB або по Wi‑Fi (ADB на порту 5555)…',
         'Looking for the phone on USB or over Wi‑Fi (ADB on port 5555)…'],
     connecting: ['Підключаюсь… {msg}', 'Connecting… {msg}'],
+    wifi_setup: ['Вмикаю на телефоні ADB по Wi‑Fi (порт 5555), щоб далі працювало без кабелю. USB на мить перепідключиться…',
+        'Turning on ADB over Wi‑Fi (port 5555) on the phone, so it works without the cable later. USB reconnects for a moment…'],
     auth: ['На телефоні натисни «Дозволити» налагодження (і «Завжди дозволяти з цього комп\'ютера»).',
         'On the phone, press "Allow" USB debugging (and "Always allow from this computer").'],
     streaming: ['DeX працює: {device} · {size} · {fps} · {via}', 'DeX is running: {device} · {size} · {fps} · {via}'],

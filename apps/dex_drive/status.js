@@ -25,6 +25,7 @@ function statusText(st, ctx) {
     case 'searching': s = tr(ctx.wifi ? 'searching_wifi' : 'searching_usb'); break;
     case 'connecting': s = tr('connecting', { msg: st.msg || '' }); break;
     case 'auth': s = tr('auth'); break;
+    case 'wifi-setup': s = tr('wifi_setup'); break;
     case 'streaming':
         s = st.w ? tr('streaming', {
             device: st.device || '?', size: st.w + '×' + st.h, fps: ctx.fps ? tr('fps', { n: Math.round(ctx.fps) }) : '…',

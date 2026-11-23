@@ -21,6 +21,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"os"
@@ -34,7 +35,7 @@ import (
 )
 
 // Version is the tool's version (component.json).
-const Version = "0.1.0"
+const Version = "0.1.1"
 
 // Logger writes to a file (kept under 1 MB, one old copy) and to stderr (the journal).
 type Logger struct {
@@ -86,16 +87,17 @@ func (l *Logger) Printf(format string, a ...interface{}) {
 }
 
 type config struct {
-	sock      string
-	group     int
-	state     string
-	server    string
-	decoder   string
-	video     string
-	sysUsb    string
-	keyName   string
-	idleAfter time.Duration
-	arp       string
+	sock        string
+	group       int
+	state       string
+	server      string
+	decoder     string
+	video       string
+	sysUsb      string
+	keyName     string
+	idleAfter   time.Duration
+	arp         string
+	wifiOverTCP bool // tests: open port 5555 on a phone met over TCP too (in the car only over USB)
 }
 
 func main() {
@@ -154,10 +156,11 @@ type daemon struct {
 	wake    chan struct{}
 	devName string // the phone, for the status
 	via     string
+	tcpipAt map[string]time.Time // phone -> when we last opened its port 5555 (no loop if it does not stick)
 }
 
 func newDaemon(cfg config, log *Logger) *daemon {
-	d := &daemon{cfg: cfg, log: log, clients: map[*client]bool{}, wake: make(chan struct{}, 1),
+	d := &daemon{cfg: cfg, log: log, clients: map[*client]bool{}, wake: make(chan struct{}, 1), tcpipAt: map[string]time.Time{},
 		status: map[string]interface{}{"ev": "status", "state": "idle", "version": Version, "video": cfg.video}}
 	go d.run()
 	go d.idleWatch()
@@ -262,6 +265,11 @@ func (d *daemon) run() {
 		if !still {
 			continue
 		}
+		if err == errReconnect {
+			// the phone's adbd restarts to listen on port 5555 too: its USB comes back in a moment
+			time.Sleep(1500 * time.Millisecond)
+			continue
+		}
 		if err != nil {
 			d.setStatus("error", err.Error(), nil)
 		}
@@ -349,6 +357,11 @@ func (d *daemon) once(want startReq, gen int) error {
 			return fmt.Errorf("%s runs Android API %d: DeX on a virtual display needs One UI 8 (Android 16)", model, n)
 		}
 	}
+	if want.TCP == "auto" && (via == "usb" || d.cfg.wifiOverTCP) {
+		if d.openWifiPort(conn, model) {
+			return errReconnect
+		}
+	}
 	d.setStatus("connecting", "Starting DeX on "+model, nil)
 	o := SessionOpts{W: want.W &^ 7, H: want.H &^ 7, DPI: want.DPI, FPS: want.FPS, Bitrate: want.Bitrate}
 	sess, err := StartSession(conn, jar, o, d.cfg.decoder, d.cfg.video, filepath.Join(d.cfg.state, "dexdec.log"), d.log,
@@ -389,4 +402,43 @@ func (d *daemon) session() *Session {
 	d.mu.Lock()
 	defer d.mu.Unlock()
 	return d.sess
+}
+
+// errReconnect: the connection ends on purpose (the phone's adbd restarts); connect again at once.
+var errReconnect = errors.New("reconnect")
+
+// openWifiPort: with "USB or Wi-Fi" chosen, a phone met on USB gets ADB on port 5555 too (as `adb tcpip 5555`), so
+// that until it restarts it is found over Wi-Fi with no cable. Its adbd restarts for that, which ends this
+// connection: true means so (connect again). Once per phone per 10 minutes, and not when the port is open already.
+func (d *daemon) openWifiPort(conn *Conn, model string) bool {
+	port, err := conn.Shell("getprop service.adb.tcp.port", 5*time.Second)
+	if err != nil {
+		d.log.Printf("wifi adb: getprop: %v", err)
+		return false
+	}
+	if strings.TrimSpace(port) == "5555" {
+		return false
+	}
+	key := model + "|" + conn.Banner
+	d.mu.Lock()
+	last, tried := d.tcpipAt[key]
+	if tried && time.Since(last) < 10*time.Minute {
+		d.mu.Unlock()
+		d.log.Printf("wifi adb: port 5555 did not stay open on %s; not trying again for now", model)
+		return false
+	}
+	d.tcpipAt[key] = time.Now()
+	d.mu.Unlock()
+	d.setStatus("wifi-setup", "Opening ADB on port 5555 on "+model+" (it reconnects)", nil)
+	s, err := conn.Open("tcpip:5555", 5*time.Second)
+	if err != nil {
+		d.log.Printf("wifi adb: tcpip:5555: %v", err)
+		return false
+	}
+	answer := make([]byte, 128)
+	n, _ := s.Read(answer)
+	s.Close()
+	d.log.Printf("wifi adb: %s: %q", model, strings.TrimSpace(string(answer[:n])))
+	conn.Close()
+	return true
 }
