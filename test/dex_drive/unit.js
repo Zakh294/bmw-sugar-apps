@@ -161,6 +161,10 @@ test('the page says what goes on', () => {
     const s = statusText({ state: 'streaming', device: 'SM-S938B', w: 1832, h: 720, via: 'usb' }, { tr, fps: 29.6, moving: true });
     assert.ok(s.indexOf('SM-S938B') >= 0 && s.indexOf('1832×720') >= 0 && s.indexOf('30 к/с') >= 0 && s.indexOf('стоянці') >= 0, s);
     assert.ok(/Помилка: boom/.test(statusText({ state: 'error', msg: 'boom' }, { tr })));
+    assert.ok(/Остання помилка 17:40:01 decoder: no GPU/.test(statusText({ state: 'searching', last: '17:40:01 decoder: no GPU' }, { tr })));
+    assert.ok(!/Остання/.test(statusText({ state: 'streaming', w: 1, h: 1, last: 'x' }, { tr })));
+    assert.ok(/дотиком до меню/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, hidden: 'hmi' })));
+    assert.ok(/mgu-render: video 1: cannot open/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, renderError: 'video 1: cannot open x' })));
     assert.ok(/no video|не показує/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, problem: 'no_video' })));
 });
 

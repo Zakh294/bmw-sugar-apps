@@ -37,6 +37,8 @@ const ctlSrv = net.createServer((c) => {
             if (m.cmd === 'start') {
                 setTimeout(() => c.write(JSON.stringify({ ev: 'status', state: 'connecting', msg: 'x' }) + '\n'), 50);
                 setTimeout(() => c.write(JSON.stringify({ ev: 'status', state: 'streaming', device: 'SM-FAKE', via: 'usb', w: 1832, h: 720 }) + '\n'), 150);
+                // the decoder makes the video file once its first frame is out: after the status says streaming
+                setTimeout(() => c.write(JSON.stringify({ ev: 'frames', w: 1832, h: 720 }) + '\n'), 600);
             }
         }
     });
@@ -106,6 +108,8 @@ async function until(what, fn, ms) {
         assert.deepStrictEqual([place.readInt32LE(0), place.readInt32LE(4), place.readInt32LE(8), place.readInt32LE(12)], [0, 0, 1920, 720]);
         const video = got.render.find((r) => r.type === 13).p;
         assert.strictEqual(video.slice(4).toString().replace(/\0+$/, ''), '/dev/shm/mgu-video-dexdrive');
+        // the renderer opens the file when it is named: named again once the decoder has made it
+        await until('video named again after the file is made', () => got.render.filter((r) => r.type === 13).length >= 3);
         const frame = got.render.filter((r) => r.type === 7).pop().p;
         let hasVideoOp = false;
         for (let i = 0; i + 4 <= frame.length; i += 4) if (frame.readUInt32LE(i) === 19 && frame.readUInt32LE(i + 24) === 1) hasVideoOp = true;

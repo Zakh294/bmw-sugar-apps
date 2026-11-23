@@ -35,7 +35,11 @@ function statusText(st, ctx) {
     case 'error': s = tr('error', { msg: st.msg || '?' }); break;
     default: s = st.state || '…';
     }
+    // why it stopped last time, kept while it tries again (the error itself shows only a few seconds)
+    if (st.last && st.state !== 'streaming' && st.state !== 'error' && st.state !== 'nosvc') s += tr('last_error', { msg: st.last });
     if (ctx.moving) s += tr('moving');
+    if (ctx.hidden) s += tr('hidden_' + ctx.hidden);
+    if (ctx.renderError) s += tr('render_error', { msg: ctx.renderError });
     if (ctx.problem) s += tr(ctx.problem);
     return s;
 }

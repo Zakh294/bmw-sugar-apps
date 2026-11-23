@@ -86,6 +86,7 @@ type Session struct {
 	dec     *exec.Cmd
 	decIn   io.WriteCloser
 	decGone chan struct{} // closed once the decoder has exited (decoderEvents waits for it)
+	notes   []string      // the phone's last lines and the decoder's last error: why it ended, for the page
 	cmu     sync.Mutex
 	smu     sync.Mutex
 	vw, vh  int
@@ -123,6 +124,7 @@ func StartSession(conn *Conn, jar []byte, o SessionOpts, decoder, videoFile, dec
 				continue
 			}
 			log.Printf("phone: %s", line)
+			s.note("phone: " + line)
 			select {
 			case serverOut <- line:
 			default:
@@ -200,7 +202,7 @@ func StartSession(conn *Conn, jar []byte, o SessionOpts, decoder, videoFile, dec
 	go s.controlLoop()
 	go func() {
 		<-server.Done()
-		s.stop(errors.New("the server on the phone stopped"))
+		s.stop(fmt.Errorf("the server on the phone stopped%s", s.why()))
 	}()
 	go func() {
 		<-conn.Done()
@@ -254,6 +256,33 @@ func (s *Session) stop(err error) {
 	})
 }
 
+// note keeps a line that may say why the session ends (the last 4).
+func (s *Session) note(line string) {
+	s.smu.Lock()
+	defer s.smu.Unlock()
+	if len(line) > 200 {
+		line = line[:200]
+	}
+	s.notes = append(s.notes, line)
+	if len(s.notes) > 4 {
+		s.notes = s.notes[len(s.notes)-4:]
+	}
+}
+
+// why: ": <the last notes>" or "".
+func (s *Session) why() string {
+	s.smu.Lock()
+	defer s.smu.Unlock()
+	if len(s.notes) == 0 {
+		return ""
+	}
+	n := s.notes
+	if len(n) > 2 {
+		n = n[len(n)-2:]
+	}
+	return ": " + strings.Join(n, " | ")
+}
+
 // Size is the virtual display's size as the encoder streams it (0, 0 before the first frame).
 func (s *Session) Size() (int, int) {
 	s.smu.Lock()
@@ -266,7 +295,7 @@ func (s *Session) videoLoop() {
 	head := make([]byte, 5)
 	for {
 		if _, err := io.ReadFull(s.video, h); err != nil {
-			s.stop(fmt.Errorf("video: %v", err))
+			s.stop(fmt.Errorf("video: %v%s", err, s.why()))
 			return
 		}
 		first := binary.BigEndian.Uint64(h[0:8])
@@ -287,7 +316,7 @@ func (s *Session) videoLoop() {
 		}
 		data := make([]byte, n)
 		if _, err := io.ReadFull(s.video, data); err != nil {
-			s.stop(fmt.Errorf("video: %v", err))
+			s.stop(fmt.Errorf("video: %v%s", err, s.why()))
 			return
 		}
 		var flags byte
@@ -321,6 +350,7 @@ func (s *Session) decoderEvents(r io.Reader) {
 		switch ev["ev"] {
 		case "error":
 			s.log.Printf("decoder: %v", ev["msg"])
+			s.note(fmt.Sprintf("decoder: %v", ev["msg"]))
 			s.events(map[string]interface{}{"ev": "decoder-error", "msg": ev["msg"]})
 		case "size":
 			s.log.Printf("decoder: frames %vx%v", ev["w"], ev["h"])
@@ -347,9 +377,9 @@ func (s *Session) decoderEvents(r io.Reader) {
 	select {
 	case <-s.done:
 	default:
-		why := fmt.Sprintf("the decoder stopped (exit %d)", code)
+		why := fmt.Sprintf("the decoder stopped (exit %d)%s", code, s.why())
 		if code == 1 {
-			why = "the hardware decoder did not start (exit 1): see dexdec.log"
+			why = "the hardware decoder did not start (exit 1)" + s.why()
 		}
 		s.stop(errors.New(why))
 	}

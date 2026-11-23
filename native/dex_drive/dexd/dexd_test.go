@@ -176,6 +176,7 @@ type fakePhone struct {
 	sdk      string
 	frames   int
 	tcpPort  string // service.adb.tcp.port
+	failMsg  string // the server prints this and exits (DeX could not start)
 	tcpips   int    // tcpip:5555 asked
 }
 
@@ -387,9 +388,17 @@ func (pc *phoneConn) open(host uint32, svc string) {
 		pc.mu.Lock()
 		pc.scid = svc[i+5 : i+13]
 		pc.mu.Unlock()
-		_, ch, write, _ := pc.accept(host)
+		_, ch, write, closeIt := pc.accept(host)
+		p.mu.Lock()
+		fail := p.failMsg
+		p.mu.Unlock()
 		go func() {
 			write([]byte("[server] INFO: Device: [samsung] SM-FAKE (Android 16)\n"))
+			if fail != "" {
+				write([]byte(fail + "\n"))
+				closeIt()
+				return
+			}
 			for range ch {
 			}
 		}()
@@ -774,5 +783,36 @@ func TestWifiPortOpenedOnce(t *testing.T) {
 	phone.mu.Unlock()
 	if n != 1 {
 		t.Fatalf("port 5555 opened again while open (%d)", n)
+	}
+}
+
+func TestLastErrorKeptWhileRetrying(t *testing.T) {
+	dec := buildFakeDecoder(t)
+	dir := t.TempDir()
+	jar := filepath.Join(dir, "scrcpy-server")
+	os.WriteFile(jar, []byte("jar"), 0o644)
+	phone := newFakePhone(t)
+	phone.failMsg = "[server] ERROR: Could not create display"
+	defer phone.l.Close()
+	cfg := config{sock: filepath.Join(dir, "ctl.sock"), group: os.Getgid(), state: filepath.Join(dir, "state"), server: jar,
+		decoder: dec, video: filepath.Join(dir, "v"), sysUsb: filepath.Join(dir, "nosys"), keyName: "t", idleAfter: time.Minute}
+	d := newDaemon(cfg, NewLogger(""))
+	if err := d.listen(); err != nil {
+		t.Fatal(err)
+	}
+	app := dialApp(t, cfg.sock)
+	app.send(map[string]interface{}{"cmd": "start", "tcp": phone.l.Addr().String()})
+	st := app.waitState(t, "error", 15*time.Second)
+	if !strings.Contains(fmt.Sprint(st["msg"]), "Could not create display") {
+		t.Fatalf("error without the phone's words: %v", st["msg"])
+	}
+	st = app.waitState(t, "connecting", 10*time.Second)
+	if !strings.Contains(fmt.Sprint(st["last"]), "Could not create display") {
+		t.Fatalf("the last error is not kept: %v", st)
+	}
+	app.send(map[string]interface{}{"cmd": "stop"})
+	st = app.waitState(t, "idle", 3*time.Second)
+	if st["last"] != nil {
+		t.Fatalf("stop keeps an old error: %v", st)
 	}
 }

@@ -36,7 +36,7 @@ import (
 )
 
 // Version is the tool's version (component.json).
-const Version = "0.2.0"
+const Version = "0.2.1"
 
 // Logger writes to a file (kept under 1 MB, one old copy) and to stderr (the journal).
 type Logger struct {
@@ -158,6 +158,7 @@ type daemon struct {
 	devName string // the phone, for the status
 	via     string
 	tcpipAt map[string]time.Time // phone -> when we last opened its port 5555 (no loop if it does not stick)
+	lastErr string               // the last error, kept on the page while it tries again ("HH:MM:SS msg")
 }
 
 func newDaemon(cfg config, log *Logger) *daemon {
@@ -194,6 +195,9 @@ func (d *daemon) setStatus(state, msg string, extra map[string]interface{}) {
 	for k, v := range extra {
 		st[k] = v
 	}
+	if d.lastErr != "" && state != "streaming" && state != "error" {
+		st["last"] = d.lastErr
+	}
 	same := d.status["state"] == st["state"] && d.status["msg"] == st["msg"] && len(extra) == 0
 	d.status = st
 	d.mu.Unlock()
@@ -218,6 +222,7 @@ func (d *daemon) broadcast(ev map[string]interface{}) {
 func (d *daemon) stopSession() {
 	d.mu.Lock()
 	d.want = nil
+	d.lastErr = ""
 	d.gen++
 	s := d.sess
 	d.mu.Unlock()
@@ -272,6 +277,9 @@ func (d *daemon) run() {
 			continue
 		}
 		if err != nil {
+			d.mu.Lock()
+			d.lastErr = time.Now().Format("15:04:05") + " " + err.Error()
+			d.mu.Unlock()
 			d.setStatus("error", err.Error(), nil)
 		}
 		select {

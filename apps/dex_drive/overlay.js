@@ -84,6 +84,8 @@ class Overlay {
         this.pressHeld = false;
         this.keep = null;
         this.shown = false;
+        this.why = null;                 // why the picture went away last (for the page): 'hmi', 'yield', 'renderer'
+        this.lastError = null;           // the renderer's last error (e.g. the video file)
     }
 
     start() {
@@ -98,13 +100,19 @@ class Overlay {
             if (info && info.fingers) r.fingers(true);
             this.update();
         });
-        r.on('gone', () => { this.connected = false; this.shown = false; this.fingers.clear(); this._keep(false); });
+        r.on('gone', () => { this.connected = false; this.shown = false; this.why = 'renderer'; this.fingers.clear(); this._keep(false); });
+        r.on('error-text', (t) => { this.lastError = t; });
+        r.on('state', (st) => {
+            // on screen as we asked, or hidden by the renderer (a camera or video surface it yields to, or a hung check)
+            if (this.shown && st && !st.onScreen) { this.why = 'yield'; this.log.info('overlay: shown but not on screen ' + JSON.stringify(st)); }
+        });
         r.on('finger', (phase, id, x, y) => this._finger(phase, id, x, y));
         // a renderer without X_FINGERS: the first finger only
         r.on('touch', (phase, x, y) => this._finger(phase, 0, x, y));
         r.on('closed', () => {
             // the HMI was touched outside our claims (its back arrow): it takes the screen back
             this.log.info('overlay: closed by a touch on the HMI');
+            this.why = 'hmi';
             this.shown = false;
             this._release();
             if (this.h.closed) this.h.closed();
@@ -121,6 +129,13 @@ class Overlay {
     }
 
     setVideo(w, h) { this.vw = w | 0; this.vh = h | 0; }
+
+    /** The player has (re)made the video file: name it again, the renderer opens it when named. */
+    videoReady() {
+        this.lastError = null;
+        this.r.video(VIDEO_ID, VIDEO_FILE, true);
+        if (this.shown) this.r.frame(frameOps());
+    }
     setKnob(on) { this.knobOn = !!on; this.update(); }
 
     /** Show the layer (when it can be shown) or hide it. */
@@ -139,6 +154,7 @@ class Overlay {
             this._release();
         }
         if (show !== this.shown) this.log.info('overlay ' + (show ? 'shown' : 'hidden'));
+        if (show) this.why = null;
         this.shown = show;
         this._keep(show);
     }

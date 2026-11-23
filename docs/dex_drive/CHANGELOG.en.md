@@ -3,6 +3,16 @@
 A short note on each version. The app's page in the MGU Store shows the same for the current version.
 [Українська](CHANGELOG.md)
 
+## 0.2.1 (2026-11-23)
+- Fixed: black instead of DeX (first car test: S26 Ultra, One UI 9, USB, 20 fps). The renderer opens the video file
+  when it is named, and the app named it before the decoder had made it. Now named again once the decoder makes it or
+  changes its size.
+- The page says why the picture went away (a touch on the iDrive menu, an iDrive camera or video, mgu-render
+  restarting) and shows the renderer's error, if any.
+- The page keeps the last error ("Last error 17:40:01 …") while the service tries again: what the phone or the
+  decoder said when DeX stopped. It used to show for a few seconds only.
+- The dex-drive-d 0.2.1 service.
+
 ## 0.2.0 (2026-11-23)
 - The iDrive controller works DeX like a laptop: the touchpad moves DeX's pointer, a tap clicks, a two-finger tap
   right-clicks, two fingers scroll; pressing the knob clicks where the pointer is (held: a long press, with the

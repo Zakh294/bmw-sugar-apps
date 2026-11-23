@@ -173,7 +173,7 @@ class Render extends EventEmitter {
             this.visible = false;
             this.emit('closed');
         } else if (type === X.STATE && p.length >= 12) {
-            this.emit('state', { onScreen: !!p.readUInt32LE(4), front: !!p.readUInt32LE(8) });
+            this.emit('state', { shown: !!p.readUInt32LE(0), onScreen: !!p.readUInt32LE(4), front: !!p.readUInt32LE(8) });
         } else if (type === X.CCU && p.length >= 5) {
             this.emit('ccu', { seq: p[0], knob: p.readUInt16BE(1), press: p[3], tilt: p[4] });
         } else if (type === E.TICK) {
@@ -239,13 +239,14 @@ class Render extends EventEmitter {
     }
     _grabMsg(on) { return u32(X.GRAB, on && this.holdMask ? [1, this.holdMask] : [on]); }
 
-    /** Video `id` is the frame file `file` (/dev/shm/mgu-video-<name>); null forgets it. */
-    video(id, file) {
+    /** Video `id` is the frame file `file` (/dev/shm/mgu-video-<name>); null forgets it. The renderer opens the file
+     *  when it is named: a file made later (the player starts after) is named again with again = true. */
+    video(id, file, again) {
         if (!file) {
             if (this.videos.delete(id) && this.ready && this.native) this._write(u32(T.DROP_VIDEO, [id]));
             return;
         }
-        if (this.videos.get(id) === file) return;
+        if (this.videos.get(id) === file && !again) return;
         this.videos.set(id, file);
         if (this.ready && this.native) this._sendVideo(id, file);
     }

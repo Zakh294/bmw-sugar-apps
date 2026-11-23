@@ -48,7 +48,8 @@ mgu.run({
             const show = wantShow && mainVisible && mainFocus && st.state === 'streaming' && st.w > 0 && !moving();
             ov.want(show);
             const text = statusText(st, { tr, wifi: settings.get('conn') === 'usbwifi', fps, moving: moving() && st.state === 'streaming',
-                problem: st.state === 'streaming' ? ov.problem() : null });
+                problem: st.state === 'streaming' ? ov.problem() : null, hidden: st.state === 'streaming' && !ov.shown ? ov.why : null,
+                renderError: st.state === 'streaming' ? ov.lastError : null });
             if (text !== lastText) {
                 lastText = text;
                 ui.text('STATUS', text);
@@ -90,6 +91,7 @@ mgu.run({
             const was = st.state;
             st = s;
             if (s.w && s.h) ov.setVideo(s.w, s.h);
+            if (s.state === 'streaming' && was !== 'streaming') ov.videoReady();
             if (s.state === 'streaming' && was !== 'streaming') {
                 log.info('DeX on ' + (s.device || '?') + ' over ' + (s.via || '?'));
                 if (settings.get('phoneOff') && !phoneOffSent) { phoneOffSent = true; setTimeout(() => ctl.send({ cmd: 'phone-screen', on: false }), 1500); }
@@ -99,6 +101,8 @@ mgu.run({
         });
         ctl.on('stats', (s) => { if (typeof s.fps === 'number') fps = s.fps; refresh(); });
         ctl.on('decoder-error', (s) => log.warn('decoder: ' + s.msg));
+        // the decoder made (or remade, at a new size) the video file: the renderer must open it again
+        ctl.on('frames', (s) => { log.info('video file ' + s.w + 'x' + s.h); ov.videoReady(); refresh(); });
         ctl.on('missing', () => { if (st.state !== 'nosvc') { st = { state: 'nosvc' }; refresh(); } });
         ctl.on('down', () => { st = { state: 'nosvc' }; refresh(); });
         ctl.on('up', () => ctl.send({ cmd: 'status' }));
