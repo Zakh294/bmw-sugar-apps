@@ -88,6 +88,7 @@ An iDrive list screen ("Camera databases" button):
 | Sound | ding | ding, gong, three beeps, soft, radar |
 | Alarm when over the limit | on | four quick beeps when your speed goes above the limit |
 | Chime volume | 70 % | 30–100 % |
+| Warning style | classic | **Classic**: as before; **BMW: countdown ring**: a thin BMW-like sign, white type, a ring round the sign that closes towards the camera, red that breathes over the limit; **Minimal**: only the sign and the distance, the camera and the speed only over the limit. BMW and Minimal are smaller and dimmer while the camera is more than 6 s away. The Test button, parked, shows every step. Side by side: [styles.png](img/styles.png) |
 | Show on the HUD / on the cluster | on / on | which screens |
 | Inside the Waze / Google map | on | a banner in the phone map when it is on the cluster |
 | Place in the map / on the cluster (no map) | centre | left, centre, right |

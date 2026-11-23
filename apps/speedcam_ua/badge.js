@@ -2,7 +2,8 @@
 /**
  * badge.js - the picture of a camera warning, as straight RGBA for a cluster-render image layer.
  *
- *   draw(alert, kind, { warnDist, blink, tr, units, noSpeed, noLimit }) -> kit Canvas (cv.w x cv.h, cv.d = RGBA bytes)
+ *   draw(alert, kind, { warnDist, blink, tr, units, noSpeed, noLimit, style, phase }) -> kit Canvas (cv.w x cv.h, cv.d = RGBA)
+ *   style: 'classic' (here), 'bmw' or 'minimal' (styles.js)
  *   tr: the language (lang.make), units: 'kmh' | 'mph' | 'auto' (as the camera's country: alert.units)
  *   kind: 'hud'     the windshield HUD: no background (black is see-through on a projection); noSpeed / noLimit leave
  *                   out the car's speed / the limit sign there, which BMW's own HUD panel already shows
@@ -21,6 +22,7 @@
 let Canvas;
 try { Canvas = require('./kit/canvas').Canvas; } catch (e) { Canvas = require('../../kit/runtime/canvas').Canvas; }
 const lang = require('./lang');
+const styles = require('./styles');
 
 const MPH = 1.609344;
 
@@ -178,11 +180,17 @@ function drawCard(cv, alert, opts) {
     return cv;
 }
 
-/** opts: { warnDist, blink, tr, units, noSpeed, noLimit } (the last two: the HUD only). */
+/**
+ * opts: { warnDist, blink, tr, units, noSpeed, noLimit (the last two: the HUD only), style ('classic' | 'bmw' |
+ * 'minimal', styles.js), phase (0..1, the bmw style's breathing) }.
+ */
 function draw(alert, kind, opts) {
     opts = opts || {};
     const sz = SIZE[kind] || SIZE.hud;
     const cv = new Canvas(sz[0], sz[1]).clear([0, 0, 0, 0]);
+    if (opts.style && styles.has(opts.style)) {
+        return styles.draw(cv, alert, kind === 'map' || kind === 'cluster' ? kind : 'hud', Object.assign({}, opts, { tr: opts.tr || lang.make('uk') }), HELP);
+    }
     if (kind === 'map') drawMap(cv, alert, opts);
     else if (kind === 'cluster') drawCard(cv, alert, opts);
     else drawHud(cv, alert, opts);
@@ -197,5 +205,7 @@ function dim(cv, k) {
     }
     return cv;
 }
+
+const HELP = { camera, fmtDist, inUnits, unitsOf, fit };
 
 module.exports = { draw, dim, SIZE, fmtDist, inUnits };

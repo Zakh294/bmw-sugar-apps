@@ -145,6 +145,26 @@ ok(lit(hFull, 198, 88, 296, 116) > 50 && lit(hNoSpeed, 198, 112, 296, 116) === 0
 ok(lit(hNoSpeed, 194, 92, 296, 104) > 200 && lit(hNoSpeed, 146, 126, 296, 150) === 0, 'HUD without the speed: the bar beside the camera, nothing below');
 ok(lit(hFull, 60, 4, 76, 12) > 0 && lit(hNoSign, 60, 4, 76, 12) === 0, 'HUD: no sign with noLimit');
 
+// the styles (styles.js): every kind and case draws, in each language; the classic one is the default
+const stCases = [hudA, Object.assign({}, hudA, { over: 0, speed: 40 }), Object.assign({}, hudA, { zone: true, over: 1 }),
+    Object.assign({}, hudA, { limit: null }), Object.assign({}, hudA, { units: 'mph', limit: 40.2 })];
+let stOk = true;
+['bmw', 'minimal'].forEach((style) => ['hud', 'cluster', 'map'].forEach((k) => stCases.forEach((c) => lang.LANGS.forEach((l) => {
+    [{}, { noSpeed: true }, { noLimit: true }].forEach((o) => {
+        try { const cv = badge.draw(c, k, Object.assign({ style, tr: lang.make(l), phase: 0.3 }, o)); if (!lit(cv, 0, 0, cv.w, cv.h)) stOk = false; } catch (e) { stOk = false; console.log(style, k, l, e.message); }
+    });
+}))));
+ok(stOk, 'styles: bmw and minimal draw every kind, case and language');
+ok(Buffer.compare(Buffer.from(badge.draw(hudA, 'hud', { style: 'classic' }).d), Buffer.from(hFull.d)) === 0, 'style classic = the picture as before');
+const near0 = Object.assign({}, hudA, { over: 0, speed: 40, dist: 400 });
+const ringPx = (cv) => lit(cv, 102, 30, 108, 36);
+ok(ringPx(badge.draw(near0, 'hud', { style: 'bmw' })) > 0 && ringPx(badge.draw(near0, 'hud', { style: 'minimal' })) === 0, 'bmw: the ring round the sign');
+const b0 = badge.draw(hudA, 'hud', { style: 'bmw', phase: 0 }), b5 = badge.draw(hudA, 'hud', { style: 'bmw', phase: 0.5 });
+ok(Buffer.compare(Buffer.from(b0.d), Buffer.from(b5.d)) !== 0, 'bmw: over the limit it breathes (the phase changes the picture)');
+ok(lit(badge.draw(near0, 'hud', { style: 'minimal' }), 120, 100, 296, 120) === 0 && lit(badge.draw(hudA, 'hud', { style: 'minimal' }), 120, 100, 296, 120) > 50,
+    'minimal: the camera and the speed only over the limit');
+ok(require(path.join(A, 'styles')).animated('bmw', hudA) && !require(path.join(A, 'styles')).animated('minimal', hudA), 'only bmw over the limit animates');
+
 // the car's own limit (car_limit.js)
 const { CarLimit, findLimit } = require(path.join(A, 'car_limit'));
 ok(findLimit(50).v === 50 && findLimit(0) === null && findLimit(255) === null && findLimit(53) === null, 'car limit: a plain number');

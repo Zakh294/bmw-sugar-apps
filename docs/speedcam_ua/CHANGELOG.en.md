@@ -3,6 +3,13 @@
 A short note on every version. The app's page in the MGU Store shows the same for the current version.
 [Українська](CHANGELOG.md)
 
+## 0.6.0 (2026-11-23)
+- "Warning style" setting: Classic (as before, the default), BMW (a countdown ring round the sign, thin white type,
+  red that breathes over the limit), Minimal (the sign and the distance).
+- BMW and Minimal: smaller and dimmer while the camera is more than 6 s away; full size nearer or over the limit.
+- "Test", parked, goes through every step: quiet, near, over, well over.
+- The camera databases screen no longer vanishes behind the main page after a second.
+
 ## 0.5.2 (2026-11-22)
 - HUD: "Car speed on the HUD" can be switched off (BMW's panel shows it already); the warning then is compact: the
   sign, the camera, the distance and the bar.

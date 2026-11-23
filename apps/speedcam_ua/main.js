@@ -41,8 +41,11 @@ const GROUPS = ['ua', 'eu', 'us'];
 function testAlert(test, speed, tr) {
     const t = (Date.now() - test.t0) / 1000;
     const dist = Math.max(0, 800 - t * 800 / 12);
-    const sp = speed > 5 ? Math.round(speed) : 72;
-    return { id: -1, dist: Math.round(dist / 10) * 10, limit: 50, speed: sp, over: sp > 70 ? 2 : sp > 50 ? 1 : 0, label: tr('test_label'), units: 'kmh', zone: false };
+    // parked: every step of a warning in turn (quiet, near, over, far over), for the styles that have them
+    const sp = speed > 5 ? Math.round(speed) : t < 7 ? 45 : t < 10 ? 56 : 72;
+    const a = { id: -1, dist: Math.round(dist / 10) * 10, limit: 50, speed: sp, over: sp > 70 ? 2 : sp > 50 ? 1 : 0, label: tr('test_label'), units: 'kmh', zone: false };
+    if (!(speed > 5)) a.stage = t < 4 ? 'far' : 'near';
+    return a;
 }
 
 /** Everything that runs with or without the page. */
@@ -116,7 +119,7 @@ function background(bg) {
         hud: settings.get('showHud'), cluster: settings.get('showCluster'), clusterPlace: settings.get('clusterPlace'),
         inMap: settings.get('inMap'), mapPlace: settings.get('mapPlace'),
         size: settings.get('size'), hudBright: settings.get('hudBright'), night: !!settings.get('nightDim') && st.night,
-        hudY: settings.get('hudY') || 0, hudSpeed: settings.get('hudSpeed') !== false,
+        hudY: settings.get('hudY') || 0, hudSpeed: settings.get('hudSpeed') !== false, style: settings.get('style') || 'classic',
         socketPath: bg.spec.config && bg.spec.config.socketPath, tr: tr(), units: settings.get('units') || 'auto',
     })).start();
 
@@ -182,7 +185,8 @@ function background(bg) {
             const hl = settings.get('hudLimit') || 'auto';
             st.carSame = !!alert && alert.limit > 0 && carLimit.shows(alert.limit);
             if (alert && (hl === 'hide' || (hl === 'auto' && st.carSame))) alert = Object.assign({}, alert, { noHudLimit: true });
-            const warn = alert && alert.cam ? eng.warnFor(alert.cam, speed) : eng.warnDistance(speed);
+            // the test runs 800 m in 12 s: its bar / ring over those 800 m
+            const warn = alert && alert.id === -1 ? 800 : alert && alert.cam ? eng.warnFor(alert.cam, speed) : eng.warnDistance(speed);
             ov.show(alert, warn);
             st.shown = alert;
             // the chime: when a warning appears, and again when the speed goes over its limit
@@ -314,6 +318,19 @@ mgu.run({
         ui.onClick('BTN_SOUND', () => { st.page = 'audio'; st.ding('button'); });
         ui.onClick('BTN_AUDIO', () => { st.page = st.page === 'audio' ? null : 'audio'; });
         ui.onClick('BTN_DB', () => { renderDb(); return ui.open('DB'); });
+        // the databases list opens over the drawn main page; the kit's renderer gives way only to its own settings and to
+        // HMI popups, so it drew the main page back over the list a moment later. The list takes the page's focus while
+        // it is open (and keeps it: the HMI may hand the page its focus back with the list still on top).
+        if (ui._setFocus && ui.onVisible) {
+            ui.onVisible((name, v) => {
+                if (name !== 'DB') return;
+                ui._setFocus('MAIN', !v);
+                if (v) renderDb();
+            });
+            if (ui.onFocus) ui.onFocus((name, on) => {
+                if (name === 'MAIN' && on && ui.isVisible('DB')) setTimeout(() => { if (ui.isVisible('DB')) ui._setFocus('MAIN', false); }, 0);
+            });
+        }
 
         const render = async () => {
             const tr = core.tr();

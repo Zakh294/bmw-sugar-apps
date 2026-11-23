@@ -21,7 +21,7 @@ Ukraine. SpeedCam says the same in the last row of its settings.
 
 | App | Folder | Version | What it does | Manual |
 |---|---|---|---|---|
-| SpeedCam | `apps/speedcam_ua` | 0.5.2 | Offline speed camera warnings on the head-up display, the instrument cluster and inside the Waze / Google map on the cluster. Ukraine (official police list), Europe and the USA (OpenStreetMap), 8 languages, a chime, monthly database updates | [English](docs/speedcam_ua/README.en.md) · [Українська](docs/speedcam_ua/README.md) |
+| SpeedCam | `apps/speedcam_ua` | 0.6.0 | Offline speed camera warnings on the head-up display, the instrument cluster and inside the Waze / Google map on the cluster. Ukraine (official police list), Europe and the USA (OpenStreetMap), 8 languages, a chime, monthly database updates | [English](docs/speedcam_ua/README.en.md) · [Українська](docs/speedcam_ua/README.md) |
 
 ### SpeedCam at a glance
 

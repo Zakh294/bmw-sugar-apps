@@ -254,6 +254,34 @@ async function main() {
     check(maxR > 100 && maxR <= 130, 'HUD brightness 50 %: the brightest red at half (' + maxR + ')');
     snap('small_dim', [['hud', '#000000'], ['panel', '#2b2f36']]);
 
+    // the bmw style: the test goes through its steps (quiet and smaller, near, over and breathing)
+    hu.ctx.settings.set('size', 100);
+    hu.ctx.settings.set('hudBright', 100);
+    hu.ctx.settings.set('style', 'bmw');
+    put(geo.offset(s2.lat, s2.lon, brg, 1400), 0);      // parked
+    await sleep(300);
+    hu.handlers.BTN_TEST();
+    await sleep(1500);
+    check(layerOf('hud').w === 255 && layerOf('hud').iw === 300, 'bmw style, far: the HUD at 85 % (' + layerOf('hud').w + ')');
+    snap('style_bmw_far', [['hud', '#000000'], ['panel', '#2b2f36']]);
+    await sleep(4000);
+    check(layerOf('hud').w === 300, 'bmw style, near: full size');
+    snap('style_bmw_near', [['hud', '#000000'], ['panel', '#2b2f36']]);
+    await sleep(6000);
+    const f1 = Buffer.from(layerOf('hud').px).toString('base64');
+    await sleep(450);
+    const f2 = Buffer.from(layerOf('hud').px).toString('base64');
+    check(f1 !== f2, 'bmw style, over the limit: the HUD picture moves (breathing)');
+    snap('style_bmw_over', [['hud', '#000000'], ['panel', '#2b2f36']]);
+    hu.ctx.settings.set('style', 'minimal');
+    hu.handlers.BTN_TEST();
+    await sleep(5500);
+    snap('style_minimal_near', [['hud', '#000000'], ['panel', '#2b2f36']]);
+    await sleep(6000);
+    snap('style_minimal_over', [['hud', '#000000'], ['panel', '#2b2f36']]);
+    hu.ctx.settings.set('style', 'classic');
+    await sleep(3500);
+
     // the audio page: every source of the audio manager, chime candidates in yellow
     hu.handlers.BTN_AUDIO();
     const t0 = Date.now();

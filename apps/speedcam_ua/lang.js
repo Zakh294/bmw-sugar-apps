@@ -176,6 +176,13 @@ const SETTINGS = {
     minWarn: { label: ['Не ближче ніж за', 'Not closer than', 'Nicht näher als', 'Nie bliżej niż', 'Pas plus près que', 'Non più vicino di', 'No más cerca de', 'Ne blíže než'] },
     tolerance: { label: ['Жовта швидкість, якщо понад ліміт на', 'Amber speed when over the limit by', 'Gelbe Geschwindigkeit ab Überschreitung um', 'Żółta prędkość, gdy ponad limit o', 'Vitesse orange au-delà de la limite de', 'Velocità gialla oltre il limite di', 'Velocidad ámbar al superar el límite en', 'Žlutá rychlost při překročení o'] },
     size: { label: ['Розмір попередження', 'Warning size', 'Größe der Warnung', 'Rozmiar ostrzeżenia', 'Taille de l\'alerte', 'Dimensione dell\'avviso', 'Tamaño del aviso', 'Velikost varování'] },
+    style: {
+        label: ['Стиль попередження', 'Warning style', 'Warnungsstil', 'Styl ostrzeżenia', 'Style de l\'alerte', 'Stile dell\'avviso', 'Estilo del aviso', 'Styl varování'],
+        classic: ['Класичний', 'Classic', 'Klassisch', 'Klasyczny', 'Classique', 'Classico', 'Clásico', 'Klasický'],
+        bmw: ['BMW: кільце відліку', 'BMW: countdown ring', 'BMW: Countdown-Ring', 'BMW: pierścień odliczania', 'BMW : anneau de décompte', 'BMW: anello del conto alla rovescia',
+            'BMW: anillo de cuenta atrás', 'BMW: odpočítávací kruh'],
+        minimal: ['Мінімальний', 'Minimal', 'Minimal', 'Minimalny', 'Minimal', 'Minimale', 'Mínimo', 'Minimální'],
+    },
     hudSpeed: { label: ['Швидкість авто на HUD', 'Car speed on the HUD', 'Geschwindigkeit im HUD', 'Prędkość auta na HUD', 'Vitesse sur le HUD', 'Velocità sull\'HUD', 'Velocidad en el HUD', 'Rychlost na HUD'] },
     hudLimit: {
         label: ['Знак ліміту на HUD', 'Limit sign on the HUD', 'Limit-Schild im HUD', 'Znak limitu na HUD', 'Panneau de limite au HUD', 'Cartello del limite sull\'HUD', 'Señal de límite en el HUD', 'Značka limitu na HUD'],

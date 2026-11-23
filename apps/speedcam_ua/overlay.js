@@ -18,11 +18,14 @@
  */
 const { ClusterRender } = require('./cluster_render_client');
 const badge = require('./badge');
+const styles = require('./styles');
 
 const MAP = { w: 1088, h: 480 };
 const HUD = { w: 800, h: 480 };
 // at night (the sun below civil twilight at the car, "nightDim" on): the HUD to 60 %, the cluster pictures to 80 %
 const NIGHT = { hud: 0.6, other: 0.8 };
+// the bmw / minimal styles: the quiet step while the camera is more than NEAR_S seconds away, and the breathing
+const NEAR_S = 6, FAR = { size: 0.85, light: 0.6 }, FRAME_MS = 200, BREATH_MS = 1200;
 const PLACE = {
     hud: { x: 372, y: 112 },
     cluster: { center: { x: 740, y: 468 }, left: { x: 150, y: 470 }, right: { x: 1330, y: 470 } },
@@ -33,7 +36,9 @@ const PLACE = {
 class Overlay {
     /**
      * opts(): { hud, cluster, inMap, mapPlace, clusterPlace, size (%), hudBright (%), hudY (px up), hudSpeed, night, socketPath,
-     * tr, units } read on every paint; an alert with noHudLimit is drawn on the HUD without its sign.
+     * tr, units, style } read on every paint; an alert with noHudLimit is drawn on the HUD without its sign.
+     * The bmw and minimal styles come in two steps: smaller and dimmer while the camera is more than NEAR_S seconds
+     * away (and within the limit), full size after; the bmw style breathes over the limit (FRAME_MS repaints).
      */
     constructor(appId, log, opts) {
         this.log = log;
@@ -50,6 +55,7 @@ class Overlay {
         this.shown = null;
         this.lastKey = '';
         this.blink = false;
+        this.phase = 0;
         this.cr.on('ready', () => {
             this.ready = true;
             this.log.info('cluster-render ready (' + (this.cr.backend || '?') + ')');
@@ -81,14 +87,27 @@ class Overlay {
     start() {
         this.cr.connect();
         this.timer = setInterval(() => {
-            if (!this.shown || this.shown.over !== 2) return;
+            if (!this.shown || this.shown.over !== 2 || this._style() !== 'classic') return;
             this.blink = !this.blink;
             try { this._paint(true); } catch (e) { this.log.warn('blink: ' + (e && e.stack || e)); }
         }, 500);
+        this.frames = setInterval(() => {
+            if (!styles.animated(this._style(), this.shown)) return;
+            this.phase = (Date.now() % BREATH_MS) / BREATH_MS;
+            try { this._paint(true); } catch (e) { this.log.warn('frame: ' + (e && e.stack || e)); }
+        }, FRAME_MS);
         return this;
     }
 
-    stop() { clearInterval(this.timer); try { this.cr.close(); } catch (e) { /* exiting */ } }
+    _style() { const s = (this.opts() || {}).style; return styles.has(s) ? s : 'classic'; }
+    /** 'far' (the quiet step of the bmw / minimal styles) or 'near'. */
+    _stage(a, style) {
+        if (style === 'classic' || !a || a.over || a.zone) return 'near';
+        if (a.stage) return a.stage;        // the test warning's own
+        if (!(a.speed > 5)) return 'near';
+        return a.dist / (a.speed / 3.6) > NEAR_S ? 'far' : 'near';
+    }
+    stop() { clearInterval(this.timer); clearInterval(this.frames); try { this.cr.close(); } catch (e) { /* exiting */ } }
 
     /** Where the banner goes when the map is hosted in the panel: the map's place mapped into the host rect. */
     _hostedPlace(place) {
@@ -106,7 +125,7 @@ class Overlay {
      */
     _rect(k, o) {
         const kind = k === 'hosted' ? 'map' : k, iw = badge.SIZE[kind][0], ih = badge.SIZE[kind][1];
-        const f = Math.max(0.5, Math.min(1, (o.size || 100) / 100));
+        const f = Math.max(0.5, Math.min(1, (o.size || 100) / 100)) * (o.stage === 'far' ? FAR.size : 1);
         const w = Math.round(iw * f), h = Math.round(ih * f);
         let x, y;
         if (k === 'hud') { x = PLACE.hud.x; y = Math.max(0, Math.min(HUD.h - h, PLACE.hud.y - (Number(o.hudY) || 0))); }
@@ -145,10 +164,13 @@ class Overlay {
     }
 
     _paint(force) {
-        const a = this.shown, o = this.opts();
-        const mode = this.mode || 'cluster';
+        const a = this.shown, o = Object.assign({}, this.opts());
+        const mode = this.mode || 'cluster', style = this._style();
+        o.style = style;
+        o.stage = this._stage(a, style);
+        const phase = styles.animated(style, a) ? Math.round(this.phase * 20) / 20 : 0;
         const key = a ? [a.id, a.dist, a.speed, a.limit, a.over, a.label, this.blink, o.hud, o.cluster, mode, o.mapPlace, o.clusterPlace,
-            o.size, o.hudBright, o.night, a.zone, o.units, o.tr && o.tr.lang, o.hudY, o.hudSpeed, a.noHudLimit].join('|') : 'off|' + o.hud + '|' + o.cluster;
+            o.size, o.hudBright, o.night, a.zone, o.units, o.tr && o.tr.lang, o.hudY, o.hudSpeed, a.noHudLimit, style, o.stage, phase].join('|') : 'off|' + o.hud + '|' + o.cluster;
         if (!force && key === this.lastKey) return;
         this.lastKey = key;
         const want = {
@@ -163,9 +185,10 @@ class Overlay {
             if (!ref) return;
             if (want[k]) {
                 const cv = badge.draw(a, k === 'hosted' ? 'map' : k, { warnDist: this.warnDist, blink: this.blink, tr: o.tr, units: o.units,
-                    noSpeed: k === 'hud' && o.hudSpeed === false, noLimit: k === 'hud' && !!a.noHudLimit });
+                    noSpeed: k === 'hud' && o.hudSpeed === false, noLimit: k === 'hud' && !!a.noHudLimit, style, phase });
                 // the HUD at its brightness setting; every screen a step down at night
-                const lvl = (k === 'hud' ? (o.hudBright || 100) / 100 : 1) * (o.night ? (k === 'hud' ? NIGHT.hud : NIGHT.other) : 1);
+                const lvl = (k === 'hud' ? (o.hudBright || 100) / 100 : 1) * (o.night ? (k === 'hud' ? NIGHT.hud : NIGHT.other) : 1)
+                    * (o.stage === 'far' ? FAR.light : 1);
                 if (lvl < 0.995) badge.dim(cv, lvl);
                 this.cr.pixels(ref, null, Buffer.from(cv.d.buffer, cv.d.byteOffset, cv.d.byteLength));
             }
