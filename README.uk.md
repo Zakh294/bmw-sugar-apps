@@ -47,7 +47,7 @@
 Потрібні блок з root-доступом і встановлений MGU Store ([інструкція Store](https://github.com/robertnisipeanu/mgu-store)),
 а також його сервіс **cluster-render** (є в Store).
 
-1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, гілка **`main`** → **Check now**.
+1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, гілка **`main`** (не «Releases»: релізи тут лише для індексу баз камер, Store їх не встановить) → **Check now**. Якщо джерело вже додане і Store пише `no catalog release and no <id>@<x.y.z>.tgz`, відкрий його в Settings → Sources → **Channel** → `main`.
 2. Вибери додаток → **Install**. Блок збере його сам (хвилина-дві).
 3. Оновлення: Installed → **Update all** (нова версія додатка; що в ній нового, пише сторінка додатка в Store і [CHANGELOG](docs/speedcam_ua/CHANGELOG.md)). Бази камер SpeedCam оновлюються самі раз на місяць. Скільки машин приблизно ним користується — [STATS.md](docs/speedcam_ua/STATS.md).
 

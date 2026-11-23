@@ -28,7 +28,7 @@
 Потрібні блок з root-доступом, [MGU Store](https://github.com/robertnisipeanu/mgu-store) і сервіс **cluster-render**
 0.5.1 або новіший (є в Store, ставиться разом із Cluster Themes чи HUD Widgets).
 
-1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, гілка `main` → **Check now**.
+1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, гілка **`main`** (не «Releases»: релізи тут лише для індексу баз камер, Store їх не встановить) → **Check now**. Якщо джерело вже додане і Store пише `no catalog release and no <id>@<x.y.z>.tgz`, відкрий його в Settings → Sources → **Channel** → `main`.
 2. Store → **SpeedCam** → **Install**. Під час збірки (1–2 хв) блок сам знаходить у своєму каталозі інтерфейсів,
    звідки брати координати машини.
 3. Якщо з'явиться *Restart pending*: Settings → **Restart head unit**.

@@ -32,7 +32,7 @@ monthly.
 You need a head unit with root access, the [MGU Store](https://github.com/robertnisipeanu/mgu-store) and its
 **cluster-render** service 0.5.1 or newer (in the Store; it comes with Cluster Themes or HUD Widgets).
 
-1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, branch `main` → **Check now**.
+1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, branch **`main`** (not "Releases": the releases here only carry the camera database index, the Store cannot install them) → **Check now**. If the source is already there and the Store says `no catalog release and no <id>@<x.y.z>.tgz`, open it in Settings → Sources → **Channel** → `main`.
 2. Store → **SpeedCam** → **Install**. While it builds (1–2 min) the head unit finds where its firmware publishes the
    car's position.
 3. If *Restart pending* shows: Settings → **Restart head unit**.

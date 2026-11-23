@@ -52,7 +52,7 @@ Ukraine. SpeedCam says the same in the last row of its settings.
 You need a head unit with root access and the MGU Store installed (see the
 [MGU Store's guide](https://github.com/robertnisipeanu/mgu-store)), plus its **cluster-render** service (in the Store).
 
-1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, branch **`main`** → **Check now**.
+1. Store → Settings → **Add source** → `Zakh294/bmw-sugar-apps`, branch **`main`** (not "Releases": the releases here only carry the camera database index, the Store cannot install them) → **Check now**. If the source is already there and the Store says `no catalog release and no <id>@<x.y.z>.tgz`, open it in Settings → Sources → **Channel** → `main`.
 2. Pick the app → **Install**. The head unit builds it (a minute or two).
 3. Updates: Installed → **Update all** (a new app version; the app's page in the Store and the
    [CHANGELOG](docs/speedcam_ua/CHANGELOG.en.md) say what is new), and SpeedCam's camera databases update themselves once a
