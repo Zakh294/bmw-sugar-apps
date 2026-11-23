@@ -21,6 +21,11 @@ data or its use.
   between countries. **You must check the law of every country you drive in** and switch the warnings off where they
   are not allowed. Using the app where it is prohibited is your own responsibility.
 - **Do not operate the app while driving.** Change settings only when the vehicle is stationary.
+- **DeX Drive: parked only.** A desktop on the centre screen is not for the driver while the car moves. DeX Drive
+  hides the picture above 3 km/h by default; switching that off is your own responsibility, and in most countries
+  watching or operating a screen like this while driving is prohibited. Samsung and DeX are trademarks of Samsung
+  Electronics Co., Ltd.; DeX Drive is not affiliated with Samsung. It turns on nothing on the phone by itself: USB
+  debugging and every "Allow" on the phone are the owner's choice.
 
 ## Speed camera warnings and the law (defaults of SpeedCam)
 
@@ -78,6 +83,11 @@ MIT). Автори й учасники **не відповідають** за б
   змінюються й різняться між країнами. **Перевір закон кожної країни, де їдеш**, і вимкни попередження там, де вони
   заборонені. Використання там, де це заборонено, — твоя відповідальність.
 - **Не налаштовуй додаток під час руху.** Змінюй налаштування лише на зупинці.
+- **DeX Drive: лише на стоянці.** Робочий стіл на центральному екрані — не для водія під час руху. DeX Drive
+  за замовчуванням ховає картинку понад 3 км/год; вимкнення цього — твоя відповідальність, і в більшості країн
+  дивитися на такий екран чи керувати ним під час руху заборонено. Samsung і DeX — торгові марки Samsung Electronics
+  Co., Ltd.; DeX Drive не пов'язаний із Samsung. Він нічого не вмикає на телефоні сам: налагодження по USB і кожне
+  «Дозволити» на телефоні — вибір власника.
 
 Де за замовчуванням попередження **вимкнені** (Німеччина, Швейцарія, Ліхтенштейн, Кіпр, Північна Македонія), їх
 можна ввімкнути: *Налаштування → Країни, де попередження заборонені → Увімкнено: відповідальність на мені*. Так ти

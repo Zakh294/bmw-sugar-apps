@@ -1,0 +1,23 @@
+DeX Drive service (dex-drive-d) - what is in this folder and where it comes from
+
+dex-drive-d      The service. MIT (LICENSE), Copyright (c) 2026 Zakhar Vityk.
+                 Source: native/dex_drive/dexd in github.com/Zakh294/bmw-sugar-apps (Go, built static for x86-64:
+                 tools/dex_drive/build_native.sh).
+
+dexdec           The GPU video decoder. GPL-3.0-or-later (LICENSE.dexdec).
+                 Source: native/dex_drive/dexdec in the same repository. Its decoder (src/decoder_msdk.*),
+                 NAL reader (src/nal_reader.*), MGVF writer (src/mgvf.*) and ABI lists (abi/) are from RideTube's
+                 ytdec (github.com/JustAnotherPU/ridetube), which has them from Robert Nisipeanu's waze-on-cluster
+                 (github.com/robertnisipeanu/idrive-apps), GPL-3.0-or-later, Copyright (C) 2026 Robert Nisipeanu,
+                 modified by JustAnotherPU and, for DeX Drive, by Zakhar Vityk (decoding order for a live stream;
+                 the notices in each file say what). abi/include/mfx: Intel Media SDK headers, MIT (their LICENSE).
+                 It links the head unit's own Intel Media SDK and libva at run time; nothing of them is shipped.
+
+scrcpy-server    scrcpy-server v5.0.1 by Genymobile (github.com/Genymobile/scrcpy), Apache-2.0 (LICENSE.scrcpy),
+                 unchanged: the release asset scrcpy-server-v5.0.1,
+                 sha256 764eb6f79811d5211fe9df341120882ba9994c7a61b897d7bf3fb662e53bc536.
+                 Copyright (C) 2018 Genymobile, Copyright (C) 2018-2026 Romain Vimont.
+                 It runs on the phone (copied there over ADB), not on the head unit.
+
+Samsung and DeX are trademarks of Samsung Electronics Co., Ltd. BMW and iDrive are trademarks of BMW AG. This is
+an unofficial project, not affiliated with either.

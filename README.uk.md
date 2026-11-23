@@ -23,6 +23,7 @@
 | Додаток | Папка | Версія | Що робить | Інструкція |
 |---|---|---|---|---|
 | SpeedCam | `apps/speedcam_ua` | 0.6.0 | Офлайн-попередження про камери швидкості на HUD, приладці та всередині мапи Waze / Google на приладці. Україна (офіційний список поліції), Європа і США (OpenStreetMap), 8 мов, звуковий сигнал, оновлення баз раз на місяць | [Українська](docs/speedcam_ua/README.md) · [English](docs/speedcam_ua/README.en.md) |
+| DeX Drive | `apps/dex_drive` | 0.1.0 (тест, гілка `dev`) | Samsung DeX (One UI 8) на центральному екрані: телефон по USB або Wi‑Fi, його робочий стіл на сенсорному екрані авто, H.264 декодує GPU головного блока; типово лише на стоянці. Потрібен сервіс DeX Drive (`native/dex_drive`, ставиться разом) і mgu-render | [Українська](docs/dex_drive/README.md) · [English](docs/dex_drive/README.en.md) |
 
 | HUD | Приладка | У мапі Waze / Google |
 |---|---|---|
@@ -72,6 +73,7 @@ apps/speedcam_ua/packs/  бази камер (index.json + JSON на кожну 
 docs/<id>/               інструкції й картинки
 data/<id>/               вихідні дані (український список у JSON, GeoJSON, CSV, KML, GPX)
 tools/                   крок збірки в машині (store_build.py), шрифти, скрипти додатків
+native/<id>/             нативні програми, які ставить інструмент Store (prebuilt/ — те, що отримує машина, з component.json)
 test/<id>/, test/lib/    тести
 kit/                     MGU App Kit (cauliflowermossgrape, MIT), шрифти з європейськими літерами
 ```
@@ -85,7 +87,8 @@ kit/                     MGU App Kit (cauliflowermossgrape, MIT), шрифти �
 
 ## Ліцензії
 
-Код — MIT ([LICENSE](LICENSE)). `kit/` — MIT (cauliflowermossgrape). `cluster_render_client.js` — MPL-2.0 (Robert
+Код — MIT ([LICENSE](LICENSE)), крім декодера DeX Drive `native/dex_drive/dexdec` (GPL-3.0-or-later) і
+scrcpy-server у `native/dex_drive/prebuilt` (Apache-2.0, без змін). `kit/` — MIT (cauliflowermossgrape). `cluster_render_client.js` — MPL-2.0 (Robert
 Nisipeanu). Шрифти — Ubuntu Font Licence / SIL OFL. Дані камер: перелік Національної поліції України (публічна
 інформація); © учасники OpenStreetMap, ODbL 1.0. Подробиці: [LEGAL.md](LEGAL.md).
 

@@ -14,5 +14,8 @@
         "kit/tools/build.py", "kit/tools/pack_data.py", "kit/tools/localize.py", "kit/tools/locale-revisions.json",
         "kit/tools/make_icon.js", "kit/tools/oapgen", "oap-sdk"]
     }
-  }
+  },
+  "components": [
+    { "id": "dex-drive-d", "kind": "tool", "path": "native/dex_drive/prebuilt" }
+  ]
 }

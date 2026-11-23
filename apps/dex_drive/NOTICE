@@ -1,0 +1,7 @@
+DeX Drive - MIT (see LICENSE at the repository root), Copyright (c) 2026 Zakhar Vityk.
+kit/ - MGU App Kit, Copyright (c) 2026 cauliflowermossgrape, MIT.
+render.js - DeX Drive's own client for mgu-render's native dialect, written from mgu-render's PROTOCOL.md
+(github.com/robertnisipeanu/mgu-store, native/mgu-render).
+The picture comes from the DeX Drive service (dex-drive-d, native/dex_drive): its NOTICE lists scrcpy-server
+(Apache-2.0) and the GPL-3.0-or-later decoder.
+Samsung and DeX are trademarks of Samsung Electronics Co., Ltd.; this app is not affiliated with Samsung or BMW.

@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: MIT
+[Unit]
+Description=dex-drive-d: DeX Drive (Samsung DeX on the centre screen: ADB to the phone, scrcpy-server, GPU decoder)
+RequiresMountsFor=/var/opt
+After=local-fs.target
+
+[Service]
+# root: usbfs (the phone's ADB interface), the GPU render node, /dev/shm/mgu-video-dexdrive.
+User=root
+# --group: the apps' group (tm_oap_app), which may use /run/dex-drive-d/ctl.sock
+ExecStart=/var/opt/dex-drive-d/current/dex-drive-d --group 12202
+RuntimeDirectory=dex-drive-d
+RuntimeDirectoryMode=0755
+# starts idle (no phone, no app needed), so the deploy tool's health check sees it active
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=5
+# 1, not 0: a crash restarts this service, never the head unit (mgu-deploy adds the same drop-in)
+LimitCORE=1
+
+[Install]
+WantedBy=multi-user.target

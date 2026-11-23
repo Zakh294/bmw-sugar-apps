@@ -24,5 +24,11 @@ docs/<id>/README.en.md in English); keep both languages in step.
   its Store `description` + `texts` (8 languages, ≤ 1000 characters; SpeedCam's unit test checks the version is named)
   and `docs/<id>/CHANGELOG.md` / `CHANGELOG.en.md`.
 - Before pushing: `node test/<id>/*.js`, `python3 test/<id>/*.py` and `python3 kit/tools/build.py --preview-only <id>`.
+- DeX Drive (`apps/dex_drive`, Node 8 app) + its Store tool `dex-drive-d` (`native/dex_drive`, listed in
+  `mgu-repo.json` "components"): `dexd/` Go service (ADB over usbfs/TCP, scrcpy-server 5.0.1 protocol, ctl socket),
+  `dexdec/` GPU decoder (GPL-3.0, C++ from RideTube's ytdec, built with zig for glibc 2.27), `prebuilt/` = what the car
+  installs (committed binaries + component.json; bump its version with any change there, and the app's
+  "requires"). Rebuild: `sh tools/dex_drive/build_native.sh`. Tests: `cd native/dex_drive/dexd && go test ./...`,
+  `node test/dex_drive/unit.js`, `python3 kit/tools/build.py --preview-only dex_drive && node test/dex_drive/app_e2e.js`.
 - Never commit SSH keys, tokens, VIN-specific backups (FA, SVT, coding, E-Sys files), photos with a VIN, a plate or the
   owner's home position.

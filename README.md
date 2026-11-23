@@ -22,6 +22,7 @@ Ukraine. SpeedCam says the same in the last row of its settings.
 | App | Folder | Version | What it does | Manual |
 |---|---|---|---|---|
 | SpeedCam | `apps/speedcam_ua` | 0.6.0 | Offline speed camera warnings on the head-up display, the instrument cluster and inside the Waze / Google map on the cluster. Ukraine (official police list), Europe and the USA (OpenStreetMap), 8 languages, a chime, monthly database updates | [English](docs/speedcam_ua/README.en.md) · [Українська](docs/speedcam_ua/README.md) |
+| DeX Drive | `apps/dex_drive` | 0.1.0 (test, branch `dev`) | Samsung DeX (One UI 8) on the centre screen: the phone by USB or Wi‑Fi, its desktop on the car's touchscreen, H.264 decoded on the head unit's GPU; parked only by default. Needs the DeX Drive service (`native/dex_drive`, installed with it) and mgu-render | [English](docs/dex_drive/README.en.md) · [Українська](docs/dex_drive/README.md) |
 
 ### SpeedCam at a glance
 
@@ -80,6 +81,7 @@ apps/speedcam_ua/packs/  the camera databases (index.json + one JSON per country
 docs/<id>/               manuals and pictures
 data/<id>/               source data (e.g. the Ukrainian list as JSON, GeoJSON, CSV, KML, GPX)
 tools/                   build step on the car (store_build.py), font baking, per-app scripts
+native/<id>/             native programs a Store tool installs (prebuilt/ is what the car gets, with component.json)
 test/<id>/, test/lib/    tests
 kit/                     MGU App Kit (cauliflowermossgrape, MIT), its fonts extended with European letters
 ```
@@ -93,8 +95,9 @@ kit/                     MGU App Kit (cauliflowermossgrape, MIT), its fonts exte
 
 ## Licences
 
-Code: MIT ([LICENSE](LICENSE)). `kit/`: MIT (cauliflowermossgrape). `cluster_render_client.js`: MPL-2.0 (Robert
-Nisipeanu). Fonts: Ubuntu Font Licence / SIL OFL. Camera data: Ukrainian police list (public information);
+Code: MIT ([LICENSE](LICENSE)), apart from DeX Drive's decoder `native/dex_drive/dexdec` (GPL-3.0-or-later) and
+scrcpy-server in `native/dex_drive/prebuilt` (Apache-2.0, unchanged). `kit/`: MIT (cauliflowermossgrape).
+`cluster_render_client.js`: MPL-2.0 (Robert Nisipeanu). Fonts: Ubuntu Font Licence / SIL OFL. Camera data: Ukrainian police list (public information);
 © OpenStreetMap contributors, ODbL 1.0. Details: [LEGAL.md](LEGAL.md).
 
 **Never in this repository:** head unit SSH keys, tokens, VIN-bound backups (FA, SVT, coding, E-Sys files).

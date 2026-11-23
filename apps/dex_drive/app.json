@@ -1,0 +1,165 @@
+{
+  "id": "dex_drive",
+  "title": "DeX Drive",
+  "description": "Samsung DeX on the centre screen: the phone (One UI 8 / Android 16) by USB or Wi-Fi, its desktop on the car's touchscreen, decoded on the head unit's GPU. Parked only by default. Needs the \"DeX Drive service\" tool and mgu-render 0.6.11+.\n\nWhat's new in 0.1.0:\n• First test version: USB and Wi-Fi (ADB 5555), multi-touch, the iDrive knob scrolls, scale, 30/60 fps",
+  "texts": {
+    "uk": {
+      "description": "Samsung DeX на центральному екрані: телефон (One UI 8 / Android 16) по USB або Wi-Fi, його робочий стіл на сенсорному екрані авто, декодування на GPU головного блока. Типово лише на стоянці. Потрібні інструмент «DeX Drive service» і mgu-render 0.6.11+.\n\nНове у 0.1.0:\n• Перша тестова версія: USB і Wi-Fi (ADB 5555), мультитач, коліщатко iDrive прокручує, масштаб, 30/60 к/с"
+    }
+  },
+  "version": "0.1.0",
+  "vendor": "custom",
+  "loggingId": "OADX",
+  "iconGlyph": "DeX",
+  "mguHmi": [
+    "ID7"
+  ],
+  "requires": {
+    "dex-drive-d": "0.1.0",
+    "mgu-render": "0.6.11"
+  },
+  "signals": {
+    "de.bmw.infotainment.vehicle.Vehicle2": {
+      "statusCarSpeed2": "rs"
+    }
+  },
+  "screens": [
+    {
+      "name": "MAIN",
+      "kind": "menu",
+      "title": "DeX Drive",
+      "settings": true,
+      "items": [
+        [
+          "button",
+          "BTN_OPEN",
+          "Відкрити DeX на екрані"
+        ],
+        [
+          "text3",
+          "STATUS",
+          "—"
+        ],
+        [
+          "button",
+          "BTN_STOP",
+          "Зупинити DeX"
+        ],
+        [
+          "button",
+          "BTN_PHONE",
+          "Вимкнути екран телефона"
+        ],
+        [
+          "button",
+          "BTN_FORGET",
+          "Забути ключ ADB цього авто"
+        ]
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "key": "lang",
+      "label": "Мова / Language",
+      "type": "choice",
+      "default": "uk",
+      "options": [
+        [
+          "uk",
+          "Українська"
+        ],
+        [
+          "en",
+          "English"
+        ]
+      ]
+    },
+    {
+      "key": "conn",
+      "label": "Підключення телефона",
+      "type": "choice",
+      "default": "usbwifi",
+      "options": [
+        [
+          "usbwifi",
+          "USB або Wi-Fi (ADB на порту 5555)"
+        ],
+        [
+          "usb",
+          "Лише USB-кабель"
+        ]
+      ]
+    },
+    {
+      "key": "dpi",
+      "label": "Масштаб DeX (щільність, менше = більше місця)",
+      "type": "number",
+      "default": 160,
+      "unit": "dpi",
+      "markDefault": true,
+      "steps": [
+        120,
+        140,
+        160,
+        180,
+        200,
+        240
+      ]
+    },
+    {
+      "key": "fps",
+      "label": "Кадрів на секунду",
+      "type": "choice",
+      "default": "30",
+      "options": [
+        [
+          "30",
+          "30 к/с"
+        ],
+        [
+          "60",
+          "60 к/с"
+        ]
+      ]
+    },
+    {
+      "key": "bitrate",
+      "label": "Якість відео",
+      "type": "choice",
+      "default": "8",
+      "options": [
+        [
+          "4",
+          "4 Мбіт/с (Wi-Fi)"
+        ],
+        [
+          "8",
+          "8 Мбіт/с"
+        ],
+        [
+          "16",
+          "16 Мбіт/с (USB)"
+        ]
+      ]
+    },
+    {
+      "key": "parkedOnly",
+      "label": "Лише на стоянці (ховати DeX під час руху)",
+      "type": "bool",
+      "default": true
+    },
+    {
+      "key": "knob",
+      "label": "Коліщатко iDrive прокручує DeX",
+      "type": "bool",
+      "default": true
+    },
+    {
+      "key": "phoneOff",
+      "label": "Гасити екран телефона, коли DeX запущено",
+      "type": "bool",
+      "default": false
+    }
+  ]
+}
