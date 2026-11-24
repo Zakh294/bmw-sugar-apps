@@ -50,7 +50,8 @@ mgu.run({
             const text = statusText(st, { tr, wifi: settings.get('conn') === 'usbwifi', fps, moving: moving() && st.state === 'streaming',
                 problem: st.state === 'streaming' ? ov.problem() : null, hidden: st.state === 'streaming' && !ov.shown ? ov.why : null,
                 renderError: st.state === 'streaming' ? ov.lastError : null,
-                noController: st.state === 'streaming' && settings.get('knob') !== false && !ov.controllerReachable(),
+                noController: st.state === 'streaming' && settings.get('knob') !== false && !ov.controllerReachable() && ov.ccuSource !== 'signals',
+                ccuSignals: st.state === 'streaming' && ov.ccuSource === 'signals',
                 noPad: st.state === 'streaming' && padOn() && padShownAt && Date.now() - padShownAt > 15000 && !padSamples });
             if (text !== lastText) {
                 lastText = text;
@@ -69,6 +70,7 @@ mgu.run({
         });
 
         ui.onClick('BTN_OPEN', () => {
+            if (ov.shown) return;
             // a press on the page: it is on screen, whatever the HMI said last
             mainVisible = true;
             mainFocus = true;
@@ -76,9 +78,18 @@ mgu.run({
             if (st.state !== 'streaming') ctl.send(startCmd(settings));
             refresh();
         });
-        ui.onClick('BTN_STOP', () => { wantShow = false; phoneOffSent = false; ctl.send({ cmd: 'stop' }); refresh(); });
-        ui.onClick('BTN_PHONE', () => ctl.send({ cmd: 'phone-screen', on: false }));
-        ui.onClick('BTN_FORGET', () => { wantShow = false; ctl.send({ cmd: 'forget-key' }); refresh(); });
+        // without the controller gate, a press on the knob also presses the (hidden) page button under the picture:
+        // while DeX shows, those do nothing
+        const underPicture = (b) => { if (ov.shown) { log.info(b + ' pressed under the picture: ignored'); return true; } return false; };
+        ui.onClick('BTN_STOP', () => {
+            if (underPicture('BTN_STOP')) return;
+            wantShow = false; phoneOffSent = false; ctl.send({ cmd: 'stop' }); refresh();
+        });
+        ui.onClick('BTN_PHONE', () => { if (!underPicture('BTN_PHONE')) ctl.send({ cmd: 'phone-screen', on: false }); });
+        ui.onClick('BTN_FORGET', () => {
+            if (underPicture('BTN_FORGET')) return;
+            wantShow = false; ctl.send({ cmd: 'forget-key' }); refresh();
+        });
 
         ui.onVisible((name, v) => {
             if (name !== 'MAIN') return;
@@ -123,6 +134,12 @@ mgu.run({
                     pad.feed(v, Date.now());
                 },
             }, log)).catch((e) => log.warn('touchpad: ' + e));
+        }
+        // the knob without the controller gate: the car's own controller signal (the iDrive menu gets it too)
+        if (ctx.signals && ctx.signals.watch) {
+            Promise.resolve(ctx.signals.watch('de.bmw.infotainment.controlelements.FrontCCU', '1', {
+                statusRotaryEncoderState: (v) => ov.signalCcu(v),
+            }, log)).catch((e) => log.warn('controller signal: ' + e));
         }
         if (touchMode) {
             setInterval(() => {

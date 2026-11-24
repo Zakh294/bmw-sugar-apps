@@ -43,8 +43,9 @@ function toVideo(x, y, vw, vh) {
 
 function inRect(x, y, r) { return x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h; }
 
-/** The layer's picture: see-through column, black under the video, the video, the menu button. */
-function frameOps() {
+/** The layer's picture: see-through column, black under the video, the video, the menu button, and the pointer
+ *  (DeX draws none for the pointer we move: Android shows one only with a real mouse plugged in) at screen px. */
+function frameOps(cursor) {
     const o = new Ops();
     o.clear(0x00000000);
     o.rect(PICTURE.x, PICTURE.y, PICTURE.w, PICTURE.h, 0x000000ff);
@@ -53,7 +54,23 @@ function frameOps() {
     // a 2 x 2 grid: "the app's menu"
     const s = 14, g = 6, x0 = MENU.x + (MENU.w - 2 * s - g) / 2, y0 = MENU.y + (MENU.h - 2 * s - g) / 2;
     [[0, 0], [1, 0], [0, 1], [1, 1]].forEach((p) => o.rrect(x0 + p[0] * (s + g), y0 + p[1] * (s + g), s, s, 3, 0xffffffff));
+    if (cursor) arrow(o, cursor.x, cursor.y);
     return o;
+}
+
+/** A mouse arrow with its tip at x, y: white, a dark edge (seen on light and dark windows). */
+function arrow(o, x, y) {
+    const P = [[0, 0], [0, 26], [7, 20], [12, 31], [17, 29], [12, 18], [21, 18]];
+    // filled: lines from the tip across the body, then the outline
+    for (let k = 0; k <= 10; k++) {
+        const t = k / 10;
+        o.line(x, y, x + 21 * t, y + 18 + 8 * (1 - t), 2.4, 0xffffffff);
+    }
+    o.line(x + 7, y + 20, x + 14.5, y + 30, 5, 0xffffffff);
+    for (let i = 0; i < P.length; i++) {
+        const a = P[i], b = P[(i + 1) % P.length];
+        o.line(x + a[0], y + a[1], x + b[0], y + b[1], 1.6, 0x101418ff);
+    }
 }
 
 /** Knob counter steps between two readings (u16, wrapping; a jump over 64 is a counter reset, not a turn). */
@@ -66,6 +83,17 @@ function knobDelta(prev, now) {
 // the controller's tilt (FrontCCU deflection, short and long push per direction) as Android arrow keys
 const TILT_KEY = { 1: 19, 2: 19, 7: 20, 8: 20, 10: 21, 11: 21, 4: 22, 5: 22 };
 const pressed = (v) => v === 1 || v === 2;
+// FrontCCU's enums: the SDK hands them over by name (or a number)
+const DEFL = { MITTELSTELLUNG: 0, NORD_KURZ_GEDRUECKT: 1, NORD_LANG_GEDRUECKT: 2, NORD_UNWIRKSAM: 3, OST_KURZ_GEDRUECKT: 4,
+    OST_LANG_GEDRUECKT: 5, OST_UNWIRKSAM: 6, SUED_KURZ_GEDRUECKT: 7, SUED_LANG_GEDRUECKT: 8, SUED_UNWIRKSAM: 9,
+    WEST_KURZ_GEDRUECKT: 10, WEST_LANG_GEDRUECKT: 11, WEST_UNWIRKSAM: 12, SIGNAL_UNGUELTIG: 15 };
+const PUSH = { KEINE_BETAETIGUNG: 0, DREHGEBER_KURZ_GEDRUECKT: 1, DREHGEBER_LANG_GEDRUECKT: 2, UNWIRKSAM: 3, SIGNAL_UNGUELTIG: 15 };
+function enumNum(v, names) {
+    if (typeof v === 'number') return v;
+    if (v != null && names[v] != null) return names[v];
+    const n = Number(v);
+    return isNaN(n) ? 15 : n;
+}
 
 class Overlay {
     constructor(log, handlers) {
@@ -85,6 +113,10 @@ class Overlay {
         this.keep = null;
         this.shown = false;
         this.why = null;                 // why the picture went away last (for the page): 'hmi', 'yield', 'renderer'
+        this.cursorAt = 0;               // the touchpad moved the pointer at (ms): it shows for 8 s after
+        this.drawTimer = null;
+        this.ccuAt = 0;                  // the last controller event from the renderer (the gate): signals wait then
+        this.ccuSource = null;           // 'gate' | 'signals': where the controller comes from (for the page)
         this.lastError = null;           // the renderer's last error (e.g. the video file)
     }
 
@@ -137,7 +169,7 @@ class Overlay {
     videoReady() {
         this.lastError = null;
         this.r.video(VIDEO_ID, VIDEO_FILE, true);
-        if (this.shown) this.r.frame(frameOps());
+        if (this.shown) this.r.frame(this._ops());
     }
     setKnob(on) { this.knobOn = !!on; this.update(); }
 
@@ -148,7 +180,7 @@ class Overlay {
         const can = this.connected && this.info && this.info.video;
         const show = !!(this.wanted && can);
         if (show) {
-            this.r.frame(frameOps());
+            this.r.frame(this._ops());
             this.r.show(true);
             // the knob, the press and the tilt are DeX's while it shows (the page under it never gets a press)
             this.r.grab(this.knobOn && this.info.controller, ['knob', 'press', 'tilt']);
@@ -164,8 +196,21 @@ class Overlay {
 
     // a shown app sends at least one message a second, or the renderer takes it for hung
     _keep(on) {
-        if (on && !this.keep) this.keep = setInterval(() => { if (this.shown) this.r.frame(frameOps()); }, 500);
+        if (on && !this.keep) this.keep = setInterval(() => { if (this.shown) this.r.frame(this._ops()); }, 500);
         if (!on && this.keep) { clearInterval(this.keep); this.keep = null; }
+    }
+
+    /** Where the pointer is on the screen (px), while the touchpad moved it in the last 8 s. */
+    cursor() {
+        if (!this.cursorAt || Date.now() - this.cursorAt > 8000) return null;
+        const f = fitted(this.vw, this.vh, PICTURE);
+        return { x: f.x + this.ptr.nx * f.w, y: f.y + this.ptr.ny * f.h };
+    }
+    _ops() { return frameOps(this.cursor()); }
+    /** Draw again soon (at most ~40 times a second): the pointer moved. */
+    _redraw() {
+        if (this.drawTimer || !this.shown) return;
+        this.drawTimer = setTimeout(() => { this.drawTimer = null; if (this.shown) this.r.frame(this._ops()); }, 25);
     }
 
     _release() {
@@ -196,12 +241,23 @@ class Overlay {
         if (phase === 'up' || phase === 'cancel') this.fingers.delete(id);
     }
 
-    _ccu(c) {
+    /** The controller as the car sends it (FrontCCU.statusRotaryEncoderState), when the renderer gives us none (no
+     *  controller gate): the iDrive menu under the picture gets the same turns and presses. */
+    signalCcu(v) {
+        if (!v || Date.now() - this.ccuAt < 1500) return;     // the gate is working: its events only
+        this.ccuSource = 'signals';
+        this._ccu({ knob: Number(v.frontRotaryEncoderOperation) & 0xffff, press: enumNum(v.frontRotaryEncoderPushButton, PUSH),
+            tilt: enumNum(v.frontRotaryEncoderDeflection, DEFL) }, true);
+    }
+
+    _ccu(c, fromSignals) {
+        if (!fromSignals) { this.ccuAt = Date.now(); this.ccuSource = 'gate'; }
         if (!this.knobOn || !this.shown) return;
         if (c.press === 15 && c.tilt === 15) return;          // no controller behind it
         const L = this.ccuLast;
         this.ccuLast = c;
         if (!L) return;
+        if (L.knob === c.knob && L.press === c.press && L.tilt === c.tilt) return;    // the car repeats a state
         const p = this.ptr;
         const d = knobDelta(L.knob, c.knob);
         // a turn clockwise moves the content up, as a wheel turned towards you
@@ -218,6 +274,8 @@ class Overlay {
         if (!this.shown) return;
         const f = fitted(this.vw, this.vh, PICTURE);
         this.ptr = { nx: Math.max(0, Math.min(1, this.ptr.nx + dx / f.w)), ny: Math.max(0, Math.min(1, this.ptr.ny + dy / f.h)) };
+        this.cursorAt = Date.now();
+        this._redraw();
         // with the press held it drags, else DeX's pointer just moves
         this.h.mouse(this.pressHeld ? 'move' : 'hover', 'left', this.ptr.nx, this.ptr.ny);
     }
@@ -233,4 +291,4 @@ class Overlay {
     stop() { this._keep(false); this.r.close(); }
 }
 
-module.exports = { Overlay, displaySize, toVideo, fitted, frameOps, knobDelta, TILT_KEY, PICTURE, MENU, VIDEO_FILE };
+module.exports = { Overlay, displaySize, toVideo, fitted, frameOps, knobDelta, enumNum, TILT_KEY, PICTURE, MENU, VIDEO_FILE };

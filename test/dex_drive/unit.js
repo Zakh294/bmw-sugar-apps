@@ -108,7 +108,7 @@ test('touchpad: two fingers up scroll the content up (negative notches), no clic
 test('controller: press clicks where the pointer is, tilt = arrows, knob scrolls, only while shown', () => {
     const ev = [];
     const o = Object.create(ov.Overlay.prototype);
-    Object.assign(o, { knobOn: true, shown: true, ccuLast: null, pressHeld: false, ptr: { nx: 0.25, ny: 0.75 }, vw: 1832, vh: 720,
+    Object.assign(o, { r: { frame() {} }, knobOn: true, shown: true, ccuLast: null, pressHeld: false, ptr: { nx: 0.25, ny: 0.75 }, vw: 1832, vh: 720,
         h: { scroll: (x, y, d) => ev.push(['scroll', d]), mouse: (a, b, x, y) => ev.push(['mouse', a, b, x, y]), key: (k) => ev.push(['key', k]) } });
     const c = (knob, press, tilt) => o._ccu({ knob, press, tilt });
     c(100, 0, 0);                    // the first event only sets the base
@@ -127,6 +127,17 @@ test('controller: press clicks where the pointer is, tilt = arrows, knob scrolls
     ev.length = 0;
     c(110, 1, 4); o.padClick('left'); o.padScroll(3);
     assert.deepStrictEqual(ev, []);
+    // without the gate: the car's controller signal (enums by name, repeated states), until the gate speaks
+    o.shown = true; ev.length = 0; o.ccuLast = null; o.ccuAt = 0;
+    const sig = (pos, push, defl) => o.signalCcu({ frontRotaryEncoderOperation: pos, frontRotaryEncoderPushButton: push, frontRotaryEncoderDeflection: defl });
+    sig(500, 'KEINE_BETAETIGUNG', 'MITTELSTELLUNG'); sig(500, 'KEINE_BETAETIGUNG', 'MITTELSTELLUNG'); sig(497, 'KEINE_BETAETIGUNG', 'MITTELSTELLUNG');
+    sig(497, 'DREHGEBER_KURZ_GEDRUECKT', 'MITTELSTELLUNG'); sig(497, 'KEINE_BETAETIGUNG', 'OST_KURZ_GEDRUECKT');
+    assert.deepStrictEqual(ev.map((e) => e[0] + ':' + e[1]), ['scroll:3', 'mouse:down', 'mouse:up', 'key:22'], JSON.stringify(ev));
+    assert.strictEqual(o.ccuSource, 'signals');
+    o._ccu({ knob: 1, press: 0, tilt: 0 });            // the gate: signals step back
+    ev.length = 0; sig(400, 'KEINE_BETAETIGUNG', 'MITTELSTELLUNG');
+    assert.deepStrictEqual(ev, []);
+    assert.strictEqual(o.ccuSource, 'gate');
     assert.strictEqual(ov.TILT_KEY[4], 22);
     assert.strictEqual(ov.TILT_KEY[7], 20);
 });
@@ -142,6 +153,8 @@ test('draw ops are words as PROTOCOL.md lists them', () => {
     assert.strictEqual(b.readUInt32LE(32), 1);
     const f = ov.frameOps().buffer();
     assert.ok(f.length > 0 && f.length % 4 === 0);
+    const withCursor = ov.frameOps({ x: 500, y: 300 }).buffer();
+    assert.ok(withCursor.length > f.length, 'the pointer is drawn');
 });
 
 test('every text has both languages', () => {
@@ -164,6 +177,8 @@ test('the page says what goes on', () => {
     assert.ok(/Остання помилка 17:40:01 decoder: no GPU/.test(statusText({ state: 'searching', last: '17:40:01 decoder: no GPU' }, { tr })));
     assert.ok(!/Остання/.test(statusText({ state: 'streaming', w: 1, h: 1, last: 'x' }, { tr })));
     assert.ok(/Controller gate/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, noController: true })));
+    assert.ok(/сигнали авто/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, ccuSignals: true })));
+    assert.ok(/телефон 192.168.1.23, авто 172.16.222.97\/24/.test(statusText({ state: 'searching', phone: '192.168.1.23', nets: '172.16.222.97/24' }, { tr })));
     assert.ok(/тачпада/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, noPad: true })));
     assert.ok(/дотиком до меню/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, hidden: 'hmi' })));
     assert.ok(/mgu-render: video 1: cannot open/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, renderError: 'video 1: cannot open x' })));

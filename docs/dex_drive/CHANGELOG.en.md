@@ -3,6 +3,17 @@
 A short note on each version. The app's page in the MGU Store shows the same for the current version.
 [Українська](CHANGELOG.md)
 
+## 0.2.3 (2026-11-24)
+- A pointer you can see: Android draws no cursor for a pointer we move (only with a physical mouse), so in the test
+  the touchpad "moved something" no one could see. DeX Drive now draws the arrow over the picture, 8 s after a move.
+- The knob without the controller gate: the car has the GPU renderer (`idrive7-renderd`) too, the gate then works
+  for it and mgu-render gives no controller. DeX Drive now reads the car's own controller signal (FrontCCU). The
+  iDrive menu under the picture hears it too, so "Stop", "Turn the phone's screen off" and "Forget the key" do nothing
+  while DeX shows. The page says where the knob comes from.
+- Wi‑Fi: while searching the page shows the phone's remembered address and the car's networks: one look tells
+  whether they share one. The last error's time carries its zone (the unit's clock runs in UTC).
+- The dex-drive-d 0.2.3 service.
+
 ## 0.2.2 (2026-11-23)
 - Installs "Controller gate" with it (`mgu-inputgate` from the `cauliflowermossgrape/idrive7-apps` source, Head-unit
   tools): without it mgu-render does not give an app the controller, so knob, press and tilt did not reach DeX (car

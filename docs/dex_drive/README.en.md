@@ -115,7 +115,9 @@ While DeX is on the screen, the controller works it (MENU / BACK and the on-scre
 | Pressing the knob | click where the pointer is; held: a long press, with a finger on the touchpad: a drag |
 | Tilt ↑ ↓ ← → | arrow keys |
 
-The pointer goes where you last touched the screen. The touchpad works only in the controller's touch mode: DeX
+The pointer goes where you last touched the screen; DeX Drive draws the arrow (Android shows no cursor for such a
+pointer). Without the controller gate (e.g. while the GPU renderer has it) the knob comes from the car's signal and
+the iDrive menu under the picture hears it too: the page's buttons then do nothing while DeX shows. The touchpad works only in the controller's touch mode: DeX
 Drive turns it on while DeX shows and off after (as the iDrive handwriting screen does).
 
 ## What is tested, what is not

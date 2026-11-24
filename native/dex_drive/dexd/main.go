@@ -37,7 +37,7 @@ import (
 )
 
 // Version is the tool's version (component.json).
-const Version = "0.2.2"
+const Version = "0.2.3"
 
 // Logger writes to a file (kept under 1 MB, one old copy) and to stderr (the journal).
 type Logger struct {
@@ -284,7 +284,7 @@ func (d *daemon) run() {
 		}
 		if err != nil {
 			d.mu.Lock()
-			d.lastErr = time.Now().Format("15:04:05") + " " + err.Error()
+			d.lastErr = time.Now().Format("15:04:05 MST") + " " + err.Error()
 			d.mu.Unlock()
 			d.setStatus("error", err.Error(), nil)
 		}
@@ -348,13 +348,31 @@ func (d *daemon) once(want startReq, gen int) error {
 				break
 			}
 		}
+		where := map[string]interface{}{}
+		if want.TCP == "auto" {
+			if b, err := os.ReadFile(filepath.Join(d.cfg.state, "phone-ip.auto")); err == nil {
+				where["phone"] = strings.Join(strings.Fields(string(b)), ", ")
+			}
+			addrs, names := d.cfg.nets()
+			var own []string
+			for i, a := range addrs {
+				if ip := a.IP.To4(); ip != nil && !carNet(ip, names[i]) {
+					own = append(own, a.String())
+				}
+			}
+			if len(own) > 0 {
+				where["nets"] = strings.Join(own, ", ")
+			} else {
+				where["nets"] = "no Wi-Fi"
+			}
+		}
 		msg := "Connect the phone by USB (USB debugging on)"
 		if want.TCP == "auto" {
 			msg += ", or over Wi-Fi with ADB on port 5555 (adb tcpip 5555)"
 		} else if want.TCP != "" {
 			msg += " or bring it to " + want.TCP
 		}
-		d.setStatus("searching", msg, nil)
+		d.setStatus("searching", msg, where)
 		select {
 		case <-d.wake:
 		case <-time.After(2 * time.Second):

@@ -40,6 +40,10 @@ function statusText(st, ctx) {
     if (ctx.moving) s += tr('moving');
     if (ctx.hidden) s += tr('hidden_' + ctx.hidden);
     if (ctx.noController) s += tr('no_controller');
+    if (ctx.ccuSignals) s += tr('ccu_signals');
+    if ((st.state === 'searching' || st.state === 'error') && (st.phone || st.nets)) {
+        s += tr('wifi_where', { phone: st.phone || '?', car: st.nets || '?' });
+    }
     if (ctx.noPad) s += tr('no_pad');
     if (ctx.renderError) s += tr('render_error', { msg: ctx.renderError });
     if (ctx.problem) s += tr(ctx.problem);
