@@ -78,6 +78,11 @@ While the phone is on the cable, the service keeps its Wi‑Fi address and looks
 through its whole Wi‑Fi network on port 5555. The phone and the car must share a network: the phone on the car's
 hotspot, the car on the phone's, or both on one Wi‑Fi.
 
+While the phone is on the cable, the service also tries to reach it over Wi‑Fi on port 5555, and the page says
+what came of it: "port 5555 is open" (without the cable it connects), "port 5555 is closed" (the phone did not
+open ADB over Wi‑Fi), "the car gets no answer" (the network does not pass connections between devices, e.g. client
+isolation on the hotspot), "no route" or "the phone is not on Wi‑Fi".
+
 After the phone restarts, port 5555 is closed again (Android does that). Android 11+ "Wireless debugging" (pairing
 code, TLS) is not supported yet. A phone with a fixed address can be written into
 `/var/opt/dex-drive-data/phone-ip` (over SSH; one line `IP` or `IP:port`).
@@ -91,15 +96,19 @@ For Wi‑Fi, "Video quality: 4 Mbit/s" works better.
 | Мова / Language | Ukrainian or English |
 | Phone connection | USB or Wi‑Fi (ADB 5555) / USB only |
 | DeX scale | the virtual display's density: 120–240 dpi, lower = more fits, smaller |
+| DeX picture zoom | 100–200 %: the phone's display that much smaller, stretched over the screen, so DeX is bigger whatever the dpi (a little softer) |
 | Frames per second | 30 or 60 |
 | Video quality | 4 / 8 / 16 Mbit/s |
 | Parked only | on: while driving (over 3 km/h) DeX hides, the session stays |
 | The iDrive controller works DeX | knob, press and tilt are DeX's while it shows (below) |
 | The controller's touchpad is DeX's pointer | the touchpad on the knob works as a laptop's |
+| Touchpad sensitivity: pointer | 30–150 %, 70 % by default (100 % = as in 0.2.3) |
+| Touchpad sensitivity: two-finger scroll | 30–150 %, 70 % by default |
 | Turn the phone's screen off | after the start, turns off the phone's own screen (DeX keeps running); the power key turns it on |
 
-Changing the scale, frames, quality or connection starts DeX again with them. (The settings' labels are in
-Ukrainian in 0.1.0.)
+Changing the scale, zoom, frames, quality or connection starts DeX again with them; while DeX runs, the page
+shows what with (`… · 160 dpi, up to 30 fps, 8 Mbit/s`) and the virtual display's size. The touchpad's sensitivity
+works at once. (The settings' labels are in Ukrainian.)
 
 ## The iDrive controller
 

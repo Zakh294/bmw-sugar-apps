@@ -37,7 +37,7 @@ import (
 )
 
 // Version is the tool's version (component.json).
-const Version = "0.2.3"
+const Version = "0.2.4"
 
 // Logger writes to a file (kept under 1 MB, one old copy) and to stderr (the journal).
 type Logger struct {
@@ -162,6 +162,8 @@ type daemon struct {
 	tcpipAt  map[string]time.Time // phone -> when we last opened its port 5555 (no loop if it does not stick)
 	lastErr  string               // the last error, kept on the page while it tries again ("HH:MM:SS msg")
 	lastScan time.Time            // the last Wi-Fi subnet scan for the phone
+	wifi     string               // what the car found of the phone's port 5555 while on the cable (wifiCheck), "" = nothing yet
+	wifiAt   string               // ...and where
 }
 
 func newDaemon(cfg config, log *Logger) *daemon {
@@ -192,7 +194,7 @@ func (d *daemon) setStatus(state, msg string, extra map[string]interface{}) {
 		if d.via != "" {
 			st["via"] = d.via
 		}
-		for _, k := range []string{"w", "h"} {
+		for _, k := range []string{"w", "h", "dpi", "maxfps", "mbps"} {
 			if v, ok := d.status[k]; ok && state == "streaming" {
 				st[k] = v
 			}
@@ -200,6 +202,10 @@ func (d *daemon) setStatus(state, msg string, extra map[string]interface{}) {
 	}
 	for k, v := range extra {
 		st[k] = v
+	}
+	if d.wifi != "" && state != "idle" {
+		st["wifi"] = d.wifi
+		st["wifi_at"] = d.wifiAt
 	}
 	if d.lastErr != "" && state != "streaming" && state != "error" {
 		st["last"] = d.lastErr
@@ -403,18 +409,25 @@ func (d *daemon) once(want startReq, gen int) error {
 		}
 	}
 	if want.TCP == "auto" && (via == "usb" || d.cfg.wifiOverTCP) {
-		d.rememberWifi(conn, model)
+		ips := d.rememberWifi(conn, model)
 		if d.openWifiPort(conn, model) {
 			return errReconnect
+		}
+		if via == "usb" {
+			d.wifiCheck(conn, ips)
 		}
 	}
 	d.setStatus("connecting", "Starting DeX on "+model, nil)
 	o := SessionOpts{W: want.W &^ 7, H: want.H &^ 7, DPI: want.DPI, FPS: want.FPS, Bitrate: want.Bitrate}
+	// what DeX runs with, on the page: a changed setting shows there once the session started again with it
+	set := map[string]interface{}{"dpi": o.DPI, "maxfps": o.FPS, "mbps": (o.Bitrate + 500000) / 1000000}
+	d.log.Printf("session: %dx%d %d dpi, up to %d fps, %d bit/s", o.W, o.H, o.DPI, o.FPS, o.Bitrate)
 	sess, err := StartSession(conn, jar, o, d.cfg.decoder, d.cfg.video, filepath.Join(d.cfg.state, "dexdec.log"), d.log,
 		func(ev map[string]interface{}) {
 			switch ev["ev"] {
 			case "video":
-				d.setStatus("streaming", "", map[string]interface{}{"device": model, "via": via, "w": ev["w"], "h": ev["h"]})
+				d.setStatus("streaming", "", map[string]interface{}{"device": model, "via": via, "w": ev["w"], "h": ev["h"],
+					"dpi": set["dpi"], "maxfps": set["maxfps"], "mbps": set["mbps"]})
 			default:
 				d.broadcast(ev)
 			}
@@ -430,7 +443,8 @@ func (d *daemon) once(want startReq, gen int) error {
 	}
 	d.sess = sess
 	d.mu.Unlock()
-	d.setStatus("streaming", "", map[string]interface{}{"device": model, "via": via})
+	d.setStatus("streaming", "", map[string]interface{}{"device": model, "via": via,
+		"dpi": set["dpi"], "maxfps": set["maxfps"], "mbps": set["mbps"]})
 	<-sess.Done()
 	d.mu.Lock()
 	if d.sess == sess {
@@ -491,20 +505,45 @@ func (d *daemon) openWifiPort(conn *Conn, model string) bool {
 
 // rememberWifi keeps the phone's Wi-Fi addresses (state/phone-ip.auto) while it is on USB: over Wi-Fi later the
 // service knocks there first, whether or not the unit has talked to it since.
-func (d *daemon) rememberWifi(conn *Conn, model string) {
+func (d *daemon) rememberWifi(conn *Conn, model string) []string {
 	out, err := conn.Shell("ip -o -4 addr show", 5*time.Second)
 	if err != nil {
 		d.log.Printf("wifi adb: the phone's addresses: %v", err)
-		return
+		return nil
 	}
 	ips := phoneWifiAddrs(out)
 	if len(ips) == 0 {
 		d.log.Printf("wifi adb: %s has no Wi-Fi address now", model)
-		return
+		return nil
 	}
 	f := filepath.Join(d.cfg.state, "phone-ip.auto")
 	os.MkdirAll(d.cfg.state, 0o700)
 	if err := os.WriteFile(f, []byte(strings.Join(ips, "\n")+"\n"), 0o600); err == nil {
 		d.log.Printf("wifi adb: %s is at %s on Wi-Fi", model, strings.Join(ips, ", "))
 	}
+	return ips
+}
+
+// wifiCheck, with the phone on the cable: does the car reach its port 5555 over Wi-Fi? What it finds goes on the
+// page (status "wifi": open, refused = the phone's adbd does not listen there, timeout = the network drops it,
+// unreach = no route, noip = the phone is not on Wi-Fi, nostay = the port setting did not stick), so a Wi-Fi
+// connection that does not come is explained before the cable comes out.
+func (d *daemon) wifiCheck(conn *Conn, ips []string) {
+	port, _ := conn.Shell("getprop service.adb.tcp.port", 5*time.Second)
+	port = strings.TrimSpace(port)
+	res, at := "noip", ""
+	for _, ip := range ips {
+		at = net.JoinHostPort(ip, "5555")
+		res = probe(at, 1500*time.Millisecond)
+		if res == "open" {
+			break
+		}
+	}
+	if res == "refused" && port != "5555" {
+		res = "nostay"
+	}
+	d.log.Printf("wifi adb: check: %s %s (service.adb.tcp.port=%q)", res, at, port)
+	d.mu.Lock()
+	d.wifi, d.wifiAt = res, at
+	d.mu.Unlock()
 }

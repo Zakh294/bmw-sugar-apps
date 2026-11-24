@@ -23,7 +23,7 @@
 | Додаток | Папка | Версія | Що робить | Інструкція |
 |---|---|---|---|---|
 | SpeedCam | `apps/speedcam_ua` | 0.6.0 | Офлайн-попередження про камери швидкості на HUD, приладці та всередині мапи Waze / Google на приладці. Україна (офіційний список поліції), Європа і США (OpenStreetMap), 8 мов, звуковий сигнал, оновлення баз раз на місяць | [Українська](docs/speedcam_ua/README.md) · [English](docs/speedcam_ua/README.en.md) |
-| DeX Drive | `apps/dex_drive` | 0.2.3 (тест) | Samsung DeX (One UI 8) на центральному екрані: телефон по USB або Wi‑Fi, його робочий стіл на сенсорному екрані авто, H.264 декодує GPU головного блока; типово лише на стоянці. Потрібен сервіс DeX Drive (`native/dex_drive`, ставиться разом) і mgu-render | [Українська](docs/dex_drive/README.md) · [English](docs/dex_drive/README.en.md) |
+| DeX Drive | `apps/dex_drive` | 0.2.4 (тест) | Samsung DeX (One UI 8) на центральному екрані: телефон по USB або Wi‑Fi, його робочий стіл на сенсорному екрані авто, H.264 декодує GPU головного блока; типово лише на стоянці. Потрібен сервіс DeX Drive (`native/dex_drive`, ставиться разом) і mgu-render | [Українська](docs/dex_drive/README.md) · [English](docs/dex_drive/README.en.md) |
 
 | HUD | Приладка | У мапі Waze / Google |
 |---|---|---|

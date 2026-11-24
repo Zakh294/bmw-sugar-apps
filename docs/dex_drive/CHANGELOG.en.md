@@ -3,6 +3,15 @@
 A short note on each version. The app's page in the MGU Store shows the same for the current version.
 [Українська](CHANGELOG.md)
 
+## 0.2.4 (2026-11-24)
+- Touchpad sensitivity in the settings, in percent, the pointer and the two-finger scroll apart; 70 % of before by
+  default (the pad was too sensitive).
+- "DeX picture zoom" (100–200 %): the phone's virtual display smaller, the picture stretched over the screen, so DeX
+  comes out bigger even where Samsung pays no heed to the dpi.
+- While DeX runs, the page shows the dpi, fps and bitrate it was started with: a setting that took shows there.
+- A Wi‑Fi check on the cable: the car tries the phone's port 5555 over Wi‑Fi and says what came of it (open / closed /
+  the network drops it / no route / the phone is not on Wi‑Fi).
+
 ## 0.2.3 (2026-11-24)
 - A pointer you can see: Android draws no cursor for a pointer we move (only with a physical mouse), so in the test
   the touchpad "moved something" no one could see. DeX Drive now draws the arrow over the picture, 8 s after a move.

@@ -11,7 +11,8 @@
  * each sent twice; touchCoordinatesZ1FrontSide 2 = nothing on the pad whatever the coordinates say.
  * Written for DeX Drive; Node 8.
  *
- *   const pad = new Pad({ move(dx, dy) {}, click(button) {}, scroll(notches) {} });
+ *   const pad = new Pad({ move(dx, dy) {}, click(button) {}, scroll(notches) {},
+ *                         speed() { return 0.7; }, scrollSpeed() { return 0.7; } });   // optional: x the gains below
  *   pad.feed(value, Date.now());
  *
  * TouchMode asks the controller for touch mode (FrontCCU.ccsControlTouchCCU = TOUCH_AKTIV, as the HMI's speller
@@ -25,6 +26,12 @@ const GAIN_SLOW = 1.8, GAIN_FAST = 7;   // screen px per pad unit at <= 0.08 and
 const V_SLOW = 0.08, V_FAST = 0.9;
 
 function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+
+/** A sensitivity from the settings (percent of the gains above) as a factor: 0.1..3, 1 when unset or not a number. */
+function factor(pct) {
+    const n = Number(pct);
+    return n > 0 ? clamp(n / 100, 0.1, 3) : 1;
+}
 
 /** The fingers in one sample: [] when nothing is on the pad (or it is not in touch mode). */
 function fingers(v) {
@@ -42,6 +49,8 @@ class Pad {
         this.h = h;
         this.reset();
     }
+
+    _k(name) { return typeof this.h[name] === 'function' ? Number(this.h[name]()) || 1 : 1; }
 
     reset() {
         this.g = null;        // the gesture: { t0, n (most fingers), travel, x0, y0, scrolled }
@@ -73,7 +82,7 @@ class Pad {
         if (g.n >= 2) {
             if (n !== 2) return;
             // natural scrolling: fingers up (pad Y grows) = the content up = scroll down (negative notches)
-            this.scrollAcc += dy / SCROLL_UNITS;
+            this.scrollAcc += dy * this._k('scrollSpeed') / SCROLL_UNITS;
             const k = this.scrollAcc > 0 ? Math.floor(this.scrollAcc) : Math.ceil(this.scrollAcc);
             if (k) { this.scrollAcc -= k; g.scrolled = true; this.h.scroll(-k); }
             return;
@@ -82,7 +91,7 @@ class Pad {
         const dt = clamp(now - p.t, 8, 100);
         const sp = Math.sqrt(dx * dx + dy * dy) / dt;
         this.speed = 0.6 * sp + 0.4 * this.speed;
-        const gain = GAIN_SLOW + (GAIN_FAST - GAIN_SLOW) * clamp((this.speed - V_SLOW) / (V_FAST - V_SLOW), 0, 1);
+        const gain = this._k('speed') * (GAIN_SLOW + (GAIN_FAST - GAIN_SLOW) * clamp((this.speed - V_SLOW) / (V_FAST - V_SLOW), 0, 1));
         this.rx += dx * gain;
         this.ry -= dy * gain;                                       // the pad's Y goes up, the screen's down
         const mx = Math.trunc(this.rx), my = Math.trunc(this.ry);
@@ -138,4 +147,4 @@ class TouchMode {
     }
 }
 
-module.exports = { Pad, TouchMode, fingers, TOUCH_MODE };
+module.exports = { Pad, TouchMode, fingers, factor, TOUCH_MODE };

@@ -13,7 +13,7 @@ const mgu = require('./kit/mgu');
 const parkedWatch = require('./kit/parked');
 const { DexCtl } = require('./dexctl');
 const { Overlay } = require('./overlay');
-const { Pad, TouchMode, TOUCH_MODE } = require('./pad');
+const { Pad, TouchMode, factor, TOUCH_MODE } = require('./pad');
 const lang = require('./lang');
 const { statusText, startCmd, STREAM_KEYS } = require('./status');
 
@@ -123,7 +123,8 @@ mgu.run({
         /* ---------- the controller's touchpad: DeX's pointer, taps click, two fingers scroll (pad.js) ---------- */
         const padOn = () => ov.shown && settings.get('touchpad') !== false;
         let padSamples = 0, padShownAt = 0;    // touchpad samples seen, and since when the picture shows (no signal: say so)
-        const pad = new Pad({ move: (dx, dy) => ov.padMove(dx, dy), click: (b) => ov.padClick(b), scroll: (n) => ov.padScroll(n) });
+        const pad = new Pad({ move: (dx, dy) => ov.padMove(dx, dy), click: (b) => ov.padClick(b), scroll: (n) => ov.padScroll(n),
+            speed: () => factor(settings.get('padSpeed')), scrollSpeed: () => factor(settings.get('padScroll')) });
         const touchMode = ctx.signals && ctx.signals.proxy && ctx.signals.set ? new TouchMode(ctx.signals, log) : null;
         if (ctx.signals && ctx.signals.watch) {
             Promise.resolve(ctx.signals.watch('de.bmw.infotainment.ControllerElements', '1', {

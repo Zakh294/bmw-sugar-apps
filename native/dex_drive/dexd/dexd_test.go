@@ -899,3 +899,27 @@ func TestDaemonFindsPhoneByScan(t *testing.T) {
 		t.Fatalf("no scan while the phone is not found")
 	}
 }
+
+func TestProbe(t *testing.T) {
+	l, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Skip(err)
+	}
+	addr := l.Addr().String()
+	go func() {
+		for {
+			c, err := l.Accept()
+			if err != nil {
+				return
+			}
+			c.Close()
+		}
+	}()
+	if got := probe(addr, time.Second); got != "open" {
+		t.Fatalf("listening port: %s", got)
+	}
+	l.Close()
+	if got := probe(addr, time.Second); got != "refused" {
+		t.Fatalf("closed port: %s", got)
+	}
+}

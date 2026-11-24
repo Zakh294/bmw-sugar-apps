@@ -9,9 +9,11 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"net"
 	"os"
 	"strings"
+	"syscall"
 	"time"
 )
 
@@ -183,4 +185,27 @@ func phoneWifiAddrs(out string) []string {
 		}
 	}
 	return ips
+}
+
+// probe: one TCP connect to addr, as a word: open, refused, timeout or unreach.
+func probe(addr string, timeout time.Duration) string {
+	c, err := net.DialTimeout("tcp", addr, timeout)
+	if err == nil {
+		c.Close()
+		return "open"
+	}
+	return dialError(err)
+}
+
+func dialError(err error) string {
+	if ne, ok := err.(net.Error); ok && ne.Timeout() {
+		return "timeout"
+	}
+	switch {
+	case errors.Is(err, syscall.ECONNREFUSED):
+		return "refused"
+	case errors.Is(err, syscall.ENETUNREACH), errors.Is(err, syscall.EHOSTUNREACH):
+		return "unreach"
+	}
+	return "timeout"
 }

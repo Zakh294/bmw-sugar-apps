@@ -5,10 +5,20 @@
 const { displaySize } = require('./overlay');
 
 // settings that change the virtual display or the stream: DeX starts again with them
-const STREAM_KEYS = ['dpi', 'fps', 'bitrate', 'conn'];
+const STREAM_KEYS = ['dpi', 'fps', 'bitrate', 'conn', 'scale'];
+
+/**
+ * The phone's virtual display: the picture's size, or smaller by "scale" (%) - the renderer stretches the video over
+ * the picture, so DeX's windows and letters come out that much bigger (whatever DeX makes of the dpi).
+ */
+function streamSize(scale) {
+    const d = displaySize();
+    const k = Math.max(1, Math.min(2.5, (Number(scale) || 100) / 100));
+    return { w: Math.floor(d.w / k / 8) * 8, h: Math.floor(d.h / k / 8) * 8 };
+}
 
 function startCmd(settings) {
-    const d = displaySize();
+    const d = streamSize(settings.get('scale'));
     return {
         cmd: 'start', w: d.w, h: d.h, dpi: Number(settings.get('dpi')) || 160, fps: Number(settings.get('fps')) || 30,
         bitrate: (Number(settings.get('bitrate')) || 8) * 1000000, tcp: settings.get('conn') === 'usbwifi' ? 'auto' : '',
@@ -31,6 +41,8 @@ function statusText(st, ctx) {
             device: st.device || '?', size: st.w + '×' + st.h, fps: ctx.fps ? tr('fps', { n: Math.round(ctx.fps) }) : '…',
             via: tr(st.via === 'tcp' ? 'via_tcp' : 'via_usb'),
         }) : tr('streaming_wait', { device: st.device || '?' });
+        // what the service runs with now: a changed setting shows here once DeX started again with it
+        if (st.dpi) s += tr('stream_set', { dpi: st.dpi, fps: st.maxfps || '?', mbps: st.mbps || '?' });
         break;
     case 'error': s = tr('error', { msg: st.msg || '?' }); break;
     default: s = st.state || '…';
@@ -44,10 +56,12 @@ function statusText(st, ctx) {
     if ((st.state === 'searching' || st.state === 'error') && (st.phone || st.nets)) {
         s += tr('wifi_where', { phone: st.phone || '?', car: st.nets || '?' });
     }
+    // what the car found out about the phone's ADB over Wi-Fi while it was on the cable
+    if (ctx.wifi && st.wifi && st.state !== 'idle' && st.state !== 'nosvc') s += tr('wifi_' + st.wifi, { at: st.wifi_at || '?' });
     if (ctx.noPad) s += tr('no_pad');
     if (ctx.renderError) s += tr('render_error', { msg: ctx.renderError });
     if (ctx.problem) s += tr(ctx.problem);
     return s;
 }
 
-module.exports = { statusText, startCmd, STREAM_KEYS };
+module.exports = { statusText, startCmd, streamSize, STREAM_KEYS };

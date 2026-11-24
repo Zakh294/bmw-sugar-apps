@@ -12,7 +12,7 @@ const { Ops } = require(path.join(app, 'render'));
 const lang = require(path.join(app, 'lang'));
 const { statusText, startCmd, STREAM_KEYS } = require(path.join(app, 'status'));
 const spec = require(path.join(app, 'app.json'));
-const { Pad, fingers } = require(path.join(app, 'pad'));
+const { Pad, fingers, factor } = require(path.join(app, 'pad'));
 
 let n = 0;
 function test(name, fn) { fn(); n++; console.log('ok  ' + name); }
@@ -51,9 +51,11 @@ test('knob steps wrap at 16 bits; a counter reset is no turn', () => {
 // a pad sample as the car sends it
 const S = (x1, y1, x2, y2, z1) => ({ statusSystemModeFrontSide: 3, touchCoordinatesX1FrontSide: x1, touchCoordinatesY1FrontSide: y1,
     touchCcoordinatesX2FrontSide: x2 || 0, touchCoordinatesY2FrontSide: y2 || 0, touchCoordinatesZ1FrontSide: z1 || 0 });
-function padLog() {
+function padLog(k) {
     const ev = [];
-    return { ev, pad: new Pad({ move: (dx, dy) => ev.push(['move', dx, dy]), click: (b) => ev.push(['click', b]), scroll: (n) => ev.push(['scroll', n]) }) };
+    const h = { move: (dx, dy) => ev.push(['move', dx, dy]), click: (b) => ev.push(['click', b]), scroll: (n) => ev.push(['scroll', n]) };
+    if (k) { h.speed = () => k.speed; h.scrollSpeed = () => k.scroll; }
+    return { ev, pad: new Pad(h) };
 }
 
 test('touchpad: fingers, no finger, not touch mode', () => {
@@ -103,6 +105,27 @@ test('touchpad: two fingers up scroll the content up (negative notches), no clic
     const n = ev.filter((e) => e[0] === 'scroll').reduce((a, e) => a + e[1], 0);
     assert.strictEqual(n, -4);
     assert.ok(!ev.some((e) => e[0] === 'click' || e[0] === 'move'));
+});
+
+test('touchpad: sensitivity in percent scales the pointer and the scroll', () => {
+    assert.strictEqual(factor(70), 0.7);
+    assert.strictEqual(factor(undefined), 1);
+    assert.strictEqual(factor('150'), 1.5);
+    const run = (k) => {
+        const p = padLog(k);
+        let t = 1000;
+        p.pad.feed(S(100, 100), t);
+        for (let i = 1; i <= 20; i++) p.pad.feed(S(100 + i * 3, 100), t += 20);
+        const two = padLog(k);
+        t = 1000;
+        two.pad.feed(S(200, 100, 260, 100), t);
+        for (let i = 1; i <= 20; i++) two.pad.feed(S(200, 100 + i * 10, 260, 100 + i * 10), t += 20);
+        return { x: p.ev.reduce((a, e) => a + (e[0] === 'move' ? e[1] : 0), 0), n: two.ev.reduce((a, e) => a + (e[0] === 'scroll' ? -e[1] : 0), 0) };
+    };
+    const full = run(null), less = run({ speed: 0.7, scroll: 0.5 });
+    assert.ok(Math.abs(less.x - full.x * 0.7) <= 2, less.x + ' vs ' + full.x);
+    assert.strictEqual(full.n, 9);
+    assert.strictEqual(less.n, 4);
 });
 
 test('controller: press clicks where the pointer is, tilt = arrows, knob scrolls, only while shown', () => {
@@ -180,6 +203,10 @@ test('the page says what goes on', () => {
     assert.ok(/сигнали авто/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, ccuSignals: true })));
     assert.ok(/телефон 192.168.1.23, авто 172.16.222.97\/24/.test(statusText({ state: 'searching', phone: '192.168.1.23', nets: '172.16.222.97/24' }, { tr })));
     assert.ok(/тачпада/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, noPad: true })));
+    assert.ok(/200 dpi, до 60 к\/с, 16 Мбіт\/с/.test(statusText({ state: 'streaming', w: 1, h: 1, dpi: 200, maxfps: 60, mbps: 16 }, { tr })));
+    assert.ok(/порт 5555 закритий/.test(statusText({ state: 'streaming', w: 1, h: 1, wifi: 'refused', wifi_at: '172.16.222.105:5555' }, { tr, wifi: true })));
+    assert.ok(!/5555/.test(statusText({ state: 'streaming', w: 1, h: 1, wifi: 'refused' }, { tr, wifi: false })));
+    ['open', 'refused', 'timeout', 'unreach', 'noip', 'nostay'].forEach((c) => assert.ok(lang.T['wifi_' + c], c));
     assert.ok(/дотиком до меню/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, hidden: 'hmi' })));
     assert.ok(/mgu-render: video 1: cannot open/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, renderError: 'video 1: cannot open x' })));
     assert.ok(/no video|не показує/.test(statusText({ state: 'streaming', w: 1, h: 1 }, { tr, problem: 'no_video' })));
@@ -191,6 +218,11 @@ test('Open asks for the display the settings describe', () => {
     assert.deepStrictEqual(c, { cmd: 'start', w: 1832, h: 720, dpi: 180, fps: 60, bitrate: 16000000, tcp: '' });
     vals.conn = 'usbwifi';
     assert.strictEqual(startCmd({ get: (k) => vals[k] }).tcp, 'auto');
+    vals.scale = 150;                                             // zoom: a smaller phone display, stretched
+    const z = startCmd({ get: (k) => vals[k] });
+    assert.ok(z.w === 1216 && z.h === 480, z.w + 'x' + z.h);
+    vals.scale = 100;
+    assert.strictEqual(startCmd({ get: (k) => vals[k] }).w, 1832);
     STREAM_KEYS.forEach((k) => assert.ok(spec.settings.some((s) => s.key === k), k));
 });
 

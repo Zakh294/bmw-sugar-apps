@@ -1,13 +1,13 @@
 {
   "id": "dex_drive",
   "title": "DeX Drive",
-  "description": "Samsung DeX on the centre screen: the phone (One UI 8 / Android 16) by USB or Wi-Fi, its desktop on the car's touchscreen, decoded on the head unit's GPU. Parked only by default. Needs the \"DeX Drive service\" tool and mgu-render 0.6.11+.\n\nWhat's new in 0.2.3:\n• A pointer you can see: the touchpad moves an arrow drawn over DeX, a tap clicks under it\n• The knob without the controller gate (when the GPU renderer has it): from the car's own controller signal\n• Wi-Fi: the page shows the phone's and the car's addresses while searching\n• 0.2.2: Wi-Fi after the cable; 0.2.1: black picture fixed; 0.2.0: the controller works DeX",
+  "description": "Samsung DeX on the centre screen: the phone (One UI 8 / Android 16) by USB or Wi-Fi, its desktop on the car's touchscreen, decoded on the head unit's GPU. Parked only by default. Needs the \"DeX Drive service\" tool and mgu-render 0.6.11+.\n\nWhat's new in 0.2.4:\n• Touchpad sensitivity in the settings, pointer and scroll apart (default 70% of before)\n• Picture zoom: a smaller phone display stretched over the screen, so DeX comes out bigger\n• The page shows the dpi, fps and bitrate DeX runs with, to see a setting take effect\n• Wi-Fi check on the cable: whether the car reaches the phone's port 5555, and why not\n• 0.2.3: a visible pointer, the knob without the gate; 0.2.2: Wi-Fi after the cable",
   "texts": {
     "uk": {
-      "description": "Samsung DeX на центральному екрані: телефон (One UI 8 / Android 16) по USB або Wi-Fi, його робочий стіл на сенсорному екрані авто, декодування на GPU головного блока. Типово лише на стоянці. Потрібні інструмент «DeX Drive service» і mgu-render 0.6.11+.\n\nНове у 0.2.3:\n• Видимий вказівник: тачпад рухає стрілку поверх DeX, тап клікає під нею\n• Коліщатко без Controller gate (коли його тримає GPU renderer): із власного сигналу контролера авто\n• Wi-Fi: під час пошуку сторінка показує адреси телефона й авто\n• 0.2.2: Wi-Fi після кабелю; 0.2.1: виправлено чорну картинку; 0.2.0: контролер керує DeX"
+      "description": "Samsung DeX на центральному екрані: телефон (One UI 8 / Android 16) по USB або Wi-Fi, його робочий стіл на сенсорному екрані авто, декодування на GPU головного блока. Типово лише на стоянці. Потрібні інструмент «DeX Drive service» і mgu-render 0.6.11+.\n\nНове у 0.2.4:\n• Чутливість тачпада в налаштуваннях, окремо рух і прокрутка (типово 70% від попередньої)\n• Збільшення картинки: менший екран телефона розтягується на весь екран, DeX стає більшим\n• Сторінка показує dpi, к/с і бітрейт, з якими працює DeX: видно, що налаштування застосувалось\n• Перевірка Wi-Fi на кабелі: чи дістає авто до порту 5555 телефона і чому ні\n• 0.2.3: видимий вказівник, коліщатко без gate; 0.2.2: Wi-Fi після кабелю"
     }
   },
-  "version": "0.2.3",
+  "version": "0.2.4",
   "vendor": "custom",
   "loggingId": "OADX",
   "iconGlyph": "DeX",
@@ -15,7 +15,7 @@
     "ID7"
   ],
   "requires": {
-    "dex-drive-d": "0.2.3",
+    "dex-drive-d": "0.2.4",
     "mgu-render": "0.6.11",
     "mgu-inputgate": "1.2.1"
   },
@@ -118,6 +118,22 @@
       ]
     },
     {
+      "key": "scale",
+      "label": "Збільшення картинки DeX (менший екран телефона, розтягнутий)",
+      "type": "number",
+      "default": 100,
+      "unit": "%",
+      "markDefault": true,
+      "steps": [
+        100,
+        115,
+        130,
+        150,
+        175,
+        200
+      ]
+    },
+    {
       "key": "fps",
       "label": "Кадрів на секунду",
       "type": "choice",
@@ -170,6 +186,52 @@
       "label": "Тачпад контролера — вказівник DeX",
       "type": "bool",
       "default": true
+    },
+    {
+      "key": "padSpeed",
+      "label": "Чутливість тачпада: рух вказівника",
+      "type": "number",
+      "default": 70,
+      "unit": "%",
+      "markDefault": true,
+      "steps": [
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100,
+        120,
+        150
+      ],
+      "when": {
+        "touchpad": true
+      }
+    },
+    {
+      "key": "padScroll",
+      "label": "Чутливість тачпада: прокрутка двома пальцями",
+      "type": "number",
+      "default": 70,
+      "unit": "%",
+      "markDefault": true,
+      "steps": [
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100,
+        120,
+        150
+      ],
+      "when": {
+        "touchpad": true
+      }
     },
     {
       "key": "phoneOff",
