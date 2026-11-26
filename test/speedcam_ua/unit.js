@@ -165,6 +165,13 @@ ok(lit(badge.draw(near0, 'hud', { style: 'minimal' }), 120, 100, 296, 120) === 0
     'minimal: the camera and the speed only over the limit');
 ok(require(path.join(A, 'styles')).animated('bmw', hudA) && !require(path.join(A, 'styles')).animated('minimal', hudA), 'only bmw over the limit animates');
 
+// the HUD's camera-only look: a red ring, the camera (gone in the blink's off half), the distance; no sign, no speed
+const camOn = badge.draw(hudA, 'hud', { style: 'camera' }), camOff = badge.draw(hudA, 'hud', { style: 'camera', blink: true });
+const redAt = (cv, x, y) => { const i = (y * cv.w + x) * 4; return cv.d[i] > 180 && cv.d[i + 1] < 60 && cv.d[i + 3] > 0; };
+ok(redAt(camOn, 60, 72 - 50) && lit(camOn, 40, 55, 80, 90) > 300 && lit(camOff, 40, 55, 80, 90) === 0, 'HUD camera style: the camera blinks inside the red ring');
+ok(lit(camOn, 140, 100, 296, 150) === 0 && lit(camOn, 140, 40, 296, 96) > 300, 'HUD camera style: the distance and nothing under it (no speed)');
+ok(lit(badge.draw(hudA, 'cluster', { style: 'camera' }), 0, 0, 440, 168) > 0, 'the camera style is the HUD\'s only: the cluster draws as before');
+
 // the car's own limit (car_limit.js)
 const { CarLimit, findLimit } = require(path.join(A, 'car_limit'));
 ok(findLimit(50).v === 50 && findLimit(0) === null && findLimit(255) === null && findLimit(53) === null, 'car limit: a plain number');

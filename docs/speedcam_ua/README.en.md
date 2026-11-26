@@ -95,6 +95,7 @@ An iDrive list screen ("Camera databases" button):
 | Warn ahead by / Not closer than | 20 s / 300 m | warning distance = speed × time, at least the minimum |
 | Amber speed when over the limit by | 0 km/h | tolerance for amber and for "only when over" |
 | Warning size | 100 % | 60–100 %, every screen |
+| HUD style | same as the warning style | "Camera and distance only": the projection shows just a blinking camera in a red ring and the distance (amber / red over the limit), no speed and no sign ([how it looks](img/hud_camera.png)); the cluster and the map keep the "Warning style" |
 | Car speed on the HUD | on | off: our HUD warning keeps only the sign, the camera, the distance and the bar; BMW's panel beside it shows the speed anyway |
 | Limit sign on the HUD | hide when the car shows the same | our sign leaves the HUD while the car (its sign recognition / the map's limit) shows the same limit; or "always", "never". See "The limit the car shows" |
 | Height on the HUD | 0 px | −150 to +90 px: moves the warning up (+) or down (−) to the level of BMW's panel |

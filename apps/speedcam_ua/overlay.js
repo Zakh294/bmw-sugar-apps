@@ -36,7 +36,7 @@ const PLACE = {
 class Overlay {
     /**
      * opts(): { hud, cluster, inMap, mapPlace, clusterPlace, size (%), hudBright (%), hudY (px up), hudSpeed, night, socketPath,
-     * tr, units, style } read on every paint; an alert with noHudLimit is drawn on the HUD without its sign.
+     * tr, units, style, hudStyle ('same' | 'camera') } read on every paint; an alert with noHudLimit is drawn on the HUD without its sign.
      * The bmw and minimal styles come in two steps: smaller and dimmer while the camera is more than NEAR_S seconds
      * away (and within the limit), full size after; the bmw style breathes over the limit (FRAME_MS repaints).
      */
@@ -87,8 +87,10 @@ class Overlay {
     start() {
         this.cr.connect();
         this.timer = setInterval(() => {
-            if (!this.shown || this.shown.over !== 2 || this._style() !== 'classic') return;
-            this.blink = !this.blink;
+            const camHud = !!this.shown && (this.opts() || {}).hudStyle === 'camera';
+            if (camHud) this.camBlink = !this.camBlink;
+            if (!this.shown || ((this.shown.over !== 2 || this._style() !== 'classic') && !camHud)) return;
+            if (this.shown.over === 2 && this._style() === 'classic') this.blink = !this.blink;
             try { this._paint(true); } catch (e) { this.log.warn('blink: ' + (e && e.stack || e)); }
         }, 500);
         this.frames = setInterval(() => {
@@ -158,7 +160,7 @@ class Overlay {
         }
         this.shown = alert;
         this.warnDist = warnDist;
-        if (!alert) this.blink = false;
+        if (!alert) { this.blink = false; this.camBlink = false; }
         this._paint(false);
         if (!alert) this.mode = null;
     }
@@ -169,7 +171,8 @@ class Overlay {
         o.style = style;
         o.stage = this._stage(a, style);
         const phase = styles.animated(style, a) ? Math.round(this.phase * 20) / 20 : 0;
-        const key = a ? [a.id, a.dist, a.speed, a.limit, a.over, a.label, this.blink, o.hud, o.cluster, mode, o.mapPlace, o.clusterPlace,
+        const camHud = o.hudStyle === 'camera';
+        const key = a ? [a.id, a.dist, a.speed, a.limit, a.over, a.label, this.blink, camHud && this.camBlink, o.hud, o.cluster, mode, o.mapPlace, o.clusterPlace,
             o.size, o.hudBright, o.night, a.zone, o.units, o.tr && o.tr.lang, o.hudY, o.hudSpeed, a.noHudLimit, style, o.stage, phase].join('|') : 'off|' + o.hud + '|' + o.cluster;
         if (!force && key === this.lastKey) return;
         this.lastKey = key;
@@ -184,8 +187,9 @@ class Overlay {
             const ref = this._layer(k, o);
             if (!ref) return;
             if (want[k]) {
-                const cv = badge.draw(a, k === 'hosted' ? 'map' : k, { warnDist: this.warnDist, blink: this.blink, tr: o.tr, units: o.units,
-                    noSpeed: k === 'hud' && o.hudSpeed === false, noLimit: k === 'hud' && !!a.noHudLimit, style, phase });
+                const hudCam = k === 'hud' && camHud;
+                const cv = badge.draw(a, k === 'hosted' ? 'map' : k, { warnDist: this.warnDist, blink: hudCam ? !!this.camBlink : this.blink, tr: o.tr,
+                    units: o.units, noSpeed: k === 'hud' && o.hudSpeed === false, noLimit: k === 'hud' && !!a.noHudLimit, style: hudCam ? 'camera' : style, phase });
                 // the HUD at its brightness setting; every screen a step down at night
                 const lvl = (k === 'hud' ? (o.hudBright || 100) / 100 : 1) * (o.night ? (k === 'hud' ? NIGHT.hud : NIGHT.other) : 1)
                     * (o.stage === 'far' ? FAR.light : 1);

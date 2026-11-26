@@ -183,6 +183,13 @@ const SETTINGS = {
             'BMW: anillo de cuenta atrás', 'BMW: odpočítávací kruh'],
         minimal: ['Мінімальний', 'Minimal', 'Minimal', 'Minimalny', 'Minimal', 'Minimale', 'Mínimo', 'Minimální'],
     },
+    hudStyle: {
+        label: ['Стиль на HUD', 'HUD style', 'Stil im HUD', 'Styl na HUD', 'Style au HUD', 'Stile sull\'HUD', 'Estilo en el HUD', 'Styl na HUD'],
+        same: ['Як стиль попередження', 'Same as the warning style', 'Wie der Warnungsstil', 'Jak styl ostrzeżenia', 'Comme le style de l\'alerte', 'Come lo stile dell\'avviso',
+            'Igual que el estilo del aviso', 'Jako styl varování'],
+        camera: ['Лише камера і відстань', 'Camera and distance only', 'Nur Blitzer und Entfernung', 'Tylko fotoradar i odległość', 'Radar et distance seulement',
+            'Solo autovelox e distanza', 'Solo radar y distancia', 'Jen radar a vzdálenost'],
+    },
     hudSpeed: { label: ['Швидкість авто на HUD', 'Car speed on the HUD', 'Geschwindigkeit im HUD', 'Prędkość auta na HUD', 'Vitesse sur le HUD', 'Velocità sull\'HUD', 'Velocidad en el HUD', 'Rychlost na HUD'] },
     hudLimit: {
         label: ['Знак ліміту на HUD', 'Limit sign on the HUD', 'Limit-Schild im HUD', 'Znak limitu na HUD', 'Panneau de limite au HUD', 'Cartello del limite sull\'HUD', 'Señal de límite en el HUD', 'Značka limitu na HUD'],

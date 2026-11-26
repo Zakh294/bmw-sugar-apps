@@ -3,6 +3,11 @@
 A short note on every version. The app's page in the MGU Store shows the same for the current version.
 [Українська](CHANGELOG.md)
 
+## 0.6.1 (2026-11-26)
+- "HUD style" → "Camera and distance only": the projection shows a blinking camera in a red ring and the distance,
+  without the speed and the limit sign (BMW's panel shows them). Over the limit the distance turns amber / red. The
+  cluster and the map keep the chosen "Warning style".
+
 ## 0.6.0 (2026-11-23)
 - "Warning style" setting: Classic (as before, the default), BMW (a countdown ring round the sign, thin white type,
   red that breathes over the limit), Minimal (the sign and the distance).

@@ -6,6 +6,7 @@
  *              the sign closes as the camera comes near (instead of the bar); red only over the limit, where the
  *              ring and a halo "breathe" (opts.phase 0..1, the overlay repaints a few times a second)
  *   'minimal'  the sign and the distance; the camera and the car's speed only while over the limit
+ *   'camera'   the HUD only (setting "hudStyle"): a blinking camera in a red ring and the distance, nothing else
  *
  *   draw(cv, a, kind, opts, h) - h: badge.js's helpers { camera, fmtDist, inUnits, unitsOf, fit, lang, colours }
  *
@@ -181,7 +182,29 @@ function minMap(cv, a, opts, h) {
     return cv;
 }
 
+/* ---- the HUD's camera-only look (setting "hudStyle": "camera") ---- */
+
+/**
+ * Only a camera in a red ring and the distance: BMW's own panel beside it shows the speed and the limit. The camera
+ * blinks (opts.blink, twice a second); over the limit the distance turns amber / red, a zone shows its name.
+ */
+function camHud(cv, a, opts, h) {
+    const W = cv.w, tr = opts.tr, u = h.unitsOf(a, opts), pad = 4;
+    const r = 54, cx = pad + r + 2, cy = 72, x0 = cx + r + 20;
+    cv.arc(cx, cy, r - 9, r, 0, 360, RED);
+    if (!opts.blink) h.camera(cv, cx - 26, cy - 21, 40, a.over ? tone(a) : WHITE, [0, 0, 0, 255]);
+    if (a.zone) {
+        const z = zoneLines(tr);
+        cv.text(h.fit(cv, z[0], 24, W - pad - x0), x0, 64, 24, tone(a, WHITE), { literal: true });
+        if (z[1]) cv.text(h.fit(cv, z[1], 24, W - pad - x0), x0, 94, 24, tone(a, WHITE), { literal: true });
+        return cv;
+    }
+    distance(cv, a, u, tr, h, x0, 94, 66, tone(a, WHITE));
+    return cv;
+}
+
 const STYLES = {
+    camera: { hud: camHud },
     bmw: { hud: bmwHud, cluster: bmwCard, map: bmwMap },
     minimal: { hud: minHud, cluster: minCard, map: minMap },
 };
@@ -191,4 +214,4 @@ function draw(cv, a, kind, opts, h) { return STYLES[opts.style][kind](cv, a, opt
 /** Whether the style moves (repaints a few times a second) for this alert. */
 function animated(style, a) { return style === 'bmw' && !!a && a.over === 2; }
 
-module.exports = { draw, animated, has: (s) => !!STYLES[s], breath };
+module.exports = { draw, animated, has: (s) => !!STYLES[s] && s !== 'camera', breath };
