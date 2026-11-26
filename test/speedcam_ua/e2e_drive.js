@@ -282,6 +282,18 @@ async function main() {
     hu.ctx.settings.set('style', 'classic');
     await sleep(3500);
 
+    // the HUD's camera-only look: the camera blinks, the cluster stays classic
+    hu.ctx.settings.set('hudStyle', 'camera');
+    hu.handlers.BTN_TEST();
+    await sleep(5500);
+    const hc1 = Buffer.from(layerOf('hud').px).toString('base64');
+    await sleep(600);
+    const hc2 = Buffer.from(layerOf('hud').px).toString('base64');
+    check(hc1 !== hc2, 'HUD style "camera": the camera blinks');
+    snap('style_hud_camera', [['hud', '#000000'], ['panel', '#2b2f36']]);
+    hu.ctx.settings.set('hudStyle', 'same');
+    await sleep(9000);
+
     // the audio page: every source of the audio manager, chime candidates in yellow
     hu.handlers.BTN_AUDIO();
     const t0 = Date.now();

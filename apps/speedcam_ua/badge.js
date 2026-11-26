@@ -188,6 +188,7 @@ function draw(alert, kind, opts) {
     opts = opts || {};
     const sz = SIZE[kind] || SIZE.hud;
     const cv = new Canvas(sz[0], sz[1]).clear([0, 0, 0, 0]);
+    if (opts.style === 'camera' && kind === 'hud') return styles.draw(cv, alert, 'hud', Object.assign({}, opts, { tr: opts.tr || lang.make('uk') }), HELP);
     if (opts.style && styles.has(opts.style)) {
         return styles.draw(cv, alert, kind === 'map' || kind === 'cluster' ? kind : 'hud', Object.assign({}, opts, { tr: opts.tr || lang.make('uk') }), HELP);
     }

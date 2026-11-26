@@ -119,7 +119,7 @@ function background(bg) {
         hud: settings.get('showHud'), cluster: settings.get('showCluster'), clusterPlace: settings.get('clusterPlace'),
         inMap: settings.get('inMap'), mapPlace: settings.get('mapPlace'),
         size: settings.get('size'), hudBright: settings.get('hudBright'), night: !!settings.get('nightDim') && st.night,
-        hudY: settings.get('hudY') || 0, hudSpeed: settings.get('hudSpeed') !== false, style: settings.get('style') || 'classic',
+        hudY: settings.get('hudY') || 0, hudSpeed: settings.get('hudSpeed') !== false, style: settings.get('style') || 'classic', hudStyle: settings.get('hudStyle') || 'same',
         socketPath: bg.spec.config && bg.spec.config.socketPath, tr: tr(), units: settings.get('units') || 'auto',
     })).start();
 
